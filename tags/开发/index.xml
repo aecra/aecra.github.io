@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>开发 on aecra</title>
+        <link>https://www.aecra.cn/tags/%E5%BC%80%E5%8F%91/</link>
+        <description>Recent content in 开发 on aecra</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 22 Jan 2022 15:25:34 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/tags/%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>How to mount host folder in VMware 20.04 on Windows.</title>
+        <link>https://www.aecra.cn/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</link>
+        <pubDate>Sat, 22 Jan 2022 15:25:34 +0000</pubDate>
+        
+        <guid>https://www.aecra.cn/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</guid>
+        <description>&lt;img src="https://static.aecra.cn/cover/ecf13f1ba0d1a72e2bef08662d3a3243.png" alt="Featured image of post How to mount host folder in VMware 20.04 on Windows." /&gt;&lt;p&gt;This time I want to use ubuntu20.04 on VMware as my workspace. But I don’t want to move and backup my files frequently. So I need to find a way to mount my host files to virtual machine.&lt;/p&gt;
+&lt;p&gt;First I need to install &lt;code&gt;VMware-tools&lt;/code&gt; to my virtual machine. With some reasons, I can’t install it autoly( The button is grey). So use the next bash command to install it.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install open-vm-tools-desktop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then close the virtual machine. Select &lt;strong&gt;VM&amp;gt;Settings.&lt;/strong&gt; On the &lt;strong&gt;Options&lt;/strong&gt; tab, select &lt;strong&gt;Shared Folders&lt;/strong&gt;. Select a folder sharing option. Click &lt;strong&gt;Add&lt;/strong&gt; to add a shared folder. I add a folder named workspace.&lt;/p&gt;
+&lt;p&gt;Now you can start this virtual mechine.&lt;/p&gt;
+&lt;p&gt;Open a terminal. use &lt;code&gt;id &amp;lt;user&amp;gt;&lt;/code&gt; to get your gid and uid. My git and gid are 1000.&lt;/p&gt;
+&lt;p&gt;Now We can mount the workspace folder to any folder in virtual machine through next command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo vmhgfs-fuse .host:/workspace ~/workspace -o allow_other -o &lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt; -o &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Finally we can use this virtual machine to develop our projects.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

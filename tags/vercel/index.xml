@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>vercel on aecra | 个人资料分享</title>
+        <link>https://www.aecra.cn/tags/vercel/</link>
+        <description>Recent content in vercel on aecra | 个人资料分享</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Mon, 22 Feb 2021 00:08:23 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/tags/vercel/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Vercel 使用之部署博客</title>
+        <link>https://www.aecra.cn/article/deployment-blog-used-by-vercel/</link>
+        <pubDate>Mon, 22 Feb 2021 00:08:23 +0000</pubDate>
+        
+        <guid>https://www.aecra.cn/article/deployment-blog-used-by-vercel/</guid>
+        <description>&lt;img src="https://static.aecra.cn/cover/deployment-blog-used-by-vercel.jpg" alt="Featured image of post Vercel 使用之部署博客" /&gt;Vercel 是什么 如果你曾听说过 ZEIT Now，是的，它是 Vercel 的前身。在去年早些时候，ZEIT Now 进行了「品牌升级」，成为了现在的 Vercel。 注册与安装 首先，</description>
+        </item>
+        
+    </channel>
+</rss>

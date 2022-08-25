@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文是 19 年秋在学校实验室处理计算机视觉相关问题时学习的，当时做的思维导图导出的 markdown 附件，现在当作一个大纲比较好。下面附带的计算机视觉相关视频是我认为对初学者比较友好的课程，毕竟这些图像特征相关的内容也没老师教。'><meta name='keywords' content='深度学习, 目标检测'><title>计算机视觉-目标检测</title>
+
+
+
+<link rel='canonical' href='https://www.aecra.cn/article/computer-vision-target-detection/'>
+
+<link rel="stylesheet" href="/scss/style.min.52c52da3fe7b812e5cd0f0af686848e7dd3a65935c0aa95d735a48cf30e383b4.css"><meta property='og:title' content='计算机视觉-目标检测'>
+<meta property='og:description' content='本文是 19 年秋在学校实验室处理计算机视觉相关问题时学习的，当时做的思维导图导出的 markdown 附件，现在当作一个大纲比较好。下面附带的计算机视觉相关视频是我认为对初学者比较友好的课程，毕竟这些图像特征相关的内容也没老师教。'>
+
+
+<meta property='og:url' content='https://www.aecra.cn/article/computer-vision-target-detection/'>
+<meta property='og:site_name' content='aecra | 个人资料分享'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='深度学习' /><meta property='article:tag' content='目标检测' /><meta property='article:published_time' content='2021-03-03T20:06:10&#43;00:00'/><meta property='article:modified_time' content='2021-03-03T20:06:10&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/computer-vision-target-detection.jpg' />
+<meta name="twitter:title" content="计算机视觉-目标检测">
+<meta name="twitter:description" content="本文是 19 年秋在学校实验室处理计算机视觉相关问题时学习的，当时做的思维导图导出的 markdown 附件，现在当作一个大纲比较好。下面附带的计算机视觉相关视频是我认为对初学者比较友好的课程，毕竟这些图像特征相关的内容也没老师教。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/computer-vision-target-detection.jpg' />
+    <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended">
+    <aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://static.aecra.cn/avatar.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">😊</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">aecra | 个人资料分享</a></h1>
+            <h2 class="site-description">Leave a line of dialogue for the years to come.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/aecra'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关 于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归 档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜 索</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/link/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友 链</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://www.aecra.cn/" selected>中文</option>
+                        
+                            <option value="https://www.aecra.cn/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗 色</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            
+            
+            <a href="/article/computer-vision-target-detection/">
+                
+                    <img src="https://static.aecra.cn/cover/computer-vision-target-detection.jpg" loading="lazy" alt="Featured image of post 计算机视觉-目标检测" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/article/computer-vision-target-detection/">计算机视觉-目标检测</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文是 19 年秋在学校实验室处理计算机视觉相关问题时学习的，当时做的思维导图导出的 markdown 附件，现在当作一个大纲比较好。下面附带的计算机视觉相关视频是我认为对初学者比较友好的课程，毕竟这些图像特征相关的内容也没老师教。
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 03, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 10 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="图像预处理">图像预处理</h2>
+<h3 id="空间域处理">空间域处理</h3>
+<h4 id="点运算">点运算</h4>
+<ul>
+<li>
+<p>HE</p>
+<ul>
+<li>直方图均衡</li>
+</ul>
+</li>
+<li>
+<p>AHE</p>
+<ul>
+<li>自适应直方图均衡（局部均衡、模板滑动）</li>
+</ul>
+</li>
+<li>
+<p>CLAHE</p>
+<ul>
+<li>限制对比度自适应直方图均衡（裁剪均衡直方图、线性插值）</li>
+</ul>
+</li>
+</ul>
+<h4 id="形态学运算">形态学运算</h4>
+<ul>
+<li>
+<p>膨胀</p>
+<ul>
+<li>高亮部分进行膨胀，类似于领域扩张</li>
+</ul>
+</li>
+<li>
+<p>腐蚀</p>
+<ul>
+<li>高亮部分被腐蚀，类似于领域被蚕食</li>
+</ul>
+</li>
+<li>
+<p>开运算</p>
+<ul>
+<li>先腐蚀再膨胀，去掉目标外部的孤立点</li>
+</ul>
+</li>
+<li>
+<p>闭运算</p>
+<ul>
+<li>先膨胀再腐蚀，去掉目标内部的孔</li>
+</ul>
+</li>
+</ul>
+<h4 id="临域运算">临域运算</h4>
+<ul>
+<li>
+<p>卷积/滤波</p>
+<ul>
+<li>
+<p>平滑均值滤波/卷积</p>
+</li>
+<li>
+<p>平滑中值滤波/卷积</p>
+<ul>
+<li>去除椒盐</li>
+</ul>
+</li>
+<li>
+<p>平滑高斯滤波/卷积</p>
+<ul>
+<li>模拟人眼、延伸为金字塔</li>
+</ul>
+</li>
+<li>
+<p>梯度 Prewitt 滤波/卷积</p>
+<ul>
+<li>梯度渐变</li>
+</ul>
+</li>
+<li>
+<p>梯度 Sobel 滤波/卷积</p>
+<ul>
+<li>梯度渐变+另一方向高斯平滑</li>
+</ul>
+</li>
+<li>
+<p>梯度 Laplacian 滤波/卷积</p>
+<ul>
+<li>团块检测、边缘检测、锐化</li>
+</ul>
+</li>
+<li>
+<p>其他滤波/卷积</p>
+</li>
+</ul>
+</li>
+<li>
+<p>金字塔</p>
+<ul>
+<li>
+<p>高斯金字塔</p>
+<ul>
+<li>目的：得到一系列尺寸逐渐减小的图像</li>
+<li>操作：先进行图像平滑（高斯滤波/卷积），再进行降采样</li>
+</ul>
+</li>
+<li>
+<p>拉普拉斯金字塔</p>
+<ul>
+<li>目的：保留所有层所丢失的高频信息，用于图像恢复</li>
+<li>操作：原图-高斯金字塔进行上采样</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="频率与处理">频率与处理</h3>
+<h4 id="傅里叶变换">傅里叶变换</h4>
+<ul>
+<li>
+<p>内容：一个信号可以由足够多个不同频率和幅值的正余弦波组成</p>
+</li>
+<li>
+<p>作用：信号分解</p>
+</li>
+<li>
+<p>欧拉公式（e^(ix) = cosx + isinx）描述的是一个随着时间变化，在复平面上做圆周运动的点；傅里叶变换描述的是一系列这样的点的运动叠加的效应</p>
+</li>
+<li>
+<p>离散傅里叶变换：∑[n=-∞, ∞]x(n)*e^(-iwn)</p>
+</li>
+<li>
+<p>二维傅里叶变换：f(u, v) = ∑[x=0,M-1] ∑[y=0, N-1] f(x, y)e^(-j2π(ux/M+vy/N))</p>
+</li>
+<li>
+<p>基于傅里叶变换的滤波</p>
+<ul>
+<li>低通滤波</li>
+<li>相位滤波</li>
+<li>频谱滤波</li>
+</ul>
+</li>
+<li>
+<p>傅里叶变换的不足</p>
+<ul>
+<li>缺乏时间和频率的定位功能</li>
+<li>对于非平稳信号的局限性</li>
+<li>在时间和频率分辨率上的局限性</li>
+</ul>
+</li>
+<li>
+<p>短时傅里叶变换（STFT）</p>
+<ul>
+<li>原理：设置窗格，对信号分段，认为窗格内的信号是平稳的</li>
+<li>优点：可以获得频域信息的同时可以获得时域信息</li>
+<li>缺点：窗格大小很难设置</li>
+</ul>
+</li>
+</ul>
+<h4 id="小波变换">小波变换</h4>
+<ul>
+<li>
+<p>起源：将傅里叶变换的无限长的三角函数基换成了有限长的会衰减的小波基</p>
+</li>
+<li>
+<p>原理：将原始信号表示为一组小波基的线性组合，然后通过忽略其中不重要的部分达到数据压缩（即降维）的目的</p>
+</li>
+<li>
+<p>小波函数</p>
+<ul>
+<li>特点：1.均值为零 2.在时域和频域都局部化</li>
+</ul>
+</li>
+<li>
+<p>常用小波函数</p>
+<ul>
+<li>
+<p>Haar 系列</p>
+<ul>
+<li>方波/最简单</li>
+</ul>
+</li>
+<li>
+<p>Daubechies 系列</p>
+</li>
+<li>
+<p>Moret 系列</p>
+</li>
+<li>
+<p>Sym 系列</p>
+</li>
+<li>
+<p>Meyer 系列</p>
+</li>
+<li>
+<p>Coif 系列</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="图像特征与描述">图像特征与描述</h2>
+<h3 id="颜色特征">颜色特征</h3>
+<h4 id="量化颜色直方图">量化颜色直方图</h4>
+<ul>
+<li>适用颜色空间：RGB、HSV 等颜色空间</li>
+<li>操作：颜色空间量化，单元（bin）由单元中心代表；统计落在量化单元上的像素数量</li>
+<li>优势：计算高效</li>
+<li>劣势：量化问题、稀疏</li>
+</ul>
+<h4 id="聚类颜色直方图">聚类颜色直方图</h4>
+<ul>
+<li>适用颜色空间：Lab 等颜色空间</li>
+<li>操作：使用聚类算法对所有像素点颜色向量进行聚类；单元（bin）由聚类中心代表</li>
+</ul>
+<h4 id="优化">优化</h4>
+<ul>
+<li>采用二次距离法</li>
+<li>对颜色直方图事先进行平滑过滤，即每个 bin 中的像素对于相邻的几个 bin 也有贡献</li>
+</ul>
+<h3 id="几何特征">几何特征</h3>
+<h4 id="边缘edge">边缘(Edge)</h4>
+<ul>
+<li>
+<p>定义：像素值函数快速变化的区域-&gt;一阶导数的极值区域</p>
+</li>
+<li>
+<p>作用</p>
+<ul>
+<li>物体识别</li>
+<li>视角变换</li>
+</ul>
+</li>
+<li>
+<p>边缘提取</p>
+<ul>
+<li>高斯滤波</li>
+<li>一阶导数获取极值</li>
+<li>梯度（幅值/强度）增加最快 方向</li>
+</ul>
+</li>
+<li>
+<p>边缘提取的尺度问题：不同标准差的滤波能捕捉到不同尺度的边缘</p>
+</li>
+</ul>
+<h4 id="特征点corner">特征点(Corner)</h4>
+<ul>
+<li>
+<p>性质</p>
+<ul>
+<li>可重复性</li>
+<li>显著性</li>
+<li>抗图片变换（外貌变换/亮度、光照，几何变换/平移、选择、尺度）</li>
+</ul>
+</li>
+<li>
+<p>作用</p>
+<ul>
+<li>图片配准/拼接</li>
+<li>运动跟踪</li>
+<li>物体识别</li>
+<li>机器人导航</li>
+<li>3D 重建</li>
+</ul>
+</li>
+<li>
+<p>Harris 角点</p>
+<ul>
+<li>
+<p>特点：在任何方向（实际为 x,y）上移动小观察窗，导致大的像素变动</p>
+</li>
+<li>
+<p>数学模型：E(u, v) = ∑[x, y]w(x, y)[ I(x+u, y+v) - I(x, y) ]²</p>
+</li>
+<li>
+<p>检测方法</p>
+<ul>
+<li>图像中直线：一个特征值大，另一个特征值小</li>
+<li>图像中平面：两个特征值都小，且近似相等</li>
+<li>图像中角点：两个特征值都大，且近似相等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Fast 角点</p>
+<ul>
+<li>特点：某像素与周围领域内足够多的像素点处于不同的区域，则为焦点或某些属性与众不同</li>
+<li>检测方法：对兴趣点所在圆周上 16 个像素点进行判断，若当前中心像素暗或亮，则将其定为角点</li>
+<li>缺点：无多尺度特征、没有方向信息、失去旋转的不变性</li>
+</ul>
+</li>
+</ul>
+<h4 id="斑点blob">斑点(Blob)</h4>
+<ul>
+<li>拉普拉斯梯度：一阶导极值点-&gt;二阶导数零点</li>
+<li>缺点：对噪声很敏感</li>
+<li>优化：高斯卷积滤波降噪处理，再采用 Laplace 算子进行边缘检测</li>
+<li>斑点判断：高斯拉普拉斯滤波图找极值点-&gt;斑点</li>
+</ul>
+<h3 id="基于关键点的特征描述子">基于关键点的特征描述子</h3>
+<h4 id="sift">SIFT</h4>
+<ul>
+<li>
+<p>特点</p>
+<ul>
+<li>具有良好的不变性：对旋转、缩放、平移、亮度变化、噪声有一定程度的稳定性</li>
+<li>独特性好，信息量能丰富：适用于在海量特征数据库中进行快速、准确的匹配</li>
+<li>多量性：即使少数物体也可以产生大量 SIFT 特征</li>
+<li>计算快：经过优化的 SIFT 匹配算法甚至可以达到实时性</li>
+</ul>
+</li>
+<li>
+<p>计算步骤</p>
+<ul>
+<li>在 DoG 尺度空间中获取极值点/关键点：LoG 空间优化为 DoG 空间（差分高斯）</li>
+<li>对关键点处理：1.位置插值（获得精确的关键点） 2.去除边缘点</li>
+<li>关键点的方向估计</li>
+<li>关键点的描述子的生成：1.区域坐标旋转 2.计算采样区域的直方图</li>
+</ul>
+</li>
+<li>
+<p>具体实现</p>
+<ul>
+<li>
+<p>构造高斯金字塔：对每一层用不同的参数 σ 做高斯模糊，使得每一层金字塔有多张高斯模糊图像，每一层的第一张图像是由上一层中倒数第三张图像降采样得到的</p>
+</li>
+<li>
+<p>计算高斯差分空间：相邻的图像进行差分形成差分金字塔</p>
+</li>
+<li>
+<p>判断极值点：以 ✗ 为检测点，除了大于同层所包围的 8 个点以外，还有上一层的 9 个点与下一层的 9 个点</p>
+</li>
+<li>
+<p>SIFT-特征点方向估计</p>
+<ul>
+<li>在尺度上计算梯度直方图：8 方向，以特征点为中心、以 3×1.5σ 为半径</li>
+<li>获取最高值方向为关键点主方向</li>
+<li>为匹配的稳定性，将超过最高值 80%的方向，做为辅方向</li>
+<li>将原图像 x 轴转到与主方向相同的方向</li>
+<li>在旋转后的坐标上采用 16×16 的像素窗计算梯度幅值和方向，4×4 分别计算得到 128 维特征向量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="surf">SURF</h4>
+<ul>
+<li>
+<p>Haar-like 特征</p>
+<ul>
+<li>
+<p>分类</p>
+<ul>
+<li>边缘特征</li>
+<li>线性特征</li>
+<li>中心特征</li>
+<li>对角线特征</li>
+</ul>
+</li>
+<li>
+<p>特征模板：由以上特征组合而成</p>
+</li>
+<li>
+<p>特征模板的特征值：白色矩形像素和减去黑色矩形像素和</p>
+</li>
+<li>
+<p>Haar 特征值反映了图像的灰度变化情况</p>
+</li>
+</ul>
+</li>
+<li>
+<p>优化内容</p>
+<ul>
+<li>把 SIFT 中的高斯二阶微分的模板简化，使得卷积平滑操作仅需要转换成加减运算</li>
+<li>在方向确定阶段，在圆形区域计算 x，y 方向的 Haar 小波响应，找到模最大的扇形方向</li>
+</ul>
+</li>
+<li>
+<p>特点</p>
+<ul>
+<li>使用 Hessian 矩阵变换图像，极值检测只需计算 Hesian 矩阵行列式（用一个简单方程求行列式近似值作为优化），使用盒状模糊滤波（特征模板）求高斯模糊近似值</li>
+<li>SURF 不使用降采样，通过保持图像大小不变，但改变盒状滤波器的大小来构建尺度金字塔</li>
+<li>在计算关键点主方向以及关键点周边像素方向的方法上，SURF 不使用直方图统计，而是使用哈尔(haar)小波转换，降至 64 维</li>
+</ul>
+</li>
+</ul>
+<h4 id="orb">ORB</h4>
+<ul>
+<li>
+<p>理论基础：FAST 角点的特征点检测（缺乏尺度不变性）、BRIEF 特征描述技术（缺乏旋转不变性）</p>
+</li>
+<li>
+<p>BRIEF</p>
+<ul>
+<li>
+<p>先平滑图像，然后在特征点周围选择一个 Patch，然后在这个 Patch 内通过一种选定的方法来挑选出来 n(d)个点对</p>
+</li>
+<li>
+<p>比较点对中两个像素的大小，进行如下赋值：τ(p; x, y)=p(x)&lt;p(y) ? 1:0;</p>
+</li>
+<li>
+<p>所有 n(d)个点对，都进行比较，生成一个 n(d)长的二进制串</p>
+</li>
+<li>
+<p>点对的生成方式（共 5 种）</p>
+<ul>
+<li>1.X 和 Y 都服从在[-S/2, S/2]范围内的均匀分布，且相互独立</li>
+<li>2.X 和 Y 都服从均值为 0，方差为 S²/25 的高斯分布，且相互独立，即 X 和 Y 都以原点为中心，进行同方差的高斯分布</li>
+</ul>
+</li>
+<li>
+<p>点对的位置一旦选定，就不再更改/每一个关键点都以此为基础</p>
+</li>
+</ul>
+</li>
+<li>
+<p>ORB 对 BRIEF 的改进：以关键点和取点区域的形心（圆形）的连线为 X 轴建立坐标系，计算形心时，圆形区域上每个点的“质量”是其对应的像素值</p>
+</li>
+</ul>
+<h3 id="其他特征提取">其他特征提取</h3>
+<h4 id="lbp局部二值模式">LBP（局部二值模式）</h4>
+<ul>
+<li>
+<p>具体实现</p>
+<ul>
+<li>将每个像素点与周围点大小比较：1.半径为 R 的圆上，均匀采样 P 个点 2.大小量化为 0 或 1</li>
+<li>多个 bit 组成一个数，统计每个数的直方图</li>
+</ul>
+</li>
+<li>
+<p>旋转不变性的解决方案：将得到的二进制数按位旋转，取最小的作为最终 LBP 值</p>
+</li>
+<li>
+<p>改进的 LBP：将 3×3 临域扩展到任意邻域，且用圆形临域代替正方形临域</p>
+</li>
+</ul>
+<h4 id="gabor">Gabor</h4>
+<h3 id="代码实现">代码实现</h3>
+<p>pip install opencv-contrib-python</p>
+<h2 id="深度学习之前的目标检测">深度学习之前的目标检测</h2>
+<h3 id="图像分割">图像分割</h3>
+<h4 id="含义">含义</h4>
+<p>根据灰度、颜色、纹理和形状等特征把图像划分成若干互不交叠的区域，并使这些特征在同一区域内呈现出相似性，而在不同区域内呈现出明显的差异性</p>
+<h4 id="分割依据">分割依据</h4>
+<p>灰度值的不连续性和相似性</p>
+<h4 id="分类">分类</h4>
+<ul>
+<li>
+<p>基于阈值</p>
+<p>基于图像的灰度特征来计算一个或多个灰度阈值，并将图像中的每个像素的灰度值与阈值相比较，最后将像素根据比较结果分到合适的类别中/其实就是分类合并</p>
+</li>
+<li>
+<p>基于边缘</p>
+<p>根据图像局部特征不连续性进行分割</p>
+</li>
+<li>
+<p>基于区域</p>
+<p>将图像按照相似性准则分成不同的区域</p>
+<p>方法：种子区域生长法、区域分裂合并法、分水岭法</p>
+</li>
+<li>
+<p>基于图论</p>
+<p>Graph Cuts 分割</p>
+<p>Grab Cuts 分割</p>
+</li>
+</ul>
+<h3 id="人脸检测">人脸检测</h3>
+<h4 id="haar-like-特征">Haar-like 特征</h4>
+<p>依据特征模板（15 种、不同位置、不同缩放）</p>
+<p>数量非常多</p>
+<h4 id="级联分类器">级联分类器</h4>
+<p>理解：每次选取少量特征多次匹配所选要素</p>
+<p>含义：级联分类器就是将多个强分类器连接在一起进行操作</p>
+<p>每一个强分类器由若干个弱分类器加权组成</p>
+<h3 id="行人检测">行人检测</h3>
+<h4 id="hogsvm">HOG+SVM</h4>
+<ul>
+<li>
+<p>HOG：方向梯度（矢量）直方图</p>
+<ul>
+<li>
+<p>将整个图像进行 Gamma 空间、颜色空间归一化（减弱对比度与局部光照影响）</p>
+</li>
+<li>
+<p>梯度计算</p>
+<p>分别计算水平、垂直梯度</p>
+<p>对于彩色图，选取梯度幅值最大的通道</p>
+</li>
+<li>
+<p>Block 拆分</p>
+<p>16×16 的 Bolck，步长为 8，50%重合</p>
+<p>包含 2×2 个 Cell</p>
+<p>每个 Cell 是 8×8</p>
+</li>
+<li>
+<p>计算 Cell 的梯度直方图</p>
+<p>9 个方向 bin（0-180）</p>
+<p>累计梯度幅值</p>
+<p>使用位置高斯加权</p>
+<p>相邻 bin 使用线性插值</p>
+</li>
+<li>
+<p>串联所有 Block 直方图</p>
+<p>64×128 图片：7×15Block、7×15×（2×2）×9=3780 维</p>
+</li>
+<li>
+<p>收集 HOG 特征</p>
+</li>
+</ul>
+</li>
+<li>
+<p>SVM</p>
+<ul>
+<li>通过映射到超平面来完成样本分割</li>
+<li>带约束条件的极值问题？？？</li>
+<li>松弛变量：防止因少量数据的融合或交叉而对结果产生的较大的影响</li>
+<li>映射到高维空间解决线性不可分数据的问题</li>
+</ul>
+</li>
+</ul>
+<h4 id="dpm可变形的组件模型">DPM（可变形的组件模型）</h4>
+<ul>
+<li>提取 DPM 特征图，将原图像进行高斯金字塔上采样（双线性插值），提取 DPM 特征图</li>
+<li>对原图像的 DPM 特征图和训练好的 Root filter 做卷积操作，得到 Root filter 响应图</li>
+<li>对于 2 倍图像的 DPM 特征图，和训练好的 Part filter 做卷积操作，从而得到 Part filter 的相应图</li>
+<li>对精细高斯金字塔的下采样操作，这样 Root filter 的响应图和 Part filter 的响应图就具有相同的分辨率了</li>
+<li>对其进行加权平均，得到最终的响应图。亮度越大表示响应值越大</li>
+</ul>
+<h2 id="神经网络与误差反向传播算法">神经网络与误差反向传播算法</h2>
+<h3 id="神经网络">神经网络</h3>
+<h4 id="神经网络概述">神经网络概述</h4>
+<ul>
+<li>神经网络：大量（结构简单的、功能接近的）神经元节点按一定体系架构连接成的网状结构——就是大脑的结构</li>
+<li>神经网络的作用：分类、模式识别、连续值预测</li>
+<li>建立输入与输出的映射关系</li>
+</ul>
+<h4 id="神经元">神经元</h4>
+<ul>
+<li>
+<p>生物神经元：树突、轴突、细胞体</p>
+</li>
+<li>
+<p>人工神经元</p>
+<ul>
+<li>接收前一层传来的数据</li>
+<li>将数据的加权和输入非线性作用函数中</li>
+<li>输出结果传递至后一层</li>
+<li>非线性函数：y = f(w^t * x) = f(∑[i=1, d]w(i)x(i))</li>
+<li>常见激活函数：f(x) = 1/(1 + e^-x)、f(x) = tanh(x) = (e^x - e^-x)/(e^x + e^-x)</li>
+</ul>
+</li>
+</ul>
+<h4 id="人工神经网络">人工神经网络</h4>
+<ul>
+<li>
+<p>神经元</p>
+<ul>
+<li>输入向量 x</li>
+<li>权重向量 w</li>
+<li>偏置标量 b</li>
+<li>激活函数 sigmoid</li>
+</ul>
+</li>
+<li>
+<p>逻辑结构：输入-&gt;输入层、隐含层（n）、输出层-&gt;输出</p>
+</li>
+<li>
+<p>浅网络</p>
+<ul>
+<li>3~5 层</li>
+<li>优化：梯度下降、BP 后向传播</li>
+</ul>
+</li>
+<li>
+<p>“层”的理解</p>
+<ul>
+<li>“层”实现了输入空间到输出空间的线性或非线性变换</li>
+<li>输入若干变量</li>
+<li>通过改变权重的值提取不同的特征</li>
+<li>提取特征个数：下一层节点数决定了想要获得多少种不同的新特征</li>
+<li>类比：C、O 原子</li>
+</ul>
+</li>
+</ul>
+<h4 id="前馈神经">前馈神经</h4>
+<ul>
+<li>
+<p>单项多层结构：有向无环图、同层神经元之间没有连接</p>
+</li>
+<li>
+<p>Delta 学习规则</p>
+<ul>
+<li>
+<p>一种有监督的学习算法，该算法根据神经元的实际输出与期望输出差别来调整连接权</p>
+</li>
+<li>
+<p>公式表示：△w(ij) = a*(d(i) - y(i))*x(j)</p>
+<ul>
+<li>△w(ij) 表示神经元 j 到神经元 i 的连接权重增量</li>
+<li>d(i) 是神经元 i 的期望输出</li>
+<li>y(i) 是神经元 i 的实际输出</li>
+<li>x(j) 表示神经元 j 的状态</li>
+<li>a 是表示学习速度的常数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>前馈神经网络的目标函数（降到最小）</p>
+<ul>
+<li>对一系列训练样本 X，期望输出 T = (t1, t2……tn)，网络实际输出 Z = (z1, z2……zn)</li>
+<li>目标函数：J(w) = 1/2 × ||t - z||² = 1/2 × ∑[k=1, c](t(k) - z(k))² //各输出误差的平方的累加</li>
+</ul>
+</li>
+</ul>
+<h4 id="梯度下降">梯度下降</h4>
+<ul>
+<li>通过 w 向量的变化，逐步找到目标函数的最小值/瞎子下山：方向（梯度方向）、步长（学习速率）、平地（迭代）、悬崖（不可导）</li>
+</ul>
+<h4 id="误差反向传播">误差反向传播</h4>
+<p>寻找一个函数将输入的向量映射到一个准确的输出值上。具体的寻找过程就是寻找合适的神经网络参数的过程。也就是缩小神经网络输出和事实所预计输出的过程。训练时随机初始化神经网络中的参数，这样的参数一定会带来较大的误差，就根据得到的误差来调整神经网络的参数。</p>
+<h2 id="视频及课件">视频及课件</h2>
+<p><a class="link" href="https://pan.baidu.com/s/1zor2sDh5GhmdiI325M8V5g"  target="_blank" rel="noopener"
+    >链接</a>,提取码：2ff8</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            
+            
+            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+        
+            
+            
+            <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">目标检测</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-ND 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2017 - 
+        
+        2022 aecra | 个人资料分享
+    </section>
+    
+    <section class="powerby">
+        
+            <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021003357号-1</a> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#图像预处理">图像预处理</a>
+      <ol>
+        <li><a href="#空间域处理">空间域处理</a>
+          <ol>
+            <li><a href="#点运算">点运算</a></li>
+            <li><a href="#形态学运算">形态学运算</a></li>
+            <li><a href="#临域运算">临域运算</a></li>
+          </ol>
+        </li>
+        <li><a href="#频率与处理">频率与处理</a>
+          <ol>
+            <li><a href="#傅里叶变换">傅里叶变换</a></li>
+            <li><a href="#小波变换">小波变换</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#图像特征与描述">图像特征与描述</a>
+      <ol>
+        <li><a href="#颜色特征">颜色特征</a>
+          <ol>
+            <li><a href="#量化颜色直方图">量化颜色直方图</a></li>
+            <li><a href="#聚类颜色直方图">聚类颜色直方图</a></li>
+            <li><a href="#优化">优化</a></li>
+          </ol>
+        </li>
+        <li><a href="#几何特征">几何特征</a>
+          <ol>
+            <li><a href="#边缘edge">边缘(Edge)</a></li>
+            <li><a href="#特征点corner">特征点(Corner)</a></li>
+            <li><a href="#斑点blob">斑点(Blob)</a></li>
+          </ol>
+        </li>
+        <li><a href="#基于关键点的特征描述子">基于关键点的特征描述子</a>
+          <ol>
+            <li><a href="#sift">SIFT</a></li>
+            <li><a href="#surf">SURF</a></li>
+            <li><a href="#orb">ORB</a></li>
+          </ol>
+        </li>
+        <li><a href="#其他特征提取">其他特征提取</a>
+          <ol>
+            <li><a href="#lbp局部二值模式">LBP（局部二值模式）</a></li>
+            <li><a href="#gabor">Gabor</a></li>
+          </ol>
+        </li>
+        <li><a href="#代码实现">代码实现</a></li>
+      </ol>
+    </li>
+    <li><a href="#深度学习之前的目标检测">深度学习之前的目标检测</a>
+      <ol>
+        <li><a href="#图像分割">图像分割</a>
+          <ol>
+            <li><a href="#含义">含义</a></li>
+            <li><a href="#分割依据">分割依据</a></li>
+            <li><a href="#分类">分类</a></li>
+          </ol>
+        </li>
+        <li><a href="#人脸检测">人脸检测</a>
+          <ol>
+            <li><a href="#haar-like-特征">Haar-like 特征</a></li>
+            <li><a href="#级联分类器">级联分类器</a></li>
+          </ol>
+        </li>
+        <li><a href="#行人检测">行人检测</a>
+          <ol>
+            <li><a href="#hogsvm">HOG+SVM</a></li>
+            <li><a href="#dpm可变形的组件模型">DPM（可变形的组件模型）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#神经网络与误差反向传播算法">神经网络与误差反向传播算法</a>
+      <ol>
+        <li><a href="#神经网络">神经网络</a>
+          <ol>
+            <li><a href="#神经网络概述">神经网络概述</a></li>
+            <li><a href="#神经元">神经元</a></li>
+            <li><a href="#人工神经网络">人工神经网络</a></li>
+            <li><a href="#前馈神经">前馈神经</a></li>
+            <li><a href="#梯度下降">梯度下降</a></li>
+            <li><a href="#误差反向传播">误差反向传播</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#视频及课件">视频及课件</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript">
+    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
+</script>
+<script>
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    </body>
+</html>

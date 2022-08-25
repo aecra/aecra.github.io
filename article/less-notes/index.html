@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。'><meta name='keywords' content='css, less'><title>Less 笔记</title>
+
+
+
+<link rel='canonical' href='https://www.aecra.cn/article/less-notes/'>
+
+<link rel="stylesheet" href="/scss/style.min.52c52da3fe7b812e5cd0f0af686848e7dd3a65935c0aa95d735a48cf30e383b4.css"><meta property='og:title' content='Less 笔记'>
+<meta property='og:description' content='less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。'>
+
+
+<meta property='og:url' content='https://www.aecra.cn/article/less-notes/'>
+<meta property='og:site_name' content='aecra | 个人资料分享'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='css' /><meta property='article:tag' content='less' /><meta property='article:published_time' content='2021-02-07T11:13:35&#43;00:00'/><meta property='article:modified_time' content='2021-02-07T11:13:35&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/less-notes.jpg' />
+<meta name="twitter:title" content="Less 笔记">
+<meta name="twitter:description" content="less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/less-notes.jpg' />
+    <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended">
+    <aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://static.aecra.cn/avatar.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">😊</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">aecra | 个人资料分享</a></h1>
+            <h2 class="site-description">Leave a line of dialogue for the years to come.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/aecra'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关 于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归 档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜 索</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/link/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友 链</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://www.aecra.cn/" selected>中文</option>
+                        
+                            <option value="https://www.aecra.cn/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗 色</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            
+            
+            <a href="/article/less-notes/">
+                
+                    <img src="https://static.aecra.cn/cover/less-notes.jpg" loading="lazy" alt="Featured image of post Less 笔记" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/article/less-notes/">Less 笔记</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 07, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，
+增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展
+LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行。</p>
+</blockquote>
+<h3 id="less-的中文官网">less 的中文官网</h3>
+<p><a class="link" href="http://lesscss.cn/"  target="_blank" rel="noopener"
+    >官网地址</a></p>
+<h3 id="bootstrap-中-less-教程">bootstrap 中 less 教程</h3>
+<p><a class="link" href="http://www.bootcss.com/p/lesscss/"  target="_blank" rel="noopener"
+    >教程地址</a></p>
+<h3 id="less-编译工具">Less 编译工具</h3>
+<p>koala 官网:
+<a class="link" href="http://www.koala-app.com/"  target="_blank" rel="noopener"
+    >www.koala-app.com</a></p>
+<h3 id="less-编译">Less 编译</h3>
+<ol>
+<li>用 koala 手动编译</li>
+<li>借助 less 转 css 文件手动编译</li>
+<li>利用打包工具编译</li>
+</ol>
+<h2 id="less-中的注释">less 中的注释</h2>
+<p>以//开头的注释，不会被编译到 css 文件中</p>
+<p>以/**/包裹的注释会被编译到 css 文件中</p>
+<h2 id="less-中的变量">less 中的变量</h2>
+<p><strong>LESS 中的变量为完全的 ‘常量’ ，所以只能定义一次。</strong></p>
+<p>使用@来申明一个变量：@pink：pink;</p>
+<h3 id="作为普通属性值">作为普通属性值</h3>
+<p>直接使用@pink</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">@nice-blue: #5b83ad;
+@light-blue: @nice-blue + #111;
+#header {
+  color: @light-blue;
+}
+= &gt; #header {
+  color: #6c94be;
+}
+</code></pre><h3 id="作为选择器和属性名">作为选择器和属性名</h3>
+<p>@{selector 的值}的形式</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">&lt;div id=&#34;wrap&#34;&gt;&lt;/div&gt;
+// less
+@selector:#wrap;
+@w:width;
+@{selector}{
+    @{w}:100px;
+    height: 300px;
+    border: 1px solid;
+}
+// 编译为css后
+#wrap{
+    width:100px;
+    height:300px;
+    border:1px solid;
+}
+</code></pre><h3 id="作为-url">作为 URL</h3>
+<p>@{url}</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+@url: &#39;../img/zdy.jpg&#39;;
+#wrap {
+  width: 100px;
+  height: 100px;
+  background: url(&#39;@{url}&#39;);
+  // 也可以将url作为变量，写成下面形式
+  // background: url(@url);
+}
+// 编译为css后
+#wrap {
+  width: 100px;
+  height: 100px;
+  background: url(&#39;../img/zdy.jpg&#39;);
+}
+</code></pre><h3 id="变量的延迟加载">变量的延迟加载</h3>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+@var: 0;
+.class {
+  @var: 1;
+  .brass {
+    @var: 2;
+    three: @var; //3
+    @var: 3;
+  }
+  one: @var; //1
+}
+// 编译为css后
+.class {
+  one: 1;
+}
+.class .brass {
+  three: 3;
+}
+</code></pre><h2 id="less-作用域">less 作用域</h2>
+<p>首先会从本地查找变量或者混合模块，如果没找到的话会去父级作用域中查找，直到找到为止.</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">@var: red;
+#page {
+  @var: white;
+  #header {
+    color: @var; // white
+  }
+}
+#footer {
+  color: @var; // red
+}
+</code></pre><h2 id="less-中的嵌套规则">less 中的嵌套规则</h2>
+<p>基本嵌套规则</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">// html页面：
+&lt;ul id=&#34;list&#34;&gt;
+  &lt;li&gt;
+    &lt;a href=&#34;javascript:;&#34;&gt;a1&lt;/a&gt;
+    &lt;span&gt;b1&lt;/span&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+// less嵌套写法：
+#list {
+  list-style: none;
+  line-height: 30px;
+  width: 300px;
+  background: pink;
+  margin: 0 auto;
+  li {
+    height: 30px;
+  }
+  a {
+    float: left;
+    /*&amp;代表父级*/
+    &amp;:hover {
+      color: red;
+    }
+  }
+  span {
+    float: right;
+  }
+}
+</code></pre><p>&amp;的使用（&amp;代表父级）</p>
+<p>如果想写串联选择器，而不是写后代选择器，就可以用到&amp;了。这点对伪类尤其有用如 :hover 和 :focus.</p>
+<h2 id="less-中的混合">less 中的混合</h2>
+<blockquote>
+<p>混合就是将一系列属性从一个规则集引入到另一个规则集的方式</p>
+<p>任何 CSS class, id 或者 元素 属性集都可以以同样的方式引入.</p>
+</blockquote>
+<p>以下测试，html 模板均为</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">// html
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;box1&#34;</span><span class="p">&gt;</span>box1<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h3 id="普通混合">普通混合</h3>
+<p>会将混合内容输出到 css 文件中</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+.juzhong {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+#box1 {
+  width: 100px;
+  height: 100px;
+  background: pink;
+  .juzhong;
+}
+
+// 编译为css后
+.juzhong {
+  // 会将混合内容输出到css文件中
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+#box1 {
+  width: 100px;
+  height: 100px;
+  background: pink;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+</code></pre><h3 id="不带输出的混合">不带输出的混合</h3>
+<p>加（）后就不会在 css 中输出混合内容了</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+.juzhong() {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+#box1 {
+  width: 100px;
+  height: 100px;
+  background: pink;
+  .juzhong;
+}
+
+// 编译为css后
+#box1 {
+  width: 100px;
+  height: 100px;
+  background: pink;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+</code></pre><h3 id="带参数的混合">带参数的混合</h3>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+.juzhong(@w,@h,@c) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: @w;
+  height: @h;
+  background: @c;
+}
+
+#box1 {
+  .juzhong(100px,100px,pink);
+  z-index: 1;
+}
+
+// 编译为css后
+#box1 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  background: #ffc0cb;
+  z-index: 1;
+}
+</code></pre><h3 id="带参数并且有默认值的混合">带参数并且有默认值的混合</h3>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+.juzhong(@w:100px,@h:100px,@c:pink) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: @w;
+  height: @h;
+  background: @c;
+}
+
+#box1 {
+  .juzhong;
+  z-index: 1;
+}
+
+// 编译为css后
+#box1 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  background: #ffc0cb;
+  z-index: 1;
+}
+</code></pre><h3 id="带多个参数的混合">带多个参数的混合</h3>
+<p>见 <a class="link" href="###%e5%b8%a6%e5%8f%82%e6%95%b0%e5%b9%b6%e4%b8%94%e6%9c%89%e9%bb%98%e8%ae%a4%e5%80%bc%e7%9a%84%e6%b7%b7%e5%90%88" >带参数并且有默认值的混合</a></p>
+<h3 id="形参和实参">形参和实参</h3>
+<blockquote>
+<p>命名参数就是引用 mixin 时可以通过参数名称而不是参数的位置来为 mixin 提供参数值。</p>
+<p>任何参数都已通过它的名称来引用，这样就不必按照任意特定的顺序来使用</p>
+</blockquote>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+.juzhong(@w:100px,@h:100px,@c:pink) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: @w;
+  height: @h;
+  background: @c;
+}
+#box1 {
+  // 引入混合时可以改变参数位置
+  .juzhong(@h:200px;@c:deeppink;);
+}
+
+// 编译为css后
+#box1 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 100px;
+  height: 200px;
+  background: #ff1493;
+}
+</code></pre><h3 id="匹配模式">匹配模式</h3>
+<p>根据传入的参数来改变混合的默认呈现。</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+/*向上的三角*/
+.triangle(top,@w:10px,@c:pink) {
+  border-width: @w;
+  border-color: transparent transparent @c transparent;
+  border-style: dashed dashed solid dashed;
+}
+
+/*向下的三角*/
+.triangle(bottom,@w:10px,@c:pink) {
+  border-width: @w;
+  border-color: @c transparent transparent transparent;
+  border-style: solid dashed dashed dashed;
+}
+
+/*向左的三角*/
+.triangle(left,@w:10px,@c:pink) {
+  border-width: @w;
+  border-color: transparent @c transparent transparent;
+  border-style: dashed solid dashed dashed;
+}
+
+/*向右的三角*/
+.triangle(right,@w:10px,@c:pink) {
+  border-width: @w;
+  border-color: transparent transparent transparent @c;
+  border-style: dashed dashed dashed solid;
+}
+
+.triangle(@_,@w:10px,@c:pink) {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#box1 {
+  // 向上三角图案
+  .triangle(top,50px,deeppink);
+}
+
+// 编译为css后
+#box1 {
+  border-width: 50px;
+  border-color: transparent transparent #ff1493 transparent;
+  border-style: dashed dashed solid dashed;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+</code></pre><h3 id="导引表达式">导引表达式</h3>
+<p>当我们想根据表达式进行匹配，而非根据值和参数匹配时，导引就显得非常有用。如果你对函数式编程非常熟悉，那么你很可能已经使用过导引。</p>
+<p>为了尽可能地保留 CSS 的可声明性，LESS 通过导引混合而非 if/else 语句来实现条件判断，因为前者已在@media query 特性中被定义。</p>
+<p>从该例开始</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">.mixin (@a) when (lightness(@a) &gt;= 50%) {
+  background-color: black;
+}
+.mixin (@a) when (lightness(@a) &lt; 50%) {
+  background-color: white;
+}
+.mixin (@a) {
+  color: @a;
+}
+</code></pre><p>when 关键字用以定义一个导引序列(此例只有一个导引)。接下来我们运行下列代码</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">.class1 {
+  .mixin(#ddd);
+}
+.class2 {
+  .mixin(#555);
+}
+</code></pre><p>就会得到</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">class1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">background-color</span><span class="p">:</span> <span class="kc">black</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#ddd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">class2</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">background-color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#555</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>导引中可用的全部比较运算有： &gt; &gt;= = =&lt; &lt;。此外，关键字 true 只表示布尔真值，除去关键字 true 以外的值都被视为布尔假，下面两个混合是相同的</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">.truth (@a) when (@a) {
+  ...;
+}
+.truth (@a) when (@a = true) {
+  ...;
+}
+</code></pre><p>导引序列使用逗号‘,’—分割，当且仅当所有条件都符合时，才会被视为匹配成功。</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">.mixin (@a) when (@a &gt; 10), (@a &lt; -10) {
+  ...;
+}
+</code></pre><p>导引可以无参数，也可以对参数进行比较运算</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">@media: mobile;
+
+.mixin (@a) when (@media = mobile) {
+  ...;
+}
+.mixin (@a) when (@media = desktop) {
+  ...;
+}
+
+.max (@a, @b) when (@a &gt; @b) {
+  width: @a;
+}
+.max (@a, @b) when (@a &lt; @b) {
+  width: @b;
+}
+</code></pre><p>最后，如果想基于值的类型进行匹配，我们就可以使用 is*函式</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">.mixin (@a, @b: 0) when (isnumber(@b)) { ... }
+.mixin (@a, @b: black) when (iscolor(@b)) { ... }
+
+// 下面就是常见的检测函式：
+iscolor
+isnumber
+isstring
+iskeyword
+isurl
+// 如果你想判断一个值是纯数字，还是某个单位量，可以使用下列函式
+ispixel
+ispercentage
+isem
+</code></pre><p>最后再补充一点，在导引序列中可以使用 and 关键字实现与条件，使用 not 关键字实现或条件。</p>
+<h3 id="arguments-变量">arguments 变量</h3>
+<p>@arguments 包含了所有传递进来的参数. 如果你不想单独处理每一个参数的话就可以像这样写</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">.border(@w:10px,@style:solid,@c:deeppink) {
+  border: @arguments;
+}
+</code></pre><h2 id="less-运算">less 运算</h2>
+<p>任何数字、颜色或者变量都可以参与运算</p>
+<p>在 less 中可以进行加减乘除的运算</p>
+<p>括号也同样允许使用</p>
+<p>Color 函数</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">lighten(@color, 10%);      // 返回颜色比@color浅10%的颜色
+darken(@color, 10%);       //返回颜色比@color深10%的颜色
+
+saturate(@color, 10%);      // 返回饱和比比@color深10%的颜色
+desaturate(@color, 10%);    // 返回饱和比比@color浅10%的颜色
+
+fadein(@color, 10%);       // 返回颜色不透明度是@color10%的颜色
+fadeout(@color, 10%);      // 返回颜色透明度是@color10%的颜色
+fade(@color, 50%);        // 返回透明度是@color50%的颜色
+
+spin(@color, 10);         // 颜色比@color大10的色调
+spin(@color, -10);        // 颜色比@color小10的色调
+mix(@color1, @color2);      // 返回@color1与@color2的混合值
+</code></pre><p>Math 函数:</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">round(1.67); //四舍五入 returns `2`
+ceil(2.4); // returns `3`
+floor(2.6); // returns `2`
+percentage(0.5); // returns `50%`
+</code></pre><h2 id="less-避免编译">less 避免编译</h2>
+<p>有时候我们需要输出一些不正确的 CSS 语法或者使用一些 LESS 不认识的专有语法.</p>
+<p>要输出这样的值我们可以在字符串前加上一个 ~</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">.class {
+    filter: ~&#34;ms:alwaysHasItsOwnSyntax.For.Stuff()&#34;;
+}
+// 我们可以将要避免编译的值用 “”包含起来，输出结果为:
+.class {
+    filter: ms:alwaysHasItsOwnSyntax.For.Stuff();
+}
+</code></pre><h2 id="less-继承">less 继承</h2>
+<p>性能比混合高</p>
+<p>灵活度比混合低</p>
+<p>extend(继承的类 all)</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">// less
+.common:hover {
+  background: pink;
+}
+.common {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+.juzhong(@w:100px,@h:100px,@c:pink) {
+  &amp;:extend(.common all);
+  width: @w;
+  height: @h;
+  background: @c;
+}
+#box1 {
+  .juzhong();
+  z-index: 1;
+}
+
+// 编译为css后
+.common:hover {
+  background: pink;
+}
+.common {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+.juzhong(@w:100px,@h:100px,@c:pink) {
+  &amp;:extend(.common all);
+  width: @w;
+  height: @h;
+  background: @c;
+}
+#box1 {
+  .juzhong();
+  z-index: 1;
+}
+</code></pre><h2 id="命名空间">命名空间</h2>
+<p>有时候，你可能为了更好组织 CSS 或者单纯是为了更好的封装，将一些变量或者混合模块打包起来</p>
+<p>你可以像下面这样在#bundle 中定义一些属性集之后可以重复使用</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">#bundle {
+  .button () {
+    display: block;
+    border: 1px solid black;
+    background-color: grey;
+    &amp;:hover {
+      background-color: white;
+    }
+  }
+  .tab {
+    ...;
+  }
+  .citation {
+    ...;
+  }
+}
+// 只需要在 #header a中像这样引入 .button
+#header a {
+  color: orange;
+  #bundle &gt; .button;
+}
+</code></pre><h2 id="混合与继承区别">混合与继承区别</h2>
+<p><strong>混合</strong>：就是将一系列属性从一个规则集引入到另一个规则集的方式，任何 CSS class, id 或者元素 属性集都可以以同样的方式引入。可带可不带参数，编译后相当于 ctrl c +ctrl v</p>
+<p><strong>继承</strong>：不能带参数，性能比混合高，灵活度比混合低。编译后再 css 中会将选择器组合在一起，代码减少。</p>
+<h2 id="javascript-表达式">JavaScript 表达式</h2>
+<blockquote>
+<p>慎用，测试报错</p>
+</blockquote>
+<p>JavaScript 表达式也可以在.less 文件中使用. 可以通过反引号的方式使用:</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">@var: ` &#39;hello&#39; .toUpperCase() + &#39;!&#39; `;
+// 输出
+@var: &#39;HELLO!&#39;;
+
+// 注意你也可以同时使用字符串插值和避免编译
+@str: &#39;hello&#39;;
+@var: ~` &#39;@{str}&#39; .toUpperCase() + &#39;!&#39; `;
+
+// 输出
+@var: HELLO!;
+
+// 它也可以访问JavaScript环境:
+@height: `document.body.clientHeight`;
+
+// 如果你想将一个JavaScript字符串解析成16进制的颜色值, 你可以使用 color 函数
+@color: color(`window.colors.baseColor`);
+@darkcolor: darken(@color, 10%);
+</code></pre>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            
+            
+            <a href="/tags/css/">css</a>
+        
+            
+            
+            <a href="/tags/less/">less</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-ND 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/html-css/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/html-css.jpg" loading="lazy" data-key="html-css" data-hash="https://static.aecra.cn/cover/html-css.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">HTML &#43; CSS</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2017 - 
+        
+        2022 aecra | 个人资料分享
+    </section>
+    
+    <section class="powerby">
+        
+            <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021003357号-1</a> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#less-的中文官网">less 的中文官网</a></li>
+        <li><a href="#bootstrap-中-less-教程">bootstrap 中 less 教程</a></li>
+        <li><a href="#less-编译工具">Less 编译工具</a></li>
+        <li><a href="#less-编译">Less 编译</a></li>
+      </ol>
+    </li>
+    <li><a href="#less-中的注释">less 中的注释</a></li>
+    <li><a href="#less-中的变量">less 中的变量</a>
+      <ol>
+        <li><a href="#作为普通属性值">作为普通属性值</a></li>
+        <li><a href="#作为选择器和属性名">作为选择器和属性名</a></li>
+        <li><a href="#作为-url">作为 URL</a></li>
+        <li><a href="#变量的延迟加载">变量的延迟加载</a></li>
+      </ol>
+    </li>
+    <li><a href="#less-作用域">less 作用域</a></li>
+    <li><a href="#less-中的嵌套规则">less 中的嵌套规则</a></li>
+    <li><a href="#less-中的混合">less 中的混合</a>
+      <ol>
+        <li><a href="#普通混合">普通混合</a></li>
+        <li><a href="#不带输出的混合">不带输出的混合</a></li>
+        <li><a href="#带参数的混合">带参数的混合</a></li>
+        <li><a href="#带参数并且有默认值的混合">带参数并且有默认值的混合</a></li>
+        <li><a href="#带多个参数的混合">带多个参数的混合</a></li>
+        <li><a href="#形参和实参">形参和实参</a></li>
+        <li><a href="#匹配模式">匹配模式</a></li>
+        <li><a href="#导引表达式">导引表达式</a></li>
+        <li><a href="#arguments-变量">arguments 变量</a></li>
+      </ol>
+    </li>
+    <li><a href="#less-运算">less 运算</a></li>
+    <li><a href="#less-避免编译">less 避免编译</a></li>
+    <li><a href="#less-继承">less 继承</a></li>
+    <li><a href="#命名空间">命名空间</a></li>
+    <li><a href="#混合与继承区别">混合与继承区别</a></li>
+    <li><a href="#javascript-表达式">JavaScript 表达式</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript">
+    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
+</script>
+<script>
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    </body>
+</html>

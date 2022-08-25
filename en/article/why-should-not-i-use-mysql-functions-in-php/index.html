@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record.'><meta name='keywords' content='PHP, PDO, MySQL'><title>Why shouldn&#39;t I use mysql_* functions in PHP?</title>
+
+
+
+<link rel='canonical' href='https://www.aecra.cn/en/article/why-should-not-i-use-mysql-functions-in-php/'>
+
+<link rel="stylesheet" href="/scss/style.min.52c52da3fe7b812e5cd0f0af686848e7dd3a65935c0aa95d735a48cf30e383b4.css"><meta property='og:title' content='Why shouldn&#39;t I use mysql_* functions in PHP?'>
+<meta property='og:description' content='This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record.'>
+
+
+<meta property='og:url' content='https://www.aecra.cn/en/article/why-should-not-i-use-mysql-functions-in-php/'>
+<meta property='og:site_name' content='aecra | Technical article sharing'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='PHP' /><meta property='article:tag' content='PDO' /><meta property='article:tag' content='MySQL' /><meta property='article:published_time' content='2021-02-14T14:26:56&#43;00:00'/><meta property='article:modified_time' content='2021-02-14T14:26:56&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/why-should-not-i-use-mysql-functions-in-php.jpg' />
+<meta name="twitter:title" content="Why shouldn&#39;t I use mysql_* functions in PHP?">
+<meta name="twitter:description" content="This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/why-should-not-i-use-mysql-functions-in-php.jpg' />
+    <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended">
+    <aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/en">
+                
+                    <img src="https://static.aecra.cn/avatar.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">😊</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/en">aecra | Technical article sharing</a></h1>
+            <h2 class="site-description">Leave a line of dialogue for the years to come.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/aecra'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/en/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/en/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/en/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/en/link/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Friends</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/en/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://www.aecra.cn/" >中文</option>
+                        
+                            <option value="https://www.aecra.cn/en/" selected>English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            
+            
+            <a href="/en/article/why-should-not-i-use-mysql-functions-in-php/">
+                
+                    <img src="https://static.aecra.cn/cover/why-should-not-i-use-mysql-functions-in-php.jpg" loading="lazy" alt="Featured image of post Why shouldn&#39;t I use mysql_* functions in PHP?" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/en/article/why-should-not-i-use-mysql-functions-in-php/">Why shouldn&#39;t I use mysql_* functions in PHP?</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record.
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 14, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    11 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>PHP offers three different APIs to connect to MySQL. These are the <a class="link" href="http://in1.php.net/manual/en/book.mysql.php"  target="_blank" rel="noopener"
+    >mysql</a>(removed as of PHP 7), <a class="link" href="http://uk.php.net/manual/en/book.mysqli.php"  target="_blank" rel="noopener"
+    >mysqli</a>, and <a class="link" href="http://php.net/manual/en/book.pdo.php"  target="_blank" rel="noopener"
+    >PDO</a> extensions.</p>
+<p>The <strong>mysql_</strong> functions used to be very popular, but their use is not encouraged anymore. The documentation team is discussing the database security situation, and educating users to move away from the commonly used ext/mysql extension is part of this (check <em><a class="link" href="http://news.php.net/php.internals/53799"  target="_blank" rel="noopener"
+    >php.internals: deprecating ext/mysql</a></em>).</p>
+<p>And the later PHP developer team has taken the decision to generate <a class="link" href="https://github.com/php/php-src/commit/b7091aaf0137d97cf4aa4a402ec50b3946d369c0"  target="_blank" rel="noopener"
+    ><strong>E_DEPRECATED</strong></a> errors when users connect to MySQL, whether through <strong>mysql_connect()</strong>, <strong>mysql_pconnect()</strong> or the implicit connection functionality built into <strong>ext/mysql</strong>.</p>
+<p><strong>ext/mysql</strong> was <a class="link" href="https://wiki.php.net/rfc/mysql_deprecation"  target="_blank" rel="noopener"
+    ><strong>officially deprecated as of PHP 5.5</strong></a> and has been <a class="link" href="https://wiki.php.net/rfc/remove_deprecated_functionality_in_php7"  target="_blank" rel="noopener"
+    ><strong>removed as of PHP 7</strong></a>.</p>
+<p><strong>See the Red Box?</strong></p>
+<p>When you go on any <strong>mysql_</strong> function manual page, you see a red box, explaining it should not be used anymore.</p>
+<h2 id="what-is-the-shortcomings-of-mysql_">What is the shortcomings of mysql_*?</h2>
+<p>Moving away from <strong>ext/mysql</strong> is not only about security, but also about having access to all the features of the MySQL database.</p>
+<p><strong>ext/mysql</strong> was built for <strong>MySQL 3.23</strong> and only got very few additions since then while mostly keeping compatibility with this old version which makes the code a bit harder to maintain. Missing features that is not supported by <strong>ext/mysql</strong> include: (<em><a class="link" href="https://wiki.php.net/rfc/mysql_deprecation"  target="_blank" rel="noopener"
+    >from PHP manual</a></em>).</p>
+<ul>
+<li><a class="link" href="http://en.wikipedia.org/wiki/Stored_procedure"  target="_blank" rel="noopener"
+    >Stored procedures</a> (can&rsquo;t handle multiple result sets)</li>
+<li><a class="link" href="http://en.wikipedia.org/wiki/Prepared_statement"  target="_blank" rel="noopener"
+    >Prepared statements</a></li>
+<li>Encryption (SSL)</li>
+<li>Compression</li>
+<li>Full Charset support</li>
+</ul>
+<p>Reason to not use <strong>mysql_*</strong> function:</p>
+<ul>
+<li>Not under active development</li>
+<li>Removed as of PHP 7</li>
+<li>Lacks an OO interface</li>
+<li>Doesn&rsquo;t support non-blocking, asynchronous queries</li>
+<li>Doesn&rsquo;t support prepared statements or <a class="link" href="http://en.wikipedia.org/wiki/Prepared_statement"  target="_blank" rel="noopener"
+    >parameterized queries</a></li>
+<li>Doesn&rsquo;t support stored procedures</li>
+<li>Doesn&rsquo;t support multiple statements</li>
+<li>Doesn&rsquo;t support <a class="link" href="http://en.wikipedia.org/wiki/Database_transaction"  target="_blank" rel="noopener"
+    >transactions</a></li>
+<li>Doesn&rsquo;t support all of the functionality in MySQL 5.1</li>
+</ul>
+<p><a class="link" href="https://stackoverflow.com/a/12860046/1723893"  target="_blank" rel="noopener"
+    >Above point quoted from Quentin&rsquo;s answer</a></p>
+<p>Lack of support for prepared statements is particularly important as they provide a clearer, less error prone method of escaping and quoting external data than manually escaping it with a separate function call.</p>
+<p>See the <a class="link" href="http://php.net/manual/en/mysqlinfo.api.choosing.php"  target="_blank" rel="noopener"
+    >comparison of SQL extensions</a>.</p>
+<h2 id="contrast-use-of-mysql_-and-pdo">Contrast use of mysql_* and PDO</h2>
+<h3 id="q-first-question-in-my-mind-was-what-is-pdo">Q. First question in my mind was: what is PDO?</h3>
+<p>A. “<strong>PDO – PHP Data Objects</strong> – is a database access layer providing a uniform method of access to multiple databases.”</p>
+<h3 id="connecting-to-mysql">Connecting to MySQL</h3>
+<p>With <strong>mysql_</strong> function or we can say it the old way (deprecated in PHP 5.5 and above)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$link</span> <span class="o">=</span> <span class="nx">mysql_connect</span><span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">mysql_select_db</span><span class="p">(</span><span class="s1">&#39;testdb&#39;</span><span class="p">,</span> <span class="nv">$link</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">mysql_set_charset</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span> <span class="nv">$link</span><span class="p">);</span>
+</span></span></code></pre></div><p>With <strong>PDO</strong>: All you need to do is create a new <strong>PDO</strong> object. The constructor accepts parameters for specifying the database source <strong>PDO</strong>&rsquo;s constructor mostly takes four parameters which are <strong>DSN</strong> (data source name) and optionally <strong>username</strong>, <strong>password</strong>.</p>
+<p>Here I think you are familiar with all except <strong>DSN</strong>; this is new in <strong>PDO</strong>. A <strong>DSN</strong> is basically a string of options that tell <strong>PDO</strong> which driver to use, and connection details. For further reference, check <a class="link" href="http://www.php.net/manual/en/ref.pdo-mysql.connection.php"  target="_blank" rel="noopener"
+    >PDO MySQL DSN</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">&#39;mysql:host=localhost;dbname=testdb;charset=utf8&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><p><strong>Note:</strong> you can also use <strong>charset=UTF-8</strong>, but sometimes it causes an error, so it&rsquo;s better to use <strong>utf8</strong>.</p>
+<p>If there is any connection error, it will throw a <strong>PDOException</strong> object that can be caught to handle <strong>Exception</strong> further.</p>
+<p><strong>Good read</strong>: <a class="link" href="http://php.net/manual/en/pdo.connections.php"  target="_blank" rel="noopener"
+    >Connections and Connection management ¶</a></p>
+<p>You can also pass in several driver options as an array to the fourth parameter. I recommend passing the parameter which puts <strong>PDO</strong> into exception mode. Because some <strong>PDO</strong> drivers don&rsquo;t support native prepared statements, so <strong>PDO</strong> performs emulation of the prepare. It also lets you manually enable this emulation. To use the native server-side prepared statements, you should explicitly set it <strong>false</strong>.</p>
+<p>The other is to turn off prepare emulation which is enabled in the <strong>MySQL</strong> driver by default, but prepare emulation should be turned off to use <strong>PDO</strong> safely.</p>
+<p>I will later explain why prepare emulation should be turned off. To find reason please check <a class="link" href="https://stackoverflow.com/a/12202218/1723893"  target="_blank" rel="noopener"
+    >this post</a>.</p>
+<p>It is only usable if you are using an old version of <strong>MySQL</strong> which I do not recommended.</p>
+<p>Below is an example of how you can do it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">&#39;mysql:host=localhost;dbname=testdb;charset=UTF-8&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="s1">&#39;password&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="k">array</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_EMULATE_PREPARES</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span> <span class="o">=&gt;</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_EXCEPTION</span><span class="p">));</span>
+</span></span></code></pre></div><p><strong>Can we set attributes after PDO construction?</strong></p>
+<p><strong>Yes</strong>, we can also set some attributes after PDO construction with the <strong>setAttribute</strong> method:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">&#39;mysql:host=localhost;dbname=testdb;charset=UTF-8&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="s1">&#39;password&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$db</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_EXCEPTION</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$db</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_EMULATE_PREPARES</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="error-handling">Error Handling</h3>
+<p>Error handling is much easier in <strong>PDO</strong> than <strong>mysql_</strong>.</p>
+<p>A common practice when using <strong>mysql_</strong> is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//Connected to MySQL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$result</span> <span class="o">=</span> <span class="nx">mysql_query</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM table&#34;</span><span class="p">,</span> <span class="nv">$link</span><span class="p">)</span> <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="nx">mysql_error</span><span class="p">(</span><span class="nv">$link</span><span class="p">));</span>
+</span></span></code></pre></div><p><strong>OR die()</strong> is not a good way to handle the error since we can not handle the thing in <strong>die</strong>. It will just end the script abruptly and then echo the error to the screen which you usually do NOT want to show to your end users, and let bloody hackers discover your schema. Alternately, the return values of <strong>mysql_</strong> functions can often be used in conjunction with <a class="link" href="http://php.net/mysql_error"  target="_blank" rel="noopener"
+    >mysql_error()</a> to handle errors.</p>
+<p><strong>PDO</strong> offers a better solution: exceptions. Anything we do with <strong>PDO</strong> should be wrapped in a <strong>try</strong>-<strong>catch</strong> block. We can force <strong>PDO</strong> into one of three error modes by setting the error mode attribute. Three error handling modes are below.</p>
+<ul>
+<li><strong>PDO::ERRMODE_SILENT</strong>. It&rsquo;s just setting error codes and acts pretty much the same as <strong>mysql_</strong> where you must check each result and then look at <strong>$db-&gt;errorInfo();</strong> to get the error details.</li>
+<li><strong>PDO::ERRMODE_WARNING</strong> Raise <strong>E_WARNING</strong>. (Run-time warnings (non-fatal errors). Execution of the script is not halted.)</li>
+<li><strong>PDO::ERRMODE_EXCEPTION</strong>: Throw exceptions. It represents an error raised by PDO. You should not throw a <strong>PDOException</strong> from your own code. See <em>Exceptions</em> for more information about exceptions in PHP. It acts very much like <strong>or die(mysql_error());</strong>, when it isn&rsquo;t caught. But unlike <strong>or die()</strong>, the <strong>PDOException</strong> can be caught and handled gracefully if you choose to do so.</li>
+</ul>
+<p><strong>Good read</strong>:</p>
+<ul>
+<li><a class="link" href="http://php.net/manual/en/pdo.error-handling.php"  target="_blank" rel="noopener"
+    >Errors and error handling ¶</a></li>
+<li><a class="link" href="http://php.net/manual/en/class.pdoexception.php"  target="_blank" rel="noopener"
+    >The PDOException class ¶</a></li>
+<li><a class="link" href="http://www.php.net/manual/en/language.exceptions.php"  target="_blank" rel="noopener"
+    >Exceptions ¶</a></li>
+</ul>
+<p>Like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_SILENT</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_WARNING</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_EXCEPTION</span> <span class="p">);</span>
+</span></span></code></pre></div><p>And you can wrap it in <strong>try</strong>-<strong>catch</strong>, like below:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Connect as appropriate as above
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">);</span> <span class="c1">//Invalid query!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">catch</span> <span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;An Error occured!&#34;</span><span class="p">;</span> <span class="c1">//User friendly message/message you want to show to user
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">some_logging_function</span><span class="p">(</span><span class="nv">$ex</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>You do not have to handle with <strong>try</strong>-<strong>catch</strong> right now. You can catch it at any time appropriate, but I strongly recommend you to use <strong>try</strong>-<strong>catch</strong>. Also it may make more sense to catch it at outside the function that calls the <strong>PDO</strong> stuff:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">data_fun</span><span class="p">(</span><span class="nv">$db</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM table&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//Then later
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">data_fun</span><span class="p">(</span><span class="nv">$db</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">catch</span><span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Here you can handle error and show message/perform action you want.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>Also, you can handle by <strong>or die()</strong> or we can say like <strong>mysql_</strong>, but it will be really varied. You can hide the dangerous error messages in production by turning <strong>display_errors off</strong> and just reading your error log.</p>
+<p>Now, after reading all the things above, you are probably thinking: what the heck is that when I just want to start leaning simple <strong>SELECT</strong>, <strong>INSERT</strong>, <strong>UPDATE</strong>, or <strong>DELETE</strong> statements? Don&rsquo;t worry, here we go:</p>
+<h3 id="selecting-data">Selecting Data</h3>
+<p>So what you are doing in <strong>mysql_</strong> is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$result</span> <span class="o">=</span> <span class="nx">mysql_query</span><span class="p">(</span><span class="s1">&#39;SELECT * from table&#39;</span><span class="p">)</span> <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="nx">mysql_error</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$num_rows</span> <span class="o">=</span> <span class="nx">mysql_num_rows</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nx">mysql_fetch_assoc</span><span class="p">(</span><span class="nv">$result</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;field1&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Now in <strong>PDO</strong>, you can do this like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;field1&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Or</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//Use $results
+</span></span></span></code></pre></div><p><strong>Note</strong>: If you are using the method like below (<strong>query()</strong>), this method returns a <strong>PDOStatement</strong> object. So if you want to fetch the result, use it like above.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;field1&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>In PDO Data, it is obtained via the <strong>-&gt;fetch()</strong>, a method of your statement handle. Before calling fetch, the best approach would be telling PDO how you’d like the data to be fetched. In the below section I am explaining this.</p>
+<h3 id="insert-and-update-or-delete-statements">Insert and Update or Delete statements</h3>
+<p>What we are doing in <strong>mysql_</strong> function is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="o">=</span> <span class="nx">mysql_query</span><span class="p">(</span><span class="s2">&#34;UPDATE table SET field=&#39;value&#39;&#34;</span><span class="p">)</span> <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="nx">mysql_error</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">mysql_affected_rows</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+</span></span></code></pre></div><p>And in pdo, this same thing can be done by:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$affected_rows</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">exec</span><span class="p">(</span><span class="s2">&#34;UPDATE table SET field=&#39;value&#39;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$affected_rows</span><span class="p">;</span>
+</span></span></code></pre></div><p>In the above query <a class="link" href="http://php.net/manual/en/pdo.exec.php"  target="_blank" rel="noopener"
+    ><strong>PDO::exec</strong></a> execute an SQL statement and returns the number of affected rows.</p>
+<p><em>Insert and delete will be covered later.</em></p>
+<p>The above method is only useful when you are not using variable in query. But when you need to use a variable in a query, do not ever ever try like the above and there for <a class="link" href="http://en.wikipedia.org/wiki/Prepared_statement"  target="_blank" rel="noopener"
+    ><strong>prepared statement or parameterized statement</strong></a> is.</p>
+<h2 id="others-in-pdo">Others in PDO</h2>
+<h3 id="fetch-modes-in-pdo">Fetch Modes in PDO</h3>
+<p>Note the use of <strong>PDO::FETCH_ASSOC</strong> in the <strong>fetch()</strong> and <strong>fetchAll()</strong> code above. This tells <strong>PDO</strong> to return the rows as an associative array with the field names as keys. There are many other fetch modes too which I will explain one by one.</p>
+<p>First of all, I explain how to select fetch mode:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">)</span>
+</span></span></code></pre></div><p>In the above, I have been using <strong>fetch()</strong>. You can also use:</p>
+<ul>
+<li><a class="link" href="http://php.net/manual/en/pdostatement.fetchall.php"  target="_blank" rel="noopener"
+    ><strong>PDOStatement::fetchAll()</strong></a> - Returns an array containing all of the result set rows</li>
+<li><a class="link" href="http://php.net/manual/en/pdostatement.fetchcolumn.php"  target="_blank" rel="noopener"
+    ><strong>PDOStatement::fetchColumn()</strong></a> - Returns a single column from the next row of a result set</li>
+<li><a class="link" href="http://php.net/manual/en/pdostatement.fetchobject.php"  target="_blank" rel="noopener"
+    ><strong>PDOStatement::fetchObject()</strong></a> - Fetches the next row and returns it as an object.</li>
+<li><a class="link" href="http://php.net/manual/en/pdostatement.setfetchmode.php"  target="_blank" rel="noopener"
+    ><strong>PDOStatement::setFetchMode()</strong></a> - Set the default fetch mode for this statement</li>
+</ul>
+<p>Now I come to fetch mode:</p>
+<ul>
+<li><strong>PDO::FETCH_ASSOC</strong>: returns an array indexed by column name as returned in your result set</li>
+<li><strong>PDO::FETCH_BOTH</strong> (default): returns an array indexed by both column name and 0-indexed column number as returned in your result set</li>
+</ul>
+<p>There are even more choices! Read about them all in <a class="link" href="http://www.php.net/manual/en/pdostatement.fetch.php"  target="_blank" rel="noopener"
+    ><strong>PDOStatement</strong> Fetch documentation.</a>.</p>
+<h3 id="prepared-statements">Prepared Statements</h3>
+<p><strong>Q.</strong> What is a prepared statement and why do I need them?
+<strong>A.</strong> A prepared statement is a pre-compiled SQL statement that can be executed multiple times by sending only the data to the server.</p>
+<p>The typical workflow of using a prepared statement is as follows (<a class="link" href="http://en.wikipedia.org/wiki/Prepared_statement"  target="_blank" rel="noopener"
+    >quoted from Wikipedia three 3 point</a>):</p>
+<ol>
+<li>
+<p><strong>Prepare</strong>: The statement template is created by the application and sent to the database management system (DBMS). Certain values are left unspecified, called parameters, placeholders or bind variables (labelled <strong>?</strong> below):</p>
+<p><strong>INSERT INTO PRODUCT (name, price) VALUES (?, ?)</strong></p>
+</li>
+<li>
+<p>The DBMS parses, compiles, and performs query optimization on the statement template, and stores the result without executing it.</p>
+</li>
+<li>
+<p><strong>Execute</strong>: At a later time, the application supplies (or binds) values for the parameters, and the DBMS executes the statement (possibly returning a result). The application may execute the statement as many times as it wants with different values. In this example, it might supply &lsquo;Bread&rsquo; for the first parameter and <strong>1.00</strong> for the second parameter.</p>
+</li>
+</ol>
+<p>You can use a prepared statement by including placeholders in your SQL. There are basically three ones without placeholders (don&rsquo;t try this with variable its above one), one with unnamed placeholders, and one with named placeholders.</p>
+<p><strong>Q.</strong> So now, what are named placeholders and how do I use them?
+<strong>A.</strong> Named placeholders. Use descriptive names preceded by a colon, instead of question marks. We don&rsquo;t care about position/order of value in name place holder:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">bindParam</span><span class="p">(</span><span class="s1">&#39;:bla&#39;</span><span class="p">,</span> <span class="nv">$bla</span><span class="p">);</span>
+</span></span></code></pre></div><p><a class="link" href="http://php.net/manual/en/pdostatement.bindparam.php"  target="_blank" rel="noopener"
+    ><strong>bindParam(parameter,variable,data_type,length,driver_options)</strong></a></p>
+<p>You can also bind using an execute array as well:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM table WHERE id=:id AND name=:name&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;:name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span> <span class="s1">&#39;:id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">);</span>
+</span></span></code></pre></div><p>Another nice feature for <strong>OOP</strong> friends is that named placeholders have the ability to insert objects directly into your database, assuming the properties match the named fields. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$add</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="nv">$a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">add</span> <span class="o">=</span> <span class="nv">$b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$demo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">person</span><span class="p">(</span><span class="s1">&#39;john&#39;</span><span class="p">,</span><span class="s1">&#39;29 bla district&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;INSERT INTO table (name, add) value (:name, :add)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">((</span><span class="k">array</span><span class="p">)</span><span class="nv">$demo</span><span class="p">);</span>
+</span></span></code></pre></div><p><strong>Q.</strong> So now, what are unnamed placeholders and how do I use them?
+<strong>A.</strong> Let&rsquo;s have an example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;INSERT INTO folks (name, add) values (?, ?)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">bindValue</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">PARAM_STR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">bindValue</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$add</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">PARAM_STR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+</span></span></code></pre></div><p>and</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;INSERT INTO folks (name, add) values (?, ?)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;john&#39;</span><span class="p">,</span> <span class="s1">&#39;29 bla district&#39;</span><span class="p">));</span>
+</span></span></code></pre></div><p>In the above, you can see those <strong>?</strong> instead of a name like in a name place holder. Now in the first example, we assign variables to the various placeholders (<strong>$stmt-&gt;bindValue(1, $name, PDO::PARAM_STR);</strong>). Then, we assign values to those placeholders and execute the statement. In the second example, the first array element goes to the first <strong>?</strong> and the second to the second <strong>?</strong>.</p>
+<p><strong>NOTE</strong>: In <strong>unnamed placeholders</strong> we must take care of the proper order of the elements in the array that we are passing to the <strong>PDOStatement::execute()</strong> method.</p>
+<h4 id="select-insert-update-delete-prepared-queries">SELECT, INSERT, UPDATE, DELETE prepared queries</h4>
+<ol>
+<li>
+<p><strong>SELECT</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM table WHERE id=:id AND name=:name&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;:name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span> <span class="s1">&#39;:id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>INSERT</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;INSERT INTO table(field1,field2) VALUES(:field1,:field2)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;:field1&#39;</span> <span class="o">=&gt;</span> <span class="nv">$field1</span><span class="p">,</span> <span class="s1">&#39;:field2&#39;</span> <span class="o">=&gt;</span> <span class="nv">$field2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$affected_rows</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">rowCount</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>DELETE</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;DELETE FROM table WHERE id=:id&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">bindValue</span><span class="p">(</span><span class="s1">&#39;:id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">PARAM_STR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$affected_rows</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">rowCount</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>UPDATE</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;UPDATE table SET name=? WHERE id=?&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$affected_rows</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">rowCount</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+</ol>
+<p><strong>NOTE</strong>: If you use the <strong>like</strong> statement, please bind the % in execute statement.</p>
+<h3 id="getting-the-row-count">Getting the row count</h3>
+<p>Instead of using <strong>mysql_num_rows</strong> to get the number of returned rows, you can get a <strong>PDOStatement</strong> and do <strong>rowCount()</strong>, like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$row_count</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">rowCount</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$row_count</span><span class="o">.</span><span class="s1">&#39; rows selected&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><h3 id="getting-the-last-inserted-id">Getting the Last Inserted ID</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">exec</span><span class="p">(</span><span class="s2">&#34;INSERT INTO table(firstname, lastname) VAULES(&#39;John&#39;, &#39;Doe&#39;)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$insertId</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">lastInsertId</span><span class="p">();</span>
+</span></span></code></pre></div><h2 id="note">NOTE</h2>
+<p>However <strong>PDO</strong> and/or <strong>MySQLi</strong> are not completely safe. Check the answer <em><a class="link" href="https://stackoverflow.com/a/12202218/1723893"  target="_blank" rel="noopener"
+    >Are PDO prepared statements sufficient to prevent SQL injection?</a></em> by <a class="link" href="https://stackoverflow.com/users/338665/ircmaxell"  target="_blank" rel="noopener"
+    >ircmaxell</a>. Also, I am quoting some part from his answer:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_EMULATE_PREPARES</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;SET NAMES GBK&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM test WHERE name = ? LIMIT 1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nx">chr</span><span class="p">(</span><span class="mh">0xbf</span><span class="p">)</span> <span class="o">.</span> <span class="nx">chr</span><span class="p">(</span><span class="mh">0x27</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34; OR 1=1 /*&#34;</span><span class="p">));</span>
+</span></span></code></pre></div><h2 id="addition">Addition</h2>
+<p>This article is excerpted from <a class="link" href="https://stackoverflow.com/questions/12859942/why-shouldnt-i-use-mysql-functions-in-php"  target="_blank" rel="noopener"
+    >why-shouldnt-i-use-mysql-functions-in-php</a> and revised appropriately.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            
+            
+            <a href="/en/tags/php/">PHP</a>
+        
+            
+            
+            <a href="/en/tags/pdo/">PDO</a>
+        
+            
+            
+            <a href="/en/tags/mysql/">MySQL</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-ND 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2017 - 
+        
+        2022 aecra | Technical article sharing
+    </section>
+    
+    <section class="powerby">
+        
+            <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021003357号-1</a> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#what-is-the-shortcomings-of-mysql_">What is the shortcomings of mysql_*?</a></li>
+    <li><a href="#contrast-use-of-mysql_-and-pdo">Contrast use of mysql_* and PDO</a>
+      <ol>
+        <li><a href="#q-first-question-in-my-mind-was-what-is-pdo">Q. First question in my mind was: what is PDO?</a></li>
+        <li><a href="#connecting-to-mysql">Connecting to MySQL</a></li>
+        <li><a href="#error-handling">Error Handling</a></li>
+        <li><a href="#selecting-data">Selecting Data</a></li>
+        <li><a href="#insert-and-update-or-delete-statements">Insert and Update or Delete statements</a></li>
+      </ol>
+    </li>
+    <li><a href="#others-in-pdo">Others in PDO</a>
+      <ol>
+        <li><a href="#fetch-modes-in-pdo">Fetch Modes in PDO</a></li>
+        <li><a href="#prepared-statements">Prepared Statements</a>
+          <ol>
+            <li><a href="#select-insert-update-delete-prepared-queries">SELECT, INSERT, UPDATE, DELETE prepared queries</a></li>
+          </ol>
+        </li>
+        <li><a href="#getting-the-row-count">Getting the row count</a></li>
+        <li><a href="#getting-the-last-inserted-id">Getting the Last Inserted ID</a></li>
+      </ol>
+    </li>
+    <li><a href="#note">NOTE</a></li>
+    <li><a href="#addition">Addition</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript">
+    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
+</script>
+<script>
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    </body>
+</html>

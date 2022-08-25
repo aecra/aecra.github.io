@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。'><meta name='keywords' content='Go'><title>GO 中哈希表的实现</title>
+
+
+
+<link rel='canonical' href='https://www.aecra.cn/article/hash-table-implementation-in-go/'>
+
+<link rel="stylesheet" href="/scss/style.min.52c52da3fe7b812e5cd0f0af686848e7dd3a65935c0aa95d735a48cf30e383b4.css"><meta property='og:title' content='GO 中哈希表的实现'>
+<meta property='og:description' content='哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。'>
+
+
+<meta property='og:url' content='https://www.aecra.cn/article/hash-table-implementation-in-go/'>
+<meta property='og:site_name' content='aecra | 个人资料分享'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2022-04-20T19:51:21&#43;00:00'/><meta property='article:modified_time' content='2022-04-20T19:51:21&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/hash-table-implementation-in-go.png' />
+<meta name="twitter:title" content="GO 中哈希表的实现">
+<meta name="twitter:description" content="哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/hash-table-implementation-in-go.png' />
+    <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended">
+    <aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://static.aecra.cn/avatar.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">😊</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">aecra | 个人资料分享</a></h1>
+            <h2 class="site-description">Leave a line of dialogue for the years to come.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/aecra'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关 于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归 档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜 索</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/link/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友 链</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://www.aecra.cn/" selected>中文</option>
+                        
+                            <option value="https://www.aecra.cn/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗 色</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            
+            
+            <a href="/article/hash-table-implementation-in-go/">
+                
+                    <img src="https://static.aecra.cn/cover/hash-table-implementation-in-go.png" loading="lazy" alt="Featured image of post GO 中哈希表的实现" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/article/hash-table-implementation-in-go/">GO 中哈希表的实现</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 20, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="什么是哈希表">什么是哈希表</h2>
+<p>哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。</p>
+<p>哈希函数提供了对键的散列编码，可以将存取的数据分散到底层的数据空间中，所以哈希函数的均匀分布可以提高哈希表的读写性能。</p>
+<p>哈希冲突的结果可以使用开放寻址法和拉链法来解决。</p>
+<blockquote>
+<p>源码位置：<a class="link" href="https://github.com/golang/go/blob/master/src/runtime/map.go"  target="_blank" rel="noopener"
+    >go/map.go</a></p>
+</blockquote>
+<h2 id="数据结构">数据结构</h2>
+<p>哈希表使用 <code>runtime.hmap</code> 表示，其中每个存储桶使用 <code>runtime.bmap</code> 表示。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">hmap</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">count</span>     <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">flags</span>     <span class="kt">uint8</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span>         <span class="kt">uint8</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">noverflow</span> <span class="kt">uint16</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">hash0</span>     <span class="kt">uint32</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">buckets</span>    <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">oldbuckets</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">nevacuate</span>  <span class="kt">uintptr</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">extra</span> <span class="o">*</span><span class="nx">mapextra</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">mapextra</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">overflow</span>    <span class="o">*</span><span class="p">[]</span><span class="o">*</span><span class="nx">bmap</span> <span class="c1">// 当前持有的初始化溢出桶
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">oldoverflow</span> <span class="o">*</span><span class="p">[]</span><span class="o">*</span><span class="nx">bmap</span> <span class="c1">// 扩容前的初始化溢出桶
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">nextOverflow</span> <span class="o">*</span><span class="nx">bmap</span>   <span class="c1">// 下一个待分配的溢出桶
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><ol>
+<li><code>count</code> 表示当前哈希表中的元素数量；</li>
+<li><code>B</code> 表示当前哈希表持有的 <code>buckets</code> 数量，但是因为哈希表中桶扩容为翻倍扩容，所以该字段会存储对数，也就是 <code>len(buckets) == 2^B</code>；</li>
+<li><code>noverflow</code> 用于记录当前哈希表的溢出桶数量。</li>
+<li><code>hash0</code> 是哈希的种子，它能为哈希函数的结果引入随机性，这个值在创建哈希表时确定，并在调用哈希函数时作为参数传入；</li>
+<li><code>buckets</code> 是当前桶。</li>
+<li><code>oldbuckets</code> 是哈希在扩容时用于保存之前 <code>buckets</code> 的字段。</li>
+<li><code>nevacuate</code> 表示当前已分流桶的数量。</li>
+<li><code>mapextra</code> 用于存储溢出桶的相关数据，溢出桶是用于解决频繁扩容的有效方法。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">bmap</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">topbits</span>  <span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="kt">uint8</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">keys</span>     <span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="nx">keytype</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">values</span>   <span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="nx">valuetype</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pad</span>      <span class="kt">uintptr</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">overflow</span> <span class="kt">uintptr</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>原始的 <code>bmap</code> 只有 <code>topbits</code> 字段，该字段为哈希值的高八位，用于加速键值对的访问。</p>
+<p>其他字段在编译时进行推导，该结构为虚拟结构，实际访问则通过计算内存地址的方式访问。</p>
+<h2 id="溢出桶">溢出桶</h2>
+<p>由上面可知，哈希表的底层使用的是桶存储数据，每个桶最多可以存储 8 个键值对，其中根据需要可能会多创建不定数量的溢出桶用来承载桶溢出后的数据，溢出桶会添加到桶的 <code>overflow</code> 字段。</p>
+<p>桶数量确定原则：</p>
+<ul>
+<li>哈希表未指定元素数量是默认为 0，然后根据最大负载因子为 6.5、每个存储桶中 8 个元素来确定最小的 B 大小。</li>
+</ul>
+<p>溢出桶创建规则：</p>
+<ul>
+<li>当桶的数量小于 <code>2**4</code> 时，由于数据较少、使用溢出桶的可能性较低，会省略创建的过程以减少额外开销；</li>
+<li>当桶的数量多于 <code>2**4</code> 时，会额外创建 <code>2**(B-4)</code> 个溢出桶；</li>
+</ul>
+<p>在创建时正常桶和溢出桶处于相邻的地址空间，只有在初始化的溢出桶使用完后才会通过 <code>runtime.newobject</code> 创建新的溢出桶。</p>
+<h2 id="数据操作">数据操作</h2>
+<h3 id="访问">访问</h3>
+<p>哈希表的访问步骤如下：</p>
+<ol>
+<li>计算哈希值。</li>
+<li>获取存储数据的桶。</li>
+<li>依次对比 <code>tophash</code> 与哈希值的高八位，如果相同则对比对应的键值，相同即可返回，否则继续向下寻找，如果当前桶内数据查找完后继续查找溢出桶，直到找到键值对或者数据不存在。</li>
+</ol>
+<p>因为哈希表的扩容不具备原子性，所以在扩容过程中进行访问的过程在扩容部分介绍。</p>
+<h3 id="写入修改">写入/修改</h3>
+<p>写入与修改在相同过程中实现，步骤如下：</p>
+<ol>
+<li>计算哈希值</li>
+<li>获取存储数据的桶</li>
+<li>依次对比 <code>tophash</code> 与哈希值的高八位，如果相同则对比对应的键值，相同即可将新数据写入，否则继续向下寻找，如果当前桶内数据查找完后继续查找溢出桶，直到找到键值对或者数据不存在，当数据不存在时会将哈希高八位写入到 <code>tophash</code> 键值对写入对应位置，如果最后的桶已满，则获取新的溢出桶插入到当前桶之后并写入数据。</li>
+</ol>
+<p>在扩容期间进行的写入与修改过程将在扩容部分介绍。</p>
+<h3 id="删除">删除</h3>
+<p>删除操作即删除对应的 <code>tophash</code> 和键值对，但并不会整理内存和释放多余的溢出桶，此部分在扩容部分完成。</p>
+<h2 id="扩容机制">扩容机制</h2>
+<h3 id="发生条件">发生条件</h3>
+<ol>
+<li>装载因子超过 6.5。</li>
+<li>哈希表使用了过多的溢出桶。</li>
+</ol>
+<h3 id="扩容分类">扩容分类</h3>
+<ol>
+<li>
+<p>等量扩容</p>
+<p>等量扩容的原因是使用了过多的溢出桶，扩容方式是创建一组相同数量的桶，随后将原有的桶数组设置到 <code>oldbuckets</code> 上并将新的空桶设置到 <code>buckets</code> 上，溢出桶也使用了相同的逻辑更新。</p>
+</li>
+<li>
+<p>翻倍扩容</p>
+<p>翻倍扩容的原因是装载因子已经超过了 6.5，扩容方式是创建一组 2 倍数量的桶和相应的溢出桶，随后将原有的桶数组设置到 <code>oldbuckets</code> 上并将新的空桶设置到 <code>buckets</code> 上，溢出桶也使用了相同的逻辑更新。</p>
+</li>
+</ol>
+<h3 id="增量扩容">增量扩容</h3>
+<p>在创建新桶后并没有对原有数据进行分流，数据的分流以桶为单位，分流时机为每次写入操作前和删除操作前。</p>
+<p>分流方式为从旧桶中依次读取数据，计算哈希值和新桶索引，并将数据写入到新桶中，写入方式和上文相同。之后只保留旧桶的 <code>tophash</code> 用于标记该桶已分流，其他内存则进行回收。如果所有的桶都进行了分流则置 <code>oldbuckets</code> 和<code>nevacuate</code> 为空，以回收 <code>tophash</code> 占用的空间。</p>
+<p>在增删改前如果旧桶数据已分流则直接对新桶进行操作，如果旧桶未分流则分流后对新桶进行操作。读操作前如果旧桶未分流则读取旧桶，否则读取新桶。</p>
+<h2 id="参考">参考</h2>
+<p><a class="link" href="https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/"  target="_blank" rel="noopener"
+    >理解 Golang 哈希表 Map 的原理 | Go 语言设计与实现 (draveness.me)</a></p>
+<p><a class="link" href="https://draveness.me/golang/docs/part1-prerequisite/ch02-compile/golang-typecheck/"  target="_blank" rel="noopener"
+    >Go 语言如何进行类型检查 | Go 语言设计与实现 (draveness.me)</a></p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/265370733"  target="_blank" rel="noopener"
+    >Golang 数据结构详解之哈希表 - 知乎 (zhihu.com)</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            
+            
+            <a href="/tags/go/">Go</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-ND 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/object-oriented-in-go/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/object-oriented-in-go.png" loading="lazy" data-key="object-oriented-in-go" data-hash="https://static.aecra.cn/cover/object-oriented-in-go.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Go 中的面向对象</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/go-exception-handling/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/go-exception-handling.png" loading="lazy" data-key="go-exception-handling" data-hash="https://static.aecra.cn/cover/go-exception-handling.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Go 的异常处理</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2017 - 
+        
+        2022 aecra | 个人资料分享
+    </section>
+    
+    <section class="powerby">
+        
+            <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021003357号-1</a> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#什么是哈希表">什么是哈希表</a></li>
+    <li><a href="#数据结构">数据结构</a></li>
+    <li><a href="#溢出桶">溢出桶</a></li>
+    <li><a href="#数据操作">数据操作</a>
+      <ol>
+        <li><a href="#访问">访问</a></li>
+        <li><a href="#写入修改">写入/修改</a></li>
+        <li><a href="#删除">删除</a></li>
+      </ol>
+    </li>
+    <li><a href="#扩容机制">扩容机制</a>
+      <ol>
+        <li><a href="#发生条件">发生条件</a></li>
+        <li><a href="#扩容分类">扩容分类</a></li>
+        <li><a href="#增量扩容">增量扩容</a></li>
+      </ol>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript">
+    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
+</script>
+<script>
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    </body>
+</html>

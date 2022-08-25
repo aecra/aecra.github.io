@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The official docker tutorial is reproduced for reference.'><meta name='keywords' content='docker'><title>Docker tutorial</title>
+
+
+
+<link rel='canonical' href='https://www.aecra.cn/en/article/docker-tutorial/'>
+
+<link rel="stylesheet" href="/scss/style.min.52c52da3fe7b812e5cd0f0af686848e7dd3a65935c0aa95d735a48cf30e383b4.css"><meta property='og:title' content='Docker tutorial'>
+<meta property='og:description' content='The official docker tutorial is reproduced for reference.'>
+
+
+<meta property='og:url' content='https://www.aecra.cn/en/article/docker-tutorial/'>
+<meta property='og:site_name' content='aecra | Technical article sharing'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='docker' /><meta property='article:published_time' content='2021-04-20T10:35:12&#43;00:00'/><meta property='article:modified_time' content='2021-04-20T10:35:12&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/docker-tutorial.jpg' />
+<meta name="twitter:title" content="Docker tutorial">
+<meta name="twitter:description" content="The official docker tutorial is reproduced for reference."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/docker-tutorial.jpg' />
+    <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended">
+    <aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/en">
+                
+                    <img src="https://static.aecra.cn/avatar.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">😊</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/en">aecra | Technical article sharing</a></h1>
+            <h2 class="site-description">Leave a line of dialogue for the years to come.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/aecra'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/en/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/en/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/en/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/en/link/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Friends</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/en/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://www.aecra.cn/" >中文</option>
+                        
+                            <option value="https://www.aecra.cn/en/" selected>English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            
+            
+            <a href="/en/article/docker-tutorial/">
+                
+                    <img src="https://static.aecra.cn/cover/docker-tutorial.jpg" loading="lazy" alt="Featured image of post Docker tutorial" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/en/article/docker-tutorial/">Docker tutorial</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            The official docker tutorial is reproduced for reference.
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 20, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    43 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="getting-started">Getting Started</h2>
+<h3 id="the-command-you-just-ran">The command you just ran</h3>
+<p>Congratulations! You have started the container for this tutorial! Let&rsquo;s first explain the command that you just ran. In case you forgot, here&rsquo;s the command:</p>
+<pre tabindex="0"><code class="language-cli" data-lang="cli">docker run -d -p 80:80 docker/getting-started
+</code></pre><p>You&rsquo;ll notice a few flags being used. Here&rsquo;s some more info on them:</p>
+<ul>
+<li><code>-d</code> - run the container in detached mode (in the background)</li>
+<li><code>-p 80:80</code> - map port 80 of the host to port 80 in the container</li>
+<li><code>docker/getting-started</code> - the image to use</li>
+</ul>
+<blockquote>
+<p>You can combine single character flags to shorten the full command. As an example, the command above could be written as:
+<code>docker run -dp 80:80 docker/getting-started</code></p>
+</blockquote>
+<h3 id="the-docker-dashboard">The Docker Dashboard</h3>
+<p>Before going too far, we want to highlight the Docker Dashboard, which gives you a quick view of the containers running on your machine. It gives you quick access to container logs, lets you get a shell inside the container, and lets you easily manage container lifecycle (stop, remove, etc.).</p>
+<p>To access the dashboard, follow the instructions for either <a class="link" href="https://docs.docker.com/docker-for-mac/dashboard/"  target="_blank" rel="noopener"
+    >Mac</a> or <a class="link" href="https://docs.docker.com/docker-for-windows/dashboard/"  target="_blank" rel="noopener"
+    >Windows</a>. If you open the dashboard now, you will see this tutorial running! The container name (<code>jolly_bouman</code> below) is a randomly created name. So, you&rsquo;ll most likely have a different name.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/629e7fe7f1247328ad7c39a05e5403e0.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="tutorial-in-dashboard"
+	
+	
+></p>
+<h3 id="what-is-a-container">What is a container?</h3>
+<p>Now that you&rsquo;ve run a container, what <em>is</em> a container? Simply put, a container is simply another process on your machine that has been isolated from all other processes on the host machine. That isolation leverages <a class="link" href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504"  target="_blank" rel="noopener"
+    >kernel namespaces and cgroups</a>, features that have been in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use.</p>
+<blockquote>
+<p>If you&rsquo;d like to see how containers are built from scratch, Liz Rice from Aqua Security has a fantastic talk in which she creates a container from scratch in Go. While she makes a simple container, this talk doesn&rsquo;t go into networking, using images for the filesystem, and more. But, it gives a <em>fantastic</em> deep dive into how things are working.</p>
+</blockquote>
+<h3 id="what-is-a-container-image">What is a container image?</h3>
+<p>When running a container, it uses an isolated filesystem. This custom filesystem is provided by a <strong>container image</strong>. Since the image contains the container&rsquo;s filesystem, it must contain everything needed to run an application - all dependencies, configuration, scripts, binaries, etc. The image also contains other configuration for the container, such as environment variables, a default command to run, and other metadata.</p>
+<p>We&rsquo;ll dive deeper into images later on, covering topics such as layering, best practices, and more.</p>
+<blockquote>
+<p>If you&rsquo;re familiar with <code>chroot</code>, think of a container as an extended version of <code>chroot</code>. The filesystem is simply coming from the image. But, a container adds additional isolation not available when simply using chroot.</p>
+</blockquote>
+<h2 id="our-application">Our Application</h2>
+<p>For the rest of this tutorial, we will be working with a simple todo list manager that is running in Node.js. If you&rsquo;re not familiar with Node.js, don&rsquo;t worry! No real JavaScript experience is needed!</p>
+<p>At this point, your development team is quite small and you&rsquo;re simply building an app to prove out your MVP (minimum viable product). You want to show how it works and what it&rsquo;s capable of doing without needing to think about how it will work for a large team, multiple developers, etc.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/eb7dc36e07d82642d69f8ef7283d8ef1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="todo-list-sample"
+	
+	
+></p>
+<h3 id="getting-our-app">Getting our App</h3>
+<p>Before we can run the application, we need to get the application source code onto our machine. For real projects, you will typically clone the repo. But, for this tutorial, we have created a ZIP file containing the application.</p>
+<ol>
+<li>
+<p><a class="link" href="https://static.aecra.cn/markdown/202104/app.zip"  target="_blank" rel="noopener"
+    >Download the ZIP</a>. Open the ZIP file and make sure you extract the contents.</p>
+</li>
+<li>
+<p>Once extracted, use your favorite code editor to open the project. If you&rsquo;re in need of an editor, you can use <a class="link" href="https://code.visualstudio.com/"  target="_blank" rel="noopener"
+    >Visual Studio Code</a>. You should see the <code>package.json</code> and two subdirectories (<code>src</code> and <code>spec</code>).</p>
+<p><img src="https://static.aecra.cn/markdown/202104/fc7d00bef419c38a15bf940286635357.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="ide-screenshot"
+	
+	
+></p>
+</li>
+</ol>
+<h3 id="building-the-apps-container-image">Building the App&rsquo;s Container Image</h3>
+<p>In order to build the application, we need to use a <code>Dockerfile</code>. A Dockerfile is simply a text-based script of instructions that is used to create a container image. If you&rsquo;ve created Dockerfiles before, you might see a few flaws in the Dockerfile below. But, don&rsquo;t worry! We&rsquo;ll go over them.</p>
+<ol>
+<li>
+<p>Create a file named <code>Dockerfile</code> in the same folder as the file <code>package.json</code> with the following contents.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> node:12-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apk add --no-cache python g++ make<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> yarn install --production<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="s2">&#34;src/index.js&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><p>Please check that the file <code>Dockerfile</code> has no file extension like <code>.txt</code>. Some editors may append this file extension automatically and this would result in an error in the next step.</p>
+</li>
+<li>
+<p>If you haven&rsquo;t already done so, open a terminal and go to the <code>app</code> directory with the <code>Dockerfile</code>. Now build the container image using the <code>docker build</code> command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t getting-started .
+</span></span></code></pre></div><p>This command used the Dockerfile to build a new container image. You might have noticed that a lot of &ldquo;layers&rdquo; were downloaded. This is because we instructed the builder that we wanted to start from the <code>node:12-alpine</code> image. But, since we didn&rsquo;t have that on our machine, that image needed to be downloaded.</p>
+<p>After the image was downloaded, we copied in our application and used <code>yarn</code> to install our application&rsquo;s dependencies. The <code>CMD</code> directive specifies the default command to run when starting a container from this image.</p>
+</li>
+</ol>
+<p>Finally, the <code>-t</code> flag tags our image. Think of this simply as a human-readable name for the final image. Since we named the image <code>getting-started</code>, we can refer to that image when we run a container.</p>
+<p>The <code>.</code> at the end of the <code>docker build</code> command tells that Docker should look for the <code>Dockerfile</code> in the current directory.</p>
+<h3 id="starting-an-app-container">Starting an App Container</h3>
+<p>Now that we have an image, let&rsquo;s run the application! To do so, we will use the <code>docker run</code> command (remember that from earlier?).</p>
+<ol>
+<li>
+<p>Start your container using the <code>docker run</code> command and specify the name of the image we just created:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   docker run -dp 3000:3000 getting-started
+</span></span></code></pre></div><p>Remember the <code>-d</code> and <code>-p</code> flags? We&rsquo;re running the new container in &ldquo;detached&rdquo; mode (in the background) and creating a mapping between the host&rsquo;s port 3000 to the container&rsquo;s port 3000. Without the port mapping, we wouldn&rsquo;t be able to access the application.</p>
+</li>
+<li>
+<p>After a few seconds, open your web browser to <a class="link" href="http://localhost:3000"  target="_blank" rel="noopener"
+    >http://localhost:3000</a>. You should see our app!</p>
+<p><img src="https://static.aecra.cn/markdown/202104/885eba5692f6bb08855298217a7a03f3.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="todo-list-empty"
+	
+	
+></p>
+</li>
+<li>
+<p>Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove items. Your frontend is successfully storing items in the backend! Pretty quick and easy, huh?</p>
+<p>At this point, you should have a running todo list manager with a few items, all built by you! Now, let&rsquo;s make a few changes and learn about managing our containers.</p>
+<p>If you take a quick look at the Docker Dashboard, you should see your two containers running now (this tutorial and your freshly launched app container)!</p>
+<p><img src="https://static.aecra.cn/markdown/202104/853c89818607ac4341fe2399bc62a70c.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="dashboard-two-containers"
+	
+	
+></p>
+</li>
+</ol>
+<h3 id="recap">Recap</h3>
+<p>In this short section, we learned the very basics about building a container image and created a Dockerfile to do so. Once we built an image, we started the container and saw the running app!</p>
+<p>Next, we&rsquo;re going to make a modification to our app and learn how to update our running application with a new image. Along the way, we&rsquo;ll learn a few other useful commands.</p>
+<h2 id="updating-our-app">Updating our App</h2>
+<p>As a small feature request, we&rsquo;ve been asked by the product team to change the &ldquo;empty text&rdquo; when we don&rsquo;t have any todo list items. They would like to transition it to the following:</p>
+<blockquote>
+<p>You have no todo items yet! Add one above!</p>
+</blockquote>
+<p>Pretty simple, right? Let&rsquo;s make the change.</p>
+<h3 id="updating-our-source-code">Updating our Source Code</h3>
+<ol>
+<li>
+<p>In the <code>src/static/js/app.js</code> file, update line 56 to use the new empty text.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gd">- &lt;p className=&#34;text-center&#34;&gt;No items yet! Add one above!&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+ &lt;p className=&#34;text-center&#34;&gt;You have no todo items yet! Add one above!&lt;/p&gt;
+</span></span></span></code></pre></div></li>
+<li>
+<p>Let&rsquo;s build our updated version of the image, using the same command we used before.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t getting-started .
+</span></span></code></pre></div></li>
+<li>
+<p>Let&rsquo;s start a new container using the updated code.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -dp 3000:3000 getting-started
+</span></span></code></pre></div><p><strong>Uh oh!</strong> You probably saw an error like this (the IDs will be different):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker: Error response from daemon: driver failed programming external connectivity on endpoint laughing_burnell
+</span></span><span class="line"><span class="cl"><span class="o">(</span>bb242b2ca4d67eba76e79474fb36bb5125708ebdabd7f45c8eaf16caaabde9dd<span class="o">)</span>: Bind <span class="k">for</span> 0.0.0.0:3000 failed: port is already allocated.
+</span></span></code></pre></div><p>So, what happened? We aren&rsquo;t able to start the new container because our old container is still running. The reason this is a problem is because that container is using the host&rsquo;s port 3000 and only one process on the machine (containers included) can listen to a specific port. To fix this, we need to remove the old container.</p>
+</li>
+</ol>
+<h3 id="replacing-our-old-container">Replacing our Old Container</h3>
+<p>To remove a container, it first needs to be stopped. Once it has stopped, it can be removed. We have two ways that we can remove the old container. Feel free to choose the path that you&rsquo;re most comfortable with.</p>
+<h4 id="removing-a-container-using-the-cli">Removing a container using the CLI</h4>
+<ol>
+<li>
+<p>Get the ID of the container by using the <code>docker ps</code> command. Or you can use <code>docker ps -a</code> to see all the container with closed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker ps
+</span></span></code></pre></div></li>
+<li>
+<p>Use the <code>docker stop</code> command to stop the container.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Swap out &lt;the-container-id&gt; with the ID from docker ps</span>
+</span></span><span class="line"><span class="cl">docker stop &lt;the-container-id&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Once the container has stopped, you can remove it by using the <code>docker rm</code> command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker rm &lt;the-container-id&gt;
+</span></span></code></pre></div></li>
+</ol>
+<blockquote>
+<p>You can stop and remove a container in a single command by adding the &ldquo;force&rdquo; flag to the <code>docker rm</code> command. For example: <code>docker rm -f &lt;the-container-id&gt;</code></p>
+</blockquote>
+<h4 id="removing-a-container-using-the-docker-dashboard">Removing a container using the Docker Dashboard</h4>
+<p>If you open the Docker dashboard, you can remove a container with two clicks! It&rsquo;s certainly much easier than having to look up the container ID and remove it.</p>
+<ol>
+<li>
+<p>With the dashboard opened, hover over the app container and you&rsquo;ll see a collection of action buttons appear on the right.</p>
+</li>
+<li>
+<p>Click on the trash can icon to delete the container.</p>
+</li>
+<li>
+<p>Confirm the removal and you&rsquo;re done!</p>
+</li>
+</ol>
+<p><img src="https://static.aecra.cn/markdown/202104/50cc19890b8d05d477dbbf9c82c55fb5.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="dashboard-removing-container"
+	
+	
+></p>
+<h4 id="starting-our-updated-app-container">Starting our updated app container</h4>
+<ol>
+<li>
+<p>Now, start your updated app.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -dp 3000:3000 getting-started
+</span></span></code></pre></div></li>
+<li>
+<p>Refresh your browser on <a class="link" href="http://localhost:3000"  target="_blank" rel="noopener"
+    >http://localhost:3000</a> and you should see your updated help text!</p>
+<p><img src="https://static.aecra.cn/markdown/202104/10ead5c26776b3198faa596720614126.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="todo-list-updated-empty-text"
+	
+	
+></p>
+</li>
+</ol>
+<h3 id="recap-">Recap-</h3>
+<p>While we were able to build an update, there were two things you might have noticed:</p>
+<ul>
+<li>All of the existing items in our todo list are gone! That&rsquo;s not a very good app! We&rsquo;ll talk about that shortly.</li>
+<li>There were <em>a lot</em> of steps involved for such a small change. In an upcoming section, we&rsquo;ll talk about how to see code updates without needing to rebuild and start a new container every time we make a change.</li>
+</ul>
+<p>Before talking about persistence, we&rsquo;ll quickly see how to share these images with others.</p>
+<h2 id="sharing-our-app">Sharing our App</h2>
+<p>Now that we&rsquo;ve built an image, let&rsquo;s share it! To share Docker images, you have to use a Docker registry. The default registry is Docker Hub and is where all of the images we&rsquo;ve used have come from.</p>
+<h3 id="create-a-repo">Create a Repo</h3>
+<p>To push an image, we first need to create a repo on Docker Hub.</p>
+<ol>
+<li>
+<p>Go to <a class="link" href="https://hub.docker.com"  target="_blank" rel="noopener"
+    >Docker Hub</a> and log in if you need to.</p>
+</li>
+<li>
+<p>Click the <strong>Create Repository</strong> button.</p>
+</li>
+<li>
+<p>For the repo name, use <code>getting-started</code>. Make sure the Visibility is <code>Public</code>.</p>
+</li>
+<li>
+<p>Click the <strong>Create</strong> button!</p>
+</li>
+</ol>
+<p>If you look on the right-side of the page, you&rsquo;ll see a section named <strong>Docker commands</strong>. This gives an example command that you will need to run to push to this repo.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/00d18f0766c70548eb092f1f3fcf9e5b.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="push-command"
+	
+	
+></p>
+<h3 id="pushing-our-image">Pushing our Image</h3>
+<ol>
+<li>
+<p>In the command line, try running the push command you see on Docker Hub. Note that your command will be using your namespace, not &ldquo;docker&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   $ docker push docker/getting-started
+</span></span><span class="line"><span class="cl">   The push refers to repository <span class="o">[</span>docker.io/docker/getting-started<span class="o">]</span>
+</span></span><span class="line"><span class="cl">   An image does not exist locally with the tag: docker/getting-started
+</span></span></code></pre></div><p>Why did it fail? The push command was looking for an image named docker/getting-started, but didn&rsquo;t find one. If you run <code>docker image ls</code>, you won&rsquo;t see one either.</p>
+<p>To fix this, we need to &ldquo;tag&rdquo; our existing image we&rsquo;ve built to give it another name.</p>
+</li>
+<li>
+<p>Login to the Docker Hub using the command <code>docker login -u YOUR-USER-NAME</code>.</p>
+</li>
+<li>
+<p>Use the <code>docker tag</code> command to give the <code>getting-started</code> image a new name. Be sure to swap out <code>YOUR-USER-NAME</code> with your Docker ID.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   docker tag getting-started YOUR-USER-NAME/getting-started
+</span></span></code></pre></div></li>
+<li>
+<p>Now try your push command again. If you&rsquo;re copying the value from Docker Hub, you can drop the <code>tagname</code> portion, as we didn&rsquo;t add a tag to the image name. If you don&rsquo;t specify a tag, Docker will use a tag called <code>latest</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker push YOUR-USER-NAME/getting-started
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="running-our-image-on-a-new-instance">Running our Image on a New Instance</h3>
+<p>Now that our image has been built and pushed into a registry, let&rsquo;s try running our app on a brand new instance that has never seen this container image! To do this, we will use Play with Docker.</p>
+<ol>
+<li>
+<p>Open your browser to <a class="link" href="http://play-with-docker.com"  target="_blank" rel="noopener"
+    >Play with Docker</a>.</p>
+</li>
+<li>
+<p>Log in with your Docker Hub account.</p>
+</li>
+<li>
+<p>Once you&rsquo;re logged in, click on the &ldquo;+ ADD NEW INSTANCE&rdquo; link in the left side bar. (If you don&rsquo;t see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/9f22be1ba5d91b0318ebda83e7c0b5d0.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="pwd-add-new-instance"
+	
+	
+></p>
+</li>
+<li>
+<p>In the terminal, start your freshly pushed app.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
+</span></span></code></pre></div><p>You should see the image get pulled down and eventually start up!</p>
+</li>
+<li>
+<p>Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray! If the 3000 badge doesn&rsquo;t show up, you can click on the &ldquo;Open Port&rdquo; button and type in 3000.</p>
+</li>
+</ol>
+<h3 id="recap--">Recap&ndash;</h3>
+<p>In this section, we learned how to share our images by pushing them to a registry. We then went to a brand new instance and were able to run the freshly pushed image. This is quite common in CI pipelines, where the pipeline will create the image and push it to a registry and then the production environment can use the latest version of the image.</p>
+<p>Now that we have that figured out, let&rsquo;s circle back around to what we noticed at the end of the last section. As a reminder, we noticed that when we restarted the app, we lost all of our todo list items. That&rsquo;s obviously not a great user experience, so let&rsquo;s learn how we can persist the data across restarts!</p>
+<h2 id="persisting-our-db">Persisting our DB</h2>
+<p>In case you didn&rsquo;t notice, our todo list is being wiped clean every single time we launch the container. Why is this? Let&rsquo;s dive into how the container is working.</p>
+<h3 id="the-containers-filesystem">The Container&rsquo;s Filesystem</h3>
+<p>When a container runs, it uses the various layers from an image for its filesystem. Each container also gets its own &ldquo;scratch space&rdquo; to create/update/remove files. Any changes won&rsquo;t be seen in another container, <em>even if</em> they are using the same image.</p>
+<h4 id="seeing-this-in-practice">Seeing this in Practice</h4>
+<p>To see this in action, we&rsquo;re going to start two containers and create a file in each. What you&rsquo;ll see is that the files created in one container aren&rsquo;t available in another.</p>
+<ol>
+<li>
+<p>Start a <code>ubuntu</code> container that will create a file named <code>/data.txt</code> with a random number between 1 and 10000.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   docker run -d ubuntu bash -c <span class="s2">&#34;shuf -i 1-10000 -n 1 -o /data.txt &amp;&amp; tail -f /dev/null&#34;</span>
+</span></span></code></pre></div><p>In case you&rsquo;re curious about the command, we&rsquo;re starting a bash shell and invoking two commands (why we have the <code>&amp;&amp;</code>). The first portion picks a single random number and writes it to <code>/data.txt</code>. The second command is simply watching a file to keep the container running.</p>
+</li>
+<li>
+<p>Validate we can see the output by <code>exec</code>&lsquo;ing into the container. To do so, open the Dashboard and click the first action of the container that is running the <code>ubuntu</code> image.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/249c0a74b522f02b314fd223fccc2245.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="dashboard-open-cli-ubuntu"
+	
+	
+></p>
+<p>You will see a terminal that is running a shell in the ubuntu container. Run the following command to see the content of the <code>/data.txt</code> file. Close this terminal afterwards again.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /data.txt
+</span></span></code></pre></div><p>If you prefer the command line you can use the <code>docker exec</code> command to do the same. You need to get the container&rsquo;s ID (use <code>docker ps</code> to get it) and get the content with the following command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> &lt;container-id&gt; cat /data.txt
+</span></span></code></pre></div><p>You should see a random number!</p>
+</li>
+<li>
+<p>Now, let&rsquo;s start another <code>ubuntu</code> container (the same image) and we&rsquo;ll see we don&rsquo;t have the same file.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   docker run -it ubuntu ls /
+</span></span></code></pre></div><p>And look! There&rsquo;s no <code>data.txt</code> file there! That&rsquo;s because it was written to the scratch space for only the first container.</p>
+</li>
+<li>
+<p>Go ahead and remove the first container using the <code>docker rm -f</code> command.</p>
+</li>
+</ol>
+<h3 id="container-volumes">Container Volumes</h3>
+<p>With the previous experiment, we saw that each container starts from the image definition each time it starts. While containers can create, update, and delete files, those changes are lost when the container is removed and all changes are isolated to that container. With volumes, we can change all of this.</p>
+<p><a class="link" href="https://docs.docker.com/storage/volumes/"  target="_blank" rel="noopener"
+    >Volumes</a> provide the ability to connect specific filesystem paths of the container back to the host machine. If a directory in the container is mounted, changes in that directory are also seen on the host machine. If we mount that same directory across container restarts, we&rsquo;d see the same files.</p>
+<p>There are two main types of volumes. We will eventually use both, but we will start with <strong>named volumes</strong>.</p>
+<h3 id="persisting-our-todo-data">Persisting our Todo Data</h3>
+<p>By default, the todo app stores its data in a <a class="link" href="https://www.sqlite.org/index.html"  target="_blank" rel="noopener"
+    >SQLite Database</a> at <code>/etc/todos/todo.db</code>. If you&rsquo;re not familiar with SQLite, no worries! It&rsquo;s simply a relational database in which all of the data is stored in a single file. While this isn&rsquo;t the best for large-scale applications, it works for small demos. We&rsquo;ll talk about switching this to a different database engine later.</p>
+<p>With the database being a single file, if we can persist that file on the host and make it available to the next container, it should be able to pick up where the last one left off. By creating a volume and attaching (often called &ldquo;mounting&rdquo;) it to the directory the data is stored in, we can persist the data. As our container writes to the <code>todo.db</code> file, it will be persisted to the host in the volume.</p>
+<p>As mentioned, we are going to use a <strong>named volume</strong>. Think of a named volume as simply a bucket of data. Docker maintains the physical location on the disk and you only need to remember the name of the volume. Every time you use the volume, Docker will make sure the correct data is provided.</p>
+<ol>
+<li>
+<p>Create a volume by using the <code>docker volume create</code> command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker volume create todo-db
+</span></span></code></pre></div></li>
+<li>
+<p>Stop the todo app container once again in the Dashboard (or with <code>docker rm -f &lt;id&gt;</code>), as it is still running without using the persistent volume.</p>
+</li>
+<li>
+<p>Start the todo app container, but add the <code>-v</code> flag to specify a volume mount. We will use the named volume and mount it to <code>/etc/todos</code>, which will capture all files created at the path.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+</span></span></code></pre></div></li>
+<li>
+<p>Once the container starts up, open the app and add a few items to your todo list.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/60b10f9e01299f57f32113682ffbd786.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="items-added"
+	
+	
+></p>
+</li>
+<li>
+<p>Remove the container for the todo app. Use the Dashboard or <code>docker ps</code> to get the ID and then <code>docker rm -f &lt;id&gt;</code> to remove it.</p>
+</li>
+<li>
+<p>Start a new container using the same command from above.</p>
+</li>
+<li>
+<p>Open the app. You should see your items still in your list!</p>
+</li>
+<li>
+<p>Go ahead and remove the container when you&rsquo;re done checking out your list.</p>
+</li>
+</ol>
+<p>Hooray! You&rsquo;ve now learned how to persist data!</p>
+<blockquote>
+<p>While named volumes and bind mounts (which we&rsquo;ll talk about in a minute) are the two main types of volumes supported by a default Docker engine installation, there are many volume driver plugins available to support NFS, SFTP, NetApp, and more! This will be especially important once you start running containers on multiple hosts in a clustered environment with Swarm, Kubernetes, etc.</p>
+</blockquote>
+<h3 id="diving-into-our-volume">Diving into our Volume</h3>
+<p>A lot of people frequently ask &ldquo;Where is Docker <em>actually</em> storing my data when I use a named volume?&rdquo; If you want to know, you can use the <code>docker volume inspect</code> command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker volume inspect todo-db
+</span></span><span class="line"><span class="cl"><span class="o">[</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;CreatedAt&#34;</span>: <span class="s2">&#34;2019-09-26T02:18:36Z&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Driver&#34;</span>: <span class="s2">&#34;local&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Labels&#34;</span>: <span class="o">{}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Mountpoint&#34;</span>: <span class="s2">&#34;/var/lib/docker/volumes/todo-db/_data&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;todo-db&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Options&#34;</span>: <span class="o">{}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Scope&#34;</span>: <span class="s2">&#34;local&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">]</span>
+</span></span></code></pre></div><p>The <code>Mountpoint</code> is the actual location on the disk where the data is stored. Note that on most machines, you will need to have root access to access this directory from the host. But, that&rsquo;s where it is!</p>
+<blockquote>
+<p>While running in Docker Desktop, the Docker commands are actually running inside a small VM on your machine. If you wanted to look at the actual contents of the Mountpoint directory, you would need to first get inside of the VM.</p>
+</blockquote>
+<h3 id="recap-1">Recap+</h3>
+<p>At this point, we have a functioning application that can survive restarts! We can show it off to our investors and hope they can catch our vision!</p>
+<p>However, we saw earlier that rebuilding images for every change takes quite a bit of time. There&rsquo;s got to be a better way to make changes, right? With bind mounts (which we hinted at earlier), there is a better way! Let&rsquo;s take a look at that now!</p>
+<h2 id="using-bind-mounts">Using Bind Mounts</h2>
+<p>In the previous chapter, we talked about and used a <strong>named volume</strong> to persist the data in our database. Named volumes are great if we simply want to store data, as we don&rsquo;t have to worry about <em>where</em> the data is stored.</p>
+<p>With <strong>bind mounts</strong>, we control the exact mountpoint on the host. We can use this to persist data, but is often used to provide additional data into containers. When working on an application, we can use a bind mount to mount our source code into the container to let it see code changes, respond, and let us see the changes right away.</p>
+<p>For Node-based applications, <a class="link" href="https://npmjs.com/package/nodemon"  target="_blank" rel="noopener"
+    >nodemon</a> is a great tool to watch for file changes and then restart the application. There are equivalent tools in most other languages and frameworks.</p>
+<h3 id="quick-volume-type-comparisons">Quick Volume Type Comparisons</h3>
+<p>Bind mounts and named volumes are the two main types of volumes that come with the Docker engine. However, additional volume drivers are available to support other use cases (<a class="link" href="https://github.com/vieux/docker-volume-sshfs"  target="_blank" rel="noopener"
+    >SFTP</a>, <a class="link" href="https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/"  target="_blank" rel="noopener"
+    >Ceph</a>, <a class="link" href="https://netappdvp.readthedocs.io/en/stable/"  target="_blank" rel="noopener"
+    >NetApp</a>, <a class="link" href="https://github.com/elementar/docker-s3-volume"  target="_blank" rel="noopener"
+    >S3</a>, and more).</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th></th>
+<th>Named Volumes</th>
+<th>Bind Mounts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host Location</td>
+<td>Docker chooses</td>
+<td>You control</td>
+</tr>
+<tr>
+<td>Mount Example (using <code>-v</code>)</td>
+<td>my-volume:/usr/local/data</td>
+<td>/path/to/data:/usr/local/data</td>
+</tr>
+<tr>
+<td>Populates new volume with container contents</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Supports Volume Drivers</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="starting-a-dev-mode-container">Starting a Dev-Mode Container</h3>
+<p>To run our container to support a development workflow, we will do the following:</p>
+<ul>
+<li>Mount our source code into the container</li>
+<li>Install all dependencies, including the &ldquo;dev&rdquo; dependencies</li>
+<li>Start nodemon to watch for filesystem changes</li>
+</ul>
+<p>So, let&rsquo;s do it!</p>
+<ol>
+<li>
+<p>Make sure you don&rsquo;t have any previous <code>getting-started</code> containers running.</p>
+</li>
+<li>
+<p>Run the following command. We&rsquo;ll explain what&rsquo;s going on afterwards:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -dp 3000:3000 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -w /app -v <span class="s2">&#34;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    node:12-alpine <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -c <span class="s2">&#34;yarn install &amp;&amp; yarn run dev&#34;</span>
+</span></span></code></pre></div><p>If you are using PowerShell then use this command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">docker</span> <span class="n">run</span> <span class="n">-dp</span> <span class="n">3000</span><span class="err">:</span><span class="n">3000</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-w</span> <span class="p">/</span><span class="n">app</span> <span class="n">-v</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="n">pwd</span><span class="p">)</span><span class="s2">:/app&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="err">:</span><span class="n">12-alpine</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sh</span> <span class="n">-c</span> <span class="s2">&#34;yarn install &amp;&amp; yarn run dev&#34;</span>
+</span></span></code></pre></div><ul>
+<li><code>-dp 3000:3000</code> - same as before. Run in detached (background) mode and create a port mapping</li>
+<li><code>-w /app</code> - sets the &ldquo;working directory&rdquo; or the current directory that the command will run from</li>
+<li><code>-v &quot;$(pwd):/app&quot;</code> - bind mount the current directory from the host in the container into the <code>/app</code> directory</li>
+<li><code>node:12-alpine</code> - the image to use. Note that this is the base image for our app from the Dockerfile</li>
+<li><code>sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;</code> - the command. We&rsquo;re starting a shell using <code>sh</code> (alpine doesn&rsquo;t have <code>bash</code>) and running <code>yarn install</code> to install <em>all</em> dependencies and then running <code>yarn run dev</code>. If we look in the <code>package.json</code>, we&rsquo;ll see that the <code>dev</code> script is starting <code>nodemon</code>.</li>
+</ul>
+</li>
+<li>
+<p>You can watch the logs using <code>docker logs -f &lt;container-id&gt;</code>. You&rsquo;ll know you&rsquo;re ready to go when you see this&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker logs -f &lt;container-id&gt;
+</span></span><span class="line"><span class="cl">$ nodemon src/index.js
+</span></span><span class="line"><span class="cl"><span class="o">[</span>nodemon<span class="o">]</span> 1.19.2
+</span></span><span class="line"><span class="cl"><span class="o">[</span>nodemon<span class="o">]</span> to restart at any time, enter <span class="sb">`</span>rs<span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>nodemon<span class="o">]</span> watching dir<span class="o">(</span>s<span class="o">)</span>: *.*
+</span></span><span class="line"><span class="cl"><span class="o">[</span>nodemon<span class="o">]</span> starting <span class="sb">`</span>node src/index.js<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">Using sqlite database at /etc/todos/todo.db
+</span></span><span class="line"><span class="cl">Listening on port <span class="m">3000</span>
+</span></span></code></pre></div><p>When you&rsquo;re done watching the logs, exit out by hitting <code>Ctrl</code>+<code>C</code>.</p>
+</li>
+<li>
+<p>Now, let&rsquo;s make a change to the app. In the <code>src/static/js/app.js</code> file, let&rsquo;s change the &ldquo;Add Item&rdquo; button to simply say
+&ldquo;Add&rdquo;. This change will be on line 109.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gd">- {submitting ? &#39;Adding...&#39; : &#39;Add Item&#39;}
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+ {submitting ? &#39;Adding...&#39; : &#39;Add&#39;}
+</span></span></span></code></pre></div></li>
+<li>
+<p>Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might take a few seconds for the Node server to restart, so if you get an error, just try refreshing after a few seconds.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/b15fc1009476e897a61bdcbeeba30949.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="updated-add-button"
+	
+	
+></p>
+</li>
+<li>
+<p>Feel free to make any other changes you&rsquo;d like to make. When you&rsquo;re done, stop the container and build your new image using <code>docker build -t getting-started .</code>.</p>
+</li>
+</ol>
+<p>Using bind mounts is <em>very</em> common for local development setups. The advantage is that the dev machine doesn&rsquo;t need to have all of the build tools and environments installed. With a single <code>docker run</code> command, the dev environment is pulled and ready to go. We&rsquo;ll talk about Docker Compose in a future step, as this will help simplify our commands (we&rsquo;re already getting a lot of flags).</p>
+<h3 id="recap-2">Recap=</h3>
+<p>At this point, we can persist our database and respond rapidly to the needs and demands of our investors and founders. Hooray! But, guess what? We received great news!</p>
+<p><strong>Your project has been selected for future development!</strong></p>
+<p>In order to prepare for production, we need to migrate our database from working in SQLite to something that can scale a little better. For simplicity, we&rsquo;ll keep with a relational database and switch our application to use MySQL. But, how should we run MySQL? How do we allow the containers to talk to each other? We&rsquo;ll talk about that next!</p>
+<h2 id="multi-container-apps">Multi-Container Apps</h2>
+<p>Up to this point, we have been working with single container apps. But, we now want to add MySQL to the application stack. The following question often arises - &ldquo;Where will MySQL run? Install it in the same container or run it separately?&rdquo; In general, <strong>each container should do one thing and do it well.</strong> A few reasons:</p>
+<ul>
+<li>There&rsquo;s a good chance you&rsquo;d have to scale APIs and front-ends differently than databases</li>
+<li>Separate containers let you version and update versions in isolation</li>
+<li>While you may use a container for the database locally, you may want to use a managed service for the database in production. You don&rsquo;t want to ship your database engine with your app then.</li>
+<li>Running multiple processes will require a process manager (the container only starts one process), which adds complexity to container startup/shutdown</li>
+</ul>
+<p>And there are more reasons. So, we will update our application to work like this:</p>
+<p><img src="https://static.aecra.cn/markdown/202104/c56dd71fc2c07e8ade158f39572990c9.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="multi-app-architecture"
+	
+	
+></p>
+<h3 id="container-networking">Container Networking</h3>
+<p>Remember that containers, by default, run in isolation and don&rsquo;t know anything about other processes or containers on the same machine. So, how do we allow one container to talk to another? The answer is <strong>networking</strong>. Now, you don&rsquo;t have to be a network engineer (hooray!). Simply remember this rule&hellip;</p>
+<blockquote>
+<p>If two containers are on the same network, they can talk to each other. If they aren&rsquo;t, they can&rsquo;t.</p>
+</blockquote>
+<h3 id="starting-mysql">Starting MySQL</h3>
+<p>There are two ways to put a container on a network: 1) Assign it at start or 2) connect an existing container. For now, we will create the network first and attach the MySQL container at startup.</p>
+<ol>
+<li>
+<p>Create the network.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker network create todo-app
+</span></span></code></pre></div></li>
+<li>
+<p>Start a MySQL container and attach it to the network. We&rsquo;re also going to define a few environment variables that the database will use to initialize the database (see the &ldquo;Environment Variables&rdquo; section in the <a class="link" href="https://hub.docker.com/_/mysql/"  target="_blank" rel="noopener"
+    >MySQL Docker Hub listing</a>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      --network todo-app --network-alias mysql <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      -v todo-mysql-data:/var/lib/mysql <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      mysql:5.7
+</span></span></code></pre></div><p>If you are using PowerShell then use this command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl">   <span class="n">docker</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span><span class="n">-network</span> <span class="nb">todo-app</span> <span class="p">-</span><span class="n">-network-alias</span> <span class="n">mysql</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">      <span class="n">-v</span> <span class="nb">todo-mysql</span><span class="n">-data</span><span class="err">:</span><span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">mysql</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">      <span class="n">-e</span> <span class="n">MYSQL_ROOT_PASSWORD</span><span class="p">=</span><span class="n">secret</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">      <span class="n">-e</span> <span class="n">MYSQL_DATABASE</span><span class="p">=</span><span class="n">todos</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">      <span class="n">mysql</span><span class="err">:</span><span class="n">5</span><span class="p">.</span><span class="n">7</span>
+</span></span></code></pre></div><p>You&rsquo;ll also see we specified the <code>--network-alias</code> flag. We&rsquo;ll come back to that in just a moment.</p>
+<blockquote>
+<p>You&rsquo;ll notice we&rsquo;re using a volume named <code>todo-mysql-data</code> here and mounting it at <code>/var/lib/mysql</code>, which is where MySQL stores its data. However, we never ran a <code>docker volume create</code> command. Docker recognizes we want to use a named volume and creates one automatically for us.</p>
+</blockquote>
+</li>
+<li>
+<p>To confirm we have the database up and running, connect to the database and verify it connects.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it &lt;mysql-container-id&gt; mysql -p
+</span></span></code></pre></div><p>When the password prompt comes up, type in <strong>secret</strong>. In the MySQL shell, list the databases and verify you see the <code>todos</code> database.</p>
+<pre tabindex="0"><code class="language-cli" data-lang="cli">   mysql&gt; SHOW DATABASES;
+</code></pre><p>You should see output that looks like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">   +--------------------+
+</span></span><span class="line"><span class="cl">   | Database           |
+</span></span><span class="line"><span class="cl">   +--------------------+
+</span></span><span class="line"><span class="cl">   | information_schema |
+</span></span><span class="line"><span class="cl">   | mysql              |
+</span></span><span class="line"><span class="cl">   | performance_schema |
+</span></span><span class="line"><span class="cl">   | sys                |
+</span></span><span class="line"><span class="cl">   | todos              |
+</span></span><span class="line"><span class="cl">   +--------------------+
+</span></span><span class="line"><span class="cl">   5 rows in set (0.00 sec)
+</span></span></code></pre></div></li>
+</ol>
+<p>Hooray! We have our <code>todos</code> database and it&rsquo;s ready for us to use!</p>
+<h3 id="connecting-to-mysql">Connecting to MySQL</h3>
+<p>Now that we know MySQL is up and running, let&rsquo;s use it! But, the question is&hellip; how? If we run another container on the same network, how do we find the container (remember each container has its own IP address)?</p>
+<p>To figure it out, we&rsquo;re going to make use of the <a class="link" href="https://github.com/nicolaka/netshoot"  target="_blank" rel="noopener"
+    >nicolaka/netshoot</a> container, which ships with a <em>lot</em> of tools that are useful for troubleshooting or debugging networking issues.</p>
+<ol>
+<li>
+<p>Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it --network todo-app nicolaka/netshoot
+</span></span></code></pre></div></li>
+<li>
+<p>Inside the container, we&rsquo;re going to use the <code>dig</code> command, which is a useful DNS tool. We&rsquo;re going to look up the IP address for the hostname <code>mysql</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   dig mysql
+</span></span></code></pre></div><p>And you&rsquo;ll get an output like this&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">   ; &lt;&lt;&gt;&gt; DiG 9.14.1 &lt;&lt;&gt;&gt; mysql
+</span></span><span class="line"><span class="cl">   ;; global options: +cmd
+</span></span><span class="line"><span class="cl">   ;; Got answer:
+</span></span><span class="line"><span class="cl">   ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 32162
+</span></span><span class="line"><span class="cl">   ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">;; QUESTION SECTION:
+</span></span><span class="line"><span class="cl">   ;mysql.    IN A
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">;; ANSWER SECTION:
+</span></span><span class="line"><span class="cl">   mysql.   600 IN A 172.23.0.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">;; Query time: 0 msec
+</span></span><span class="line"><span class="cl">   ;; SERVER: 127.0.0.11#53(127.0.0.11)
+</span></span><span class="line"><span class="cl">   ;; WHEN: Tue Oct 01 23:47:24 UTC 2019
+</span></span><span class="line"><span class="cl">   ;; MSG SIZE  rcvd: 44
+</span></span></code></pre></div><p>In the &ldquo;ANSWER SECTION&rdquo;, you will see an <code>A</code> record for <code>mysql</code> that resolves to <code>172.23.0.2</code> (your IP address will most likely have a different value). While <code>mysql</code> isn&rsquo;t normally a valid hostname, Docker was able to resolve it to the IP address of the container that had that network alias (remember the <code>--network-alias</code> flag we used earlier?).</p>
+<p>What this means is&hellip; our app only simply needs to connect to a host named <code>mysql</code> and it&rsquo;ll talk to the database! It doesn&rsquo;t get much simpler than that!</p>
+</li>
+</ol>
+<h3 id="running-our-app-with-mysql">Running our App with MySQL</h3>
+<p>The todo app supports the setting of a few environment variables to specify MySQL connection settings. They are:</p>
+<ul>
+<li><code>MYSQL_HOST</code> - the hostname for the running MySQL server</li>
+<li><code>MYSQL_USER</code> - the username to use for the connection</li>
+<li><code>MYSQL_PASSWORD</code> - the password to use for the connection</li>
+<li><code>MYSQL_DB</code> - the database to use once connected</li>
+</ul>
+<blockquote>
+<p>While using env vars to set connection settings is generally ok for development, it is <strong>HIGHLY DISCOURAGED</strong> when running applications in production. Diogo Monica, the former lead of security at Docker, <a class="link" href="https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/"  target="_blank" rel="noopener"
+    >wrote a fantastic blog post</a> explaining why.</p>
+<p>A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases, these secrets are mounted as files in the running container. You&rsquo;ll see many apps (including the MySQL image and the todo app) also support env vars with a <code>_FILE</code> suffix to point to a file containing the variable.</p>
+<p>As an example, setting the <code>MYSQL_PASSWORD_FILE</code> var will cause the app to use the contents of the referenced file as the connection password. Docker doesn&rsquo;t do anything to support these env vars. Your app will need to know to look for the variable and get the file contents.</p>
+</blockquote>
+<p>With all of that explained, let&rsquo;s start our dev-ready container!</p>
+<ol>
+<li>
+<p>We&rsquo;ll specify each of the environment variables above, as well as connect the container to our app network.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -dp 3000:3000 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -w /app -v <span class="s2">&#34;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --network todo-app <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">MYSQL_USER</span><span class="o">=</span>root <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>secret <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">MYSQL_DB</span><span class="o">=</span>todos <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  node:12-alpine <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  sh -c <span class="s2">&#34;yarn install &amp;&amp; yarn run dev&#34;</span>
+</span></span></code></pre></div><p>If you are using PowerShell then use this command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">docker</span> <span class="n">run</span> <span class="n">-dp</span> <span class="n">3000</span><span class="err">:</span><span class="n">3000</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">-w</span> <span class="p">/</span><span class="n">app</span> <span class="n">-v</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="n">pwd</span><span class="p">)</span><span class="s2">:/app&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="p">-</span><span class="n">-network</span> <span class="nb">todo-app</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">-e</span> <span class="n">MYSQL_HOST</span><span class="p">=</span><span class="n">mysql</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">-e</span> <span class="n">MYSQL_USER</span><span class="p">=</span><span class="n">root</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">-e</span> <span class="n">MYSQL_PASSWORD</span><span class="p">=</span><span class="n">secret</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">-e</span> <span class="n">MYSQL_DB</span><span class="p">=</span><span class="n">todos</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">node</span><span class="err">:</span><span class="n">12-alpine</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sh</span> <span class="n">-c</span> <span class="s2">&#34;yarn install &amp;&amp; yarn run dev&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>If we look at the logs for the container (<code>docker logs &lt;container-id&gt;</code>), we should see a message indicating it&rsquo;s
+using the mysql database.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl"># Previous log messages omitted
+</span></span><span class="line"><span class="cl">$ nodemon src/index.js
+</span></span><span class="line"><span class="cl">[nodemon] 1.19.2
+</span></span><span class="line"><span class="cl">[nodemon] to restart at any time, enter `rs`
+</span></span><span class="line"><span class="cl">[nodemon] watching dir(s): *.*
+</span></span><span class="line"><span class="cl">[nodemon] starting `node src/index.js`
+</span></span><span class="line"><span class="cl">Connected to mysql db at host mysql
+</span></span><span class="line"><span class="cl">Listening on port 3000
+</span></span></code></pre></div></li>
+<li>
+<p>Open the app in your browser and add a few items to your todo list.</p>
+</li>
+<li>
+<p>Connect to the mysql database and prove that the items are being written to the database. Remember, the password
+is <strong>secret</strong>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it &lt;mysql-container-id&gt; mysql -p todos
+</span></span></code></pre></div><p>And in the mysql shell, run the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">mysql&gt; select * from todo_items;
+</span></span><span class="line"><span class="cl">+--------------------------------------+--------------------+-----------+
+</span></span><span class="line"><span class="cl">| id                                   | name               | completed |
+</span></span><span class="line"><span class="cl">+--------------------------------------+--------------------+-----------+
+</span></span><span class="line"><span class="cl">| c906ff08-60e6-44e6-8f49-ed56a0853e85 | Do amazing things! |         0 |
+</span></span><span class="line"><span class="cl">| 2912a79e-8486-4bc3-a4c5-460793a575ab | Be awesome!        |         0 |
+</span></span><span class="line"><span class="cl">+--------------------------------------+--------------------+-----------+
+</span></span></code></pre></div><p>Obviously, your table will look different because it has your items. But, you should see them stored there!</p>
+</li>
+</ol>
+<p>If you take a quick look at the Docker Dashboard, you&rsquo;ll see that we have two app containers running. But, there&rsquo;s no real indication that they are grouped together in a single app. We&rsquo;ll see how to make that better shortly!</p>
+<p><img src="https://static.aecra.cn/markdown/202104/71235cab7f723bb685e88360a5a2ab41.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="dashboard-multi-container-app"
+	
+	
+></p>
+<h3 id="recap_">Recap_</h3>
+<p>At this point, we have an application that now stores its data in an external database running in a separate container. We learned a little bit about container networking and saw how service discovery can be performed using DNS.</p>
+<p>But, there&rsquo;s a good chance you are starting to feel a little overwhelmed with everything you need to do to start up this application. We have to create a network, start containers, specify all of the environment variables, expose ports, and more! That&rsquo;s a lot to remember and it&rsquo;s certainly making things harder to pass along to someone else.</p>
+<p>In the next section, we&rsquo;ll talk about Docker Compose. With Docker Compose, we can share our application stacks in a much easier way and let others spin them up with a single (and simple) command!</p>
+<h2 id="using-docker-compose">Using Docker Compose</h2>
+<p><a class="link" href="https://docs.docker.com/compose/"  target="_blank" rel="noopener"
+    >Docker Compose</a> is a tool that was developed to help define and share multi-container applications. With Compose, we can create a YAML file to define the services and with a single command, can spin everything up or tear it all down.</p>
+<p>The <em>big</em> advantage of using Compose is you can define your application stack in a file, keep it at the root of your project repo (it&rsquo;s now version controlled), and easily enable someone else to contribute to your project. Someone would only need to clone your repo and start the compose app. In fact, you might see quite a few projects on GitHub/GitLab doing exactly this now.</p>
+<p>So, how do we get started?</p>
+<h3 id="installing-docker-compose">Installing Docker Compose</h3>
+<p>If you installed Docker Desktop/Toolbox for either Windows or Mac, you already have Docker Compose! Play-with-Docker instances already have Docker Compose installed as well. If you are on a Linux machine, you will need to install Docker Compose using <a class="link" href="https://docs.docker.com/compose/install/"  target="_blank" rel="noopener"
+    >the instructions here</a>.</p>
+<p>After installation, you should be able to run the following and see version information.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker-compose version
+</span></span></code></pre></div><h3 id="creating-our-compose-file">Creating our Compose File</h3>
+<ol>
+<li>
+<p>At the root of the app project, create a file named <code>docker-compose.yml</code>.</p>
+</li>
+<li>
+<p>In the compose file, we&rsquo;ll start off by defining the schema version. In most cases, it&rsquo;s best to use the latest supported version. You can look at the <a class="link" href="https://docs.docker.com/compose/compose-file/"  target="_blank" rel="noopener"
+    >Compose file reference</a> for the current schema versions and the compatibility matrix.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Next, we&rsquo;ll define the list of services (or containers) we want to run as part of our application.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div><p>And now, we&rsquo;ll start migrating a service at a time into the compose file.</p>
+</li>
+</ol>
+<h3 id="defining-the-app-service">Defining the App Service</h3>
+<p>To remember, this was the command we were using to define our app container.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -dp 3000:3000 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-w /app -v <span class="s2">&#34;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--network todo-app <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-e <span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-e <span class="nv">MYSQL_USER</span><span class="o">=</span>root <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>secret <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-e <span class="nv">MYSQL_DB</span><span class="o">=</span>todos <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>node:12-alpine <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>sh -c <span class="s2">&#34;yarn install &amp;&amp; yarn run dev&#34;</span>
+</span></span></code></pre></div><p>If you are using PowerShell then use this command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">docker</span> <span class="n">run</span> <span class="n">-dp</span> <span class="n">3000</span><span class="err">:</span><span class="n">3000</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl"><span class="n">-w</span> <span class="p">/</span><span class="n">app</span> <span class="n">-v</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="n">pwd</span><span class="p">)</span><span class="s2">:/app&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl"><span class="p">-</span><span class="n">-network</span> <span class="nb">todo-app</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl"><span class="n">-e</span> <span class="n">MYSQL_HOST</span><span class="p">=</span><span class="n">mysql</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl"><span class="n">-e</span> <span class="n">MYSQL_USER</span><span class="p">=</span><span class="n">root</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl"><span class="n">-e</span> <span class="n">MYSQL_PASSWORD</span><span class="p">=</span><span class="n">secret</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl"><span class="n">-e</span> <span class="n">MYSQL_DB</span><span class="p">=</span><span class="n">todos</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl"><span class="n">node</span><span class="err">:</span><span class="n">12-alpine</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl"><span class="n">sh</span> <span class="n">-c</span> <span class="s2">&#34;yarn install &amp;&amp; yarn run dev&#34;</span>
+</span></span></code></pre></div><ol>
+<li>
+<p>First, let&rsquo;s define the service entry and the image for the container. We can pick any name for the service. The name will automatically become a network alias, which will be useful when defining our MySQL service.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">   </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">node:12-alpine</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Typically, you will see the command close to the <code>image</code> definition, although there is no requirement on ordering. So, let&rsquo;s go ahead and move that into our file.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">   </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">node:12-alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">sh -c &#34;yarn install &amp;&amp; yarn run dev&#34;</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Let&rsquo;s migrate the <code>-p 3000:3000</code> part of the command by defining the <code>ports</code> for the service. We will use the <a class="link" href="https://docs.docker.com/compose/compose-file/#short-syntax-1"  target="_blank" rel="noopener"
+    >short syntax</a> here, but there is also a more verbose <a class="link" href="https://docs.docker.com/compose/compose-file/#long-syntax-1"  target="_blank" rel="noopener"
+    >long syntax</a> available as well.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">node:12-alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">sh -c &#34;yarn install &amp;&amp; yarn run dev&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">3000</span><span class="p">:</span><span class="m">3000</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Next, we&rsquo;ll migrate both the working directory (<code>-w /app</code>) and the volume mapping (<code>-v &quot;$(pwd):/app&quot;</code>) by using the <code>working_dir</code> and <code>volumes</code> definitions. Volumes also has a <a class="link" href="https://docs.docker.com/compose/compose-file/#short-syntax-3"  target="_blank" rel="noopener"
+    >short</a> and <a class="link" href="https://docs.docker.com/compose/compose-file/#long-syntax-3"  target="_blank" rel="noopener"
+    >long</a> syntax.</p>
+<p>One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">   </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">node:12-alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">sh -c &#34;yarn install &amp;&amp; yarn run dev&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="m">3000</span><span class="p">:</span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l">/app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="l">./:/app</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Finally, we need to migrate the environment variable definitions using the <code>environment</code> key.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">node:12-alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">sh -c &#34;yarn install &amp;&amp; yarn run dev&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">3000</span><span class="p">:</span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l">/app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./:/app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l">mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_DB</span><span class="p">:</span><span class="w"> </span><span class="l">todos</span><span class="w">
+</span></span></span></code></pre></div></li>
+</ol>
+<h4 id="defining-the-mysql-service">Defining the MySQL Service</h4>
+<p>Now, it&rsquo;s time to define the MySQL service. The command that we used for that container was the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --network todo-app --network-alias mysql <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -v todo-mysql-data:/var/lib/mysql <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  mysql:5.7
+</span></span></code></pre></div><p>If you are using PowerShell then use this command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">docker</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="p">-</span><span class="n">-network</span> <span class="nb">todo-app</span> <span class="p">-</span><span class="n">-network-alias</span> <span class="n">mysql</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">-v</span> <span class="nb">todo-mysql</span><span class="n">-data</span><span class="err">:</span><span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">mysql</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">-e</span> <span class="n">MYSQL_ROOT_PASSWORD</span><span class="p">=</span><span class="n">secret</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">-e</span> <span class="n">MYSQL_DATABASE</span><span class="p">=</span><span class="n">todos</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mysql</span><span class="err">:</span><span class="n">5</span><span class="p">.</span><span class="n">7</span>
+</span></span></code></pre></div><ol>
+<li>
+<p>We will first define the new service and name it <code>mysql</code> so it automatically gets the network alias. We&rsquo;ll go ahead and specify the image to use as well.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">   </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># The app service definition</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">mysql</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:5.7</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Next, we&rsquo;ll define the volume mapping. When we ran the container with <code>docker run</code>, the named volume was created automatically. However, that doesn&rsquo;t happen when running with Compose. We need to define the volume in the top-level <code>volumes:</code> section and then specify the mountpoint in the service config. By simply providing only the volume name, the default options are used. There are <a class="link" href="https://docs.docker.com/compose/compose-file/#volume-configuration-reference"  target="_blank" rel="noopener"
+    >many more options available</a> though.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># The app service definition</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mysql</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:5.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">todo-mysql-data:/var/lib/mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">todo-mysql-data</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Finally, we only need to specify the environment variables.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># The app service definition</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mysql</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:5.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">todo-mysql-data:/var/lib/mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l">todos</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">todo-mysql-data</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div></li>
+</ol>
+<p>At this point, our complete <code>docker-compose.yml</code> should look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">node:12-alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">sh -c &#34;yarn install &amp;&amp; yarn run dev&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">3000</span><span class="p">:</span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l">/app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./:/app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l">mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_DB</span><span class="p">:</span><span class="w"> </span><span class="l">todos</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mysql</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:5.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">todo-mysql-data:/var/lib/mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l">todos</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">todo-mysql-data</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div><h3 id="running-our-application-stack">Running our Application Stack</h3>
+<p>Now that we have our <code>docker-compose.yml</code> file, we can start it up!</p>
+<ol>
+<li>
+<p>Make sure no other copies of the app/db are running first (<code>docker ps</code> and <code>docker rm -f &lt;ids&gt;</code>).</p>
+</li>
+<li>
+<p>Start up the application stack using the <code>docker-compose up</code> command. We&rsquo;ll add the <code>-d</code> flag to run everything in the
+background.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker-compose up -d
+</span></span></code></pre></div><p>When we run this, we should see output like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">Creating network &#34;app_default&#34; with the default driver
+</span></span><span class="line"><span class="cl">Creating volume &#34;app_todo-mysql-data&#34; with default driver
+</span></span><span class="line"><span class="cl">Creating app_app_1   ... done
+</span></span><span class="line"><span class="cl">Creating app_mysql_1 ... done
+</span></span></code></pre></div><p>You&rsquo;ll notice that the volume was created as well as a network! By default, Docker Compose automatically creates a network specifically for the application stack (which is why we didn&rsquo;t define one in the compose file).</p>
+</li>
+<li>
+<p>Let&rsquo;s look at the logs using the <code>docker-compose logs -f</code> command. You&rsquo;ll see the logs from each of the services interleaved into a single stream. This is incredibly useful when you want to watch for timing-related issues. The <code>-f</code> flag &ldquo;follows&rdquo; the log, so will give you live output as it&rsquo;s generated.</p>
+<p>If you don&rsquo;t already, you&rsquo;ll see output that looks like this&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">mysql_1  | 2019-10-03T03:07:16.083639Z 0 [Note] mysqld: ready for connections.
+</span></span><span class="line"><span class="cl">mysql_1  | Version: &#39;5.7.27&#39;  socket: &#39;/var/run/mysqld/mysqld.sock&#39;  port: 3306  MySQL Community Server (GPL)
+</span></span><span class="line"><span class="cl">app_1    | Connected to mysql db at host mysql
+</span></span><span class="line"><span class="cl">app_1    | Listening on port 3000
+</span></span></code></pre></div><p>The service name is displayed at the beginning of the line (often colored) to help distinguish messages. If you want to view the logs for a specific service, you can add the service name to the end of the logs command (for example, <code>docker-compose logs -f app</code>).</p>
+<blockquote>
+<p>When the app is starting up, it actually sits and waits for MySQL to be up and ready before trying to connect to it. Docker doesn&rsquo;t have any built-in support to wait for another container to be fully up, running, and ready before starting another container. For Node-based projects, you can use the <a class="link" href="https://github.com/dwmkerr/wait-port"  target="_blank" rel="noopener"
+    >wait-port</a> dependency. Similar projects exist for other languages/frameworks.</p>
+</blockquote>
+</li>
+<li>
+<p>At this point, you should be able to open your app and see it running. And hey! We&rsquo;re down to a single command!</p>
+</li>
+</ol>
+<h3 id="seeing-our-app-stack-in-docker-dashboard">Seeing our App Stack in Docker Dashboard</h3>
+<p>If we look at the Docker Dashboard, we&rsquo;ll see that there is a group named <strong>app</strong>. This is the &ldquo;project name&rdquo; from Docker Compose and used to group the containers together. By default, the project name is simply the name of the directory that the <code>docker-compose.yml</code> was located in.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/218bb2d647b110c9fbf272ac12ab377f.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="dashboard-app-project-collapsed"
+	
+	
+></p>
+<p>If you twirl down the app, you will see the two containers we defined in the compose file. The names are also a little more descriptive, as they follow the pattern of <code>&lt;project-name&gt;_&lt;service-name&gt;_&lt;replica-number&gt;</code>. So, it&rsquo;s very easy to quickly see what container is our app and which container is the mysql database.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/61043e0fe60692b1b876e29434451184.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="dashboard-app-project-expanded"
+	
+	
+></p>
+<h3 id="tearing-it-all-down">Tearing it All Down</h3>
+<p>When you&rsquo;re ready to tear it all down, simply run <code>docker-compose down</code> or hit the trash can on the Docker Dashboard for the entire app. The containers will stop and the network will be removed.</p>
+<blockquote>
+<p>By default, named volumes in your compose file are NOT removed when running <code>docker-compose down</code>. If you want to remove the volumes, you will need to add the <code>--volumes</code> flag.</p>
+<p>The Docker Dashboard does <em>not</em> remove volumes when you delete the app stack.</p>
+</blockquote>
+<p>Once torn down, you can switch to another project, run <code>docker-compose up</code> and be ready to contribute to that project! It really
+doesn&rsquo;t get much simpler than that!</p>
+<h3 id="recap-3">Recap\</h3>
+<p>In this section, we learned about Docker Compose and how it helps us dramatically simplify the defining and sharing of multi-service applications. We created a Compose file by translating the commands we were using into the appropriate compose format.</p>
+<p>At this point, we&rsquo;re starting to wrap up the tutorial. However, there are a few best practices about image building we want to cover, as there is a big issue with the Dockerfile we&rsquo;ve been using. So, let&rsquo;s take a look!</p>
+<h2 id="image-building-best-practices">Image Building Best Practices</h2>
+<h3 id="security-scanning">Security Scanning</h3>
+<p>When you have built an image, it is good practice to scan it for security vulnerabilities using the <code>docker scan</code> command. Docker has partnered with <a class="link" href="http://snyk.io"  target="_blank" rel="noopener"
+    >Snyk</a> to provide the vulnerability scanning service.</p>
+<p>For example, to scan the <code>getting-started</code> image you created earlier in the tutorial, you can just type</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker scan getting-started
+</span></span></code></pre></div><p>The scan uses a constantly updated database of vulnerabilities, so the output you see will vary as new vulnerabilities are discovered, but it might look something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">✗ Low severity vulnerability found in freetype/freetype
+</span></span><span class="line"><span class="cl">  Description: CVE-2020-15999
+</span></span><span class="line"><span class="cl">  Info: https://snyk.io/vuln/SNYK-ALPINE310-FREETYPE-1019641
+</span></span><span class="line"><span class="cl">  Introduced through: freetype/freetype@2.10.0-r0, gd/libgd@2.2.5-r2
+</span></span><span class="line"><span class="cl">  From: freetype/freetype@2.10.0-r0
+</span></span><span class="line"><span class="cl">  From: gd/libgd@2.2.5-r2 &gt; freetype/freetype@2.10.0-r0
+</span></span><span class="line"><span class="cl">  Fixed in: 2.10.0-r1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">✗ Medium severity vulnerability found in libxml2/libxml2
+</span></span><span class="line"><span class="cl">  Description: Out-of-bounds Read
+</span></span><span class="line"><span class="cl">  Info: https://snyk.io/vuln/SNYK-ALPINE310-LIBXML2-674791
+</span></span><span class="line"><span class="cl">  Introduced through: libxml2/libxml2@2.9.9-r3, libxslt/libxslt@1.1.33-r3, nginx-module-xslt/nginx-module-xslt@1.17.9-r1
+</span></span><span class="line"><span class="cl">  From: libxml2/libxml2@2.9.9-r3
+</span></span><span class="line"><span class="cl">  From: libxslt/libxslt@1.1.33-r3 &gt; libxml2/libxml2@2.9.9-r3
+</span></span><span class="line"><span class="cl">  From: nginx-module-xslt/nginx-module-xslt@1.17.9-r1 &gt; libxml2/libxml2@2.9.9-r3
+</span></span><span class="line"><span class="cl">  Fixed in: 2.9.9-r4
+</span></span></code></pre></div><p>The output lists the type of vulnerability, a URL to learn more, and importantly which version of the relevant library fixes the vulnerability.</p>
+<p>There are several other options, which you can read about in the <a class="link" href="https://docs.docker.com/engine/scan/"  target="_blank" rel="noopener"
+    >docker scan documentation</a>.</p>
+<p>As well as scanning your newly built image on the command line, you can also <a class="link" href="https://docs.docker.com/docker-hub/vulnerability-scanning/"  target="_blank" rel="noopener"
+    >configure Docker Hub</a> to scan all newly pushed images automatically, and you can then see the results in both Docker Hub and Docker Desktop.</p>
+<p><img src="https://static.aecra.cn/markdown/202104/e38429ba3f980a5deb09fa6435aa7e59.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="hvs"
+	
+	
+></p>
+<h3 id="image-layering">Image Layering</h3>
+<p>Did you know that you can look at what makes up an image? Using the <code>docker image history</code> command, you can see the command that was used to create each layer within an image.</p>
+<ol>
+<li>
+<p>Use the <code>docker image history</code> command to see the layers in the <code>getting-started</code> image you created earlier in the tutorial.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   docker image <span class="nb">history</span> getting-started
+</span></span></code></pre></div><p>You should get output that looks something like this (dates/IDs may be different).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">   IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+</span></span><span class="line"><span class="cl">   a78a40cbf866        18 seconds ago      /bin/sh -c #(nop)  CMD [&#34;node&#34; &#34;src/index.j…    0B
+</span></span><span class="line"><span class="cl">   f1d1808565d6        19 seconds ago      /bin/sh -c yarn install --production            85.4MB
+</span></span><span class="line"><span class="cl">   a2c054d14948        36 seconds ago      /bin/sh -c #(nop) COPY dir:5dc710ad87c789593…   198kB
+</span></span><span class="line"><span class="cl">   9577ae713121        37 seconds ago      /bin/sh -c #(nop) WORKDIR /app                  0B
+</span></span><span class="line"><span class="cl">   b95baba1cfdb        13 days ago         /bin/sh -c #(nop)  CMD [&#34;node&#34;]                 0B
+</span></span><span class="line"><span class="cl">   &lt;missing&gt;           13 days ago         /bin/sh -c #(nop)  ENTRYPOINT [&#34;docker-entry…   0B
+</span></span><span class="line"><span class="cl">   &lt;missing&gt;           13 days ago         /bin/sh -c #(nop) COPY file:238737301d473041…   116B
+</span></span><span class="line"><span class="cl">   &lt;missing&gt;           13 days ago         /bin/sh -c apk add --no-cache --virtual .bui…   5.35MB
+</span></span><span class="line"><span class="cl">   &lt;missing&gt;           13 days ago         /bin/sh -c #(nop)  ENV YARN_VERSION=1.21.1      0B
+</span></span><span class="line"><span class="cl">   &lt;missing&gt;           13 days ago         /bin/sh -c addgroup -g 1000 node     &amp;&amp; addu…   74.3MB
+</span></span><span class="line"><span class="cl">   &lt;missing&gt;           13 days ago         /bin/sh -c #(nop)  ENV NODE_VERSION=12.14.1     0B
+</span></span><span class="line"><span class="cl">   &lt;missing&gt;           13 days ago         /bin/sh -c #(nop)  CMD [&#34;/bin/sh&#34;]              0B
+</span></span><span class="line"><span class="cl">   &lt;missing&gt;           13 days ago         /bin/sh -c #(nop) ADD file:e69d441d729412d24…   5.59MB
+</span></span></code></pre></div><p>Each of the lines represents a layer in the image. The display here shows the base at the bottom with the newest layer at the top. Using this, you can also quickly see the size of each layer, helping diagnose large images.</p>
+</li>
+<li>
+<p>You&rsquo;ll notice that several of the lines are truncated. If you add the <code>--no-trunc</code> flag, you&rsquo;ll get the full output (yes&hellip; funny how you use a truncated flag to get untruncated output, huh?)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   docker image <span class="nb">history</span> --no-trunc getting-started
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="layer-caching">Layer Caching</h3>
+<p>Now that you&rsquo;ve seen the layering in action, there&rsquo;s an important lesson to learn to help decrease build times for your container images.</p>
+<blockquote>
+<p>Once a layer changes, all downstream layers have to be recreated as well</p>
+</blockquote>
+<p>Let&rsquo;s look at the Dockerfile we were using one more time&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> node:12-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> yarn install --production<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="s2">&#34;src/index.js&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><p>Going back to the image history output, we see that each command in the Dockerfile becomes a new layer in the image. You might remember that when we made a change to the image, the yarn dependencies had to be reinstalled. Is there a way to fix this? It doesn&rsquo;t make much sense to ship around the same dependencies every time we build, right?</p>
+<p>To fix this, we need to restructure our Dockerfile to help support the caching of the dependencies. For Node-based applications, those dependencies are defined in the <code>package.json</code> file. So, what if we copied only that file in first, install the dependencies, and <em>then</em> copy in everything else? Then, we only recreate the yarn dependencies if there was a change to the <code>package.json</code>. Make sense?</p>
+<ol>
+<li>
+<p>Update the Dockerfile to copy in the <code>package.json</code> first, install dependencies, and then copy everything else in.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> node:12-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> package.json yarn.lock ./<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> yarn install --production<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="s2">&#34;src/index.js&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Create a file named <code>.dockerignore</code> in the same folder as the Dockerfile with the following contents.</p>
+<pre tabindex="0"><code class="language-ignore" data-lang="ignore">node_modules
+</code></pre><p><code>.dockerignore</code> files are an easy way to selectively copy only image relevant files. You can read more about this <a class="link" href="https://docs.docker.com/engine/reference/builder/#dockerignore-file"  target="_blank" rel="noopener"
+    >here</a>. In this case, the <code>node_modules</code> folder should be omitted in the second <code>COPY</code> step because otherwise, it would possibly overwrite files which were created by the command in the <code>RUN</code> step. For further details on why this is recommended for Node.js applications and other best practices, have a look at their guide on <a class="link" href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/"  target="_blank" rel="noopener"
+    >Dockerizing a Node.js web app</a>.</p>
+</li>
+<li>
+<p>Build a new image using <code>docker build</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t getting-started .
+</span></span></code></pre></div><p>You should see output like this&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">Sending build context to Docker daemon  219.1kB
+</span></span><span class="line"><span class="cl">Step 1/6 : FROM node:12-alpine
+</span></span><span class="line"><span class="cl">---&gt; b0dc3a5e5e9e
+</span></span><span class="line"><span class="cl">Step 2/6 : WORKDIR /app
+</span></span><span class="line"><span class="cl">---&gt; Using cache
+</span></span><span class="line"><span class="cl">---&gt; 9577ae713121
+</span></span><span class="line"><span class="cl">Step 3/6 : COPY package.json yarn.lock ./
+</span></span><span class="line"><span class="cl">---&gt; bd5306f49fc8
+</span></span><span class="line"><span class="cl">Step 4/6 : RUN yarn install --production
+</span></span><span class="line"><span class="cl">---&gt; Running in d53a06c9e4c2
+</span></span><span class="line"><span class="cl">yarn install v1.17.3
+</span></span><span class="line"><span class="cl">[1/4] Resolving packages...
+</span></span><span class="line"><span class="cl">[2/4] Fetching packages...
+</span></span><span class="line"><span class="cl">info fsevents@1.2.9: The platform &#34;linux&#34; is incompatible with this module.
+</span></span><span class="line"><span class="cl">info &#34;fsevents@1.2.9&#34; is an optional dependency and failed compatibility check. Excluding it from installation.
+</span></span><span class="line"><span class="cl">[3/4] Linking dependencies...
+</span></span><span class="line"><span class="cl">[4/4] Building fresh packages...
+</span></span><span class="line"><span class="cl">Done in 10.89s.
+</span></span><span class="line"><span class="cl">Removing intermediate container d53a06c9e4c2
+</span></span><span class="line"><span class="cl">---&gt; 4e68fbc2d704
+</span></span><span class="line"><span class="cl">Step 5/6 : COPY . .
+</span></span><span class="line"><span class="cl">---&gt; a239a11f68d8
+</span></span><span class="line"><span class="cl">Step 6/6 : CMD [&#34;node&#34;, &#34;src/index.js&#34;]
+</span></span><span class="line"><span class="cl">---&gt; Running in 49999f68df8f
+</span></span><span class="line"><span class="cl">Removing intermediate container 49999f68df8f
+</span></span><span class="line"><span class="cl">---&gt; e709c03bc597
+</span></span><span class="line"><span class="cl">Successfully built e709c03bc597
+</span></span><span class="line"><span class="cl">Successfully tagged getting-started:latest
+</span></span></code></pre></div><p>You&rsquo;ll see that all layers were rebuilt. Perfectly fine since we changed the Dockerfile quite a bit.</p>
+</li>
+<li>
+<p>Now, make a change to the <code>src/static/index.html</code> file (like change the <code>&lt;title&gt;</code> to say &ldquo;The Awesome Todo App&rdquo;).</p>
+</li>
+<li>
+<p>Build the Docker image now using <code>docker build -t getting-started .</code> again. This time, your output should look a little different.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">Sending build context to Docker daemon  219.1kB
+</span></span><span class="line"><span class="cl">Step 1/6 : FROM node:12-alpine
+</span></span><span class="line"><span class="cl">---&gt; b0dc3a5e5e9e
+</span></span><span class="line"><span class="cl">Step 2/6 : WORKDIR /app
+</span></span><span class="line"><span class="cl">---&gt; Using cache
+</span></span><span class="line"><span class="cl">---&gt; 9577ae713121
+</span></span><span class="line"><span class="cl">Step 3/6 : COPY package.json yarn.lock ./
+</span></span><span class="line"><span class="cl">---&gt; Using cache
+</span></span><span class="line"><span class="cl">---&gt; bd5306f49fc8
+</span></span><span class="line"><span class="cl">Step 4/6 : RUN yarn install --production
+</span></span><span class="line"><span class="cl">---&gt; Using cache
+</span></span><span class="line"><span class="cl">---&gt; 4e68fbc2d704
+</span></span><span class="line"><span class="cl">Step 5/6 : COPY . .
+</span></span><span class="line"><span class="cl">---&gt; cccde25a3d9a
+</span></span><span class="line"><span class="cl">Step 6/6 : CMD [&#34;node&#34;, &#34;src/index.js&#34;]
+</span></span><span class="line"><span class="cl">---&gt; Running in 2be75662c150
+</span></span><span class="line"><span class="cl">Removing intermediate container 2be75662c150
+</span></span><span class="line"><span class="cl">---&gt; 458e5c6f080c
+</span></span><span class="line"><span class="cl">Successfully built 458e5c6f080c
+</span></span><span class="line"><span class="cl">Successfully tagged getting-started:latest
+</span></span></code></pre></div><p>First off, you should notice that the build was MUCH faster! And, you&rsquo;ll see that steps 1-4 all have <code>Using cache</code>. So, hooray! We&rsquo;re using the build cache. Pushing and pulling this image and updates to it will be much faster as well. Hooray!</p>
+</li>
+</ol>
+<h3 id="multi-stage-builds">Multi-Stage Builds</h3>
+<p>While we&rsquo;re not going to dive into it too much in this tutorial, multi-stage builds are an incredibly powerful tool to help use multiple stages to create an image. There are several advantages for them:</p>
+<ul>
+<li>Separate build-time dependencies from runtime dependencies</li>
+<li>Reduce overall image size by shipping <em>only</em> what your app needs to run</li>
+</ul>
+<h4 id="maventomcat-example">Maven/Tomcat Example</h4>
+<p>When building Java-based applications, a JDK is needed to compile the source code to Java bytecode. However, that JDK isn&rsquo;t needed in production. Also, you might be using tools like Maven or Gradle to help build the app. Those also aren&rsquo;t needed in our final image. Multi-stage builds help.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> maven AS build</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mvn package<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> tomcat</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build /app/target/file.war /usr/local/tomcat/webapps<span class="err">
+</span></span></span></code></pre></div><p>In this example, we use one stage (called <code>build</code>) to perform the actual Java build using Maven. In the second stage (starting at <code>FROM tomcat</code>), we copy in files from the <code>build</code> stage. The final image is only the last stage being created (which can be overridden using the <code>--target</code> flag).</p>
+<h4 id="react-example">React Example</h4>
+<p>When building React applications, we need a Node environment to compile the JS code (typically JSX), SASS stylesheets, and more into static HTML, JS, and CSS. If we aren&rsquo;t doing server-side rendering, we don&rsquo;t even need a Node environment for our production build. Why not ship the static resources in a static nginx container?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> node:12 AS build</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> package* yarn.lock ./<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> yarn install<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> public ./public<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> src ./src<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> yarn run build<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> nginx:alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build /app/build /usr/share/nginx/html<span class="err">
+</span></span></span></code></pre></div><p>Here, we are using a <code>node:12</code> image to perform the build (maximizing layer caching) and then copying the output into an nginx container. Cool, huh?</p>
+<h3 id="recap-4">Recap`</h3>
+<p>By understanding a little bit about how images are structured, we can build images faster and ship fewer changes. Scanning images gives us confidence that the containers we are running and distributing are secure. Multi-stage builds also help us reduce overall image size and increase final container security by separating build-time dependencies from runtime dependencies.</p>
+<h2 id="what-next">What Next?</h2>
+<p>Although we&rsquo;re done with our workshop, there&rsquo;s still a LOT more to learn about containers! We&rsquo;re not going to go deep-dive here, but here are a few other areas to look at next!</p>
+<h3 id="container-orchestration">Container Orchestration</h3>
+<p>Running containers in production is tough. You don&rsquo;t want to log into a machine and simply run a <code>docker run</code> or <code>docker-compose up</code>. Why not? Well, what happens if the containers die? How do you scale across several machines? Container orchestration solves this problem. Tools like Kubernetes, Swarm, Nomad, and ECS all help solve this problem, all in slightly different ways.</p>
+<p>The general idea is that you have &ldquo;managers&rdquo; who receive <strong>expected state</strong>. This state might be &ldquo;I want to run two instances of my web app and expose port 80.&rdquo; The managers then look at all of the machines in the cluster and delegate work to &ldquo;worker&rdquo; nodes. The managers watch for changes (such as a container quitting) and then work to make <strong>actual state</strong> reflect the expected state.</p>
+<h3 id="cloud-native-computing-foundation-projects">Cloud Native Computing Foundation Projects</h3>
+<p>The CNCF is a vendor-neutral home for various open-source projects, including Kubernetes, Prometheus, Envoy, Linkerd, NATS, and more! You can view the <a class="link" href="https://www.cncf.io/projects/"  target="_blank" rel="noopener"
+    >graduated and incubated projects here</a> and the entire <a class="link" href="https://landscape.cncf.io/"  target="_blank" rel="noopener"
+    >CNCF Landscape here</a>. There are a LOT of projects to help solve problems around monitoring, logging, security, image registries, messaging, and more!</p>
+<p>So, if you&rsquo;re new to the container landscape and cloud-native application development, welcome! Please connect to the community, ask questions, and keep learning! We&rsquo;re excited to have you!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            
+            
+            <a href="/en/tags/docker/">docker</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-ND 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2017 - 
+        
+        2022 aecra | Technical article sharing
+    </section>
+    
+    <section class="powerby">
+        
+            <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021003357号-1</a> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#getting-started">Getting Started</a>
+      <ol>
+        <li><a href="#the-command-you-just-ran">The command you just ran</a></li>
+        <li><a href="#the-docker-dashboard">The Docker Dashboard</a></li>
+        <li><a href="#what-is-a-container">What is a container?</a></li>
+        <li><a href="#what-is-a-container-image">What is a container image?</a></li>
+      </ol>
+    </li>
+    <li><a href="#our-application">Our Application</a>
+      <ol>
+        <li><a href="#getting-our-app">Getting our App</a></li>
+        <li><a href="#building-the-apps-container-image">Building the App&rsquo;s Container Image</a></li>
+        <li><a href="#starting-an-app-container">Starting an App Container</a></li>
+        <li><a href="#recap">Recap</a></li>
+      </ol>
+    </li>
+    <li><a href="#updating-our-app">Updating our App</a>
+      <ol>
+        <li><a href="#updating-our-source-code">Updating our Source Code</a></li>
+        <li><a href="#replacing-our-old-container">Replacing our Old Container</a>
+          <ol>
+            <li><a href="#removing-a-container-using-the-cli">Removing a container using the CLI</a></li>
+            <li><a href="#removing-a-container-using-the-docker-dashboard">Removing a container using the Docker Dashboard</a></li>
+            <li><a href="#starting-our-updated-app-container">Starting our updated app container</a></li>
+          </ol>
+        </li>
+        <li><a href="#recap-">Recap-</a></li>
+      </ol>
+    </li>
+    <li><a href="#sharing-our-app">Sharing our App</a>
+      <ol>
+        <li><a href="#create-a-repo">Create a Repo</a></li>
+        <li><a href="#pushing-our-image">Pushing our Image</a></li>
+        <li><a href="#running-our-image-on-a-new-instance">Running our Image on a New Instance</a></li>
+        <li><a href="#recap--">Recap&ndash;</a></li>
+      </ol>
+    </li>
+    <li><a href="#persisting-our-db">Persisting our DB</a>
+      <ol>
+        <li><a href="#the-containers-filesystem">The Container&rsquo;s Filesystem</a>
+          <ol>
+            <li><a href="#seeing-this-in-practice">Seeing this in Practice</a></li>
+          </ol>
+        </li>
+        <li><a href="#container-volumes">Container Volumes</a></li>
+        <li><a href="#persisting-our-todo-data">Persisting our Todo Data</a></li>
+        <li><a href="#diving-into-our-volume">Diving into our Volume</a></li>
+        <li><a href="#recap-1">Recap+</a></li>
+      </ol>
+    </li>
+    <li><a href="#using-bind-mounts">Using Bind Mounts</a>
+      <ol>
+        <li><a href="#quick-volume-type-comparisons">Quick Volume Type Comparisons</a></li>
+        <li><a href="#starting-a-dev-mode-container">Starting a Dev-Mode Container</a></li>
+        <li><a href="#recap-2">Recap=</a></li>
+      </ol>
+    </li>
+    <li><a href="#multi-container-apps">Multi-Container Apps</a>
+      <ol>
+        <li><a href="#container-networking">Container Networking</a></li>
+        <li><a href="#starting-mysql">Starting MySQL</a></li>
+        <li><a href="#connecting-to-mysql">Connecting to MySQL</a></li>
+        <li><a href="#running-our-app-with-mysql">Running our App with MySQL</a></li>
+        <li><a href="#recap_">Recap_</a></li>
+      </ol>
+    </li>
+    <li><a href="#using-docker-compose">Using Docker Compose</a>
+      <ol>
+        <li><a href="#installing-docker-compose">Installing Docker Compose</a></li>
+        <li><a href="#creating-our-compose-file">Creating our Compose File</a></li>
+        <li><a href="#defining-the-app-service">Defining the App Service</a>
+          <ol>
+            <li><a href="#defining-the-mysql-service">Defining the MySQL Service</a></li>
+          </ol>
+        </li>
+        <li><a href="#running-our-application-stack">Running our Application Stack</a></li>
+        <li><a href="#seeing-our-app-stack-in-docker-dashboard">Seeing our App Stack in Docker Dashboard</a></li>
+        <li><a href="#tearing-it-all-down">Tearing it All Down</a></li>
+        <li><a href="#recap-3">Recap\</a></li>
+      </ol>
+    </li>
+    <li><a href="#image-building-best-practices">Image Building Best Practices</a>
+      <ol>
+        <li><a href="#security-scanning">Security Scanning</a></li>
+        <li><a href="#image-layering">Image Layering</a></li>
+        <li><a href="#layer-caching">Layer Caching</a></li>
+        <li><a href="#multi-stage-builds">Multi-Stage Builds</a>
+          <ol>
+            <li><a href="#maventomcat-example">Maven/Tomcat Example</a></li>
+            <li><a href="#react-example">React Example</a></li>
+          </ol>
+        </li>
+        <li><a href="#recap-4">Recap`</a></li>
+      </ol>
+    </li>
+    <li><a href="#what-next">What Next?</a>
+      <ol>
+        <li><a href="#container-orchestration">Container Orchestration</a></li>
+        <li><a href="#cloud-native-computing-foundation-projects">Cloud Native Computing Foundation Projects</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript">
+    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
+</script>
+<script>
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    </body>
+</html>

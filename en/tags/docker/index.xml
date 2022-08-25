@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>docker on aecra | Technical article sharing</title>
+        <link>https://www.aecra.cn/en/tags/docker/</link>
+        <description>Recent content in docker on aecra | Technical article sharing</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Tue, 20 Apr 2021 10:35:12 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/en/tags/docker/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Docker tutorial</title>
+        <link>https://www.aecra.cn/en/article/docker-tutorial/</link>
+        <pubDate>Tue, 20 Apr 2021 10:35:12 +0000</pubDate>
+        
+        <guid>https://www.aecra.cn/en/article/docker-tutorial/</guid>
+        <description>&lt;img src="https://static.aecra.cn/cover/docker-tutorial.jpg" alt="Featured image of post Docker tutorial" /&gt;Getting Started The command you just ran Congratulations! You have started the container for this tutorial! Let&amp;rsquo;s first explain the command that you just ran. In case you forgot, here&amp;rsquo;s the command:
+docker run -d -p 80:80 docker/getting-started You&amp;rsquo;ll notice a few flags being used. Here&amp;rsquo;s some more info on them:
+-d - run the container in detached mode (in the background) -p 80:80 - map port 80 of the host to port 80 in the container docker/getting-started - the image to use You can combine single character flags to shorten the full command.</description>
+        </item>
+        
+    </channel>
+</rss>

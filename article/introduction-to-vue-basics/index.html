@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='从原生 JavaScript 到 vue 框架的一个过渡性学习笔记，主要内容在于框架式应用的开发体验。'><meta name='keywords' content='JavaScript, vue'><title>vue 基础入门</title>
+
+
+
+<link rel='canonical' href='https://www.aecra.cn/article/introduction-to-vue-basics/'>
+
+<link rel="stylesheet" href="/scss/style.min.52c52da3fe7b812e5cd0f0af686848e7dd3a65935c0aa95d735a48cf30e383b4.css"><meta property='og:title' content='vue 基础入门'>
+<meta property='og:description' content='从原生 JavaScript 到 vue 框架的一个过渡性学习笔记，主要内容在于框架式应用的开发体验。'>
+
+
+<meta property='og:url' content='https://www.aecra.cn/article/introduction-to-vue-basics/'>
+<meta property='og:site_name' content='aecra | 个人资料分享'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JavaScript' /><meta property='article:tag' content='vue' /><meta property='article:published_time' content='2021-02-06T12:09:14&#43;00:00'/><meta property='article:modified_time' content='2021-02-06T12:09:14&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/introduction-to-vue-basics.jpg' />
+<meta name="twitter:title" content="vue 基础入门">
+<meta name="twitter:description" content="从原生 JavaScript 到 vue 框架的一个过渡性学习笔记，主要内容在于框架式应用的开发体验。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/introduction-to-vue-basics.jpg' />
+    <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended">
+    <aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://static.aecra.cn/avatar.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">😊</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">aecra | 个人资料分享</a></h1>
+            <h2 class="site-description">Leave a line of dialogue for the years to come.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/aecra'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关 于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归 档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜 索</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/link/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友 链</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://www.aecra.cn/" selected>中文</option>
+                        
+                            <option value="https://www.aecra.cn/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗 色</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            
+            
+            <a href="/article/introduction-to-vue-basics/">
+                
+                    <img src="https://static.aecra.cn/cover/introduction-to-vue-basics.jpg" loading="lazy" alt="Featured image of post vue 基础入门" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/article/introduction-to-vue-basics/">vue 基础入门</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            从原生 JavaScript 到 vue 框架的一个过渡性学习笔记，主要内容在于框架式应用的开发体验。
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 06, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 10 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p><a class="link" href="https://cn.vuejs.org/"  target="_blank" rel="noopener"
+    >官网</a></p>
+</blockquote>
+<h2 id="前置知识">前置知识</h2>
+<ul>
+<li>完整的学习 vue：html + css、JavaScript、css3、HTML5、第三方库、网络通信、ES6+、webpack、模块化、包管理、css 预编译器</li>
+<li>体验 vue 功能：html + css、JavaScript</li>
+</ul>
+<p>vue <strong>是前端的一种开发框架，它主要解决前端开发中的核心痛点——复杂的 DOM 操作</strong></p>
+<p>vue 拥有以下特点：</p>
+<ul>
+<li>渐进式</li>
+<li>组件化</li>
+<li>响应式</li>
+</ul>
+<p>vue 的应用场景：</p>
+<ul>
+<li>前台的部分页面</li>
+<li>后台的部分页面</li>
+</ul>
+<p>vue 的版本</p>
+<ul>
+<li>目前的正式版本是 2.x</li>
+<li>3.x 版本即将上线，对 2.x 是兼容的，要完全体验到 3.x 的优势，还要学习 TypeScript</li>
+</ul>
+<h2 id="vue-在前端的地位">vue 在前端的地位</h2>
+<p>前端是连接终端设备与人的技术</p>
+<p>除了 vue 之外，还需要学习哪些前端知识？</p>
+<p>TypeScript、ThreeJS、WebGL、ECharts、NodeJS、Egg、Redis、Mongodb、Sequelize、Express、Koa、移动端……</p>
+<h2 id="学习准备">学习准备</h2>
+<ol>
+<li>
+<p>安装 VSCode</p>
+<blockquote>
+<p><a class="link" href="https://code.visualstudio.com/"  target="_blank" rel="noopener"
+    >官网</a></p>
+</blockquote>
+</li>
+<li>
+<p>安装 VSCode 相应插件：</p>
+<ul>
+<li>Auto Rename Tag：能够自动更改结束标签</li>
+<li>Live Server：自动搭建本地服务器</li>
+<li>Prettier - Code formatter：代码美化</li>
+<li>Vetur：vue 组件格式支持</li>
+<li>vscode-icons：美化文件图标</li>
+</ul>
+</li>
+</ol>
+<h2 id="起步">起步</h2>
+<p>使用 vue 的两种方式：</p>
+<ul>
+<li>在页面中引入 vue 的文件</li>
+<li>脚手架
+<ul>
+<li>官方脚手架 vue-cli</li>
+<li>其他民间脚手架，如 webpack-simple</li>
+</ul>
+</li>
+</ul>
+<h2 id="体验-vue">体验 vue</h2>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph LR
+A(数据 Model) --&gt;|变动| B(vue View Model)
+B(vue View Model) --&gt;|更改| A(数据 Model)
+B(vue View Model) --&gt;|渲染| C(界面 View)
+C(界面 View) --&gt;|操作| B(vue View Model)
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>起步<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;app&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="c">&lt;!-- 界面模板 --&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="c">&lt;!-- mustache语法 --&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>系统名称：{{title}}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">v-for</span><span class="o">=</span><span class="s">&#34;(item, i) in products&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          名称：{{item.name}}
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;changeStock(item, item.stock - 1)&#34;</span><span class="p">&gt;</span>-<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">span</span> <span class="na">v-if</span><span class="o">=</span><span class="s">&#34;item.stock &gt; 0&#34;</span><span class="p">&gt;</span>库存：{{item.stock}}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">span</span> <span class="na">v-else</span><span class="p">&gt;</span>无货<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;changeStock(item, item.stock + 1)&#34;</span><span class="p">&gt;</span>+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;deleteProduct(i)&#34;</span><span class="p">&gt;</span>删除<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">el</span><span class="o">:</span> <span class="s1">&#39;#app&#39;</span><span class="p">,</span> <span class="c1">// css选择器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// 和界面相关的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;库存管理系统&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">products</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;iphone&#39;</span><span class="p">,</span> <span class="nx">stock</span><span class="o">:</span> <span class="mi">10</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;小米&#39;</span><span class="p">,</span> <span class="nx">stock</span><span class="o">:</span> <span class="mi">3</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;vivo&#39;</span><span class="p">,</span> <span class="nx">stock</span><span class="o">:</span> <span class="mi">15</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;华为&#39;</span><span class="p">,</span> <span class="nx">stock</span><span class="o">:</span> <span class="mi">32</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// 界面使用到的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">deleteProduct</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">products</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">changeStock</span><span class="p">(</span><span class="nx">product</span><span class="p">,</span> <span class="nx">newStock</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">newStock</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">newStock</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">product</span><span class="p">.</span><span class="nx">stock</span> <span class="o">=</span> <span class="nx">newStock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h2 id="es6-知识补充">ES6 知识补充</h2>
+<ul>
+<li>速写属性</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;小姐姐&#34;</span><span class="err">；</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">age</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">age</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>速写方法</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;小姐姐&#34;</span><span class="err">，</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">sayHello</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Hello!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>模板字符串</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;小姐姐&#34;</span><span class="err">，</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">str</span> <span class="o">=</span> <span class="sb">`I&#39;m $(person.name),
+</span></span></span><span class="line"><span class="cl"><span class="sb">my age is $(person.age).`</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="注入">注入</h2>
+<p>配置对象中的部分内容会被提取到 vue 实例中：</p>
+<ul>
+<li>data</li>
+<li>method</li>
+</ul>
+<p>该过程称之为<strong>注入</strong></p>
+<p>注入目的有两个：</p>
+<ul>
+<li>
+<p>完成数据响应</p>
+<p>vue2.0 是通过 Object.defineProperty 方法完成数据响应式(无法检测到对象属性的新增或删除、不能监听数组的变化)，vue3.0 是通过 Class Proxy 完成的数据相应式</p>
+</li>
+<li>
+<p>绑定 this</p>
+</li>
+</ul>
+<h2 id="虚拟-dom-树">虚拟 DOM 树</h2>
+<p>为了提高渲染效率，vue 会把模板<strong>编译</strong>成为虚拟 DOM 树（vm._vnode），然后再生成真实的 DOM(vm._vnode.elm)</p>
+<p>模板 —— 虚拟节点树 —— 真实节点树</p>
+<p>当数据更改时，将重新编译成虚拟 DOM 树，然后对比前后两棵树（diff 算法），仅将差异部分反映到真实 DOM，这样既可最小程度的改动真实 DOM，又可提高效率</p>
+<p>因此，对于 vue 而言，提升效率重点着眼于两个方面：</p>
+<ul>
+<li>减少新的虚拟 DOM 的生成</li>
+<li>保证对比之后，只有必要的节点有变化</li>
+</ul>
+<p>vue 提供了多种方式生成虚拟 DOM 树：</p>
+<ol>
+<li>
+<p>在挂载的元素内部直接书写，此时将使用元素的 outHTML 作为模板</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;app&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c">&lt;!-- 界面模板 --&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c">&lt;!-- mustache语法 --&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>系统名称：{{title}}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">li</span> <span class="na">v-for</span><span class="o">=</span><span class="s">&#34;(item, i) in products&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              名称：{{item.name}}
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;changeStock(item, item.stock - 1)&#34;</span><span class="p">&gt;</span>-<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">span</span> <span class="na">v-if</span><span class="o">=</span><span class="s">&#34;item.stock &gt; 0&#34;</span><span class="p">&gt;</span>库存：{{item.stock}}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">span</span> <span class="na">v-else</span><span class="p">&gt;</span>无货<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;changeStock(item, item.stock + 1)&#34;</span><span class="p">&gt;</span>+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;deleteProduct(i)&#34;</span><span class="p">&gt;</span>删除<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>在 template 配置中书写</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span> <span class="c1">// 配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">el</span><span class="o">:</span> <span class="s2">&#34;#app&#34;</span><span class="p">,</span> <span class="c1">// css选择器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">templete</span><span class="o">:</span> <span class="sb">`&lt;div id=&#34;app&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;!-- 界面模板 --&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;!-- mustache语法 --&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;h1&gt;系统名称：{{title}}&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;ul&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">          &lt;li v-for=&#34;(item, i) in products&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">              名称：{{item.name}}
+</span></span></span><span class="line"><span class="cl"><span class="sb">              &lt;button @click=&#34;changeStock(item, item.stock - 1)&#34;&gt;-&lt;/button&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">              &lt;span v-if=&#34;item.stock &gt; 0&#34;&gt;库存：{{item.stock}}&lt;/span&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">              &lt;span v-else&gt;无货&lt;/span&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">              &lt;button @click=&#34;changeStock(item, item.stock + 1)&#34;&gt;+&lt;/button&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">              &lt;button @click=&#34;deleteProduct(i)&#34;&gt;删除&lt;/button&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">            &lt;/li&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;/ul&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &lt;/div&gt;`</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span></code></pre></div></li>
+<li>
+<p>在 render 配置中用函数直接创建节点数，此时，完全脱离模板，将省略编译步骤</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span> <span class="c1">// 配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">el</span><span class="o">:</span> <span class="s2">&#34;#app&#34;</span><span class="p">,</span> <span class="c1">// css选择器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">render</span><span class="p">(</span><span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//return h(&#34;h1&#34;, &#34;hello&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">//return h(&#34;h1&#34;, this.title);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">return</span> <span class="nx">h</span><span class="p">(</span><span class="s2">&#34;div&#34;</span><span class="p">,</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">h</span><span class="p">(</span><span class="s2">&#34;h1&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">h</span><span class="p">(</span><span class="s2">&#34;p&#34;</span><span class="p">,</span> <span class="s2">&#34;例子&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span></code></pre></div></li>
+</ol>
+<p>这些步骤从上到下，优先级逐渐提升，<strong>注意：虚拟节点树必须是单根的</strong>。</p>
+<h2 id="挂载">挂载</h2>
+<p>将生成的真实 DOM 树，放置到某个元素位置，称之为<strong>挂载</strong></p>
+<p>挂载的方式：</p>
+<ol>
+<li>通过 el:&ldquo;css 选择器&quot;进行配置</li>
+<li>通过 vue 实例.$mount(&ldquo;css 选择器&rdquo;)进行配置</li>
+</ol>
+<h2 id="完整流程">完整流程</h2>
+<p><img src="https://static.aecra.cn/markdown/202102/7dd069ca8bb9766469bfd8427d505eb0.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2021-01-26-09-09-23-15"
+	
+	
+></p>
+<h2 id="模板语法">模板语法</h2>
+<h3 id="内容">内容</h3>
+<p>vue 中的元素内容使用 musrache 模板引擎进行解析</p>
+<blockquote>
+<p><a class="link" href="https://github.com/janl/mustache.js"  target="_blank" rel="noopener"
+    >mustache</a></p>
+</blockquote>
+<h3 id="指令">指令</h3>
+<p>指令会影响元素的渲染行为，指令始终以<code>v-</code>开头</p>
+<p>基础指令：</p>
+<ul>
+<li>v-for：循环渲染元素</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">li</span> <span class="na">v-for</span><span class="o">=</span><span class="s">&#34;(item, i) in arrary&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  arrary：可迭代，下标：i,循环变量：item
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li>v-html：设置元素的 innerHTML，该指令会导致元素的模板内容失效</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">v-html</span><span class="o">=</span><span class="s">&#34;html&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  html：带标签的HTML字符串
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li>v-on：注册事件
+<ul>
+<li>该指令由于十分常用，因此提供了简写@</li>
+<li>事件支持一些指令修饰符，如 revent、stop</li>
+<li>事件参数会自动传递</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">v-on:click</span><span class="o">=</span><span class="s">&#34;function()&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;function()&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">v-on:click</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">&#34;function()&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">v-on:click</span><span class="o">=</span><span class="s">&#34;function($event)&#34;</span><span class="p">&gt;</span>手动传入事件参数<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li>v-bind：绑定动态属性
+<ul>
+<li>该指令由于十分常用，因此提供了简写:</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">v-bind:src</span><span class="o">=</span><span class="s">&#34;imgUrl&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">img</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li>v-show：控制元素可见度</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">p</span> <span class="na">v-show</span><span class="o">=</span><span class="s">&#34;true&#34;</span><span class="p">&gt;</span>内容<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li>v-if、v-else-if、v-else：控制元素生成</li>
+<li>v-model：双向数据绑定，常用于表单元素
+<ul>
+<li>该指令是 v-on 和 v-bind 的复合版</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">:value</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="err">@</span><span class="na">input</span><span class="o">=</span><span class="s">&#34;text=$event.target.value&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">v-model</span><span class="o">=</span><span class="s">&#34;text&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></div><blockquote>
+<p>进阶指令：</p>
+<ul>
+<li>v-slot</li>
+<li>v-text</li>
+<li>v-pre</li>
+<li>v-cloak</li>
+</ul>
+</blockquote>
+<h3 id="特殊属性">特殊属性</h3>
+<p>最重要的特殊属性：key</p>
+<p>该属性可以干预 diff 算法，在同一层级，key 值相同的节点会进行对比，key 值不同则不会</p>
+<p>在循环生成的节点中，vue 强烈建议给予每个节点唯一且稳定的 key 值</p>
+<blockquote>
+<p>其他特殊属性：</p>
+<ul>
+<li>ref</li>
+<li>is</li>
+<li>slot</li>
+<li>slot-scope</li>
+<li>scope</li>
+</ul>
+</blockquote>
+<h2 id="计算属性">计算属性</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;app&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>姓：{{firstName}}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>名：{{lastName}}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>全名：{{fullName}}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">el</span><span class="o">:</span> <span class="s2">&#34;#app&#34;</span><span class="p">,</span> <span class="c1">// css选择器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// 和界面相关的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">firstName</span><span class="o">:</span> <span class="s2">&#34;张&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">lastName</span><span class="o">:</span> <span class="s2">&#34;三&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">computed</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">//fullName() {
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="c1">//    return this.firstName + this.lastName;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="c1">//}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">fullName</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">},</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">set</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="c1">// 数据处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>计算属性和方法的区别：</p>
+<ul>
+<li>计算属性可以赋值，而方法不行</li>
+<li>计算属性会进行缓存，如果依赖不变，则直接使用缓存结果，不会重新计算</li>
+<li>凡是根据已有数据计算得到新数据的无参函数，都应该尽量写成计算属性，而不是方法</li>
+</ul>
+<h2 id="知识补充">知识补充</h2>
+<ol>
+<li>
+<p>箭头函数</p>
+<ul>
+<li>任何可以书写匿名函数的地方均可书写箭头函数</li>
+<li>箭头函数将会绑定 this 为函数书写位置的 this 值</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="c1">// 一个参数可以省略小括号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span><span class="c1">// 只有一个返回值，可以省略大括号和return
+</span></span></span></code></pre></div></li>
+<li>
+<p>模块化</p>
+<ul>
+<li>没有模块化的世界：全局变量污染、难以管理的依赖</li>
+<li>常见的模块化标准：CommonJS、ES6 Module、AMD、CMD、UMD</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="p">.</span><span class="o">/</span><span class="nx">utl</span><span class="p">.</span><span class="nx">js</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">test1</span><span class="p">()</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">test2</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="o">/</span><span class="nx">main</span><span class="p">.</span><span class="nx">js</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">utl</span> <span class="nx">from</span> <span class="s2">&#34;./utl.js&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">utl</span><span class="p">.</span><span class="nx">test1</span><span class="p">();</span>
+</span></span></code></pre></div><h2 id="组件概念">组件概念</h2>
+<p>一个完整的页面是复杂的，如果将其作为一个整体来开发，将会遇到下面的困难</p>
+<ul>
+<li>代码凌乱臃肿</li>
+<li>不宜协作</li>
+<li>难以复用</li>
+</ul>
+<p>vue 推荐使用一种更加精细的控制方案——组件化开发</p>
+<p>所谓组件化开发，即把一个页面中区域功能细分，每一个区域作为一个组件，每各组件包含：</p>
+<ul>
+<li>功能（JS 代码）</li>
+<li>内容（模板代码）</li>
+<li>样式（CSS 代码）</li>
+</ul>
+<blockquote>
+<p>由于没有构建工具的支持，css 代码暂时无法放到组件中</p>
+</blockquote>
+<h2 id="组件开发">组件开发</h2>
+<h2 id="创建组件">创建组件</h2>
+<p>组件是根据一个普通的配置对象创建的，所以要开发组件，只需要写一个配置对象即可</p>
+<p>该配置对象和 vue 实例是<strong>几乎一样</strong>的</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">myComp</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">computed</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">template</span><span class="o">:</span> <span class="sb">`......`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>值得注意的是，组件配置对象和 vue 实例有以下几点差异：</p>
+<ul>
+<li>无 el</li>
+<li>data 必须是一个函数，该函数返回的对象最为<strong>数据</strong></li>
+<li>由于没有 el 配置，组建的虚拟 DOM 树必须定义子啊 template 或 render 中</li>
+</ul>
+<h3 id="注册组件">注册组件</h3>
+<p>注册组件分为两种方式，一种是<strong>全局注册</strong>，一种是<strong>局部注册</strong></p>
+<h4 id="全局注册">全局注册</h4>
+<p>一旦全局注册了一个组件，整个应用中任何地方都可以只用该组件</p>
+<p>全局注册的方式是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 参数1：组件名称。将来在模板中使用组件时，会使用该名称
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 参数2：组件配置对象
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 该代码运行后，即可在模板中使用组件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="s1">&#39;MyComp&#39;</span><span class="p">,</span> <span class="nx">myComp</span><span class="p">);</span>
+</span></span></code></pre></div><p>在模板中，可以只用组件了</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">myComp</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 或 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">myComp</span><span class="p">&gt;&lt;/</span><span class="nt">myComp</span><span class="p">&gt;</span>
+</span></span></code></pre></div><blockquote>
+<p>但在一些工程化的大型项目中，很多组件都不需要全局使用</p>
+<p>比如一个登陆组件，只有在登陆相关的页面中使用，如果全局注册，将导致构建工具无法优化打包</p>
+<p><strong>因此，除非组件特别通用，否则不建议使用全局注册</strong></p>
+</blockquote>
+<h4 id="局部注册">局部注册</h4>
+<p>局部注册就是哪里要用到组件，就在哪里注册</p>
+<p>局部注册的方式是，在要使用的组件的组件或实例中加入一个配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">otherComp</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 属性名为组件名称，模板中将使用该名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 属性值为组件配置对象，两个名字相同时可简写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">myComp</span><span class="o">:</span> <span class="nx">myComp</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;myComp&gt;&lt;/myComp&gt;`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h3 id="应用组件">应用组件</h3>
+<p>在模板中使用组件特别简单，把组件当作 HTML 元素名使用即可</p>
+<p>但要注意以下几点：</p>
+<ol>
+<li>
+<p><strong>组件必须有结束</strong></p>
+<p>组件可以自结束，也可以用结束标记结束，但必须要有结束</p>
+</li>
+<li>
+<p><strong>组件的命名</strong></p>
+<p>无论你是用哪种方式注册组件，组建的明明需要遵循规范</p>
+<p>组件可以使用 [^kebab-case 短横线命名法] ，也可以使用 [^PascalCase 大驼峰命名法]</p>
+<p>以下两种命名法都是可以的</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">otherComp</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;my-comp&#39;</span><span class="o">:</span> <span class="nx">myComp</span><span class="p">,</span> <span class="c1">// 短横线命名法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">MyComp</span><span class="o">:</span> <span class="nx">myComp</span><span class="p">,</span> <span class="c1">// 大驼峰命名法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><blockquote>
+<p>实际上使用小驼峰命名法也是可以识别的，只不过不符合官方要求的规范</p>
+</blockquote>
+<p>使用大驼峰命名法，在模板中可以使用大驼峰命名法和短横线命名法两种名称</p>
+</li>
+</ol>
+<p>因此，在组建使用时，常采用如下方式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">MyComp</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 组件配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">OtherComp</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">MyComp</span><span class="p">,</span> <span class="c1">// ES6速写属性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h2 id="组件树">组件树</h2>
+<p>一个组件创建好后，往往会在各种地方使用它。它可能多次出现在 vue 实例中，也可能出现在其他组件中。</p>
+<p>于是就形成了一个组件树</p>
+<h2 id="向组件传递数据">向组件传递数据</h2>
+<p>大部分组件要完成自身的功能，都需要一些额外的信息</p>
+<p>比如一个头像组件，需要告诉它头像的地址，这就需要在使用组件时向组件传递数据</p>
+<p>传递数据的方法有很多种，主唱兼的一种是使用<strong>组件属性 component</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">MyComp</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">props</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;p3&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 和vue实例一样，使用组件时，也会创建组建的实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 而组件的属性会被提取到组件实例中，因此可以在模板中使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;div&gt;{{p1}},{{p2}},{{p3}}&lt;/div&gt;`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">OtherComp</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">MyComp</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;my-comp :p1=&#34;a&#34; p2=&#34;2&#34; p3=&#34;3&#34; /&gt;`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>注意：在组件中，属性是只读的，绝对不可以更改，这叫做单向数据流。</p>
+<h2 id="vue-cli-的使用">vue-cli 的使用</h2>
+<p>vue-cli 是一个脚手架工具，它集成了诸多前端技术，包括但不仅限于：</p>
+<ul>
+<li>webpack</li>
+<li>babel</li>
+<li>eslint</li>
+<li>http-proxy-middleware</li>
+<li>typescript</li>
+<li>css pre-prosessor</li>
+<li>css module</li>
+<li>&hellip;&hellip;</li>
+</ul>
+<p>这些工具，他们大部分都要依赖两个东西：</p>
+<ul>
+<li>node 环境：很多工具的运行环境</li>
+<li>npm：包管理器，用于下载各种第三方库</li>
+</ul>
+<blockquote>
+<p>目前，npm 已和 node 继集成，当安装 node 后，会自动安装 npm</p>
+</blockquote>
+<h3 id="安装-node">安装 node</h3>
+<p>下载 node：<a class="link" href="https://nodejs.org/zh-cn"  target="_blank" rel="noopener"
+    >https://nodejs.org/zh-cn</a></p>
+<h4 id="验证安装">验证安装</h4>
+<p>打开终端，查看 node 和 npm 版本，验证是否安装成功：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">node -v
+</span></span><span class="line"><span class="cl">npm -v
+</span></span></code></pre></div><blockquote>
+<p>如果安装之前打开终端，需要在安装后重新打开</p>
+</blockquote>
+<h4 id="配置源地址">配置源地址</h4>
+<p>默认情况下，npm 安装包会从国外的地址下载，速度很慢，容易导致安装失败，因此需要先配置 npm 的源地址</p>
+<p>使用下面的命令更改 npm 的源地址为淘宝源</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm config <span class="nb">set</span> registry http://registry.npm.taobao.org/
+</span></span></code></pre></div><p>更改好之后，查看源地址是否正确修改</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm config get registry
+</span></span></code></pre></div><h3 id="安装-vue-cli">安装 vue-cli</h3>
+<p>使用下面的命令安装 vue-cli 工具</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm install -g @vue/cli
+</span></span></code></pre></div><p>安装好之后，检查 vue-cli 是否安装成功</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vue --version
+</span></span></code></pre></div><h3 id="使用-vue-cli">使用 vue-cli</h3>
+<h4 id="在终端进入某个目录">在终端进入某个目录</h4>
+<p>选择一个目录，该目录将放置你的工程文件夹</p>
+<p>在终端中进入该目录</p>
+<h4 id="搭建工程">搭建工程</h4>
+<p>使用 vue-cli 提供的命令搭建工程</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vue create 工程名
+</span></span></code></pre></div><blockquote>
+<p>注意工程名只能出现英文、数字和下划线</p>
+</blockquote>
+<h4 id="启动开发环境">启动开发环境</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> bilibili-app
+</span></span><span class="line"><span class="cl">npm run serve
+</span></span></code></pre></div><h4 id="打包应用">打包应用</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> bilibili-app
+</span></span><span class="line"><span class="cl">npm run build
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            
+            
+            <a href="/tags/javascript/">JavaScript</a>
+        
+            
+            
+            <a href="/tags/vue/">vue</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-ND 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/implementation-publish-and-subscription-by-javascript/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/implementation-publish-and-subscription-by-javascript.png" loading="lazy" data-key="implementation-publish-and-subscription-by-javascript" data-hash="https://static.aecra.cn/cover/implementation-publish-and-subscription-by-javascript.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">JavaScript 实现发布订阅</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/how-to-gracefully-implement-async-await-error-handing/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/how-to-gracefully-implement-async-await-error-handing.jpg" loading="lazy" data-key="how-to-gracefully-implement-async-await-error-handing" data-hash="https://static.aecra.cn/cover/how-to-gracefully-implement-async-await-error-handing.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">如何优雅地实现 async/await 的错误处理</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/introduction-to-axios-and-source-code-analysis/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/introduction-to-axios-and-source-code-analysis.jpg" loading="lazy" data-key="introduction-to-axios-and-source-code-analysis" data-hash="https://static.aecra.cn/cover/introduction-to-axios-and-source-code-analysis.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">axios 入门和源码分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/promise-deep-custom-promise/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/promise-deep-custom-promise.jpg" loading="lazy" data-key="promise-deep-custom-promise" data-hash="https://static.aecra.cn/cover/promise-deep-custom-promise.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Promise 深入 &#43; 自定义 Promise</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/differences-in-the-usage-of-call-apply-and-bind-in-javascript.jpg" loading="lazy" data-key="differences-in-the-usage-of-call-apply-and-bind-in-javascript" data-hash="https://static.aecra.cn/cover/differences-in-the-usage-of-call-apply-and-bind-in-javascript.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">JavaScript 中 call()、apply()、bind() 的用法差异</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2017 - 
+        
+        2022 aecra | 个人资料分享
+    </section>
+    
+    <section class="powerby">
+        
+            <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021003357号-1</a> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前置知识">前置知识</a></li>
+    <li><a href="#vue-在前端的地位">vue 在前端的地位</a></li>
+    <li><a href="#学习准备">学习准备</a></li>
+    <li><a href="#起步">起步</a></li>
+    <li><a href="#体验-vue">体验 vue</a></li>
+    <li><a href="#es6-知识补充">ES6 知识补充</a></li>
+    <li><a href="#注入">注入</a></li>
+    <li><a href="#虚拟-dom-树">虚拟 DOM 树</a></li>
+    <li><a href="#挂载">挂载</a></li>
+    <li><a href="#完整流程">完整流程</a></li>
+    <li><a href="#模板语法">模板语法</a>
+      <ol>
+        <li><a href="#内容">内容</a></li>
+        <li><a href="#指令">指令</a></li>
+        <li><a href="#特殊属性">特殊属性</a></li>
+      </ol>
+    </li>
+    <li><a href="#计算属性">计算属性</a></li>
+    <li><a href="#知识补充">知识补充</a></li>
+    <li><a href="#组件概念">组件概念</a></li>
+    <li><a href="#组件开发">组件开发</a></li>
+    <li><a href="#创建组件">创建组件</a>
+      <ol>
+        <li><a href="#注册组件">注册组件</a>
+          <ol>
+            <li><a href="#全局注册">全局注册</a></li>
+            <li><a href="#局部注册">局部注册</a></li>
+          </ol>
+        </li>
+        <li><a href="#应用组件">应用组件</a></li>
+      </ol>
+    </li>
+    <li><a href="#组件树">组件树</a></li>
+    <li><a href="#向组件传递数据">向组件传递数据</a></li>
+    <li><a href="#vue-cli-的使用">vue-cli 的使用</a>
+      <ol>
+        <li><a href="#安装-node">安装 node</a>
+          <ol>
+            <li><a href="#验证安装">验证安装</a></li>
+            <li><a href="#配置源地址">配置源地址</a></li>
+          </ol>
+        </li>
+        <li><a href="#安装-vue-cli">安装 vue-cli</a></li>
+        <li><a href="#使用-vue-cli">使用 vue-cli</a>
+          <ol>
+            <li><a href="#在终端进入某个目录">在终端进入某个目录</a></li>
+            <li><a href="#搭建工程">搭建工程</a></li>
+            <li><a href="#启动开发环境">启动开发环境</a></li>
+            <li><a href="#打包应用">打包应用</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript">
+    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
+</script>
+<script>
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    </body>
+</html>

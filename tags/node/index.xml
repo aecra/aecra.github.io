@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>node on aecra | 个人资料分享</title>
+        <link>https://www.aecra.cn/tags/node/</link>
+        <description>Recent content in node on aecra | 个人资料分享</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 27 Mar 2021 22:55:10 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/tags/node/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>webpack 学习笔记</title>
+        <link>https://www.aecra.cn/article/webpack-learning-notes/</link>
+        <pubDate>Sat, 27 Mar 2021 22:55:10 +0000</pubDate>
+        
+        <guid>https://www.aecra.cn/article/webpack-learning-notes/</guid>
+        <description>&lt;img src="https://static.aecra.cn/cover/webpack-learning-notes.jpg" alt="Featured image of post webpack 学习笔记" /&gt;webpack 简介 webpack 是什么 webpack 是一种前端资源构建工具，一个静态模块打包器(module bundler)。 在 webpack 看来, 前端的所有资源文件(js/json/cs</description>
+        </item>
+        
+    </channel>
+</rss>

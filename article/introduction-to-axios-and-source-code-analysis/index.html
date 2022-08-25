@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='别看记了这么多，我甚至都忘了我学过这玩意；axios 号称前端最流行的 ajax 请求库，本文从 HTTP 协议开始叙述，真正的零基础。'><meta name='keywords' content='JavaScript'><title>axios 入门和源码分析</title>
+
+
+
+<link rel='canonical' href='https://www.aecra.cn/article/introduction-to-axios-and-source-code-analysis/'>
+
+<link rel="stylesheet" href="/scss/style.min.52c52da3fe7b812e5cd0f0af686848e7dd3a65935c0aa95d735a48cf30e383b4.css"><meta property='og:title' content='axios 入门和源码分析'>
+<meta property='og:description' content='别看记了这么多，我甚至都忘了我学过这玩意；axios 号称前端最流行的 ajax 请求库，本文从 HTTP 协议开始叙述，真正的零基础。'>
+
+
+<meta property='og:url' content='https://www.aecra.cn/article/introduction-to-axios-and-source-code-analysis/'>
+<meta property='og:site_name' content='aecra | 个人资料分享'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JavaScript' /><meta property='article:published_time' content='2021-04-17T00:26:25&#43;00:00'/><meta property='article:modified_time' content='2021-04-17T00:26:25&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/introduction-to-axios-and-source-code-analysis.jpg' />
+<meta name="twitter:title" content="axios 入门和源码分析">
+<meta name="twitter:description" content="别看记了这么多，我甚至都忘了我学过这玩意；axios 号称前端最流行的 ajax 请求库，本文从 HTTP 协议开始叙述，真正的零基础。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/introduction-to-axios-and-source-code-analysis.jpg' />
+    <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended">
+    <aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://static.aecra.cn/avatar.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">😊</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">aecra | 个人资料分享</a></h1>
+            <h2 class="site-description">Leave a line of dialogue for the years to come.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/aecra'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关 于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归 档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜 索</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/link/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友 链</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://www.aecra.cn/" selected>中文</option>
+                        
+                            <option value="https://www.aecra.cn/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗 色</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            
+            
+            <a href="/article/introduction-to-axios-and-source-code-analysis/">
+                
+                    <img src="https://static.aecra.cn/cover/introduction-to-axios-and-source-code-analysis.jpg" loading="lazy" alt="Featured image of post axios 入门和源码分析" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/article/introduction-to-axios-and-source-code-analysis/">axios 入门和源码分析</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            别看记了这么多，我甚至都忘了我学过这玩意；axios 号称前端最流行的 ajax 请求库，本文从 HTTP 协议开始叙述，真正的零基础。
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 17, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 9 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="http-介绍">http 介绍</h2>
+<h3 id="概述">概述</h3>
+<p>HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol(通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是由像浏览器这样的接受方发起的。一个完整的 Web 文档通常是由不同的子文档拼接而成的，像是文本、布局描述、图片、视频、脚本等等。</p>
+<p><img src="https://static.aecra.cn/markdown/202103/8cfeef1da5e1405e13cdef7e2d64f50d.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Fetching_a_page"
+	
+	
+></p>
+<p>客户端和服务端通过交换各自的消息（与数据流正好相反）进行交互。由像浏览器这样的客户端发出的消息叫做 requests，被服务端响应的消息叫做 responses。</p>
+<p><img src="https://static.aecra.cn/markdown/202103/023b42249a0cc1620b01b1e637758ebb.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="HTTP & layers"
+	
+	
+></p>
+<p>HTTP 被设计于 20 世纪 90 年代初期，是一种可扩展的协议。它是应用层的协议，通过<a class="link" href="https://developer.mozilla.org/en-US/docs/Glossary/TCP"  target="_blank" rel="noopener"
+    >TCP</a>，或者是<a class="link" href="https://developer.mozilla.org/en-US/docs/Glossary/TLS"  target="_blank" rel="noopener"
+    >TLS</a>－加密的 TCP 连接来发送，理论上任何可靠的传输协议都可以使用。因为其良好的扩展性，时至今日，它不仅被用来传输超文本文档，还用来传输图片、视频或者向服务器发送如 HTML 表单这样的信息。HTTP 还可以根据网页需求，仅获取部分 Web 文档内容更新网页。</p>
+<p>详细内容见 <a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Overview"  target="_blank" rel="noopener"
+    >HTTP 概述</a></p>
+<h3 id="http-请求方法">HTTP 请求方法</h3>
+<p>HTTP 定义了一组<strong>请求方法</strong>, 以表明要对给定资源执行的操作。指示针对给定资源要执行的期望动作. 虽然他们也可以是名词, 但这些请求方法有时被称为 HTTP 动词. 每一个请求方法都实现了不同的语义, 但一些共同的特征由一组共享：: 例如一个请求方法可以是 <a class="link" href="https://developer.mozilla.org/en-US/docs/Glossary/safe"  target="_blank" rel="noopener"
+    >safe</a>, <a class="link" href="https://developer.mozilla.org/en-US/docs/Glossary/Idempotent"  target="_blank" rel="noopener"
+    >idempotent</a>, 或 <a class="link" href="https://developer.mozilla.org/en-US/docs/Glossary/cacheable"  target="_blank" rel="noopener"
+    >cacheable</a>.</p>
+<h3 id="http-请求头">HTTP 请求头</h3>
+<p><strong>HTTP 消息头</strong>允许客户端和服务器通过 <strong>request</strong>和 <strong>response</strong>传递附加信息。一个请求头由名称（不区分大小写）后跟一个冒号“：”，冒号后跟具体的值（不带换行符）组成。该值前面的引导空白会被忽略。</p>
+<p>常用请求头：<a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#the_accept.3a_header"  target="_blank" rel="noopener"
+    >Accept</a> 、<a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#access-control-allow-origin"  target="_blank" rel="noopener"
+    >Access-Control-Allow-Origin</a> 、<a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Connection"  target="_blank" rel="noopener"
+    >Connection</a> 、<a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length"  target="_blank" rel="noopener"
+    >Content-Length</a> 、<a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Type"  target="_blank" rel="noopener"
+    >Content-Type</a> 、<a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie"  target="_blank" rel="noopener"
+    >Cookie</a> 、<a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Host"  target="_blank" rel="noopener"
+    >Host</a> 、<a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#origin"  target="_blank" rel="noopener"
+    >Origin</a> 、<a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#the_user-agent.3a_header"  target="_blank" rel="noopener"
+    >User-Agent</a> 。</p>
+<h3 id="http-请求体">HTTP 请求体</h3>
+<p>http 请求体通常用于 POST 请求中，包括但不限于提交表单等操作。</p>
+<p>格式为在请求头之后空一行填写，例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">POST</span> <span class="nn">/test</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">foo.example</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">27</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">field1=value1&amp;field2=value2
+</span></span></code></pre></div><h3 id="http-响应代码">HTTP 响应代码</h3>
+<p>HTTP 响应状态代码指示特定 <a class="link" href="https://developer.mozilla.org/zh-cn/HTTP"  target="_blank" rel="noopener"
+    >HTTP</a> 请求是否已成功完成。响应分为五类：信息响应(<code>100</code>–<code>199</code>)，成功响应(<code>200</code>–<code>299</code>)，重定向(<code>300</code>–<code>399</code>)，客户端错误(<code>400</code>–<code>499</code>)和服务器错误 (<code>500</code>–<code>599</code>)。状态代码由 <a class="link" href="https://tools.ietf.org/html/rfc2616#section-10"  target="_blank" rel="noopener"
+    >section 10 of RFC 2616</a>定义。</p>
+<p>详见：<a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status"  target="_blank" rel="noopener"
+    >HTTP 响应代码</a></p>
+<h2 id="xhr-的理解和使用">XHR 的理解和使用</h2>
+<h3 id="mdn-文档">MDN 文档</h3>
+<p><a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest"  target="_blank" rel="noopener"
+    >链接</a></p>
+<h3 id="理解">理解</h3>
+<ol>
+<li>使用 XMLHttpRequest (XHR)对象可以与服务器交互, 也就是发送 ajax 请求。</li>
+<li>前端可以获取到数据，而无需让整个的页面刷新。</li>
+<li>这使得 Web 页面可以只更新页面的局部，而不影响用户的操作。</li>
+<li>xhr 和 fetch 都是 JavaScript 的底层 API，互不相关。</li>
+</ol>
+<h3 id="区别一般-http-请求与-ajax-请求">区别一般 http 请求与 ajax 请求</h3>
+<ol>
+<li>
+<p>ajax 请求是一种特别的 http 请求。</p>
+</li>
+<li>
+<p>对服务器端来说，没有任何区别，区别在浏览器端。</p>
+</li>
+<li>
+<p>浏览器端发请求：只有 XHR 或 fetch 发出的才是 ajax 请求，其它所有的都是 非 ajax 请求。</p>
+</li>
+<li>
+<p>浏览器端接收到响应</p>
+<p>(1) 一般请求：浏览器一般会直接显示响应体数据，也就是我们常说的刷新 / 跳转页面。</p>
+<p>(2) ajax 请求：浏览器不会对界面进行任何更新操作，只是调用监视的回调 函数并传入响应相关数据。</p>
+</li>
+</ol>
+<h3 id="api">API</h3>
+<h4 id="构造函数">构造函数</h4>
+<ul>
+<li>
+<p>XMLHttpRequest()</p>
+<p>该构造函数用于初始化一个 XMLHttpRequest 实例对象。在调用下列任何其他方法之前，必须先调用该构造函数，或通过其他方式，得到一个实例对象。</p>
+</li>
+</ul>
+<h4 id="属性">属性</h4>
+<blockquote>
+<p>此接口继承了 XMLHttpRequestEventTarget 和 EventTarget 的属性。</p>
+</blockquote>
+<ul>
+<li>
+<p>XMLHttpRequest.onreadystatechange</p>
+<p>当 readyState 属性发生变化时，调用的 EventHandler (en-US)。</p>
+</li>
+<li>
+<p>XMLHttpRequest.readyState 只读</p>
+<p>返回 一个无符号短整型（unsigned short）数字，代表请求的状态码。</p>
+</li>
+<li>
+<p>XMLHttpRequest.response 只读</p>
+<p>返回一个 ArrayBuffer、Blob、Document，或 DOMString，具体是哪种类型取决于 XMLHttpRequest.responseType 的值。其中包含整个响应实体（response entity body）。</p>
+</li>
+<li>
+<p>XMLHttpRequest.responseText 只读</p>
+<p>返回一个 DOMString，该 DOMString 包含对请求的响应，如果请求未成功或尚未发送，则返回 null。</p>
+</li>
+<li>
+<p>XMLHttpRequest.responseType</p>
+<p>一个用于定义响应类型的枚举值（enumerated value）。</p>
+</li>
+<li>
+<p>XMLHttpRequest.responseURL 只读</p>
+<p>返回经过序列化（serialized）的响应 URL，如果该 URL 为空，则返回空字符串。</p>
+</li>
+<li>
+<p>XMLHttpRequest.responseXML 只读</p>
+<p>返回一个 Document，其中包含该请求的响应，如果请求未成功、尚未发送或时不能被解析为 XML 或 HTML，则返回 null。</p>
+</li>
+<li>
+<p>XMLHttpRequest.status 只读</p>
+<p>返回一个无符号短整型（unsigned short）数字，代表请求的响应状态。</p>
+</li>
+<li>
+<p>XMLHttpRequest.statusText 只读</p>
+<p>返回一个 DOMString，其中包含 HTTP 服务器返回的响应状态。与 XMLHTTPRequest.status 不同的是，它包含完整的响应状态文本（例如，&ldquo;200 OK&rdquo;）。</p>
+<blockquote>
+<p>注意：根据 HTTP/2 规范（8.1.2.4 Response Pseudo-Header Fields，响应伪标头字段），HTTP/2 没有定义任何用于携带 HTTP/1.1 状态行中包含的版本（version）或者原因短语（reason phrase）的方法。</p>
+</blockquote>
+</li>
+<li>
+<p>XMLHttpRequest.timeout</p>
+<p>一个无符号长整型（unsigned long）数字，表示该请求的最大请求时间（毫秒），若超出该时间，请求会自动终止。</p>
+</li>
+<li>
+<p>XMLHttpRequestEventTarget.ontimeout</p>
+<p>当请求超时调用的 EventHandler。</p>
+</li>
+<li>
+<p>XMLHttpRequest.upload 只读</p>
+<p>XMLHttpRequestUpload，代表上传进度。</p>
+</li>
+<li>
+<p>XMLHttpRequest.withCredentials</p>
+<p>一个布尔值，用来指定跨域 Access-Control 请求是否应当带有授权信息，如 cookie 或授权 header 头。</p>
+</li>
+</ul>
+<p>非标准属性</p>
+<ul>
+<li>事件处理器</li>
+</ul>
+<p>作为 XMLHttpRequest 实例的属性之一，所有浏览器都支持 onreadystatechange。</p>
+<p>后来，许多浏览器实现了一些额外的事件（onload、onerror、onprogress 等）。</p>
+<p>更多现代浏览器，包括 Firefox，除了可以设置 on* 属性外，也提供标准的监听器 addEventListener() API 来监听 XMLHttpRequest 事件。</p>
+<h4 id="方法">方法</h4>
+<ul>
+<li>
+<p>XMLHttpRequest.abort()</p>
+<p>如果请求已被发出，则立刻中止请求。</p>
+</li>
+<li>
+<p>XMLHttpRequest.getAllResponseHeaders()</p>
+<p>以字符串的形式返回所有用 CRLF 分隔的响应头，如果没有收到响应，则返回 null。</p>
+</li>
+<li>
+<p>XMLHttpRequest.getResponseHeader()</p>
+<p>返回包含指定响应头的字符串，如果响应尚未收到或响应中不存在该报头，则返回 null。</p>
+</li>
+<li>
+<p>XMLHttpRequest.open()</p>
+<p>初始化一个请求。该方法只能在 JavaScript 代码中使用，若要在 native code 中初始化请求，请使用 openRequest()。</p>
+</li>
+<li>
+<p>XMLHttpRequest.overrideMimeType()</p>
+<p>覆写由服务器返回的 MIME 类型。</p>
+</li>
+<li>
+<p>XMLHttpRequest.send()</p>
+<p>发送请求。如果请求是异步的（默认），那么该方法将在请求发送后立即返回。</p>
+</li>
+<li>
+<p>XMLHttpRequest.setRequestHeader()
+设置 HTTP 请求头的值。必须在 open() 之后、send() 之前调用 setRequestHeader() 方法。</p>
+</li>
+</ul>
+<h4 id="事件">事件</h4>
+<ul>
+<li>
+<p>abort</p>
+<p>当 request 被停止时触发，例如当程序调用 XMLHttpRequest.abort() 时。</p>
+</li>
+<li>
+<p>error</p>
+<p>当 request 遭遇错误时触发。</p>
+</li>
+<li>
+<p>load</p>
+<p>XMLHttpRequest 请求成功完成时触发。</p>
+</li>
+<li>
+<p>loadend</p>
+<p>当请求结束时触发, 无论请求成功 ( load) 还是失败 (abort 或 error)。</p>
+</li>
+<li>
+<p>loadstart</p>
+<p>接收到响应数据时触发。</p>
+</li>
+<li>
+<p>progress</p>
+<p>当请求接收到更多数据时，周期性地触发。</p>
+</li>
+<li>
+<p>timeout</p>
+<p>在预设时间内没有接收到响应时触发。</p>
+</li>
+</ul>
+<h3 id="xhr-的-ajax-封装简单版-axios">XHR 的 Ajax 封装（简单版 axios）</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 1.函数的返回值为promise, 成功的结果为response, 失败的结果为error
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 2.能处理多种类型的请求: GET/POST/PUT/DELETE
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 3.函数的参数为一个配置对象
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *   {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     url: &#39;&#39;,   // 请求地址
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     method: &#39;&#39;,   // 请求方式GET/POST/PUT/DELETE
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     params: {},  // GET/DELETE请求的query参数
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     data: {}, // POST或DELETE请求的请求体参数
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *   }
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 4.响应json数据自动解析为js的对象/数组
+</span></span></span><span class="line"><span class="cl"><span class="cm"> **/</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">axios</span><span class="p">({</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">method</span> <span class="o">=</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{}</span> <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 返回一个promise对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 处理method(转大写)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">method</span> <span class="o">=</span> <span class="nx">method</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 处理query参数(拼接到url上)   id=1&amp;xxx=abc
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">let</span> <span class="nx">queryString</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryString</span> <span class="o">+=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="sb">=</span><span class="si">${</span><span class="nx">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="sb">&amp;`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 拼接url
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">url</span> <span class="o">+=</span> <span class="nx">queryString</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span> <span class="o">?</span> <span class="nx">queryString</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">queryString</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 执行异步ajax请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 创建xhr对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 打开连接(初始化请求, 没有发送请求)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">request</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 发送请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">method</span> <span class="o">===</span> <span class="s1">&#39;GET&#39;</span> <span class="o">||</span> <span class="nx">method</span> <span class="o">===</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">request</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">method</span> <span class="o">===</span> <span class="s1">&#39;POST&#39;</span> <span class="o">||</span> <span class="nx">method</span> <span class="o">===</span> <span class="s1">&#39;PUT&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">request</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json;charset=utf-8&#39;</span><span class="p">);</span> <span class="c1">// 告诉服务器请求体的格式是json
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">request</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span> <span class="c1">// 发送json格式请求体参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 绑定状态改变的监听
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">request</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 如果请求没有完成, 直接结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">!==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 如果响应状态码在[200, 300)之间代表成功, 否则失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="p">{</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">statusText</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 2.1. 如果请求成功了, 调用resolve()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">&gt;=</span> <span class="mi">200</span> <span class="o">&amp;&amp;</span> <span class="nx">status</span> <span class="o">&lt;=</span> <span class="mi">299</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 准备结果数据对象response
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">data</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">response</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">status</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">statusText</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">resolve</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2.2. 如果请求失败了, 调用reject()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;request error status is &#39;</span> <span class="o">+</span> <span class="nx">status</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="axios-的理解和使用">axios 的理解和使用</h2>
+<h3 id="axios-是什么">axios 是什么</h3>
+<ol>
+<li>前端最流行的 ajax 请求库</li>
+<li>react/vue 官方都推荐使用 axios 发 ajax 请求</li>
+<li><a class="link" href="https://github.com/axios/axios"  target="_blank" rel="noopener"
+    >开源地址</a></li>
+</ol>
+<h3 id="axios-特点">.axios 特点</h3>
+<ol>
+<li>基本 promise 的异步 ajax 请求库</li>
+<li>浏览器端/node 端都可以使用</li>
+<li>支持请求／响应拦截器</li>
+<li>支持请求取消</li>
+<li>请求/响应数据转换</li>
+<li>批量发送多个请求</li>
+</ol>
+<h3 id="axios-常用语法">axios 常用语法</h3>
+<p><strong>axios(config)</strong>: 通用/最本质的发任意类型请求的方式</p>
+<p><strong>axios(url[, config])</strong>: 可以只指定 url 发 get 请求</p>
+<p><strong>axios.request(config)</strong>: 等同于 axios(config)</p>
+<p><strong>axios.get(url[, config])</strong>: 发 get 请求</p>
+<p><strong>axios.delete(url[, config])</strong>: 发 delete 请求</p>
+<p><strong>axios.post(url[, data, config])</strong>: 发 post 请求</p>
+<p><strong>axios.put(url[, data, config])</strong>: 发 put 请求</p>
+<p><strong>axios.defaults.xxx</strong>: 请求的默认全局配置</p>
+<p><strong>axios.interceptors.request.use()</strong>: 添加请求拦截器</p>
+<p><strong>axios.interceptors.response.use()</strong>: 添加响应拦截器</p>
+<p><strong>axios.create([config])</strong>: 创建一个新的 axios(它没有下面的功能)</p>
+<p><strong>axios.Cancel()</strong>: 用于创建取消请求的错误对象</p>
+<p><strong>axios.CancelToken()</strong>: 用于创建取消请求的 token 对象</p>
+<p><strong>axios.isCancel()</strong>: 是否是一个取消请求的错误</p>
+<p><strong>axios.all(promises)</strong>: 用于批量执行多个异步请求</p>
+<h3 id="难点语法的理解和使用">难点语法的理解和使用</h3>
+<h4 id="axioscreateconfig">axios.create(config)</h4>
+<ol>
+<li>
+<p>根据指定配置创建一个新的 axios, 也就就每个新 axios 都有自己的配置</p>
+</li>
+<li>
+<p>新 axios 只是没有取消请求和批量发请求的方法, 其它所有语法都是一致的</p>
+</li>
+<li>
+<p>为什么要设计这个语法?</p>
+<p>(1) 需求: 项目中有部分接口需要的配置与另一部分接口需要的配置不太一 样, 如何处理</p>
+<p>(2) 解决: 创建 2 个新 axios, 每个都有自己特有的配置, 分别应用到不同要 求的接口请求中</p>
+</li>
+</ol>
+<h4 id="拦截器函数ajax-请求请求的回调函数的调用顺序">拦截器函数/ajax 请求/请求的回调函数的调用顺序</h4>
+<ol>
+<li>说明: 调用 axios()并不是立即发送 ajax 请求, 而是需要经历一个较长的流程</li>
+<li>流程: 请求拦截器 2 =&gt; 请求拦截器 1 =&gt; 发 ajax 请求 =&gt; 响应拦截器 1 =&gt; 响应拦截器 2 =&gt; 请求的回调</li>
+<li>注意: 此流程是通过 promise 串连起来的, 请求拦截器传递的是 config, 响应拦截器传递的是 response</li>
+</ol>
+<h4 id="取消请求">取消请求</h4>
+<ol>
+<li>
+<p>基本流程</p>
+<p>配置 cancelToken 对象</p>
+<p>缓存用于取消请求的 cancel 函数</p>
+<p>在后面特定时机调用 cancel 函数取消请求</p>
+<p>在错误回调中判断如果 error 是 cancel, 做相应处理</p>
+</li>
+<li>
+<p>实现功能</p>
+<p>点击按钮, 取消某个正在请求中的请求；在请求一个接口前, 取消前面一个未完成的请求</p>
+</li>
+</ol>
+<h2 id="axios-源码分析">axios 源码分析</h2>
+<h3 id="axios-与-axios-的关系">axios 与 Axios 的关系?</h3>
+<ol>
+<li>从语法上来说: axios 不是 Axios 的实例</li>
+<li>从功能上来说: axios 是 Axios 的实例</li>
+<li>axios 是 Axios.prototype.request 函数 bind()返回的函数</li>
+<li>axios 作为对象有 Axios 原型对象上的所有方法, 有 Axios</li>
+</ol>
+<h3 id="instance-与-axios-的区别">instance 与 axios 的区别?</h3>
+<ol>
+<li>
+<p>相同:</p>
+<p>(1) 都是一个能发任意请求的函数: request(config)</p>
+<p>(2) 都有发特定请求的各种方法: get()/post()/put()/delete()</p>
+<p>(3) 都有默认配置和拦截器的属性: defaults/interceptors</p>
+</li>
+<li>
+<p>不同:</p>
+<p>(1) 默认匹配的值很可能不一样</p>
+<p>(2) instance 没有 axios 后面添加的一些方法: create()/CancelToken()/all()</p>
+</li>
+</ol>
+<h3 id="axios-运行的整体流程">axios 运行的整体流程</h3>
+<p><img src="https://static.aecra.cn/markdown/202104/6404bcfeddf1ca6dc0fe53b4cb59cf8c.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="QQ截图20210417000728"
+	
+	
+></p>
+<ol>
+<li>
+<p>整体流程:</p>
+<p>request(config) ==&gt; dispatchRequest(config) ==&gt; xhrAdapter(config)</p>
+</li>
+<li>
+<p>request(config):</p>
+<p>将请求拦截器 / dispatchRequest() / 响应拦截器 通过 promise 链串连起来, 返回 promise</p>
+</li>
+<li>
+<p>dispatchRequest(config):</p>
+<p>转换请求数据 ==&gt; 调用 xhrAdapter()发请求 ==&gt; 请求返回后转换响应数据。返回 promis</p>
+</li>
+<li>
+<p>xhrAdapter(config):</p>
+<p>创建 XHR 对象, 根据 config 进行相应设置, 发送特定请求, 并接收响应数据, 返回 promise</p>
+</li>
+</ol>
+<h3 id="axios-的请求响应拦截器是什么">axios 的请求/响应拦截器是什么?</h3>
+<p><img src="https://static.aecra.cn/markdown/202104/7176861eb94a84fc1c7931d09265f3dd.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="QQ截图20210417001018"
+	
+	
+></p>
+<ol>
+<li>
+<p>请求拦截器:</p>
+<p>在真正发送请求前执行的回调函数</p>
+<p>可以对请求进行检查或配置进行特定处理</p>
+<p>成功的回调函数, 传递的默认是 config(也必须是)</p>
+<p>失败的回调函数, 传递的默认是 error</p>
+</li>
+<li>
+<p>响应拦截器</p>
+<p>在请求得到响应后执行的回调函数</p>
+<p>可以对响应数据进行特定处理</p>
+<p>成功的回调函数, 传递的默认是 response</p>
+<p>失败的回调函数, 传递的默认是 erro</p>
+</li>
+</ol>
+<h3 id="axios-的请求响应数据转换器是什么">axios 的请求/响应数据转换器是什么?</h3>
+<ol>
+<li>
+<p>请求转换器: 对请求头和请求体数据进行特定处理的函数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">utils</span><span class="p">.</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">setContentTypeIfUnset</span><span class="p">(</span><span class="nx">headers</span><span class="p">,</span> <span class="s1">&#39;application/json;charset=utf-8&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>响应转换器: 将响应体 json 字符串解析为 js 对象或数组的函数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="response-的整体结构">response 的整体结构</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">status</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">statusText</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">headers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">request</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="error-的整体结构">error 的整体结构</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">message</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">response</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">request</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="如何取消未完成的请求">如何取消未完成的请求?</h3>
+<ol>
+<li>
+<p>当配置了 cancelToken 对象时, 保存 cancel 函数</p>
+<p>(1) 创建一个用于将来中断请求的 Promise 对象： cancelPromise</p>
+<p>(2) 并定义了一个用于取消请求的 resolved 函数： cancel</p>
+<p>(3) 将 cancel 函数传递出来</p>
+</li>
+<li>
+<p>调用 cancel()取消请求</p>
+<p>(1) 执行 cacel 函数, 传入错误信息 message</p>
+<p>(2) 内部会让 cancelPromise 变为成功, 且成功的值为一个 Cancel 对象</p>
+<p>(3) 在 cancelPromise 的成功回调中中断请求, 并让发请求的 proimse 失败, 失败的 reason 为 Cacel 对象</p>
+</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            
+            
+            <a href="/tags/javascript/">JavaScript</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-ND 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/implementation-publish-and-subscription-by-javascript/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/implementation-publish-and-subscription-by-javascript.png" loading="lazy" data-key="implementation-publish-and-subscription-by-javascript" data-hash="https://static.aecra.cn/cover/implementation-publish-and-subscription-by-javascript.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">JavaScript 实现发布订阅</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/how-to-gracefully-implement-async-await-error-handing/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/how-to-gracefully-implement-async-await-error-handing.jpg" loading="lazy" data-key="how-to-gracefully-implement-async-await-error-handing" data-hash="https://static.aecra.cn/cover/how-to-gracefully-implement-async-await-error-handing.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">如何优雅地实现 async/await 的错误处理</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/promise-deep-custom-promise/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/promise-deep-custom-promise.jpg" loading="lazy" data-key="promise-deep-custom-promise" data-hash="https://static.aecra.cn/cover/promise-deep-custom-promise.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Promise 深入 &#43; 自定义 Promise</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/differences-in-the-usage-of-call-apply-and-bind-in-javascript.jpg" loading="lazy" data-key="differences-in-the-usage-of-call-apply-and-bind-in-javascript" data-hash="https://static.aecra.cn/cover/differences-in-the-usage-of-call-apply-and-bind-in-javascript.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">JavaScript 中 call()、apply()、bind() 的用法差异</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/asynchronous-programming-in-javascript/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/asynchronous-programming-in-javascript.jpg" loading="lazy" data-key="asynchronous-programming-in-javascript" data-hash="https://static.aecra.cn/cover/asynchronous-programming-in-javascript.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">JavaScript 中的异步编程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2017 - 
+        
+        2022 aecra | 个人资料分享
+    </section>
+    
+    <section class="powerby">
+        
+            <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021003357号-1</a> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#http-介绍">http 介绍</a>
+      <ol>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#http-请求方法">HTTP 请求方法</a></li>
+        <li><a href="#http-请求头">HTTP 请求头</a></li>
+        <li><a href="#http-请求体">HTTP 请求体</a></li>
+        <li><a href="#http-响应代码">HTTP 响应代码</a></li>
+      </ol>
+    </li>
+    <li><a href="#xhr-的理解和使用">XHR 的理解和使用</a>
+      <ol>
+        <li><a href="#mdn-文档">MDN 文档</a></li>
+        <li><a href="#理解">理解</a></li>
+        <li><a href="#区别一般-http-请求与-ajax-请求">区别一般 http 请求与 ajax 请求</a></li>
+        <li><a href="#api">API</a>
+          <ol>
+            <li><a href="#构造函数">构造函数</a></li>
+            <li><a href="#属性">属性</a></li>
+            <li><a href="#方法">方法</a></li>
+            <li><a href="#事件">事件</a></li>
+          </ol>
+        </li>
+        <li><a href="#xhr-的-ajax-封装简单版-axios">XHR 的 Ajax 封装（简单版 axios）</a></li>
+      </ol>
+    </li>
+    <li><a href="#axios-的理解和使用">axios 的理解和使用</a>
+      <ol>
+        <li><a href="#axios-是什么">axios 是什么</a></li>
+        <li><a href="#axios-特点">.axios 特点</a></li>
+        <li><a href="#axios-常用语法">axios 常用语法</a></li>
+        <li><a href="#难点语法的理解和使用">难点语法的理解和使用</a>
+          <ol>
+            <li><a href="#axioscreateconfig">axios.create(config)</a></li>
+            <li><a href="#拦截器函数ajax-请求请求的回调函数的调用顺序">拦截器函数/ajax 请求/请求的回调函数的调用顺序</a></li>
+            <li><a href="#取消请求">取消请求</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#axios-源码分析">axios 源码分析</a>
+      <ol>
+        <li><a href="#axios-与-axios-的关系">axios 与 Axios 的关系?</a></li>
+        <li><a href="#instance-与-axios-的区别">instance 与 axios 的区别?</a></li>
+        <li><a href="#axios-运行的整体流程">axios 运行的整体流程</a></li>
+        <li><a href="#axios-的请求响应拦截器是什么">axios 的请求/响应拦截器是什么?</a></li>
+        <li><a href="#axios-的请求响应数据转换器是什么">axios 的请求/响应数据转换器是什么?</a></li>
+        <li><a href="#response-的整体结构">response 的整体结构</a></li>
+        <li><a href="#error-的整体结构">error 的整体结构</a></li>
+        <li><a href="#如何取消未完成的请求">如何取消未完成的请求?</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript">
+    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
+</script>
+<script>
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    </body>
+</html>
