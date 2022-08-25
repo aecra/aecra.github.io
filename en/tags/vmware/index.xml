@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Vmware on aecra | Technical article sharing</title>
-        <link>https://www.aecra.cn/en/tags/vmware/</link>
-        <description>Recent content in Vmware on aecra | Technical article sharing</description>
+        <title>Vmware on aecra</title>
+        <link>https://blog.aecra.cn/en/tags/vmware/</link>
+        <description>Recent content in Vmware on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Sun, 13 Feb 2022 20:19:13 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/en/tags/vmware/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Sun, 13 Feb 2022 20:19:13 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/en/tags/vmware/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>VMware development virtual machine starts and shuts down with the system.</title>
-        <link>https://www.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</link>
+        <link>https://blog.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</link>
         <pubDate>Sun, 13 Feb 2022 20:19:13 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</guid>
+        <guid>https://blog.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post VMware development virtual machine starts and shuts down with the system." /&gt;Reasons for Vmware Virtual Machine Development Windows development is sometimes so unsatisfactory, especially when the services developed need to run in Linux, and there are always some inexplicable problems if you develop in Windows, so it is necessary to develop in Linux. There are several options for using Linux development environment in Windows, such as WSL2, Hyper-V, VitualBox and Vmware. WSL2 is so tied to Windows that many configurations cannot</description>
         </item>
         

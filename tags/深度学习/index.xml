@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>深度学习 on aecra | 个人资料分享</title>
-        <link>https://www.aecra.cn/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
-        <description>Recent content in 深度学习 on aecra | 个人资料分享</description>
+        <title>深度学习 on aecra</title>
+        <link>https://blog.aecra.cn/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
+        <description>Recent content in 深度学习 on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Wed, 03 Mar 2021 20:06:10 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Wed, 03 Mar 2021 20:06:10 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>计算机视觉-目标检测</title>
-        <link>https://www.aecra.cn/article/computer-vision-target-detection/</link>
+        <link>https://blog.aecra.cn/article/computer-vision-target-detection/</link>
         <pubDate>Wed, 03 Mar 2021 20:06:10 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/article/computer-vision-target-detection/</guid>
+        <guid>https://blog.aecra.cn/article/computer-vision-target-detection/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/computer-vision-target-detection.jpg" alt="Featured image of post 计算机视觉-目标检测" /&gt;图像预处理 空间域处理 点运算 HE 直方图均衡 AHE 自适应直方图均衡（局部均衡、模板滑动） CLAHE 限制对比度自适应直方图均衡（裁剪均衡直方图、线性插值） 形态学</description>
         </item>
         

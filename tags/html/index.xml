@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>HTML on aecra | 个人资料分享</title>
-        <link>https://www.aecra.cn/tags/html/</link>
-        <description>Recent content in HTML on aecra | 个人资料分享</description>
+        <title>HTML on aecra</title>
+        <link>https://blog.aecra.cn/tags/html/</link>
+        <description>Recent content in HTML on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Sun, 31 Jan 2021 13:18:45 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/tags/html/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Sun, 31 Jan 2021 13:18:45 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/html/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>HTML &#43; CSS</title>
-        <link>https://www.aecra.cn/article/html-css/</link>
+        <link>https://blog.aecra.cn/article/html-css/</link>
         <pubDate>Sun, 31 Jan 2021 13:18:45 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/article/html-css/</guid>
+        <guid>https://blog.aecra.cn/article/html-css/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/html-css.jpg" alt="Featured image of post HTML &#43; CSS" /&gt;HTML 基础 文档声明 文档声明用来告诉浏览器当前网页的版本 &amp;lt;!DOCTYPE html&amp;gt; 语言声明 声明在 html 根标签中 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;html lang=&amp;#34;zh&amp;#34;&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;/html&amp;gt; 实体 html 实体用来呈现特殊字符 &amp;amp;nbsp; 空格 &amp;amp;gt; 大于号 &amp;amp;lt; 小于号 &amp;amp;copy; 版</description>
         </item>
         

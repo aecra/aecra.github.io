@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>software on aecra | Technical article sharing</title>
-        <link>https://www.aecra.cn/en/tags/software/</link>
-        <description>Recent content in software on aecra | Technical article sharing</description>
+        <title>software on aecra</title>
+        <link>https://blog.aecra.cn/en/tags/software/</link>
+        <description>Recent content in software on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Sat, 03 Jul 2021 08:50:45 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/en/tags/software/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Sat, 03 Jul 2021 08:50:45 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/en/tags/software/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Nginx getting started guide.</title>
-        <link>https://www.aecra.cn/en/article/nginx-getting-started-guide/</link>
+        <link>https://blog.aecra.cn/en/article/nginx-getting-started-guide/</link>
         <pubDate>Sat, 03 Jul 2021 08:50:45 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/article/nginx-getting-started-guide/</guid>
+        <guid>https://blog.aecra.cn/en/article/nginx-getting-started-guide/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/nginx-getting-started-guide.png" alt="Featured image of post Nginx getting started guide." /&gt;Introduction Nginx is a lightweight HTTP server that uses an event-driven, asynchronous, non-blocking processing framework, which gives it excellent IO performance and is often used for server-side reverse proxying and load balancing.
 Quick Start Install nginx
 sudo apt-get install nginx Uninstall nginx

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>podman on aecra | Technical article sharing</title>
-        <link>https://www.aecra.cn/en/tags/podman/</link>
-        <description>Recent content in podman on aecra | Technical article sharing</description>
+        <title>podman on aecra</title>
+        <link>https://blog.aecra.cn/en/tags/podman/</link>
+        <description>Recent content in podman on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Tue, 16 Aug 2022 10:43:50 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/en/tags/podman/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Tue, 16 Aug 2022 10:43:50 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/en/tags/podman/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Podman build container residual problem when the build process is forced to terminate</title>
-        <link>https://www.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</link>
+        <link>https://blog.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</link>
         <pubDate>Tue, 16 Aug 2022 10:43:50 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</guid>
+        <guid>https://blog.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/Podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate.png" alt="Featured image of post Podman build container residual problem when the build process is forced to terminate" /&gt;Description First of all, if you use Ctrl + C to force termination during the build of Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images.
 There were forced interruptions on many previous builds, so my problem was more serious before I discovered it, otherwise one or two images that could not be deleted would not have attracted attention.</description>
         </item>

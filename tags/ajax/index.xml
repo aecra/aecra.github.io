@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>AJAX on aecra | 个人资料分享</title>
-        <link>https://www.aecra.cn/tags/ajax/</link>
-        <description>Recent content in AJAX on aecra | 个人资料分享</description>
+        <title>AJAX on aecra</title>
+        <link>https://blog.aecra.cn/tags/ajax/</link>
+        <description>Recent content in AJAX on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Fri, 05 Feb 2021 10:17:04 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/tags/ajax/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Fri, 05 Feb 2021 10:17:04 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/ajax/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>JavaScript 中 AJAX 的使用</title>
-        <link>https://www.aecra.cn/article/use-of-ajax-in-javascript/</link>
+        <link>https://blog.aecra.cn/article/use-of-ajax-in-javascript/</link>
         <pubDate>Fri, 05 Feb 2021 10:17:04 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/article/use-of-ajax-in-javascript/</guid>
+        <guid>https://blog.aecra.cn/article/use-of-ajax-in-javascript/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/use-of-ajax-in-javascript.jpg" alt="Featured image of post JavaScript 中 AJAX 的使用" /&gt;AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。 AJAX 不是新的编程语言，而是一种使用现有标准的新方法。 AJAX 最大的优点是在不重新加载整个页面的情况下，可以与服</description>
         </item>
         

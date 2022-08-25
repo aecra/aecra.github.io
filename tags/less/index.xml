@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>less on aecra | 个人资料分享</title>
-        <link>https://www.aecra.cn/tags/less/</link>
-        <description>Recent content in less on aecra | 个人资料分享</description>
+        <title>less on aecra</title>
+        <link>https://blog.aecra.cn/tags/less/</link>
+        <description>Recent content in less on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Sun, 07 Feb 2021 11:13:35 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/tags/less/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Sun, 07 Feb 2021 11:13:35 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/less/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Less 笔记</title>
-        <link>https://www.aecra.cn/article/less-notes/</link>
+        <link>https://blog.aecra.cn/article/less-notes/</link>
         <pubDate>Sun, 07 Feb 2021 11:13:35 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/article/less-notes/</guid>
+        <guid>https://blog.aecra.cn/article/less-notes/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/less-notes.jpg" alt="Featured image of post Less 笔记" /&gt;less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言， 增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展 LESS 既可以在 客户端 上运行 ，也</description>
         </item>
         

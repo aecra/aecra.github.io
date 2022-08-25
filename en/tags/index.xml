@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Tags on aecra | Technical article sharing</title>
-        <link>https://www.aecra.cn/en/tags/</link>
-        <description>Recent content in Tags on aecra | Technical article sharing</description>
+        <title>Tags on aecra</title>
+        <link>https://blog.aecra.cn/en/tags/</link>
+        <description>Recent content in Tags on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Tue, 16 Aug 2022 10:43:50 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/en/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Tue, 16 Aug 2022 10:43:50 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/en/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>podman</title>
-        <link>https://www.aecra.cn/en/tags/podman/</link>
+        <link>https://blog.aecra.cn/en/tags/podman/</link>
         <pubDate>Tue, 16 Aug 2022 10:43:50 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/podman/</guid>
+        <guid>https://blog.aecra.cn/en/tags/podman/</guid>
         <description></description>
         </item>
         <item>
         <title>gateway</title>
-        <link>https://www.aecra.cn/en/tags/gateway/</link>
+        <link>https://blog.aecra.cn/en/tags/gateway/</link>
         <pubDate>Fri, 20 May 2022 19:31:35 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/gateway/</guid>
+        <guid>https://blog.aecra.cn/en/tags/gateway/</guid>
         <description></description>
         </item>
         <item>
         <title>Vmware</title>
-        <link>https://www.aecra.cn/en/tags/vmware/</link>
+        <link>https://blog.aecra.cn/en/tags/vmware/</link>
         <pubDate>Sun, 13 Feb 2022 20:19:13 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/vmware/</guid>
+        <guid>https://blog.aecra.cn/en/tags/vmware/</guid>
         <description></description>
         </item>
         <item>
         <title>dev</title>
-        <link>https://www.aecra.cn/en/tags/dev/</link>
+        <link>https://blog.aecra.cn/en/tags/dev/</link>
         <pubDate>Sat, 22 Jan 2022 15:25:34 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/dev/</guid>
+        <guid>https://blog.aecra.cn/en/tags/dev/</guid>
         <description></description>
         </item>
         <item>
         <title>software</title>
-        <link>https://www.aecra.cn/en/tags/software/</link>
+        <link>https://blog.aecra.cn/en/tags/software/</link>
         <pubDate>Sat, 03 Jul 2021 08:50:45 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/software/</guid>
+        <guid>https://blog.aecra.cn/en/tags/software/</guid>
         <description></description>
         </item>
         <item>
         <title>docker</title>
-        <link>https://www.aecra.cn/en/tags/docker/</link>
+        <link>https://blog.aecra.cn/en/tags/docker/</link>
         <pubDate>Tue, 20 Apr 2021 10:35:12 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/docker/</guid>
+        <guid>https://blog.aecra.cn/en/tags/docker/</guid>
         <description></description>
         </item>
         <item>
         <title>MySQL</title>
-        <link>https://www.aecra.cn/en/tags/mysql/</link>
+        <link>https://blog.aecra.cn/en/tags/mysql/</link>
         <pubDate>Sun, 14 Feb 2021 14:26:56 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/mysql/</guid>
+        <guid>https://blog.aecra.cn/en/tags/mysql/</guid>
         <description></description>
         </item>
         <item>
         <title>PDO</title>
-        <link>https://www.aecra.cn/en/tags/pdo/</link>
+        <link>https://blog.aecra.cn/en/tags/pdo/</link>
         <pubDate>Sun, 14 Feb 2021 14:26:56 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/pdo/</guid>
+        <guid>https://blog.aecra.cn/en/tags/pdo/</guid>
         <description></description>
         </item>
         <item>
         <title>PHP</title>
-        <link>https://www.aecra.cn/en/tags/php/</link>
+        <link>https://blog.aecra.cn/en/tags/php/</link>
         <pubDate>Sun, 14 Feb 2021 14:26:56 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/tags/php/</guid>
+        <guid>https://blog.aecra.cn/en/tags/php/</guid>
         <description></description>
         </item>
         

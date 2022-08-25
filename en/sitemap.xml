@@ -4,294 +4,294 @@
     
             
             <url>
-                <loc>https://www.aecra.cn/en/</loc>
+                <loc>https://blog.aecra.cn/en/</loc>
                 <lastmod>2022-08-16T10:43:50+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/"
+                        href="https://blog.aecra.cn/en/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/"
+                        href="https://blog.aecra.cn/en/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/podman/</loc>
+                <loc>https://blog.aecra.cn/en/tags/podman/</loc>
                 <lastmod>2022-08-16T10:43:50+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/tags/podman/"
+                        href="https://blog.aecra.cn/en/tags/podman/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/tags/podman/"
+                        href="https://blog.aecra.cn/en/tags/podman/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</loc>
+                <loc>https://blog.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</loc>
                 <lastmod>2022-08-16T10:43:50+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
+                        href="https://blog.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
+                        href="https://blog.aecra.cn/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/post/</loc>
+                <loc>https://blog.aecra.cn/en/post/</loc>
                 <lastmod>2022-08-16T10:43:50+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/post/"
+                        href="https://blog.aecra.cn/en/post/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/post/"
+                        href="https://blog.aecra.cn/en/post/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/</loc>
+                <loc>https://blog.aecra.cn/en/tags/</loc>
                 <lastmod>2022-08-16T10:43:50+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/tags/"
+                        href="https://blog.aecra.cn/en/tags/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/tags/"
+                        href="https://blog.aecra.cn/en/tags/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/article/build-a-gateway-by-kong/</loc>
+                <loc>https://blog.aecra.cn/en/article/build-a-gateway-by-kong/</loc>
                 <lastmod>2022-05-26T17:30:35+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/article/build-a-gateway-by-kong/"
+                        href="https://blog.aecra.cn/en/article/build-a-gateway-by-kong/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/article/build-a-gateway-by-kong/"
+                        href="https://blog.aecra.cn/en/article/build-a-gateway-by-kong/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/gateway/</loc>
+                <loc>https://blog.aecra.cn/en/tags/gateway/</loc>
                 <lastmod>2022-05-26T17:30:35+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/vmware/</loc>
+                <loc>https://blog.aecra.cn/en/tags/vmware/</loc>
                 <lastmod>2022-02-13T20:19:13+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/tags/vmware/"
+                        href="https://blog.aecra.cn/en/tags/vmware/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/tags/vmware/"
+                        href="https://blog.aecra.cn/en/tags/vmware/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</loc>
+                <loc>https://blog.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</loc>
                 <lastmod>2022-02-13T20:19:13+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
+                        href="https://blog.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
+                        href="https://blog.aecra.cn/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/dev/</loc>
+                <loc>https://blog.aecra.cn/en/tags/dev/</loc>
                 <lastmod>2022-01-22T15:25:34+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</loc>
+                <loc>https://blog.aecra.cn/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</loc>
                 <lastmod>2022-01-22T15:25:34+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/about/</loc>
+                <loc>https://blog.aecra.cn/en/about/</loc>
                 <lastmod>2021-09-13T20:14:45+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/about/"
+                        href="https://blog.aecra.cn/en/about/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/about/"
+                        href="https://blog.aecra.cn/en/about/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/page/</loc>
+                <loc>https://blog.aecra.cn/en/page/</loc>
                 <lastmod>2021-09-13T20:14:45+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/page/"
+                        href="https://blog.aecra.cn/en/page/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/page/"
+                        href="https://blog.aecra.cn/en/page/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/article/nginx-getting-started-guide/</loc>
+                <loc>https://blog.aecra.cn/en/article/nginx-getting-started-guide/</loc>
                 <lastmod>2021-10-01T19:55:34+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/article/nginx-getting-started-guide/"
+                        href="https://blog.aecra.cn/en/article/nginx-getting-started-guide/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/article/nginx-getting-started-guide/"
+                        href="https://blog.aecra.cn/en/article/nginx-getting-started-guide/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/software/</loc>
+                <loc>https://blog.aecra.cn/en/tags/software/</loc>
                 <lastmod>2021-10-01T19:55:34+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/docker/</loc>
+                <loc>https://blog.aecra.cn/en/tags/docker/</loc>
                 <lastmod>2021-04-20T10:35:12+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/tags/docker/"
+                        href="https://blog.aecra.cn/en/tags/docker/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/tags/docker/"
+                        href="https://blog.aecra.cn/en/tags/docker/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/article/docker-tutorial/</loc>
+                <loc>https://blog.aecra.cn/en/article/docker-tutorial/</loc>
                 <lastmod>2021-04-20T10:35:12+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/mysql/</loc>
+                <loc>https://blog.aecra.cn/en/tags/mysql/</loc>
                 <lastmod>2021-02-14T14:26:56+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/tags/mysql/"
+                        href="https://blog.aecra.cn/en/tags/mysql/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/tags/mysql/"
+                        href="https://blog.aecra.cn/en/tags/mysql/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/pdo/</loc>
+                <loc>https://blog.aecra.cn/en/tags/pdo/</loc>
                 <lastmod>2021-02-14T14:26:56+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/tags/php/</loc>
+                <loc>https://blog.aecra.cn/en/tags/php/</loc>
                 <lastmod>2021-02-14T14:26:56+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/article/why-should-not-i-use-mysql-functions-in-php/</loc>
+                <loc>https://blog.aecra.cn/en/article/why-should-not-i-use-mysql-functions-in-php/</loc>
                 <lastmod>2021-02-14T14:26:56+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/archives/</loc>
+                <loc>https://blog.aecra.cn/en/archives/</loc>
                 <lastmod>2019-05-28T00:00:00+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/archives/"
+                        href="https://blog.aecra.cn/en/archives/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/archives/"
+                        href="https://blog.aecra.cn/en/archives/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/categories/</loc>
+                <loc>https://blog.aecra.cn/en/categories/</loc>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/categories/"
+                        href="https://blog.aecra.cn/en/categories/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/categories/"
+                        href="https://blog.aecra.cn/en/categories/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/link/</loc>
+                <loc>https://blog.aecra.cn/en/link/</loc>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/link/"
+                        href="https://blog.aecra.cn/en/link/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/link/"
+                        href="https://blog.aecra.cn/en/link/"
                 />
             </url>
             
             <url>
-                <loc>https://www.aecra.cn/en/search/</loc>
+                <loc>https://blog.aecra.cn/en/search/</loc>
                 <xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://www.aecra.cn/en/search/"
+                        href="https://blog.aecra.cn/en/search/"
                 />
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://www.aecra.cn/en/search/"
+                        href="https://blog.aecra.cn/en/search/"
                 />
             </url>
 </urlset>

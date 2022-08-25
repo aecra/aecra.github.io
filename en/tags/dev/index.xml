@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>dev on aecra | Technical article sharing</title>
-        <link>https://www.aecra.cn/en/tags/dev/</link>
-        <description>Recent content in dev on aecra | Technical article sharing</description>
+        <title>dev on aecra</title>
+        <link>https://blog.aecra.cn/en/tags/dev/</link>
+        <description>Recent content in dev on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Sat, 22 Jan 2022 15:25:34 +0000</lastBuildDate><atom:link href="https://www.aecra.cn/en/tags/dev/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language>
+        <lastBuildDate>Sat, 22 Jan 2022 15:25:34 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/en/tags/dev/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>How to mount host folder in VMware 20.04 on Windows.</title>
-        <link>https://www.aecra.cn/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</link>
+        <link>https://blog.aecra.cn/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</link>
         <pubDate>Sat, 22 Jan 2022 15:25:34 +0000</pubDate>
         
-        <guid>https://www.aecra.cn/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</guid>
+        <guid>https://blog.aecra.cn/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/How-to-mount-host-folder-in-VMware-20.04-on-Windows.png" alt="Featured image of post How to mount host folder in VMware 20.04 on Windows." /&gt;This time I want to use ubuntu20.04 on VMware as my workspace. But I don’t want to move and backup my files frequently. So I need to find a way to mount my host files to virtual machine.
 First I need to install VMware-tools to my virtual machine. With some reasons, I can’t install it autoly( The button is grey). So use the next bash command to install it.
 sudo apt install open-vm-tools-desktop Then close the virtual machine.</description>
