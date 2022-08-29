@@ -446,8 +446,7 @@ if (!doNotTrack) {
 <h2 id="promise-深入">Promise 深入</h2>
 <h3 id="含义">含义</h3>
 <p><a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise"  target="_blank" rel="noopener"
-    >Promise</a> 是<a class="link" href="https://www.aecra.cn/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"  target="_blank" rel="noopener"
-    >异步编程</a>的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6 将其写进了语言标准，统一了用法，原生提供了<code>Promise</code>对象。</p>
+    >Promise</a> 是<a class="link" href="/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" >异步编程</a>的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6 将其写进了语言标准，统一了用法，原生提供了<code>Promise</code>对象。</p>
 <p>所谓<code>Promise</code>，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。</p>
 <h3 id="特点">特点</h3>
 <p>（1）对象的状态不受外界影响。<code>Promise</code>对象代表一个异步操作，有三种状态：<code>pending</code>（进行中）、<code>fulfilled</code>（已成功）和<code>rejected</code>（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是<code>Promise</code>这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。</p>
@@ -499,8 +498,7 @@ if (!doNotTrack) {
 <p>回调地狱的缺点? 不便于阅读 / 不便于异常处理</p>
 <p>解决方案? promise 链式调用</p>
 <p>终极解决方案? async/await</p>
-<p>详见 <a class="link" href="https://www.aecra.cn/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"  target="_blank" rel="noopener"
-    >JavaScript 中的异步编程</a></p>
+<p>详见 <a class="link" href="/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" >JavaScript 中的异步编程</a></p>
 </li>
 </ol>
 <h3 id="promise-的-api">Promise 的 API</h3>
@@ -784,8 +782,7 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>微任务和宏任务</p>
-<p>在 es6 中 then 中的函数会放入微任务中，而因为开发者无法向微任务队列中添加任务，所以用宏任务替代，即用 setTimeout 实现异步执行，详细问题见 <a class="link" href="https://www.aecra.cn/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"  target="_blank" rel="noopener"
-    >JavaScript 中的异步编程</a></p>
+<p>在 es6 中 then 中的函数会放入微任务中，而因为开发者无法向微任务队列中添加任务，所以用宏任务替代，即用 setTimeout 实现异步执行，详细问题见 <a class="link" href="/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" >JavaScript 中的异步编程</a></p>
 </li>
 <li>
 <p>then 方法如何书写？</p>
@@ -1076,6 +1073,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
+        
+            <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021003357号-1</a> <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
