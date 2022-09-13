@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='安装双系统过程中，Linux 引导启动菜单过于丑陋，而改为 Windows 直接启动。'><meta name='keywords' content='系统'><title>Windows &amp; Linux 双系统启动引导问题</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Golang 竟然不支持开箱即用的优先队列，没得办法还得自己写。'><meta name='keywords' content='算法, Golang'><title>在 Golang 中使用优先队列</title>
 
 
 
-<link rel='canonical' href='https://blog.aecra.cn/article/windows-linux-dual-system-boot-problem/'>
+<link rel='canonical' href='https://blog.aecra.cn/article/use-priority-queue-in-golang/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='Windows &amp; Linux 双系统启动引导问题'>
-<meta property='og:description' content='安装双系统过程中，Linux 引导启动菜单过于丑陋，而改为 Windows 直接启动。'>
+<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='在 Golang 中使用优先队列'>
+<meta property='og:description' content='Golang 竟然不支持开箱即用的优先队列，没得办法还得自己写。'>
 
 
-<meta property='og:url' content='https://blog.aecra.cn/article/windows-linux-dual-system-boot-problem/'>
+<meta property='og:url' content='https://blog.aecra.cn/article/use-priority-queue-in-golang/'>
 <meta property='og:site_name' content='aecra'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='系统' /><meta property='article:published_time' content='2021-10-28T18:52:34&#43;00:00'/><meta property='article:modified_time' content='2021-10-28T18:52:34&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/windows-linux-dual-system-boot-problem.jpg' />
-<meta name="twitter:title" content="Windows &amp; Linux 双系统启动引导问题">
-<meta name="twitter:description" content="安装双系统过程中，Linux 引导启动菜单过于丑陋，而改为 Windows 直接启动。"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://static.aecra.cn/cover/windows-linux-dual-system-boot-problem.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='算法' /><meta property='article:tag' content='Golang' /><meta property='article:published_time' content='2022-09-13T23:41:00&#43;00:00'/><meta property='article:modified_time' content='2022-09-13T23:41:00&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/use-priority-queue-in-golang.png' />
+<meta name="twitter:title" content="在 Golang 中使用优先队列">
+<meta name="twitter:description" content="Golang 竟然不支持开箱即用的优先队列，没得办法还得自己写。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/use-priority-queue-in-golang.png' />
     <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
@@ -265,9 +265,9 @@ if (!doNotTrack) {
         <div class="article-image">
             
             
-            <a href="/article/windows-linux-dual-system-boot-problem/">
+            <a href="/article/use-priority-queue-in-golang/">
                 
-                    <img src="https://static.aecra.cn/cover/windows-linux-dual-system-boot-problem.jpg" loading="lazy" alt="Featured image of post Windows &amp; Linux 双系统启动引导问题" />
+                    <img src="https://static.aecra.cn/cover/use-priority-queue-in-golang.png" loading="lazy" alt="Featured image of post 在 Golang 中使用优先队列" />
                 
             </a>
         </div>
@@ -278,12 +278,12 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/article/windows-linux-dual-system-boot-problem/">Windows &amp; Linux 双系统启动引导问题</a>
+            <a href="/article/use-priority-queue-in-golang/">在 Golang 中使用优先队列</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            安装双系统过程中，Linux 引导启动菜单过于丑陋，而改为 Windows 直接启动。
+            Golang 竟然不支持开箱即用的优先队列，没得办法还得自己写。
         </h3>
         
     </div>
@@ -301,7 +301,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 28, 2021</time>
+                <time class="article-time--published">Sep 13, 2022</time>
             </div>
         
 
@@ -330,64 +330,48 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <h2 id="问题描述">问题描述</h2>
-<p>该问题是 Windows 和 Linux 双系统中，因先安装 Windows 后安装 Linux 而导致 Linux 引导 Windows。该情况下系统可以正常启动，无论启动 Windows 还是 Linux 都是没问题的，至于为什么说这是问题呢？因为个人觉得 Linux 的启动引导太丑了，和 Windows 的风格差异过于巨大。
-另外，我以为先装 Linux 后装 Windows 可以实现 Windows 引导 Linux，但看过些不知道对不对的资料，说是 Windows 系统无法识别 Linux 的启动项，可能会覆盖，导致无法启动 Linux，该问题留待查究。</p>
-<h2 id="实现目标">实现目标</h2>
-<p>由上所说，Linux 的启动引导过于丑陋，且一般情况下使用 Windows，进入 Linux 的情况较少，所以最终结果是开机直接启动 Windows，可以通过电脑启动项进入 Linux。</p>
-<h2 id="实现方法">实现方法</h2>
-<p>因为是两个系统都可以进入，所以我找到的方法也是系统正常启动下的方法，直接使用 Linux 系统自带的 efibootmgr 方法就可以完成我的要求。</p>
-<p>在命令行中键入 efibootmgr 并执行，就可以得到如下结果，</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">aecra@UUIK:~$ efibootmgr
-</span></span><span class="line"><span class="cl">BootCurrent: <span class="m">0009</span>
-</span></span><span class="line"><span class="cl">Timeout: <span class="m">0</span> seconds
-</span></span><span class="line"><span class="cl">BootOrder: 0004,0009,0008,0006,0007,9999
-</span></span><span class="line"><span class="cl">Boot0004* Windows Boot Manager
-</span></span><span class="line"><span class="cl">Boot0006* ubuntu
-</span></span><span class="line"><span class="cl">Boot0007* Solid State Disk
-</span></span><span class="line"><span class="cl">Boot0008* UOS
-</span></span><span class="line"><span class="cl">Boot0009* deepin
-</span></span><span class="line"><span class="cl">Boot9999* USB Drive <span class="o">(</span>UEFI<span class="o">)</span>
-</span></span></code></pre></div><p>可以看到，我们第一行的结果显示的是 <code>BootCurrent: 0009</code>，对应到下面的就是 deepin，也就是当前所在系统。</p>
-<p>注意第三行，我们的启动顺序（BootOrder）是 0004,0009,0008,0006,0007,9999。正是通过修改该项实现的启动引导顺序更改，我现在的第一个启动项就是 Windows，修改命令如下：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">efibootmgr -o 0004,0009,0008,0006,0007,9999
-</span></span></code></pre></div><p>另外有关启动项的其他设置也可以使用此命令，具体内容如下：</p>
-<blockquote>
-<p>usage: efibootmgr [options]</p>
-<p>-a | &ndash;active sets bootnum active</p>
-<p>-A | &ndash;inactive sets bootnum inactive</p>
-<p>-b | &ndash;bootnum XXXX modify BootXXXX (hex)</p>
-<p>-B | &ndash;delete-bootnum delete bootnum</p>
-<p>-c | &ndash;create create new variable bootnum and add to bootorder</p>
-<p>-C | &ndash;create-only create new variable bootnum and do not add to bootorder</p>
-<p>-D | &ndash;remove-dups remove duplicate values from BootOrder</p>
-<p>-d | &ndash;disk disk (defaults to /dev/sda) containing loader</p>
-<p>-r | &ndash;driver Operate on Driver variables, not Boot Variables.</p>
-<p>-e | &ndash;edd [1|3|-1] force EDD 1.0 or 3.0 creation variables, or guess</p>
-<p>-E | &ndash;device num EDD 1.0 device number (defaults to 0x80)</p>
-<p>-g | &ndash;gpt force disk with invalid PMBR to be treated as GPT</p>
-<p>-i | &ndash;iface name create a netboot entry for the named interface</p>
-<p>-l | &ndash;loader name (defaults to &ldquo;\EFI\debian\grub.efi&rdquo;)</p>
-<p>-L | &ndash;label label Boot manager display label (defaults to &ldquo;Linux&rdquo;)</p>
-<p>-m | &ndash;mirror-below-4G t|f mirror memory below 4GB</p>
-<p>-M | &ndash;mirror-above-4G X percentage memory to mirror above 4GB</p>
-<p>-n | &ndash;bootnext XXXX set BootNext to XXXX (hex)</p>
-<p>-N | &ndash;delete-bootnext delete BootNext</p>
-<p>-o | &ndash;bootorder XXXX,YYYY,ZZZZ,&hellip; explicitly set BootOrder (hex)</p>
-<p>-O | &ndash;delete-bootorder delete BootOrder</p>
-<p>-p | &ndash;part part (defaults to 1) containing loader</p>
-<p>-q | &ndash;quiet be quiet</p>
-<p>-t | &ndash;timeout seconds set boot manager timeout waiting for user input.</p>
-<p>-T | &ndash;delete-timeout delete Timeout.</p>
-<p>-u | &ndash;unicode | &ndash;UCS-2 handle extra args as UCS-2 (default is ASCII)</p>
-<p>-v | &ndash;verbose print additional information</p>
-<p>-V | &ndash;version return version and exit</p>
-<p>-w | &ndash;write-signature write unique sig to MBR if needed</p>
-<p>-y | &ndash;sysprep Operate on SysPrep variables, not Boot Variables.</p>
-<p>-@ | &ndash;append-binary-args file append extra args from file (use &ldquo;-&rdquo; for stdin)</p>
-<p>-h | &ndash;help show help/usage</p>
-</blockquote>
-<p>特别注意大小写问题！！！</p>
+    <p>在 Golang 中我们可以找到 heap 的实现，但是，基于 heap 的优先队列没有提供支持，只在 heap 文档中提供了优先队列的一个示例，Go 团队是在是太狗了，这对于我们这些要刷算法题，参加算法竞赛的同志们非常的不友好，而且在示例里面展示的优先队列还是 string 类型的，如果我们使用肯定是要修改的，和 C++ 相比，Go 没有 template 的特性和运算符重载的支持实在是很不方便（终于体会到什么是 &ldquo;less is more&quot;了）。</p>
+<p>堆的实现这里就不赘述了，我们只了解以下先验知识：</p>
+<ul>
+<li>堆是一个完全二叉树</li>
+<li>堆使用数组作为底层存储，它的每个元素的子节点是<code>2\*i</code>，和<code>2\*i+1</code></li>
+<li>堆中的最小元素在下标 0 处，即完全二叉树的根</li>
+<li>入队时将元素加入到数组末尾，然后进行上浮操作</li>
+<li>出队时将最大值与数组末尾元素互换位置，并对根进行下沉操作</li>
+</ul>
+<p>好了，我们知道这些之后，看看下面这个最简洁的优先队列例子。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Item</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">value</span>    <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">priority</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PriorityQueue</span> <span class="p">[]</span><span class="o">*</span><span class="nx">Item</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">pq</span> <span class="nx">PriorityQueue</span><span class="p">)</span> <span class="nf">Len</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nx">pq</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">pq</span> <span class="nx">PriorityQueue</span><span class="p">)</span> <span class="nf">Less</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">pq</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">priority</span> <span class="p">&lt;</span> <span class="nx">pq</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">priority</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">pq</span> <span class="nx">PriorityQueue</span><span class="p">)</span> <span class="nf">Swap</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">pq</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">pq</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="p">=</span> <span class="nx">pq</span><span class="p">[</span><span class="nx">j</span><span class="p">],</span> <span class="nx">pq</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">pq</span> <span class="o">*</span><span class="nx">PriorityQueue</span><span class="p">)</span> <span class="nf">Push</span><span class="p">(</span><span class="nx">x</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">item</span> <span class="o">:=</span> <span class="nx">x</span><span class="p">.(</span><span class="o">*</span><span class="nx">Item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span><span class="nx">pq</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="o">*</span><span class="nx">pq</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">pq</span> <span class="o">*</span><span class="nx">PriorityQueue</span><span class="p">)</span> <span class="nf">Pop</span><span class="p">()</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">old</span> <span class="o">:=</span> <span class="o">*</span><span class="nx">pq</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">n</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">old</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">item</span> <span class="o">:=</span> <span class="nx">old</span><span class="p">[</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">old</span><span class="p">[</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span><span class="nx">pq</span> <span class="p">=</span> <span class="nx">old</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">item</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>我们需要关注的是 Item 结构体的字段，在实际使用中可以根据需要自定义。</p>
+<p>其次就是 Less 函数了，前面已经知道了，最小的在下标 0 处，出队时也是它，所以我们修改 Less 函数，让我们排在前面的优先级最小，这就是优先级最小的在队首优先队列，如果要得到优先级最大的在队首的优先队列只需要反转 Less 函数即可。</p>
 
 </section>
 
@@ -398,7 +382,11 @@ if (!doNotTrack) {
         
             
             
-            <a href="/tags/%E7%B3%BB%E7%BB%9F/">系统</a>
+            <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+        
+            
+            
+            <a href="/tags/golang/">golang</a>
         
     </section>
 
@@ -447,6 +435,120 @@ if (!doNotTrack) {
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/Web-proxy-causes-build-jam-when-building-Golang-projects-in-wsl.png" loading="lazy" data-key="Web-proxy-causes-build-jam-when-building-Golang-projects-in-wsl" data-hash="https://static.aecra.cn/cover/Web-proxy-causes-build-jam-when-building-Golang-projects-in-wsl.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl 中构建 Golang 项目时网络代理引起构建卡壳的问题</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/sorting-algorithm/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/Sorting-algorithm.png" loading="lazy" data-key="Sorting-algorithm" data-hash="https://static.aecra.cn/cover/Sorting-algorithm.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">排序算法</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/kmp-string-matching-algorithm/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/kmp-string-matching-algorithm.jpg" loading="lazy" data-key="kmp-string-matching-algorithm" data-hash="https://static.aecra.cn/cover/kmp-string-matching-algorithm.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">KMP 字符串匹配算法</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/minimum-spanning-tree-kruskal-algorithm/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/minimum-spanning-tree-kruskal-algorithm.jpg" loading="lazy" data-key="minimum-spanning-tree-kruskal-algorithm" data-hash="https://static.aecra.cn/cover/minimum-spanning-tree-kruskal-algorithm.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">最小生成树（kruskal 算法）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
+    <a href="/article/last-common-ancestor-lca/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/last-common-ancestor-lca.jpg" loading="lazy" data-key="last-common-ancestor-lca" data-hash="https://static.aecra.cn/cover/last-common-ancestor-lca.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">最近公共祖先lca</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -550,40 +652,7 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#问题描述">问题描述</a></li>
-    <li><a href="#实现目标">实现目标</a></li>
-    <li><a href="#实现方法">实现方法</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+    
 
         </div>
         <script 
