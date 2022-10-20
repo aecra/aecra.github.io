@@ -6,7 +6,15 @@
         <description>Recent content in Go on aecra</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Wed, 20 Apr 2022 19:51:21 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/go/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 20 Oct 2022 20:07:32 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/go/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Golang 中的 GC 算法：三色标记与混合写屏障</title>
+        <link>https://blog.aecra.cn/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</link>
+        <pubDate>Thu, 20 Oct 2022 20:07:32 +0000</pubDate>
+        
+        <guid>https://blog.aecra.cn/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</guid>
+        <description>&lt;img src="https://static.aecra.cn/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png" alt="Featured image of post Golang 中的 GC 算法：三色标记与混合写屏障" /&gt;标记清除法 在 v1.0~v1.3 版本中都是用的是标记清除算法。首先我们需要了解 STW（Stop The World）是什么，顾名思义，STW 是将当前程序完全暂停，不执</description>
+        </item>
+        <item>
         <title>GO 中哈希表的实现</title>
         <link>https://blog.aecra.cn/article/hash-table-implementation-in-go/</link>
         <pubDate>Wed, 20 Apr 2022 19:51:21 +0000</pubDate>

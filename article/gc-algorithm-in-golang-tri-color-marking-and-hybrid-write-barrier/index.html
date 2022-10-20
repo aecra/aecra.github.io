@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='追求简介优雅的 Go 中没有 try … catch … finally 这种类型的异常处理，取而代之的是 defer、panic、recover。'><meta name='keywords' content='Go'><title>Go 的异常处理</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Golang 中 GC 算法的实现思路，为什么使用三色标记法，写屏障又是什么，混合写屏障解决了哪些问题。'><meta name='keywords' content='Go'><title>Golang 中的 GC 算法：三色标记与混合写屏障</title>
 
 
 
-<link rel='canonical' href='https://blog.aecra.cn/article/go-exception-handling/'>
+<link rel='canonical' href='https://blog.aecra.cn/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='Go 的异常处理'>
-<meta property='og:description' content='追求简介优雅的 Go 中没有 try … catch … finally 这种类型的异常处理，取而代之的是 defer、panic、recover。'>
+<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='Golang 中的 GC 算法：三色标记与混合写屏障'>
+<meta property='og:description' content='Golang 中 GC 算法的实现思路，为什么使用三色标记法，写屏障又是什么，混合写屏障解决了哪些问题。'>
 
 
-<meta property='og:url' content='https://blog.aecra.cn/article/go-exception-handling/'>
+<meta property='og:url' content='https://blog.aecra.cn/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/'>
 <meta property='og:site_name' content='aecra'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2021-10-12T20:44:50&#43;00:00'/><meta property='article:modified_time' content='2021-10-12T20:44:50&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/go-exception-handling.png' />
-<meta name="twitter:title" content="Go 的异常处理">
-<meta name="twitter:description" content="追求简介优雅的 Go 中没有 try … catch … finally 这种类型的异常处理，取而代之的是 defer、panic、recover。"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://static.aecra.cn/cover/go-exception-handling.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2022-10-20T20:07:32&#43;00:00'/><meta property='article:modified_time' content='2022-10-20T20:07:32&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png' />
+<meta name="twitter:title" content="Golang 中的 GC 算法：三色标记与混合写屏障">
+<meta name="twitter:description" content="Golang 中 GC 算法的实现思路，为什么使用三色标记法，写屏障又是什么，混合写屏障解决了哪些问题。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png' />
     <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
@@ -265,9 +265,9 @@ if (!doNotTrack) {
         <div class="article-image">
             
             
-            <a href="/article/go-exception-handling/">
+            <a href="/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/">
                 
-                    <img src="https://static.aecra.cn/cover/go-exception-handling.png" loading="lazy" alt="Featured image of post Go 的异常处理" />
+                    <img src="https://static.aecra.cn/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png" loading="lazy" alt="Featured image of post Golang 中的 GC 算法：三色标记与混合写屏障" />
                 
             </a>
         </div>
@@ -278,12 +278,12 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/article/go-exception-handling/">Go 的异常处理</a>
+            <a href="/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/">Golang 中的 GC 算法：三色标记与混合写屏障</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            追求简介优雅的 Go 中没有 try … catch … finally 这种类型的异常处理，取而代之的是 defer、panic、recover。
+            Golang 中 GC 算法的实现思路，为什么使用三色标记法，写屏障又是什么，混合写屏障解决了哪些问题。
         </h3>
         
     </div>
@@ -301,7 +301,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 12, 2021</time>
+                <time class="article-time--published">Oct 20, 2022</time>
             </div>
         
 
@@ -316,7 +316,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    阅读时长: 2 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
         
@@ -330,74 +330,69 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <h2 id="前言">前言</h2>
-<p>Go 语言追求简洁优雅，所以，Go 语言不支持传统的 try … catch … finally 这种异常，因为 Go 语言的设计者们认为，将异常与控制结构混在一起会很容易使得代码变得混乱。因为开发者很容易滥用异常，甚至一个小小的错误都抛出一个异常。在 Go 语言中，使用多值返回来返回错误。不要用异常代替错误，更不要用来控制流程。在极个别的情况下，也就是说，遇到真正的异常的情况下（比如除数为 0 了）。才使用 Go 中引入的 Exception 处理：defer, panic, recover。</p>
-<p>这几个异常的使用场景可以这么简单描述：Go 中可以抛出一个 panic 的异常，然后在 defer 中通过 recover 捕获这个异常，然后正常处理。</p>
-<h2 id="代码示例">代码示例</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// 必须要先声明 defer，否则不能捕获到 panic 异常
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 解释：出现异常后直接跳过 return，执行 defer 代码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;d&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nb">recover</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;e&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}()</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">panic</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;b&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;c&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">a
-</span></span><span class="line"><span class="cl">d
-</span></span><span class="line"><span class="cl">55
-</span></span><span class="line"><span class="cl">e
-</span></span></code></pre></div><h2 id="defer">defer</h2>
-<p>defer 的意思是延迟，意为其后的代码延迟执行，在 Go 中，defer 的代码将在 panic 和 return 后执行；类似于 C++的析构函数，在函数结束后执行，但 defer 语句是动态的，在上面那个例子中，如果 panic 出现在 defer 之前，defer 语句并未被执行也就没有相应的错误处理。</p>
-<p>defer 的三大特性：</p>
+    <h2 id="标记清除法">标记清除法</h2>
+<p>在 v1.0~v1.3 版本中都是用的是标记清除算法。首先我们需要了解 STW（Stop The World）是什么，顾名思义，STW 是将当前程序完全暂停，不执行用户程序并开始垃圾回收。标记清除算法的流程如下：</p>
 <ol>
-<li>
-<p>defer 语句声明时，其参数立即求值</p>
-<blockquote>
-<p>A deferred function’s arguments are evaluated when the defer statement is evaluated</p>
-</blockquote>
-</li>
-<li>
-<p>defer 函数在其后代码执行完之后按照先进后出的顺序执行</p>
-<blockquote>
-<p>Deferred function calls are executed in Last In First Out order after the surrounding function returns.</p>
-</blockquote>
-</li>
-<li>
-<p>defer 语句可读取并修改函数的命名返回值</p>
-<blockquote>
-<p>Deferred functions may read and assign to the returning function’s named return values.</p>
-</blockquote>
-</li>
+<li>Stop the world；</li>
+<li>标记：从根对象开始标记，将可达对象和不可达对象区分开；</li>
+<li>清除：将不可达对象回收；</li>
+<li>恢复用户程序的执行。</li>
 </ol>
-<p>defer 的其他使用场景：</p>
+<p>标记清除算法如此简单粗暴很明显有非常突出的性能问题，体现在</p>
 <ol>
-<li>
-<p>释放一个信号量</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">  <span class="nx">mu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="k">defer</span> <span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
-</span></span></code></pre></div></li>
-<li>
-<p>输出底部信息</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">  <span class="nf">printHeader</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="k">defer</span> <span class="nf">printFooter</span><span class="p">()</span>
-</span></span></code></pre></div></li>
+<li>STW 会导致程序卡顿，对程序相应带来不可接受的延时；</li>
+<li>标记过程需要扫描整个堆空间；</li>
+<li>清除数据会产生堆碎片，这里需要参照内存分配算法。</li>
 </ol>
-<h2 id="panic">panic</h2>
-<p>Panic 是一个内置的函数，它停止普通的控制流并开始恐慌。当函数 F 调用 panic 时，F 的执行停止，F 中的任何延迟函数被正常执行，然后 F 返回给它的调用者。对于调用者来说，F 的行为就像对 panic 的调用。这个过程继续在堆栈中进行，直到当前 goroutine 中的所有函数都返回，这时程序就会崩溃。除非在 defer 函数中调用了 recover 函数处理了 panic，这时恐慌将不会继续向上传递。恐慌可以通过直接调用 panic 来启动。它们也会由运行时错误引起，如越界数组访问。</p>
-<h2 id="recover">recover</h2>
-<p>recover 是一个内置的函数，可以重新获得对一个恐慌的 goroutine 的控制。Recover 只在延迟函数中有用。在正常执行过程中，对 recover 的调用将返回 nil，没有其他影响。如果当前的 goroutine 处于恐慌状态，对 recover 的调用将捕获给定的恐慌值并恢复正常执行。</p>
+<p>v1.0 是完全串行的标记清除算法，v1.1 实现了多核系统的并行垃圾收集和标记，v1.3 运行时基于只有指针类型的值包含指针的假设增加了对栈内存的精确扫描支持，实现了真正精确的垃圾收集。</p>
+<h2 id="三色标记法">三色标记法</h2>
+<p>在 v1.5 中 Golang 实现了三色标记法，三色标记法的流程如下：</p>
+<ol>
+<li>所有对象都标记为白色；</li>
+<li>从根节点开始将对象标记为灰色；</li>
+<li>从灰色及各种选择一个灰色对象并将其标记为黑色；</li>
+<li>将该黑色对象指向的对象都标记为灰色；</li>
+<li>重复步骤2、步骤3 直到不存在灰色对象。</li>
+<li>回收白色对象。</li>
+</ol>
+<h2 id="写屏障">写屏障</h2>
+<h3 id="三色不变式">三色不变式</h3>
+<p>如果我们在使用三色标记法时采用和标记清除法相同的 STW 措施时肯定可以正常运行，但正是为了解决 STW 时间过长而采用的三色标记法，所以程序和GC是要并行的，如果有如下情况将会回收不应回收的对象：</p>
+<ol>
+<li>黑色对象指向白色对象；</li>
+<li>直接或间接指向该白色对象的灰色对象切断了依赖链条；</li>
+</ol>
+<p>这种情况在标记完之后会将该白色对象清除掉，而黑色对象将产生悬浮指针问题。</p>
+<p><strong>强三色不变式</strong>：不允许黑色对象引用白色对象</p>
+<p><strong>弱三色不变式</strong>：黑色对象可以引用白色对象，但是这个白色对象必须存在其他灰色对象对它的引用，或者可达它的链路上游存在灰色对象。</p>
+<p>而为了实现三色不变式，引入了屏障机制。</p>
+<h3 id="插入写屏障">插入写屏障</h3>
+<p>写屏障这个名字如果没有接触过会感到很迷惑，其实它就是在进行写操作之前添加额外的处理，可以看作对函数的进一步封装。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">writePointer(slot, ptr):
+</span></span><span class="line"><span class="cl">    shade(ptr)
+</span></span><span class="line"><span class="cl">    *slot = ptr
+</span></span></code></pre></div><p>上述插入写屏障的伪代码非常好理解，每当执行类似 <code>*slot = ptr</code> 的表达式时，我们会执行上述写屏障通过 <code>shade</code> 函数尝试改变指针的颜色。如果 <code>ptr</code> 指针是白色的，那么该函数会将该对象设置成灰色，其他情况则保持不变。</p>
+<p>通过这种方法就可以保证强三色不变式。</p>
+<p>因为栈上的对象在垃圾收集中也会被认为是根对象，所以为了保证内存的安全，插入写屏障必须为栈上的对象增加写屏障，而用户代码执行过程中对会对栈上的数据频繁读写，所以会大幅增加写入的额外开销；另一种方法是不对栈上的空间开启插入写屏障，而是在标记阶段完成后 Stop the World，并对栈上的对象进行扫描，这两种方法各有利弊。</p>
+<h3 id="删除写屏障">删除写屏障</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">writePointer(slot, ptr)
+</span></span><span class="line"><span class="cl">    shade(*slot)
+</span></span><span class="line"><span class="cl">    *slot = ptr
+</span></span></code></pre></div><p>被删除对象，如果自身为灰色或者白色，那么被标记为灰色。</p>
+<p>通过这种方法就可以保证弱三色不变式。</p>
+<p>这种方式的缺点是，对于本次要删除的对象，只有在下一轮之后才会被清除。</p>
+<h3 id="混合写屏障">混合写屏障</h3>
+<p>v1.8 使用了<strong>混合写屏障</strong>将垃圾收集时最坏的 STW 时间缩短至 0.05ms 以内。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">writePointer(slot, ptr):
+</span></span><span class="line"><span class="cl">    shade(*slot)
+</span></span><span class="line"><span class="cl">    if current stack is grey:
+</span></span><span class="line"><span class="cl">        shade(ptr)
+</span></span><span class="line"><span class="cl">    *slot = ptr
+</span></span></code></pre></div><p>该写屏障会<strong>将被覆盖的对象标记成灰色并在当前 goroutine 的栈没有扫描时将新对象也标记成灰色</strong>。</p>
+<p>标记阶段开始时<strong>将栈上的可达对象全部扫描并标记为黑色</strong>。</p>
+<p>在垃圾收集的标记阶段，我们需要<strong>将创建的所有新对象都标记成黑色</strong>，防止新分配的栈内存和堆内存中的对象被错误地回收，同时因为栈中的对象在标记阶段最终都会变为黑色，所以不再需要重新扫描栈空间。</p>
+<p>通过这种方法就可以保证变形的弱三色不变式。</p>
+<p>关于 <code>if current stack is grey</code> 的问题，这个判断如果单纯看写屏障不容易搞明白适用条件，这里的标记阶段是并发执行的，当涉及到不同 goroutine 的操作时，例如 channel 带来的变量复制情况，会在不同的栈上进行操作，这里是为了防止另一个栈将我们需要的对象进行回收。</p>
 
 </section>
 
@@ -467,6 +462,27 @@ if (!doNotTrack) {
 <article class="has-image">
     
     
+    <a href="/article/hash-table-implementation-in-go/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://static.aecra.cn/cover/hash-table-implementation-in-go.png" loading="lazy" data-key="hash-table-implementation-in-go" data-hash="https://static.aecra.cn/cover/hash-table-implementation-in-go.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">GO 中哈希表的实现</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    
+    
     <a href="/article/object-oriented-in-go/">
         
         
@@ -488,39 +504,18 @@ if (!doNotTrack) {
 <article class="has-image">
     
     
-    <a href="/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/">
+    <a href="/article/go-exception-handling/">
         
         
             <div class="article-image">
                 
-                    <img src="https://static.aecra.cn/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png" loading="lazy" data-key="GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier" data-hash="https://static.aecra.cn/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png"/>
+                    <img src="https://static.aecra.cn/cover/go-exception-handling.png" loading="lazy" data-key="go-exception-handling" data-hash="https://static.aecra.cn/cover/go-exception-handling.png"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Golang 中的 GC 算法：三色标记与混合写屏障</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    
-    
-    <a href="/article/hash-table-implementation-in-go/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://static.aecra.cn/cover/hash-table-implementation-in-go.png" loading="lazy" data-key="hash-table-implementation-in-go" data-hash="https://static.aecra.cn/cover/hash-table-implementation-in-go.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">GO 中哈希表的实现</h2>
+            <h2 class="article-title">Go 的异常处理</h2>
         </div>
     </a>
 </article>
@@ -654,11 +649,16 @@ if (!doNotTrack) {
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#前言">前言</a></li>
-    <li><a href="#代码示例">代码示例</a></li>
-    <li><a href="#defer">defer</a></li>
-    <li><a href="#panic">panic</a></li>
-    <li><a href="#recover">recover</a></li>
+    <li><a href="#标记清除法">标记清除法</a></li>
+    <li><a href="#三色标记法">三色标记法</a></li>
+    <li><a href="#写屏障">写屏障</a>
+      <ol>
+        <li><a href="#三色不变式">三色不变式</a></li>
+        <li><a href="#插入写屏障">插入写屏障</a></li>
+        <li><a href="#删除写屏障">删除写屏障</a></li>
+        <li><a href="#混合写屏障">混合写屏障</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
