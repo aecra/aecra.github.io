@@ -13,10 +13,10 @@
 
 <meta property='og:url' content='https://blog.aecra.cn/article/brief-instructions-for-using-gdb/'>
 <meta property='og:site_name' content='aecra'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='GDB' /><meta property='article:published_time' content='2022-10-31T20:27:48&#43;00:00'/><meta property='article:modified_time' content='2022-10-31T20:27:48&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='GDB' /><meta property='article:published_time' content='2022-10-31T20:27:48&#43;00:00'/><meta property='article:modified_time' content='2022-10-31T20:27:48&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.png' />
 <meta name="twitter:title" content="GDB 简要使用说明">
 <meta name="twitter:description" content="学编程也有五六年了，但仍然不会使用 GDB 这样一个强大的调试工具，学了学之后，就写了这篇简陋的文章，更多的是提供一个如何使用的参照，更多详细的内容还是需要查看 GDB 的官方文档。"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.jpg' />
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.png' />
     <link rel="shortcut icon" href="https://static.aecra.cn/logo.png" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
@@ -267,7 +267,7 @@ if (!doNotTrack) {
             
             <a href="/article/brief-instructions-for-using-gdb/">
                 
-                    <img src="https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.jpg" loading="lazy" alt="Featured image of post GDB 简要使用说明" />
+                    <img src="https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.png" loading="lazy" alt="Featured image of post GDB 简要使用说明" />
                 
             </a>
         </div>
@@ -442,7 +442,7 @@ if (!doNotTrack) {
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) info watchpoints
 </code></pre><p>使用如下方式来设置捕捉点：</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) catch event
-</code></pre><p>捕捉点同样使用 <code>info b</code> 来查看，值得一提的是，此命令同样会列出我们设置的观察点。</p>
+</code></pre><p>捕捉点同样使用 <code>info b</code> 来查看，值得一提的是，此命令同样会列出我们设置的观察点。</p>
 <h3 id="启动">启动</h3>
 <p>启动分为从最开始启动程序和中断后继续执行程序。</p>
 <p>从最开始启动程序的命令有starti 和 run两个命令。其中 starti 是开启程序，并停止在第一个指令，该指令在 linux 为 _start 而非 main 函数，因为堆栈、全局函数等一系列程序初始状态尚未设置。run 命令则是开启程序并在到达设置的断点处中断。</p>
