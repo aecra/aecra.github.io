@@ -5,7 +5,7 @@
             
             <url>
                 <loc>https://blog.aecra.cn/</loc>
-                <lastmod>2022-10-20T20:07:32+00:00</lastmod>
+                <lastmod>2022-10-31T20:27:48+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -19,18 +19,18 @@
             </url>
             
             <url>
-                <loc>https://blog.aecra.cn/tags/go/</loc>
-                <lastmod>2022-10-20T20:07:32+00:00</lastmod>
+                <loc>https://blog.aecra.cn/tags/gdb/</loc>
+                <lastmod>2022-10-31T20:27:48+00:00</lastmod>
             </url>
             
             <url>
-                <loc>https://blog.aecra.cn/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</loc>
-                <lastmod>2022-10-20T20:07:32+00:00</lastmod>
+                <loc>https://blog.aecra.cn/article/brief-instructions-for-using-gdb/</loc>
+                <lastmod>2022-10-31T20:27:48+00:00</lastmod>
             </url>
             
             <url>
                 <loc>https://blog.aecra.cn/post/</loc>
-                <lastmod>2022-10-20T20:07:32+00:00</lastmod>
+                <lastmod>2022-10-31T20:27:48+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -45,7 +45,7 @@
             
             <url>
                 <loc>https://blog.aecra.cn/tags/</loc>
-                <lastmod>2022-10-20T20:07:32+00:00</lastmod>
+                <lastmod>2022-10-31T20:27:48+00:00</lastmod>
                 <xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -56,6 +56,16 @@
                         hreflang="zh-cn"
                         href="https://blog.aecra.cn/tags/"
                 />
+            </url>
+            
+            <url>
+                <loc>https://blog.aecra.cn/tags/go/</loc>
+                <lastmod>2022-10-20T20:07:32+00:00</lastmod>
+            </url>
+            
+            <url>
+                <loc>https://blog.aecra.cn/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</loc>
+                <lastmod>2022-10-20T20:07:32+00:00</lastmod>
             </url>
             
             <url>
