@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>运维 on aecra</title>
-        <link>https://blog.aecra.cn/tags/%E8%BF%90%E7%BB%B4/</link>
-        <description>Recent content in 运维 on aecra</description>
+        <title>运维 on Tian Jiale&#39;s Blog</title>
+        <link>https://aecra.ml/tags/%E8%BF%90%E7%BB%B4/</link>
+        <description>Recent content in 运维 on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Thu, 26 May 2022 19:00:25 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 26 May 2022 19:00:25 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>为服务器配置畅通的网络环境</title>
-        <link>https://blog.aecra.cn/article/configure-a-smooth-network-environment-for-the-server/</link>
+        <link>https://aecra.ml/article/configure-a-smooth-network-environment-for-the-server/</link>
         <pubDate>Thu, 26 May 2022 19:00:25 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/configure-a-smooth-network-environment-for-the-server/</guid>
+        <guid>https://aecra.ml/article/configure-a-smooth-network-environment-for-the-server/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/configure-a-smooth-network-environment-for-the-server.jpg" alt="Featured image of post 为服务器配置畅通的网络环境" /&gt;简述 因为国内网络不能畅通，在配置服务器和更新资源时常常需要更换成国内的镜像源，过多的配置实在是繁杂，倒不如直接将本机流量转发到处于正常的网络</description>
         </item>
         

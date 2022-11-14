@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>JavaScript on aecra</title>
-        <link>https://blog.aecra.cn/tags/javascript/</link>
-        <description>Recent content in JavaScript on aecra</description>
+        <title>JavaScript on Tian Jiale&#39;s Blog</title>
+        <link>https://aecra.ml/tags/javascript/</link>
+        <description>Recent content in JavaScript on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sun, 05 Dec 2021 21:38:25 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/javascript/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 05 Dec 2021 21:38:25 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/javascript/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>JavaScript 实现发布订阅</title>
-        <link>https://blog.aecra.cn/article/implementation-publish-and-subscription-by-javascript/</link>
+        <link>https://aecra.ml/article/implementation-publish-and-subscription-by-javascript/</link>
         <pubDate>Sun, 05 Dec 2021 21:38:25 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/implementation-publish-and-subscription-by-javascript/</guid>
+        <guid>https://aecra.ml/article/implementation-publish-and-subscription-by-javascript/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/implementation-publish-and-subscription-by-javascript.png" alt="Featured image of post JavaScript 实现发布订阅" /&gt;事由 在开发微信小程序的过程中，因为要维护全局用户数据，所以各个页面都要从 app.js 同步用户数据；另外在一些其他的全局数据中也需要使用此功能。 在微信开</description>
         </item>
         <item>
         <title>如何优雅地实现 async/await 的错误处理</title>
-        <link>https://blog.aecra.cn/article/how-to-gracefully-implement-async-await-error-handing/</link>
+        <link>https://aecra.ml/article/how-to-gracefully-implement-async-await-error-handing/</link>
         <pubDate>Mon, 18 Oct 2021 16:53:59 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/how-to-gracefully-implement-async-await-error-handing/</guid>
+        <guid>https://aecra.ml/article/how-to-gracefully-implement-async-await-error-handing/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/how-to-gracefully-implement-async-await-error-handing.jpg" alt="Featured image of post 如何优雅地实现 async/await 的错误处理" /&gt;异步编程 该部分可以参考 JavaScript 中的异步编程，其中较为详细地介绍了各种异步编程的实现方案的优缺点，为了方便开发我使用了 async/await 方式去解决异步编程的问题。 错</description>
         </item>
         <item>
         <title>axios 入门和源码分析</title>
-        <link>https://blog.aecra.cn/article/introduction-to-axios-and-source-code-analysis/</link>
+        <link>https://aecra.ml/article/introduction-to-axios-and-source-code-analysis/</link>
         <pubDate>Sat, 17 Apr 2021 00:26:25 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/introduction-to-axios-and-source-code-analysis/</guid>
+        <guid>https://aecra.ml/article/introduction-to-axios-and-source-code-analysis/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/introduction-to-axios-and-source-code-analysis.jpg" alt="Featured image of post axios 入门和源码分析" /&gt;http 介绍 概述 HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol(通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是</description>
         </item>
         <item>
         <title>Promise 深入 &#43; 自定义 Promise</title>
-        <link>https://blog.aecra.cn/article/promise-deep-custom-promise/</link>
+        <link>https://aecra.ml/article/promise-deep-custom-promise/</link>
         <pubDate>Mon, 15 Mar 2021 16:06:58 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/promise-deep-custom-promise/</guid>
+        <guid>https://aecra.ml/article/promise-deep-custom-promise/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/promise-deep-custom-promise.jpg" alt="Featured image of post Promise 深入 &#43; 自定义 Promise" /&gt;前置知识准备 函数对象与实例对象 函数对象：将函数作为对象使用时, 简称为函数对象。 实例对象：new 函数产生的对象, 简称为实例对象。 function Fn() { // Fn函</description>
         </item>
         <item>
         <title>JavaScript 中 call()、apply()、bind() 的用法差异</title>
-        <link>https://blog.aecra.cn/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/</link>
+        <link>https://aecra.ml/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/</link>
         <pubDate>Sun, 14 Mar 2021 23:47:57 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/</guid>
+        <guid>https://aecra.ml/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/differences-in-the-usage-of-call-apply-and-bind-in-javascript.jpg" alt="Featured image of post JavaScript 中 call()、apply()、bind() 的用法差异" /&gt;对象中 this 指向问题 var name = &amp;#39;小王&amp;#39;, age = 17; var persion = { name: &amp;#39;小王&amp;#39;, myAge: this.age, introduce() { console.log(&amp;#39;我叫&amp;#</description>
         </item>
         <item>
         <title>JavaScript 中的异步编程</title>
-        <link>https://blog.aecra.cn/article/asynchronous-programming-in-javascript/</link>
+        <link>https://aecra.ml/article/asynchronous-programming-in-javascript/</link>
         <pubDate>Fri, 05 Mar 2021 20:54:11 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/asynchronous-programming-in-javascript/</guid>
+        <guid>https://aecra.ml/article/asynchronous-programming-in-javascript/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/asynchronous-programming-in-javascript.jpg" alt="Featured image of post JavaScript 中的异步编程" /&gt;什么是异步编程 在谈论异步编程概念之提前，先了解什么是同步编程。同步编程是指程序的执行是按着代码顺序执行的，若一段代码因任何原因而卡住（htt</description>
         </item>
         <item>
         <title>JavaScript 笔记</title>
-        <link>https://blog.aecra.cn/article/javascript-notes/</link>
+        <link>https://aecra.ml/article/javascript-notes/</link>
         <pubDate>Sun, 21 Feb 2021 15:27:32 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/javascript-notes/</guid>
+        <guid>https://aecra.ml/article/javascript-notes/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/javascript-notes.jpg" alt="Featured image of post JavaScript 笔记" /&gt;JavaScript 负责页面中的的行为。 它是一门运行在浏览器端的脚本语言。 基础内容 JS 的编写的位置 1.可以编写到标签的指定属性中 &amp;lt;button onclick=&amp;#34;al</description>
         </item>
         <item>
         <title>使用 JavaScript 实现打字机效果</title>
-        <link>https://blog.aecra.cn/article/using-javascript-to-achieve-typewriter-effect/</link>
+        <link>https://aecra.ml/article/using-javascript-to-achieve-typewriter-effect/</link>
         <pubDate>Wed, 17 Feb 2021 13:22:57 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/using-javascript-to-achieve-typewriter-effect/</guid>
+        <guid>https://aecra.ml/article/using-javascript-to-achieve-typewriter-effect/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/using-javascript-to-achieve-typewriter-effect.jpg" alt="Featured image of post 使用 JavaScript 实现打字机效果" /&gt;功能：打字机效果、切换光标、设置打字时间间隔和光标闪烁时间间隔 拓展：可以自行修改参数，实现自定义内容 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width&amp;#34; /&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34; /&amp;gt; &amp;lt;titl</description>
         </item>
         <item>
         <title>jQuery 笔记</title>
-        <link>https://blog.aecra.cn/article/jquery-notes/</link>
+        <link>https://aecra.ml/article/jquery-notes/</link>
         <pubDate>Wed, 10 Feb 2021 10:44:52 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/jquery-notes/</guid>
+        <guid>https://aecra.ml/article/jquery-notes/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/jquery-notes.jpg" alt="Featured image of post jQuery 笔记" /&gt;jQuery 简介 JavaScript 库的概念 JavaScript 开发的过程中，处理浏览器的兼容很复杂而且很耗时，于是一些封装了这些操作的库应运而生。这些库还会把一些常用的代码进行封装。 把</description>
         </item>
         <item>
         <title>vue 基础入门</title>
-        <link>https://blog.aecra.cn/article/introduction-to-vue-basics/</link>
+        <link>https://aecra.ml/article/introduction-to-vue-basics/</link>
         <pubDate>Sat, 06 Feb 2021 12:09:14 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/introduction-to-vue-basics/</guid>
+        <guid>https://aecra.ml/article/introduction-to-vue-basics/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/introduction-to-vue-basics.jpg" alt="Featured image of post vue 基础入门" /&gt;官网 前置知识 完整的学习 vue：html + css、JavaScript、css3、HTML5、第三方库、网络通信、ES6+、webpack、模</description>
         </item>
         <item>
         <title>JavaScript 中 AJAX 的使用</title>
-        <link>https://blog.aecra.cn/article/use-of-ajax-in-javascript/</link>
+        <link>https://aecra.ml/article/use-of-ajax-in-javascript/</link>
         <pubDate>Fri, 05 Feb 2021 10:17:04 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/use-of-ajax-in-javascript/</guid>
+        <guid>https://aecra.ml/article/use-of-ajax-in-javascript/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/use-of-ajax-in-javascript.jpg" alt="Featured image of post JavaScript 中 AJAX 的使用" /&gt;AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。 AJAX 不是新的编程语言，而是一种使用现有标准的新方法。 AJAX 最大的优点是在不重新加载整个页面的情况下，可以与服</description>
         </item>
         

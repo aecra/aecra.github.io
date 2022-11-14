@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>jQuery on aecra</title>
-        <link>https://blog.aecra.cn/tags/jquery/</link>
-        <description>Recent content in jQuery on aecra</description>
+        <title>jQuery on Tian Jiale&#39;s Blog</title>
+        <link>https://aecra.ml/tags/jquery/</link>
+        <description>Recent content in jQuery on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Wed, 10 Feb 2021 10:44:52 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/jquery/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 10 Feb 2021 10:44:52 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/jquery/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>jQuery 笔记</title>
-        <link>https://blog.aecra.cn/article/jquery-notes/</link>
+        <link>https://aecra.ml/article/jquery-notes/</link>
         <pubDate>Wed, 10 Feb 2021 10:44:52 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/jquery-notes/</guid>
+        <guid>https://aecra.ml/article/jquery-notes/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/jquery-notes.jpg" alt="Featured image of post jQuery 笔记" /&gt;jQuery 简介 JavaScript 库的概念 JavaScript 开发的过程中，处理浏览器的兼容很复杂而且很耗时，于是一些封装了这些操作的库应运而生。这些库还会把一些常用的代码进行封装。 把</description>
         </item>
         

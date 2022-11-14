@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>golang on aecra</title>
-        <link>https://blog.aecra.cn/tags/golang/</link>
-        <description>Recent content in golang on aecra</description>
+        <title>golang on Tian Jiale&#39;s Blog</title>
+        <link>https://aecra.ml/tags/golang/</link>
+        <description>Recent content in golang on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Tue, 13 Sep 2022 23:41:00 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/golang/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 13 Sep 2022 23:41:00 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/golang/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>在 Golang 中使用优先队列</title>
-        <link>https://blog.aecra.cn/article/use-priority-queue-in-golang/</link>
+        <link>https://aecra.ml/article/use-priority-queue-in-golang/</link>
         <pubDate>Tue, 13 Sep 2022 23:41:00 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/use-priority-queue-in-golang/</guid>
+        <guid>https://aecra.ml/article/use-priority-queue-in-golang/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/use-priority-queue-in-golang.png" alt="Featured image of post 在 Golang 中使用优先队列" /&gt;在 Golang 中我们可以找到 heap 的实现，但是，基于 heap 的优先队列没有提供支持，只在 heap 文档中提供了优先队列的一个示例，Go 团队是在是太狗了，这对于我们这些要</description>
         </item>
         <item>
         <title>wsl 中构建 Golang 项目时网络代理引起构建卡壳的问题</title>
-        <link>https://blog.aecra.cn/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/</link>
+        <link>https://aecra.ml/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/</link>
         <pubDate>Sat, 13 Aug 2022 21:09:21 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/</guid>
+        <guid>https://aecra.ml/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/Web-proxy-causes-build-jam-when-building-Golang-projects-in-wsl.png" alt="Featured image of post wsl 中构建 Golang 项目时网络代理引起构建卡壳的问题" /&gt;问题背景和描述 Windows 系统中使用 Clash-for-Windows 作为代理应用，同时 wsl 中设置了系统代理，配置如下： export http_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export https_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export ftp_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export no_proxy=&amp;#34;127.0.0.1,localhost&amp;#34; export HTTP_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export HTTPS_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export FTP_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export NO_PROXY=&amp;#34;127.0.0.1,localhost&amp;#34; 我的目标是构建 Golang 应用，涉及到的 Dockerfile</description>
         </item>
         

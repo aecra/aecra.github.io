@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>GDB on aecra</title>
-        <link>https://blog.aecra.cn/tags/gdb/</link>
-        <description>Recent content in GDB on aecra</description>
+        <title>GDB on Tian Jiale&#39;s Blog</title>
+        <link>https://aecra.ml/tags/gdb/</link>
+        <description>Recent content in GDB on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 31 Oct 2022 20:27:48 +0000</lastBuildDate><atom:link href="https://blog.aecra.cn/tags/gdb/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 31 Oct 2022 20:27:48 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/gdb/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>GDB 简要使用说明</title>
-        <link>https://blog.aecra.cn/article/brief-instructions-for-using-gdb/</link>
+        <link>https://aecra.ml/article/brief-instructions-for-using-gdb/</link>
         <pubDate>Mon, 31 Oct 2022 20:27:48 +0000</pubDate>
         
-        <guid>https://blog.aecra.cn/article/brief-instructions-for-using-gdb/</guid>
+        <guid>https://aecra.ml/article/brief-instructions-for-using-gdb/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.png" alt="Featured image of post GDB 简要使用说明" /&gt;什么是 GDB？ GDB 是 GNU Project 调试器，它允许您查看另一个程序在执行时“内部”发生了什么——或者在它崩溃时另一个程序正在做什么。 GDB 可以做四种主要的事情</description>
         </item>
         
