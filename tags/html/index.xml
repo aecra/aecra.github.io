@@ -12,7 +12,7 @@
         <pubDate>Sun, 31 Jan 2021 13:18:45 +0000</pubDate>
         
         <guid>https://aecra.ml/article/html-css/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/html-css.jpg" alt="Featured image of post HTML &#43; CSS" /&gt;HTML 基础 文档声明 文档声明用来告诉浏览器当前网页的版本 &amp;lt;!DOCTYPE html&amp;gt; 语言声明 声明在 html 根标签中 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;html lang=&amp;#34;zh&amp;#34;&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;/html&amp;gt; 实体 html 实体用来呈现特殊字符 &amp;amp;nbsp; 空格 &amp;amp;gt; 大于号 &amp;amp;lt; 小于号 &amp;amp;copy; 版</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/html-css.jpg" alt="Featured image of post HTML &#43; CSS" /&gt;HTML 基础 文档声明 文档声明用来告诉浏览器当前网页的版本 &amp;lt;!DOCTYPE html&amp;gt; 语言声明 声明在 html 根标签中 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;html lang=&amp;#34;zh&amp;#34;&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;/html&amp;gt; 实体 html 实体用来呈现特殊字符 &amp;amp;nbsp; 空格 &amp;amp;gt; 大于号 &amp;amp;lt; 小于号 &amp;amp;copy; 版</description>
         </item>
         
     </channel>

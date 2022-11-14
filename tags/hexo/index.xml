@@ -12,7 +12,7 @@
         <pubDate>Sun, 21 Feb 2021 23:51:38 +0000</pubDate>
         
         <guid>https://aecra.ml/article/quickly-build-hexo-personal-blog-and-deploy-it-to-github/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/quickly-build-hexo-personal-blog-and-deploy-it-to-github.jpg" alt="Featured image of post 快速搭建 Hexo 个人博客并部署至 GitHub" /&gt;准备环境 安装 Git sudo apt install git-core -y 安装 Node.js 使用以下命令安装 Node.js wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh 更新一下 source ~/.profile 安装 Node.js nvm install stable 安装 Hexo 安装 cnpm 使用以下命令安装 cnpm npm install -g cnpm --registry=https://registry.npm.taobao.org 安装 hexo-cli 用命令创建 hexo</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/quickly-build-hexo-personal-blog-and-deploy-it-to-github.jpg" alt="Featured image of post 快速搭建 Hexo 个人博客并部署至 GitHub" /&gt;准备环境 安装 Git sudo apt install git-core -y 安装 Node.js 使用以下命令安装 Node.js wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh 更新一下 source ~/.profile 安装 Node.js nvm install stable 安装 Hexo 安装 cnpm 使用以下命令安装 cnpm npm install -g cnpm --registry=https://registry.npm.taobao.org 安装 hexo-cli 用命令创建 hexo</description>
         </item>
         
     </channel>

@@ -12,7 +12,7 @@
         <pubDate>Wed, 03 Mar 2021 20:06:10 +0000</pubDate>
         
         <guid>https://aecra.ml/article/computer-vision-target-detection/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/computer-vision-target-detection.jpg" alt="Featured image of post 计算机视觉-目标检测" /&gt;图像预处理 空间域处理 点运算 HE 直方图均衡 AHE 自适应直方图均衡（局部均衡、模板滑动） CLAHE 限制对比度自适应直方图均衡（裁剪均衡直方图、线性插值） 形态学</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/computer-vision-target-detection.jpg" alt="Featured image of post 计算机视觉-目标检测" /&gt;图像预处理 空间域处理 点运算 HE 直方图均衡 AHE 自适应直方图均衡（局部均衡、模板滑动） CLAHE 限制对比度自适应直方图均衡（裁剪均衡直方图、线性插值） 形态学</description>
         </item>
         
     </channel>

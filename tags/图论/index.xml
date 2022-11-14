@@ -12,7 +12,7 @@
         <pubDate>Sat, 27 Mar 2021 22:47:46 +0000</pubDate>
         
         <guid>https://aecra.ml/article/minimum-spanning-tree-kruskal-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/minimum-spanning-tree-kruskal-algorithm.jpg" alt="Featured image of post 最小生成树（kruskal 算法）" /&gt;说明 此算法可以称为“加边法”，初始最小生成树边数为 0，每迭代一次就选择一条满足条件的最小代价边，加入到最小生成树的边集合里。 实现思路 把图中的</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/minimum-spanning-tree-kruskal-algorithm.jpg" alt="Featured image of post 最小生成树（kruskal 算法）" /&gt;说明 此算法可以称为“加边法”，初始最小生成树边数为 0，每迭代一次就选择一条满足条件的最小代价边，加入到最小生成树的边集合里。 实现思路 把图中的</description>
         </item>
         <item>
         <title>拓扑排序</title>
@@ -20,7 +20,7 @@
         <pubDate>Sun, 28 Feb 2021 13:14:08 +0000</pubDate>
         
         <guid>https://aecra.ml/article/topological-sorting/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/topological-sorting.jpg" alt="Featured image of post 拓扑排序" /&gt;百度百科 对一个有向无环图(Directed Acyclic Graph 简称 DAG)G 进行拓扑排序，是将 G 中所有顶点排成一个线性序列，使得图中任意一对顶点 u 和 v，若边(u,v</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/topological-sorting.jpg" alt="Featured image of post 拓扑排序" /&gt;百度百科 对一个有向无环图(Directed Acyclic Graph 简称 DAG)G 进行拓扑排序，是将 G 中所有顶点排成一个线性序列，使得图中任意一对顶点 u 和 v，若边(u,v</description>
         </item>
         <item>
         <title>链式前向星</title>
@@ -28,7 +28,7 @@
         <pubDate>Fri, 26 Feb 2021 18:59:07 +0000</pubDate>
         
         <guid>https://aecra.ml/article/chain-forward-star/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/chain-forward-star.jpg" alt="Featured image of post 链式前向星" /&gt;介绍 有权边的图的存储一般有两种：邻接矩阵、前向星。 若图是稀疏图，边很少，开二维数组 a[][]很浪费;若点很多(如 10000 个点)a[10000][1</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/chain-forward-star.jpg" alt="Featured image of post 链式前向星" /&gt;介绍 有权边的图的存储一般有两种：邻接矩阵、前向星。 若图是稀疏图，边很少，开二维数组 a[][]很浪费;若点很多(如 10000 个点)a[10000][1</description>
         </item>
         <item>
         <title>Floyd 最小环算法</title>
@@ -36,7 +36,7 @@
         <pubDate>Sat, 20 Feb 2021 16:38:46 +0000</pubDate>
         
         <guid>https://aecra.ml/article/floyd-minimum-ring/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/floyd-minimum-ring.jpg" alt="Featured image of post Floyd 最小环算法" /&gt;思路一 首先，理解 Floyd 算法是按照点的编号增加的顺序更新最短路径的。 因为 Floyd 算法基于动态规划思想，动态规划过程必定存在一个顺序，这里的顺序就是节点编</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/floyd-minimum-ring.jpg" alt="Featured image of post Floyd 最小环算法" /&gt;思路一 首先，理解 Floyd 算法是按照点的编号增加的顺序更新最短路径的。 因为 Floyd 算法基于动态规划思想，动态规划过程必定存在一个顺序，这里的顺序就是节点编</description>
         </item>
         <item>
         <title>Tarjan 强连通算法</title>
@@ -44,7 +44,7 @@
         <pubDate>Fri, 19 Feb 2021 14:42:09 +0000</pubDate>
         
         <guid>https://aecra.ml/article/tarjan-strong-connectivity-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/tarjan-strong-connectivity-algorithm.jpg" alt="Featured image of post Tarjan 强连通算法" /&gt;定义 1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg+（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。 2、</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/tarjan-strong-connectivity-algorithm.jpg" alt="Featured image of post Tarjan 强连通算法" /&gt;定义 1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg+（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。 2、</description>
         </item>
         <item>
         <title>最短路问题</title>

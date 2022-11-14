@@ -12,7 +12,7 @@
         <pubDate>Thu, 26 May 2022 19:00:25 +0000</pubDate>
         
         <guid>https://aecra.ml/article/configure-a-smooth-network-environment-for-the-server/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/configure-a-smooth-network-environment-for-the-server.jpg" alt="Featured image of post 为服务器配置畅通的网络环境" /&gt;简述 因为国内网络不能畅通，在配置服务器和更新资源时常常需要更换成国内的镜像源，过多的配置实在是繁杂，倒不如直接将本机流量转发到处于正常的网络</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/configure-a-smooth-network-environment-for-the-server.jpg" alt="Featured image of post 为服务器配置畅通的网络环境" /&gt;简述 因为国内网络不能畅通，在配置服务器和更新资源时常常需要更换成国内的镜像源，过多的配置实在是繁杂，倒不如直接将本机流量转发到处于正常的网络</description>
         </item>
         
     </channel>

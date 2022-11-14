@@ -12,7 +12,7 @@
         <pubDate>Sat, 03 Jul 2021 08:50:45 +0000</pubDate>
         
         <guid>https://aecra.ml/en/article/nginx-getting-started-guide/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/nginx-getting-started-guide.png" alt="Featured image of post Nginx getting started guide." /&gt;Introduction Nginx is a lightweight HTTP server that uses an event-driven, asynchronous, non-blocking processing framework, which gives it excellent IO performance and is often used for server-side reverse proxying and load balancing.
+        <description>&lt;img src="https://static.aecra.ml/cover/nginx-getting-started-guide.png" alt="Featured image of post Nginx getting started guide." /&gt;Introduction Nginx is a lightweight HTTP server that uses an event-driven, asynchronous, non-blocking processing framework, which gives it excellent IO performance and is often used for server-side reverse proxying and load balancing.
 Quick Start Install nginx
 sudo apt-get install nginx Uninstall nginx
 sudo apt-get uninstall nginx Start nginx

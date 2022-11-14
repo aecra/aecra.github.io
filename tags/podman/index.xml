@@ -12,7 +12,7 @@
         <pubDate>Tue, 16 Aug 2022 10:43:50 +0000</pubDate>
         
         <guid>https://aecra.ml/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/Podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate.png" alt="Featured image of post Podman 构建过程强制终止时构建容器残留问题" /&gt;问题描述 先简要描述一下，在构建 Podman 过程中，如果使用 Ctrl + C 强制终止，会使构建中的容器残留在 Podman 中，不仅占用空间还影响无用镜像的删除。 之前多次构建时</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/Podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate.png" alt="Featured image of post Podman 构建过程强制终止时构建容器残留问题" /&gt;问题描述 先简要描述一下，在构建 Podman 过程中，如果使用 Ctrl + C 强制终止，会使构建中的容器残留在 Podman 中，不仅占用空间还影响无用镜像的删除。 之前多次构建时</description>
         </item>
         
     </channel>

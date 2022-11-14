@@ -12,7 +12,7 @@
         <pubDate>Tue, 16 Aug 2022 10:43:50 +0000</pubDate>
         
         <guid>https://aecra.ml/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/Podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate.png" alt="Featured image of post Podman build container residual problem when the build process is forced to terminate" /&gt;Description First of all, if you use Ctrl + C to force termination during the build of Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images.
+        <description>&lt;img src="https://static.aecra.ml/cover/Podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate.png" alt="Featured image of post Podman build container residual problem when the build process is forced to terminate" /&gt;Description First of all, if you use Ctrl + C to force termination during the build of Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images.
 There were forced interruptions on many previous builds, so my problem was more serious before I discovered it, otherwise one or two images that could not be deleted would not have attracted attention.</description>
         </item>
         <item>
@@ -21,7 +21,7 @@ There were forced interruptions on many previous builds, so my problem was more 
         <pubDate>Fri, 20 May 2022 19:31:35 +0000</pubDate>
         
         <guid>https://aecra.ml/en/article/build-a-gateway-by-kong/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/build-a-gateway-by-kong.png" alt="Featured image of post Build a gateway by kong." /&gt;Why should we build our own gateway？ First of all, to clarify the purpose of the gateway, I use the gateway completely to unifiedly manage the various background interfaces. Before building my own gateway my background interfaces are very scattered, some are deployed on the HTTP event trigger of the cloud function, some are deployed on the Web cloud function of the cloud function, some are on the API gateway of Tencent cloud, some are on the nginx proxy.</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/build-a-gateway-by-kong.png" alt="Featured image of post Build a gateway by kong." /&gt;Why should we build our own gateway？ First of all, to clarify the purpose of the gateway, I use the gateway completely to unifiedly manage the various background interfaces. Before building my own gateway my background interfaces are very scattered, some are deployed on the HTTP event trigger of the cloud function, some are deployed on the Web cloud function of the cloud function, some are on the API gateway of Tencent cloud, some are on the nginx proxy.</description>
         </item>
         <item>
         <title>VMware development virtual machine starts and shuts down with the system.</title>
@@ -29,7 +29,7 @@ There were forced interruptions on many previous builds, so my problem was more 
         <pubDate>Sun, 13 Feb 2022 20:19:13 +0000</pubDate>
         
         <guid>https://aecra.ml/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post VMware development virtual machine starts and shuts down with the system." /&gt;Reasons for Vmware Virtual Machine Development Windows development is sometimes so unsatisfactory, especially when the services developed need to run in Linux, and there are always some inexplicable problems if you develop in Windows, so it is necessary to develop in Linux. There are several options for using Linux development environment in Windows, such as WSL2, Hyper-V, VitualBox and Vmware. WSL2 is so tied to Windows that many configurations cannot</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post VMware development virtual machine starts and shuts down with the system." /&gt;Reasons for Vmware Virtual Machine Development Windows development is sometimes so unsatisfactory, especially when the services developed need to run in Linux, and there are always some inexplicable problems if you develop in Windows, so it is necessary to develop in Linux. There are several options for using Linux development environment in Windows, such as WSL2, Hyper-V, VitualBox and Vmware. WSL2 is so tied to Windows that many configurations cannot</description>
         </item>
         <item>
         <title>How to mount host folder in VMware 20.04 on Windows.</title>
@@ -37,7 +37,7 @@ There were forced interruptions on many previous builds, so my problem was more 
         <pubDate>Sat, 22 Jan 2022 15:25:34 +0000</pubDate>
         
         <guid>https://aecra.ml/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/How-to-mount-host-folder-in-VMware-20.04-on-Windows.png" alt="Featured image of post How to mount host folder in VMware 20.04 on Windows." /&gt;This time I want to use ubuntu20.04 on VMware as my workspace. But I don’t want to move and backup my files frequently. So I need to find a way to mount my host files to virtual machine.
+        <description>&lt;img src="https://static.aecra.ml/cover/How-to-mount-host-folder-in-VMware-20.04-on-Windows.png" alt="Featured image of post How to mount host folder in VMware 20.04 on Windows." /&gt;This time I want to use ubuntu20.04 on VMware as my workspace. But I don’t want to move and backup my files frequently. So I need to find a way to mount my host files to virtual machine.
 First I need to install VMware-tools to my virtual machine. With some reasons, I can’t install it autoly( The button is grey). So use the next bash command to install it.
 sudo apt install open-vm-tools-desktop Then close the virtual machine.</description>
         </item>
@@ -61,7 +61,7 @@ All kinds of technical exchanges are welcome :)</description>
         <pubDate>Sat, 03 Jul 2021 08:50:45 +0000</pubDate>
         
         <guid>https://aecra.ml/en/article/nginx-getting-started-guide/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/nginx-getting-started-guide.png" alt="Featured image of post Nginx getting started guide." /&gt;Introduction Nginx is a lightweight HTTP server that uses an event-driven, asynchronous, non-blocking processing framework, which gives it excellent IO performance and is often used for server-side reverse proxying and load balancing.
+        <description>&lt;img src="https://static.aecra.ml/cover/nginx-getting-started-guide.png" alt="Featured image of post Nginx getting started guide." /&gt;Introduction Nginx is a lightweight HTTP server that uses an event-driven, asynchronous, non-blocking processing framework, which gives it excellent IO performance and is often used for server-side reverse proxying and load balancing.
 Quick Start Install nginx
 sudo apt-get install nginx Uninstall nginx
 sudo apt-get uninstall nginx Start nginx
@@ -75,7 +75,7 @@ nginx -s reload install in CentOS Install compilation tools and library files yu
         <pubDate>Tue, 20 Apr 2021 10:35:12 +0000</pubDate>
         
         <guid>https://aecra.ml/en/article/docker-tutorial/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/docker-tutorial.jpg" alt="Featured image of post Docker tutorial" /&gt;Getting Started The command you just ran Congratulations! You have started the container for this tutorial! Let&amp;rsquo;s first explain the command that you just ran. In case you forgot, here&amp;rsquo;s the command:
+        <description>&lt;img src="https://static.aecra.ml/cover/docker-tutorial.jpg" alt="Featured image of post Docker tutorial" /&gt;Getting Started The command you just ran Congratulations! You have started the container for this tutorial! Let&amp;rsquo;s first explain the command that you just ran. In case you forgot, here&amp;rsquo;s the command:
 docker run -d -p 80:80 docker/getting-started You&amp;rsquo;ll notice a few flags being used. Here&amp;rsquo;s some more info on them:
 -d - run the container in detached mode (in the background) -p 80:80 - map port 80 of the host to port 80 in the container docker/getting-started - the image to use You can combine single character flags to shorten the full command.</description>
         </item>
@@ -85,7 +85,7 @@ docker run -d -p 80:80 docker/getting-started You&amp;rsquo;ll notice a few flag
         <pubDate>Sun, 14 Feb 2021 14:26:56 +0000</pubDate>
         
         <guid>https://aecra.ml/en/article/why-should-not-i-use-mysql-functions-in-php/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/why-should-not-i-use-mysql-functions-in-php.jpg" alt="Featured image of post Why shouldn&#39;t I use mysql_* functions in PHP?" /&gt;PHP offers three different APIs to connect to MySQL. These are the mysql(removed as of PHP 7), mysqli, and PDO extensions.
+        <description>&lt;img src="https://static.aecra.ml/cover/why-should-not-i-use-mysql-functions-in-php.jpg" alt="Featured image of post Why shouldn&#39;t I use mysql_* functions in PHP?" /&gt;PHP offers three different APIs to connect to MySQL. These are the mysql(removed as of PHP 7), mysqli, and PDO extensions.
 The mysql_ functions used to be very popular, but their use is not encouraged anymore. The documentation team is discussing the database security situation, and educating users to move away from the commonly used ext/mysql extension is part of this (check php.internals: deprecating ext/mysql).
 And the later PHP developer team has taken the decision to generate E_DEPRECATED errors when users connect to MySQL, whether through mysql_connect(), mysql_pconnect() or the implicit connection functionality built into ext/mysql.</description>
         </item>

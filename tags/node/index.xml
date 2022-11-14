@@ -12,7 +12,7 @@
         <pubDate>Sat, 27 Mar 2021 22:55:10 +0000</pubDate>
         
         <guid>https://aecra.ml/article/webpack-learning-notes/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/webpack-learning-notes.jpg" alt="Featured image of post webpack 学习笔记" /&gt;webpack 简介 webpack 是什么 webpack 是一种前端资源构建工具，一个静态模块打包器(module bundler)。 在 webpack 看来, 前端的所有资源文件(js/json/cs</description>
+        <description>&lt;img src="https://static.aecra.ml/cover/webpack-learning-notes.jpg" alt="Featured image of post webpack 学习笔记" /&gt;webpack 简介 webpack 是什么 webpack 是一种前端资源构建工具，一个静态模块打包器(module bundler)。 在 webpack 看来, 前端的所有资源文件(js/json/cs</description>
         </item>
         
     </channel>
