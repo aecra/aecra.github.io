@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>podman on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.ml/en/tags/podman/</link>
+        <link>https://aecra.github.io/en/tags/podman/</link>
         <description>Recent content in podman on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Tue, 16 Aug 2022 10:43:50 +0000</lastBuildDate><atom:link href="https://aecra.ml/en/tags/podman/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 16 Aug 2022 10:43:50 +0000</lastBuildDate><atom:link href="https://aecra.github.io/en/tags/podman/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Podman build container residual problem when the build process is forced to terminate</title>
-        <link>https://aecra.ml/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</link>
+        <link>https://aecra.github.io/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</link>
         <pubDate>Tue, 16 Aug 2022 10:43:50 +0000</pubDate>
         
-        <guid>https://aecra.ml/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</guid>
+        <guid>https://aecra.github.io/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</guid>
         <description>&lt;img src="https://static.aecra.ml/cover/Podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate.png" alt="Featured image of post Podman build container residual problem when the build process is forced to terminate" /&gt;Description First of all, if you use Ctrl + C to force termination during the build of Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images.
 There were forced interruptions on many previous builds, so my problem was more serious before I discovered it, otherwise one or two images that could not be deleted would not have attracted attention.</description>
         </item>

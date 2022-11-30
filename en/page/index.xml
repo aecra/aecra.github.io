@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Pages on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.ml/en/page/</link>
+        <link>https://aecra.github.io/en/page/</link>
         <description>Recent content in Pages on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 13 Sep 2021 18:24:34 +0000</lastBuildDate><atom:link href="https://aecra.ml/en/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 13 Sep 2021 18:24:34 +0000</lastBuildDate><atom:link href="https://aecra.github.io/en/page/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>About</title>
-        <link>https://aecra.ml/en/about/</link>
+        <link>https://aecra.github.io/en/about/</link>
         <pubDate>Mon, 13 Sep 2021 18:24:34 +0000</pubDate>
         
-        <guid>https://aecra.ml/en/about/</guid>
+        <guid>https://aecra.github.io/en/about/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/about.jpg" alt="Featured image of post About" /&gt;tags：
 Technology house, late stage of lazy cancer, no understanding
 Previous Blog：blog2021
@@ -22,26 +22,26 @@ All kinds of technical exchanges are welcome :)</description>
         </item>
         <item>
         <title>Archives</title>
-        <link>https://aecra.ml/en/archives/</link>
+        <link>https://aecra.github.io/en/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://aecra.ml/en/archives/</guid>
+        <guid>https://aecra.github.io/en/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>Friends</title>
-        <link>https://aecra.ml/en/link/</link>
+        <link>https://aecra.github.io/en/link/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://aecra.ml/en/link/</guid>
+        <guid>https://aecra.github.io/en/link/</guid>
         <description>&lt;img src="https://static.aecra.cn/cover/link.jpg" alt="Featured image of post Friends" /&gt;Friends You can apply for adding a friends link by sending an email (admin@aecra.cn)!</description>
         </item>
         <item>
         <title>Search</title>
-        <link>https://aecra.ml/en/search/</link>
+        <link>https://aecra.github.io/en/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://aecra.ml/en/search/</guid>
+        <guid>https://aecra.github.io/en/search/</guid>
         <description></description>
         </item>
         

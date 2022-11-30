@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Linux on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.ml/tags/linux/</link>
+        <link>https://aecra.github.io/tags/linux/</link>
         <description>Recent content in Linux on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Fri, 12 Mar 2021 19:47:32 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 12 Mar 2021 19:47:32 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Ubuntu、Deepin 安装软件</title>
-        <link>https://aecra.ml/article/ubuntu-deepin-installation-software/</link>
+        <link>https://aecra.github.io/article/ubuntu-deepin-installation-software/</link>
         <pubDate>Fri, 12 Mar 2021 19:47:32 +0000</pubDate>
         
-        <guid>https://aecra.ml/article/ubuntu-deepin-installation-software/</guid>
+        <guid>https://aecra.github.io/article/ubuntu-deepin-installation-software/</guid>
         <description>&lt;img src="https://static.aecra.ml/cover/ubuntu-deepin-installation-software.jpg" alt="Featured image of post Ubuntu、Deepin 安装软件" /&gt;apt-get 安装 apt-get，是一条 linux 命令，适用于 deb 包管理式的操作系统，主要用于自动从互联网的软件仓库中搜索、安装、升级、卸载软件或操作系统。如果下</description>
         </item>
         

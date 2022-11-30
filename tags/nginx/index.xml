@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Nginx on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.ml/tags/nginx/</link>
+        <link>https://aecra.github.io/tags/nginx/</link>
         <description>Recent content in Nginx on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Thu, 14 Jul 2022 11:25:54 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/nginx/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 14 Jul 2022 11:25:54 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>NGINX 问题集锦</title>
-        <link>https://aecra.ml/article/collection-of-nginx-issues/</link>
+        <link>https://aecra.github.io/article/collection-of-nginx-issues/</link>
         <pubDate>Thu, 14 Jul 2022 11:25:54 +0000</pubDate>
         
-        <guid>https://aecra.ml/article/collection-of-nginx-issues/</guid>
+        <guid>https://aecra.github.io/article/collection-of-nginx-issues/</guid>
         <description>&lt;img src="https://static.aecra.ml/cover/collection-of-nginx-issues.png" alt="Featured image of post NGINX 问题集锦" /&gt;NGINX 安装 NGINX 入门指导 网站强制使用 HTTPS 监听 80 端口上的所有请求，将其重定向到 443 端口，之后每个服务只需要监听 443 点扣上对应的域名即可。 server { listen 80 default_server; server_name _; return 301 https://$host$request_uri;</description>
         </item>
         <item>
         <title>Nginx 中按域名转发 TCP 连接</title>
-        <link>https://aecra.ml/article/forwarding-tcp-connections-by-domain-name-in-nginx/</link>
+        <link>https://aecra.github.io/article/forwarding-tcp-connections-by-domain-name-in-nginx/</link>
         <pubDate>Fri, 11 Feb 2022 17:08:45 +0000</pubDate>
         
-        <guid>https://aecra.ml/article/forwarding-tcp-connections-by-domain-name-in-nginx/</guid>
+        <guid>https://aecra.github.io/article/forwarding-tcp-connections-by-domain-name-in-nginx/</guid>
         <description>&lt;img src="https://static.aecra.ml/cover/Forwarding-TCP-connections-by-domain-name-in-Nginx.png" alt="Featured image of post Nginx 中按域名转发 TCP 连接" /&gt;编译安装 Nginx 上接 NGINX 入门指导,由于安装版本号为 1.20.1 所以不考虑旧版适配问题，其中编译选项增加的模块 --with-stream 和 --with-stream_ssl_preread_module 就是本次需要的功能模块。 配置 Nginx 由于是转发的 TCP</description>
         </item>
         

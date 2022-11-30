@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>vim on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.ml/tags/vim/</link>
+        <link>https://aecra.github.io/tags/vim/</link>
         <description>Recent content in vim on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 04 Apr 2022 15:51:45 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/vim/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Apr 2022 15:51:45 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Vim 命令速查表</title>
-        <link>https://aecra.ml/article/vim-command-manual/</link>
+        <link>https://aecra.github.io/article/vim-command-manual/</link>
         <pubDate>Mon, 04 Apr 2022 15:51:45 +0000</pubDate>
         
-        <guid>https://aecra.ml/article/vim-command-manual/</guid>
+        <guid>https://aecra.github.io/article/vim-command-manual/</guid>
         <description>光标移动 注：一般模式下，任意一个动作都可以重复。 h # 光标左移，同 &amp;lt;Left&amp;gt; 键 j # 光标下移，同 &amp;lt;Down&amp;gt; 键 k # 光标上移，同 &amp;lt;Up&amp;gt; 键 l # 光标右移，同 &amp;lt;Right&amp;gt; 键 Ctrl+e # 向上滚动</description>
         </item>
         

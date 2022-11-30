@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>node on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.ml/tags/node/</link>
+        <link>https://aecra.github.io/tags/node/</link>
         <description>Recent content in node on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sat, 27 Mar 2021 22:55:10 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/node/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 27 Mar 2021 22:55:10 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>webpack 学习笔记</title>
-        <link>https://aecra.ml/article/webpack-learning-notes/</link>
+        <link>https://aecra.github.io/article/webpack-learning-notes/</link>
         <pubDate>Sat, 27 Mar 2021 22:55:10 +0000</pubDate>
         
-        <guid>https://aecra.ml/article/webpack-learning-notes/</guid>
+        <guid>https://aecra.github.io/article/webpack-learning-notes/</guid>
         <description>&lt;img src="https://static.aecra.ml/cover/webpack-learning-notes.jpg" alt="Featured image of post webpack 学习笔记" /&gt;webpack 简介 webpack 是什么 webpack 是一种前端资源构建工具，一个静态模块打包器(module bundler)。 在 webpack 看来, 前端的所有资源文件(js/json/cs</description>
         </item>
         

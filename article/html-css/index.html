@@ -5,19 +5,19 @@
 
 
 
-<link rel='canonical' href='https://aecra.ml/article/html-css/'>
+<link rel='canonical' href='https://aecra.github.io/article/html-css/'>
 
 <link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='HTML &#43; CSS'>
 <meta property='og:description' content='本文是学习 html 和 css 时所做的学习笔记'>
 
 
-<meta property='og:url' content='https://aecra.ml/article/html-css/'>
+<meta property='og:url' content='https://aecra.github.io/article/html-css/'>
 <meta property='og:site_name' content='Tian Jiale&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='HTML' /><meta property='article:tag' content='css' /><meta property='article:published_time' content='2021-01-31T13:18:45&#43;00:00'/><meta property='article:modified_time' content='2021-01-31T13:18:45&#43;00:00'/><meta property='og:image' content='https://static.aecra.ml/cover/html-css.jpg' />
 <meta name="twitter:title" content="HTML &#43; CSS">
 <meta name="twitter:description" content="本文是学习 html 和 css 时所做的学习笔记"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://static.aecra.ml/cover/html-css.jpg' />
-    <link rel="shortcut icon" href="https://static.aecra.ml/logo.png" />
+    <link rel="shortcut icon" href="/img/favicon.png" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
 <script>
@@ -70,7 +70,13 @@ if (!doNotTrack) {
             <figure class="site-avatar">
                 <a href="/">
                 
-                    <img src="https://static.aecra.ml/avatar.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hua5231a43b8a957198f717690616d9973_481638_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
                 
                 </a>
                 
@@ -226,9 +232,9 @@ if (!doNotTrack) {
 
                     <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
                         
-                            <option value="https://aecra.ml/" selected>中文</option>
+                            <option value="https://aecra.github.io/" selected>中文</option>
                         
-                            <option value="https://aecra.ml/en/" >English</option>
+                            <option value="https://aecra.github.io/en/" >English</option>
                         
                     </select>
                 </li>
@@ -353,22 +359,22 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;refresh&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;3;url=https://www.mozilla.org&#34;</span> <span class="p">/&gt;</span>
 </span></span></code></pre></div><h3 id="语义化标签">语义化标签</h3>
 <p>标签的名字表征了标签的用途</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">h1-h6</span>    <span class="nt">标题</span>
-</span></span><span class="line"><span class="cl"><span class="nt">p</span>       <span class="nt">段落</span>
-</span></span><span class="line"><span class="cl"><span class="nt">em</span>        <span class="nt">加重</span>
-</span></span><span class="line"><span class="cl"><span class="nt">strong</span>     <span class="nt">强调</span>
-</span></span><span class="line"><span class="cl"><span class="nt">blockquote</span>  <span class="nt">长引用</span>
-</span></span><span class="line"><span class="cl"><span class="nt">q</span>        <span class="nt">短引用</span>
-</span></span><span class="line"><span class="cl"><span class="nt">br</span>       <span class="nt">换行</span>
-</span></span><span class="line"><span class="cl"><span class="nt">header</span>     <span class="nt">网页的头部</span>
-</span></span><span class="line"><span class="cl"><span class="nt">main</span>      <span class="nt">网页的主体部分</span>
-</span></span><span class="line"><span class="cl"><span class="nt">footer</span>     <span class="nt">网页的底部</span>
-</span></span><span class="line"><span class="cl"><span class="nt">nav</span>       <span class="nt">网页中的导航</span>
-</span></span><span class="line"><span class="cl"><span class="nt">aside</span>     <span class="nt">和主体相关的其他内容</span><span class="err">（</span><span class="nt">侧边栏</span><span class="err">）</span>
-</span></span><span class="line"><span class="cl"><span class="nt">article</span>    <span class="nt">一个独立的文章</span>
-</span></span><span class="line"><span class="cl"><span class="nt">section</span>    <span class="nt">表示一个独立的区块</span>
-</span></span><span class="line"><span class="cl"><span class="nt">div</span>       <span class="nt">没有语义</span>
-</span></span><span class="line"><span class="cl"><span class="nt">span</span>      <span class="nt">行内元素</span><span class="err">，</span><span class="nt">无语义</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">h1-h6</span>    <span class="err">标题</span>
+</span></span><span class="line"><span class="cl"><span class="nt">p</span>       <span class="err">段落</span>
+</span></span><span class="line"><span class="cl"><span class="nt">em</span>        <span class="err">加重</span>
+</span></span><span class="line"><span class="cl"><span class="nt">strong</span>     <span class="err">强调</span>
+</span></span><span class="line"><span class="cl"><span class="nt">blockquote</span>  <span class="err">长引用</span>
+</span></span><span class="line"><span class="cl"><span class="nt">q</span>        <span class="err">短引用</span>
+</span></span><span class="line"><span class="cl"><span class="nt">br</span>       <span class="err">换行</span>
+</span></span><span class="line"><span class="cl"><span class="nt">header</span>     <span class="err">网页的头部</span>
+</span></span><span class="line"><span class="cl"><span class="nt">main</span>      <span class="err">网页的主体部分</span>
+</span></span><span class="line"><span class="cl"><span class="nt">footer</span>     <span class="err">网页的底部</span>
+</span></span><span class="line"><span class="cl"><span class="nt">nav</span>       <span class="err">网页中的导航</span>
+</span></span><span class="line"><span class="cl"><span class="nt">aside</span>     <span class="err">和主体相关的其他内容（侧边栏）</span>
+</span></span><span class="line"><span class="cl"><span class="nt">article</span>    <span class="err">一个独立的文章</span>
+</span></span><span class="line"><span class="cl"><span class="nt">section</span>    <span class="err">表示一个独立的区块</span>
+</span></span><span class="line"><span class="cl"><span class="nt">div</span>       <span class="err">没有语义</span>
+</span></span><span class="line"><span class="cl"><span class="nt">span</span>      <span class="err">行内元素，无语义</span>
 </span></span></code></pre></div><h3 id="列表">列表</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">无序列表，使用ul标签来创建无序列表
 </span></span><span class="line"><span class="cl">    使用li表示列表项
@@ -405,9 +411,9 @@ if (!doNotTrack) {
 <p>audio 标签用来向页面中引入一个音频文件</p>
 <p>video 标签用来向网页中引入一个视频文件</p>
 <p>属性</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">controls</span> <span class="nt">是否允许用户控制播放</span>
-</span></span><span class="line"><span class="cl"><span class="nt">autoplay</span> <span class="nt">音频文件是否自动播放</span>
-</span></span><span class="line"><span class="cl"><span class="nt">loop</span> <span class="nt">音乐是否循环播放</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">controls</span> <span class="err">是否允许用户控制播放</span>
+</span></span><span class="line"><span class="cl"><span class="nt">autoplay</span> <span class="err">音频文件是否自动播放</span>
+</span></span><span class="line"><span class="cl"><span class="nt">loop</span> <span class="err">音乐是否循环播放</span>
 </span></span></code></pre></div><p>例子</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">audio</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;./source/audio.mp3&#34;</span> <span class="na">controls</span><span class="p">&gt;&lt;/</span><span class="nt">audio</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">
@@ -512,26 +518,26 @@ if (!doNotTrack) {
 </span></span></code></pre></div><h3 id="选择器">选择器</h3>
 <h4 id="基本选择器">基本选择器</h4>
 <p>元素选择器</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">标签名</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">标签名</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>id 选择器</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">#</span><span class="nn">id属性值</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">#</span><span class="nn">id</span><span class="err">属性值</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>类选择器</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">class属性值</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">class</span><span class="err">属性值</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>通配选择器</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="o">*</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="复合选择器">复合选择器</h4>
 <p>交集选择器</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">语法</span><span class="err">：</span><span class="nt">选择器1选择器2选择器3选择器n</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">交集选择器中如果有元素选择器</span><span class="err">，</span><span class="nt">必须使用元素选择器开头</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">语法：选择器</span><span class="nt">1</span><span class="err">选择器</span><span class="nt">2</span><span class="err">选择器</span><span class="nt">3</span><span class="err">选择器</span><span class="nt">n</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="err">交集选择器中如果有元素选择器，必须使用元素选择器开头</span>
 </span></span></code></pre></div><p>选择器分组（并集选择器）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">语法</span><span class="err">：</span><span class="nt">选择器1</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl"><span class="nt">选择器2</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl"><span class="nt">选择器3</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl"><span class="nt">选择器n</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">语法：选择器</span><span class="nt">1</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"><span class="err">选择器</span><span class="nt">2</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"><span class="err">选择器</span><span class="nt">3</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"><span class="err">选择器</span><span class="nt">n</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="关系选择器">关系选择器</h4>
 <blockquote>
@@ -560,38 +566,38 @@ if (!doNotTrack) {
 <p>伪类用来描述一个元素的特殊状态</p>
 <p>比如：第一个子元素、被点击的元素、鼠标移入的元素&hellip;</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">:</span><span class="nd">first-child</span> <span class="nt">第一个子元素</span>
-</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">last-child</span> <span class="nt">最后一个子元素</span>
-</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">only-child</span> <span class="nt">没有任何兄弟元素的子元素</span>
-</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">nth-child</span><span class="o">()</span> <span class="nt">选中第n个子元素</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">特殊值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">n</span> <span class="nt">第n个</span> <span class="nt">n的范围0到正无穷</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">2n</span> <span class="nt">或</span> <span class="nt">even</span> <span class="nt">表示选中偶数位的元素</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">2n</span><span class="o">+</span><span class="nt">1</span> <span class="nt">或</span> <span class="nt">odd</span> <span class="nt">表示选中奇数位的元素</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">:</span><span class="nd">first-child</span> <span class="err">第一个子元素</span>
+</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">last-child</span> <span class="err">最后一个子元素</span>
+</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">only-child</span> <span class="err">没有任何兄弟元素的子元素</span>
+</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">nth-child</span><span class="o">()</span> <span class="err">选中第</span><span class="nt">n</span><span class="err">个子元素</span>
+</span></span><span class="line"><span class="cl">    <span class="err">特殊值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">n</span> <span class="err">第</span><span class="nt">n</span><span class="err">个</span> <span class="nt">n</span><span class="err">的范围</span><span class="nt">0</span><span class="err">到正无穷</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">2n</span> <span class="err">或</span> <span class="nt">even</span> <span class="err">表示选中偶数位的元素</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">2n</span><span class="o">+</span><span class="nt">1</span> <span class="err">或</span> <span class="nt">odd</span> <span class="err">表示选中奇数位的元素</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">以上这些伪类都是根据所有的子元素进行排序</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">以上这些伪类都是根据所有的子元素进行排序</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">first-of-type</span>
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">last-of-type</span>
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">nth-of-type</span><span class="o">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">only-of-type</span>
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">empty</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">这几个伪类的功能和上述的类似</span><span class="err">，</span><span class="nt">不通点是他们是在同类型元素中进行排序</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">这几个伪类的功能和上述的类似，不通点是他们是在同类型元素中进行排序</span>
 </span></span></code></pre></div><h4 id="a-元素的伪类">a 元素的伪类</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">:</span><span class="nd">link</span> <span class="nt">用来表示没访问过的链接</span><span class="err">（</span><span class="nt">正常的链接</span><span class="err">）</span>
-</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">visited</span> <span class="nt">用来表示访问过的链接</span>
-</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">hover</span> <span class="nt">用来表示鼠标移入的状态</span>
-</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">active</span> <span class="nt">用来表示鼠标点击</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">:</span><span class="nd">link</span> <span class="err">用来表示没访问过的链接（正常的链接）</span>
+</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">visited</span> <span class="err">用来表示访问过的链接</span>
+</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">hover</span> <span class="err">用来表示鼠标移入的状态</span>
+</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nd">active</span> <span class="err">用来表示鼠标点击</span>
 </span></span></code></pre></div><h4 id="伪元素选择器">伪元素选择器</h4>
 <blockquote>
 <p>伪元素：表示页面中一些特殊的并不真实的存在的元素（特殊的位置）</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">::</span><span class="nd">first-letter</span> <span class="nt">表示第一个字母</span>
-</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="nd">first-line</span> <span class="nt">表示第一行</span>
-</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="nd">selection</span> <span class="nt">表示选中的内容</span>
-</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="nd">before</span> <span class="nt">元素的开始</span>
-</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="nd">after</span> <span class="nt">元素的最后</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">before</span> <span class="nt">和</span> <span class="nt">after</span> <span class="nt">必须结合content属性来使用</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">::</span><span class="nd">first-letter</span> <span class="err">表示第一个字母</span>
+</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="nd">first-line</span> <span class="err">表示第一行</span>
+</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="nd">selection</span> <span class="err">表示选中的内容</span>
+</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="nd">before</span> <span class="err">元素的开始</span>
+</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="nd">after</span> <span class="err">元素的最后</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">before</span> <span class="err">和</span> <span class="nt">after</span> <span class="err">必须结合</span><span class="nt">content</span><span class="err">属性来使用</span>
 </span></span></code></pre></div><h4 id="样式的继承">样式的继承</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">样式的继承，我们为一个元素设置的样式同时也会应用到它的后代元素上
 </span></span><span class="line"><span class="cl">利用继承我们可以将一些通用的样式统一设置到共同的祖先元素上，
@@ -612,46 +618,46 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">继承的样式       没有优先级
 </span></span></code></pre></div><p>可以在某一个样式的后边添加 !important ，则此时该样式会获取到最高的优先级，甚至超过内联样式</p>
 <h3 id="单位">单位</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">像素</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">屏幕</span><span class="err">（</span><span class="nt">显示器</span><span class="err">）</span><span class="nt">实际上是由一个一个的小点点构成的</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">不同屏幕的像素大小是不同的</span><span class="err">，</span><span class="nt">像素越小的屏幕显示的效果越清晰</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">所以同样的200px在不同的设备下显示效果不一样</span>
-</span></span><span class="line"><span class="cl"><span class="nt">百分比</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">也可以将属性值设置为相对于其父元素属性的百分比</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">设置百分比可以使子元素跟随父元素的改变而改变</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">像素</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">屏幕（显示器）实际上是由一个一个的小点点构成的</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">不同屏幕的像素大小是不同的，像素越小的屏幕显示的效果越清晰</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">所以同样的</span><span class="nt">200px</span><span class="err">在不同的设备下显示效果不一样</span>
+</span></span><span class="line"><span class="cl"><span class="err">百分比</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">也可以将属性值设置为相对于其父元素属性的百分比</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">设置百分比可以使子元素跟随父元素的改变而改变</span>
 </span></span><span class="line"><span class="cl"><span class="nt">em</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">em是相对于元素的字体大小来计算的</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">em</span><span class="err">是相对于元素的字体大小来计算的</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">1em</span> <span class="o">=</span> <span class="nt">1font-size</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">em会根据字体大小的改变而改变</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">em</span><span class="err">会根据字体大小的改变而改变</span>
 </span></span><span class="line"><span class="cl"><span class="nt">rem</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">rem是相对于根元素的字体大小来计算</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">rem</span><span class="err">是相对于根元素的字体大小来计算</span>
 </span></span></code></pre></div><h3 id="颜色">颜色</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">颜色名</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">颜色名</span>
 </span></span><span class="line"><span class="cl"><span class="nt">red</span><span class="err">、</span><span class="nt">orange</span><span class="err">、</span><span class="nt">yellow</span><span class="err">、</span><span class="nt">blue</span><span class="err">、</span><span class="nt">green</span> <span class="o">...</span> <span class="o">...</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">RGB值</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">RGB通过三种颜色的不同浓度来调配出不同的颜色</span>
+</span></span><span class="line"><span class="cl"><span class="nt">RGB</span><span class="err">值</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">RGB</span><span class="err">通过三种颜色的不同浓度来调配出不同的颜色</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">R</span> <span class="nt">red</span><span class="err">，</span><span class="nt">G</span> <span class="nt">green</span> <span class="err">，</span><span class="nt">B</span> <span class="nt">blue</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">每一种颜色的范围在</span> <span class="nt">0</span> <span class="nt">-</span> <span class="nt">255</span> <span class="o">(</span><span class="nt">0</span><span class="o">%</span> <span class="nt">-</span> <span class="nt">100</span><span class="o">%)</span> <span class="nt">之间</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">语法</span><span class="err">：</span><span class="nt">rgb</span><span class="o">(</span><span class="nt">255</span><span class="o">,</span> <span class="nt">0</span><span class="o">,</span> <span class="nt">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">每一种颜色的范围在</span> <span class="nt">0</span> <span class="nt">-</span> <span class="nt">255</span> <span class="o">(</span><span class="nt">0</span><span class="o">%</span> <span class="nt">-</span> <span class="nt">100</span><span class="o">%)</span> <span class="err">之间</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">语法：</span><span class="nt">rgb</span><span class="o">(</span><span class="nt">255</span><span class="o">,</span> <span class="nt">0</span><span class="o">,</span> <span class="nt">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nt">RGBA</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">就是在rgb的基础上增加了一个a表示不透明度</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">需要四个值</span><span class="err">，</span><span class="nt">前三个和rgb一样</span><span class="err">，</span><span class="nt">第四个表示不透明度</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">1表示完全不透明</span>   <span class="nt">0表示完全透明</span>  <span class="p">.</span><span class="nc">5半透明</span>
-</span></span><span class="line"><span class="cl"> <span class="nt">-</span> <span class="nt">语法</span><span class="err">：</span><span class="nt">rgba</span><span class="o">(</span><span class="nt">106</span><span class="o">,</span><span class="nt">153</span><span class="o">,</span><span class="nt">85</span><span class="o">,</span><span class="nt">0</span><span class="p">.</span><span class="nc">5</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">就是在</span><span class="nt">rgb</span><span class="err">的基础上增加了一个</span><span class="nt">a</span><span class="err">表示不透明度</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">需要四个值，前三个和</span><span class="nt">rgb</span><span class="err">一样，第四个表示不透明度</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">1</span><span class="err">表示完全不透明</span>   <span class="nt">0</span><span class="err">表示完全透明</span>  <span class="p">.</span><span class="nc">5</span><span class="err">半透明</span>
+</span></span><span class="line"><span class="cl"> <span class="nt">-</span> <span class="err">语法：</span><span class="nt">rgba</span><span class="o">(</span><span class="nt">106</span><span class="o">,</span><span class="nt">153</span><span class="o">,</span><span class="nt">85</span><span class="o">,</span><span class="nt">0</span><span class="p">.</span><span class="nc">5</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">十六进制的RGB值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">颜色浓度通过</span> <span class="nt">00-ff</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">如果颜色两位两位重复可以进行简写</span>
+</span></span><span class="line"><span class="cl"><span class="err">十六进制的</span><span class="nt">RGB</span><span class="err">值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">颜色浓度通过</span> <span class="nt">00-ff</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">如果颜色两位两位重复可以进行简写</span>
 </span></span><span class="line"><span class="cl">        <span class="p">#</span><span class="nn">aabbcc</span> <span class="nt">--</span><span class="o">&gt;</span> <span class="p">#</span><span class="nn">abc</span>
-</span></span><span class="line"><span class="cl"> <span class="nt">-</span> <span class="nt">语法</span><span class="err">：</span><span class="p">#</span><span class="nn">红色绿色蓝色</span>
+</span></span><span class="line"><span class="cl"> <span class="nt">-</span> <span class="err">语法：#红色绿色蓝色</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">HSL值</span> <span class="nt">HSLA值</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">H</span> <span class="nt">色相</span><span class="o">(</span><span class="nt">0</span> <span class="nt">-</span> <span class="nt">360</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">S</span> <span class="nt">饱和度</span><span class="err">，</span><span class="nt">颜色的浓度</span> <span class="nt">0</span><span class="o">%</span> <span class="nt">-</span> <span class="nt">100</span><span class="o">%</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">L</span> <span class="nt">亮度</span><span class="err">，</span><span class="nt">颜色的亮度</span> <span class="nt">0</span><span class="o">%</span> <span class="nt">-</span> <span class="nt">100</span><span class="o">%</span>
-</span></span><span class="line"><span class="cl"> <span class="nt">-</span> <span class="nt">语法</span><span class="err">：</span><span class="nt">hsla</span><span class="o">(</span><span class="nt">98</span><span class="o">,</span> <span class="nt">48</span><span class="o">%,</span> <span class="nt">40</span><span class="o">%,</span> <span class="nt">0</span><span class="p">.</span><span class="nc">658</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nt">HSL</span><span class="err">值</span> <span class="nt">HSLA</span><span class="err">值</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">H</span> <span class="err">色相</span><span class="o">(</span><span class="nt">0</span> <span class="nt">-</span> <span class="nt">360</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">S</span> <span class="err">饱和度，颜色的浓度</span> <span class="nt">0</span><span class="o">%</span> <span class="nt">-</span> <span class="nt">100</span><span class="o">%</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">L</span> <span class="err">亮度，颜色的亮度</span> <span class="nt">0</span><span class="o">%</span> <span class="nt">-</span> <span class="nt">100</span><span class="o">%</span>
+</span></span><span class="line"><span class="cl"> <span class="nt">-</span> <span class="err">语法：</span><span class="nt">hsla</span><span class="o">(</span><span class="nt">98</span><span class="o">,</span> <span class="nt">48</span><span class="o">%,</span> <span class="nt">40</span><span class="o">%,</span> <span class="nt">0</span><span class="p">.</span><span class="nc">658</span><span class="o">)</span>
 </span></span></code></pre></div><h2 id="盒模型">盒模型</h2>
 <h3 id="文档流normal-flow">文档流（normal flow）</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">- 网页是一个多层的结构，一层摞着一层
@@ -686,14 +692,14 @@ if (!doNotTrack) {
 	
 ></p>
 <h3 id="子元素溢出">子元素溢出</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">如果子元素的大小超过了父元素</span><span class="err">，</span><span class="nt">则子元素会从父元素中溢出</span>
-</span></span><span class="line"><span class="cl"><span class="nt">使用</span> <span class="nt">overflow</span> <span class="nt">属性来设置父元素如何处理溢出的子元素</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">如果子元素的大小超过了父元素，则子元素会从父元素中溢出</span>
+</span></span><span class="line"><span class="cl"><span class="err">使用</span> <span class="nt">overflow</span> <span class="err">属性来设置父元素如何处理溢出的子元素</span>
 </span></span><span class="line"><span class="cl"><span class="o">(</span><span class="nt">overflow-x</span><span class="err">、</span><span class="nt">overflow-y</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">visible</span> <span class="nt">默认值</span> <span class="nt">子元素会从父元素中溢出</span><span class="err">，</span><span class="nt">在父元素外部的位置显示</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">hidden</span>  <span class="nt">溢出内容将会被裁剪不会显示</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">scroll</span>  <span class="nt">生成两个滚动条</span><span class="err">，</span><span class="nt">通过滚动条来查看完整的内容</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">auto</span>   <span class="nt">根据需要生成滚动条</span>
+</span></span><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">visible</span> <span class="err">默认值</span> <span class="err">子元素会从父元素中溢出，在父元素外部的位置显示</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">hidden</span>  <span class="err">溢出内容将会被裁剪不会显示</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">scroll</span>  <span class="err">生成两个滚动条，通过滚动条来查看完整的内容</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">auto</span>   <span class="err">根据需要生成滚动条</span>
 </span></span></code></pre></div><h3 id="margin-的折叠">margin 的折叠</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">- 相邻的垂直方向外边距会发生重叠现象
 </span></span><span class="line"><span class="cl">- 兄弟元素
@@ -709,25 +715,25 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    - 父子元素间相邻外边距，子元素的会传递给父元素（上外边距）
 </span></span><span class="line"><span class="cl">    - 父子外边距的折叠会影响到页面的布局，必须要进行处理
 </span></span></code></pre></div><h3 id="行内元素的盒模型">行内元素的盒模型</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">行内元素的盒模型</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">行内元素不支持设置宽度和高度</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">行内元素可以设置padding</span><span class="err">，</span><span class="nt">但是垂直方向padding不会影响页面的布局</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">行内元素可以设置border</span><span class="err">，</span><span class="nt">垂直方向的border不会影响页面的布局</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">行内元素可以设置margin</span><span class="err">，</span><span class="nt">垂直方向的margin不会影响布局</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">行内元素的盒模型</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">行内元素不支持设置宽度和高度</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">行内元素可以设置</span><span class="nt">padding</span><span class="err">，但是垂直方向</span><span class="nt">padding</span><span class="err">不会影响页面的布局</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">行内元素可以设置</span><span class="nt">border</span><span class="err">，垂直方向的</span><span class="nt">border</span><span class="err">不会影响页面的布局</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">行内元素可以设置</span><span class="nt">margin</span><span class="err">，垂直方向的</span><span class="nt">margin</span><span class="err">不会影响布局</span>
 </span></span></code></pre></div><h3 id="盒模型类别">盒模型类别</h3>
 <p>display 用来设置元素显示的类型</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">inline</span> <span class="nt">将元素设置为行内元素</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">block</span> <span class="nt">将元素设置为块元素</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">inline-block</span> <span class="nt">将元素设置为行内块元素</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">行内块</span><span class="err">，</span><span class="nt">既可以设置宽度和高度又不会独占一行</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">table</span> <span class="nt">将元素设置为一个表格</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">none</span> <span class="nt">元素不在页面中显示</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">inline</span> <span class="err">将元素设置为行内元素</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">block</span> <span class="err">将元素设置为块元素</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">inline-block</span> <span class="err">将元素设置为行内块元素</span>
+</span></span><span class="line"><span class="cl">            <span class="err">行内块，既可以设置宽度和高度又不会独占一行</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">table</span> <span class="err">将元素设置为一个表格</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">none</span> <span class="err">元素不在页面中显示</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">visibility</span> <span class="nt">用来设置元素的显示状态</span>
-</span></span><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">visible</span> <span class="nt">默认值</span><span class="err">，</span><span class="nt">元素在页面中正常显示</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">hidden</span> <span class="nt">元素在页面中隐藏</span> <span class="nt">不显示</span><span class="err">，</span><span class="nt">但是依然占据页面的位置</span>
+</span></span><span class="line"><span class="cl"><span class="nt">visibility</span> <span class="err">用来设置元素的显示状态</span>
+</span></span><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">visible</span> <span class="err">默认值，元素在页面中正常显示</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">hidden</span> <span class="err">元素在页面中隐藏</span> <span class="err">不显示，但是依然占据页面的位置</span>
 </span></span></code></pre></div><h3 id="重置样式表">重置样式表</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">默认样式：
 </span></span><span class="line"><span class="cl">    - 通常情况，浏览器都会为元素设置一些默认样式
@@ -746,39 +752,39 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    width 和 height 指的是内容区 和 内边距 和 边框的总大小
 </span></span></code></pre></div><h3 id="轮廓和圆角">轮廓和圆角</h3>
 <p>阴影</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">box-shadow</span> <span class="nt">用来设置元素的阴影效果</span><span class="err">，</span><span class="nt">阴影不会影响页面布局</span>
-</span></span><span class="line"><span class="cl"><span class="nt">第一个值</span> <span class="nt">水平偏移量</span> <span class="nt">设置阴影的水平位置</span> <span class="nt">正值向右移动</span> <span class="nt">负值向左移动</span>
-</span></span><span class="line"><span class="cl"><span class="nt">第二个值</span> <span class="nt">垂直偏移量</span> <span class="nt">设置阴影的水平位置</span> <span class="nt">正值向下移动</span> <span class="nt">负值向上移动</span>
-</span></span><span class="line"><span class="cl"><span class="nt">第三个值</span> <span class="nt">阴影的模糊半径</span>
-</span></span><span class="line"><span class="cl"><span class="nt">第四个值</span> <span class="nt">阴影的颜色</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">box-shadow</span> <span class="err">用来设置元素的阴影效果，阴影不会影响页面布局</span>
+</span></span><span class="line"><span class="cl"><span class="err">第一个值</span> <span class="err">水平偏移量</span> <span class="err">设置阴影的水平位置</span> <span class="err">正值向右移动</span> <span class="err">负值向左移动</span>
+</span></span><span class="line"><span class="cl"><span class="err">第二个值</span> <span class="err">垂直偏移量</span> <span class="err">设置阴影的水平位置</span> <span class="err">正值向下移动</span> <span class="err">负值向上移动</span>
+</span></span><span class="line"><span class="cl"><span class="err">第三个值</span> <span class="err">阴影的模糊半径</span>
+</span></span><span class="line"><span class="cl"><span class="err">第四个值</span> <span class="err">阴影的颜色</span>
 </span></span></code></pre></div><p>轮廓线</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">outline</span> <span class="nt">用来设置元素的轮廓线</span><span class="err">，</span><span class="nt">用法和border一模一样</span>
-</span></span><span class="line"><span class="cl"><span class="nt">轮廓和边框不同的点</span><span class="err">，</span><span class="nt">就是轮廓不会影响到可见框的大小</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">outline</span> <span class="err">用来设置元素的轮廓线，用法和</span><span class="nt">border</span><span class="err">一模一样</span>
+</span></span><span class="line"><span class="cl"><span class="err">轮廓和边框不同的点，就是轮廓不会影响到可见框的大小</span>
 </span></span></code></pre></div><p>圆角</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">border-radius</span> <span class="nt">用来设置元素的圆角半径大小</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">border-radius</span> <span class="err">用来设置元素的圆角半径大小</span>
 </span></span></code></pre></div><h2 id="浮动">浮动</h2>
 <h3 id="简介">简介</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">使用</span> <span class="nt">float</span> <span class="nt">属性来设置于元素的浮动</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">none</span> <span class="nt">默认值</span> <span class="err">，</span><span class="nt">元素不浮动</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">left</span> <span class="nt">元素向左浮动</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">right</span> <span class="nt">元素向右浮动</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">使用</span> <span class="nt">float</span> <span class="err">属性来设置于元素的浮动</span>
+</span></span><span class="line"><span class="cl">    <span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">none</span> <span class="err">默认值</span> <span class="err">，元素不浮动</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">left</span> <span class="err">元素向左浮动</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">right</span> <span class="err">元素向右浮动</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">注意</span><span class="err">：</span><span class="nt">元素设置浮动以后</span><span class="err">，</span><span class="nt">水平布局的等式便不需要强制成立</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">元素设置浮动以后</span><span class="err">，</span><span class="nt">会完全从文档流中脱离</span><span class="err">，</span><span class="nt">不再占用文档流的位置</span><span class="err">，</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">所以元素下边的还在文档流中的元素会自动向上移动</span>
+</span></span><span class="line"><span class="cl"><span class="err">注意：元素设置浮动以后，水平布局的等式便不需要强制成立</span>
+</span></span><span class="line"><span class="cl">    <span class="err">元素设置浮动以后，会完全从文档流中脱离，不再占用文档流的位置，</span>
+</span></span><span class="line"><span class="cl">        <span class="err">所以元素下边的还在文档流中的元素会自动向上移动</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">浮动的特点</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">1</span><span class="err">、</span><span class="nt">浮动元素会完全脱离文档流</span><span class="err">，</span><span class="nt">不再占据文档流中的位置</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">2</span><span class="err">、</span><span class="nt">设置浮动以后元素会向父元素的左侧或右侧移动</span><span class="err">，</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">3</span><span class="err">、</span><span class="nt">浮动元素默认不会从父元素中移出</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">4</span><span class="err">、</span><span class="nt">浮动元素向左或向右移动时</span><span class="err">，</span><span class="nt">不会超过它前边的其他浮动元素</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">5</span><span class="err">、</span><span class="nt">如果浮动元素的上边是一个没有浮动的块元素</span><span class="err">，</span><span class="nt">则浮动元素无法上移</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">6</span><span class="err">、</span><span class="nt">浮动元素不会超过它上边的浮动的兄弟元素</span><span class="err">，</span><span class="nt">最多最多就是和它一样高</span>
+</span></span><span class="line"><span class="cl"><span class="err">浮动的特点：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">1</span><span class="err">、浮动元素会完全脱离文档流，不再占据文档流中的位置</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">2</span><span class="err">、设置浮动以后元素会向父元素的左侧或右侧移动，</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">3</span><span class="err">、浮动元素默认不会从父元素中移出</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">4</span><span class="err">、浮动元素向左或向右移动时，不会超过它前边的其他浮动元素</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">5</span><span class="err">、如果浮动元素的上边是一个没有浮动的块元素，则浮动元素无法上移</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">6</span><span class="err">、浮动元素不会超过它上边的浮动的兄弟元素，最多最多就是和它一样高</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">简单总结</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">浮动目前来讲它的主要作用就是让页面中的元素可以水平排列</span><span class="err">，</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">通过浮动可以制作一些水平方向的布局</span>
+</span></span><span class="line"><span class="cl"><span class="err">简单总结：</span>
+</span></span><span class="line"><span class="cl">    <span class="err">浮动目前来讲它的主要作用就是让页面中的元素可以水平排列，</span>
+</span></span><span class="line"><span class="cl">        <span class="err">通过浮动可以制作一些水平方向的布局</span>
 </span></span></code></pre></div><h3 id="其他特点">其他特点</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">浮动元素不会盖住文字，文字会自动环绕在浮动元素的周围， 所以我们可以利用浮动来设置文字环绕图片的效果
 </span></span><span class="line"><span class="cl">
@@ -801,22 +807,22 @@ if (!doNotTrack) {
 <p>特点</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">独立的布局区域，将内外的布局分隔开
 </span></span></code></pre></div><p>开启方式</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">1</span><span class="err">、</span><span class="nt">设置元素的浮动</span><span class="err">（</span><span class="nt">不推荐</span><span class="err">）</span>
-</span></span><span class="line"><span class="cl"><span class="nt">2</span><span class="err">、</span><span class="nt">将元素设置为行内块元素</span><span class="err">（</span><span class="nt">不推荐</span><span class="err">）</span>
-</span></span><span class="line"><span class="cl"><span class="nt">3</span><span class="err">、</span><span class="nt">将元素的overflow设置为一个非visible的值</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">常用的方式</span> <span class="nt">为元素设置</span> <span class="nt">overflow</span><span class="p">:</span><span class="nd">hidden</span> <span class="nt">开启其</span> <span class="nt">BFC</span> <span class="nt">以使其可以包含浮动元素</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">1</span><span class="err">、设置元素的浮动（不推荐）</span>
+</span></span><span class="line"><span class="cl"><span class="nt">2</span><span class="err">、将元素设置为行内块元素（不推荐）</span>
+</span></span><span class="line"><span class="cl"><span class="nt">3</span><span class="err">、将元素的</span><span class="nt">overflow</span><span class="err">设置为一个非</span><span class="nt">visible</span><span class="err">的值</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">常用的方式</span> <span class="err">为元素设置</span> <span class="nt">overflow</span><span class="p">:</span><span class="nd">hidden</span> <span class="err">开启其</span> <span class="nt">BFC</span> <span class="err">以使其可以包含浮动元素</span>
 </span></span></code></pre></div><h4 id="clear">clear</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">如果我们不希望某个元素因为其他元素浮动的影响而改变位置</span><span class="err">，</span><span class="nt">可以通过clear属性来清除浮动元素对当前元素所产生的影响</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">如果我们不希望某个元素因为其他元素浮动的影响而改变位置，可以通过</span><span class="nt">clear</span><span class="err">属性来清除浮动元素对当前元素所产生的影响</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nt">clear</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">作用</span><span class="err">：</span><span class="nt">清除浮动元素对当前元素所产生的影响</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">left</span> <span class="nt">清除左侧浮动元素对当前元素的影响</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">right</span> <span class="nt">清除右侧浮动元素对当前元素的影响</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">both</span> <span class="nt">清除两侧中最大影响的那侧</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">作用：清除浮动元素对当前元素所产生的影响</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">left</span> <span class="err">清除左侧浮动元素对当前元素的影响</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">right</span> <span class="err">清除右侧浮动元素对当前元素的影响</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">both</span> <span class="err">清除两侧中最大影响的那侧</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">原理</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl"><span class="nt">设置清除浮动以后</span><span class="err">，</span><span class="nt">浏览器会自动为元素添加一个上外边距</span><span class="err">，</span> <span class="nt">以使其位置不受其他元素的影响</span>
+</span></span><span class="line"><span class="cl"><span class="err">原理：</span>
+</span></span><span class="line"><span class="cl"><span class="err">设置清除浮动以后，浏览器会自动为元素添加一个上外边距，</span> <span class="err">以使其位置不受其他元素的影响</span>
 </span></span></code></pre></div><h4 id="理想的解决方案">理想的解决方案</h4>
 <p>设置父元素的::after 伪类</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">box1</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
@@ -839,60 +845,60 @@ if (!doNotTrack) {
 <p>定位是一种更加高级的布局手段</p>
 <p>通过定位可以将元素摆放到页面的任意位置</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">使用position属性来设置定位</span>
-</span></span><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">static</span> <span class="nt">默认值</span><span class="err">，</span><span class="nt">元素是静止的没有开启定位</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">relative</span> <span class="nt">开启元素的相对定位</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">absolute</span> <span class="nt">开启元素的绝对定位</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">fixed</span> <span class="nt">开启元素的固定定位</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">sticky</span> <span class="nt">开启元素的粘滞定位</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">使用</span><span class="nt">position</span><span class="err">属性来设置定位</span>
+</span></span><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">static</span> <span class="err">默认值，元素是静止的没有开启定位</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">relative</span> <span class="err">开启元素的相对定位</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">absolute</span> <span class="err">开启元素的绝对定位</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">fixed</span> <span class="err">开启元素的固定定位</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">sticky</span> <span class="err">开启元素的粘滞定位</span>
 </span></span></code></pre></div><p>偏移量</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">当元素开启了定位以后</span><span class="err">，</span><span class="nt">可以通过偏移量来设置元素的位置</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">当元素开启了定位以后，可以通过偏移量来设置元素的位置</span>
 </span></span><span class="line"><span class="cl"><span class="nt">top</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">定位元素和定位位置上边的距离</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">定位元素和定位位置上边的距离</span>
 </span></span><span class="line"><span class="cl"><span class="nt">bottom</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">定位元素和定位位置下边的距离</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">定位元素和定位位置下边的距离</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">定位元素垂直方向的位置由top和bottom两个属性来控制</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">定位元素垂直方向的位置由</span><span class="nt">top</span><span class="err">和</span><span class="nt">bottom</span><span class="err">两个属性来控制</span>
 </span></span><span class="line"><span class="cl"><span class="nt">---------------------------------------------------------</span>
 </span></span><span class="line"><span class="cl"><span class="nt">left</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">定位元素和定位位置的左侧距离</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">定位元素和定位位置的左侧距离</span>
 </span></span><span class="line"><span class="cl"><span class="nt">right</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="nt">定位元素和定位位置的右侧距离</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">-</span> <span class="err">定位元素和定位位置的右侧距离</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">定位元素水平方向的位置由left和right两个属性控制</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">定位元素水平方向的位置由</span><span class="nt">left</span><span class="err">和</span><span class="nt">right</span><span class="err">两个属性控制</span>
 </span></span></code></pre></div><h3 id="相对定位">相对定位</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">当元素的position属性值设置为relative时则开启了元素的相对定位</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">相对定位的特点</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">1</span><span class="p">.</span><span class="nc">元素开启相对定位以后</span><span class="err">，</span><span class="nt">如果不设置偏移量元素不会发生任何的变化</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">2</span><span class="p">.</span><span class="nc">相对定位是参照于元素在文档流中的位置进行定位的</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">3</span><span class="p">.</span><span class="nc">相对定位会提升元素的层级</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">4</span><span class="p">.</span><span class="nc">相对定位不会使元素脱离文档流</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">5</span><span class="p">.</span><span class="nc">相对定位不会改变元素的性质块还是块</span><span class="err">，</span><span class="nt">行内还是行内</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">当元素的</span><span class="nt">position</span><span class="err">属性值设置为</span><span class="nt">relative</span><span class="err">时则开启了元素的相对定位</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">相对定位的特点：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">1</span><span class="o">.</span><span class="err">元素开启相对定位以后，如果不设置偏移量元素不会发生任何的变化</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">2</span><span class="o">.</span><span class="err">相对定位是参照于元素在文档流中的位置进行定位的</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">3</span><span class="o">.</span><span class="err">相对定位会提升元素的层级</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">4</span><span class="o">.</span><span class="err">相对定位不会使元素脱离文档流</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">5</span><span class="o">.</span><span class="err">相对定位不会改变元素的性质块还是块，行内还是行内</span>
 </span></span></code></pre></div><h3 id="绝对定位">绝对定位</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">当元素的position属性值设置为absolute时</span><span class="err">，</span><span class="nt">则开启了元素的绝对定位</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">绝对定位的特点</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">1</span><span class="p">.</span><span class="nc">开启绝对定位后</span><span class="err">，</span><span class="nt">如果不设置偏移量元素的位置不会发生变化</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">2</span><span class="p">.</span><span class="nc">开启绝对定位后</span><span class="err">，</span><span class="nt">元素会从文档流中脱离</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">3</span><span class="p">.</span><span class="nc">绝对定位会改变元素的性质</span><span class="err">，</span><span class="nt">行内变成块</span><span class="err">，</span><span class="nt">块的宽高被内容撑开</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">4</span><span class="p">.</span><span class="nc">绝对定位会使元素提升一个层级</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">5</span><span class="p">.</span><span class="nc">绝对定位元素是相对于其包含块进行定位的</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">当元素的</span><span class="nt">position</span><span class="err">属性值设置为</span><span class="nt">absolute</span><span class="err">时，则开启了元素的绝对定位</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">绝对定位的特点：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">1</span><span class="o">.</span><span class="err">开启绝对定位后，如果不设置偏移量元素的位置不会发生变化</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">2</span><span class="o">.</span><span class="err">开启绝对定位后，元素会从文档流中脱离</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">3</span><span class="o">.</span><span class="err">绝对定位会改变元素的性质，行内变成块，块的宽高被内容撑开</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">4</span><span class="o">.</span><span class="err">绝对定位会使元素提升一个层级</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">5</span><span class="o">.</span><span class="err">绝对定位元素是相对于其包含块进行定位的</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">绝对定位的包含块</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">包含块就是离它最近的开启了定位的祖先元素</span><span class="err">，</span><span class="nt">如果所有的祖先元素都没有开启定位则根元素就是它的包含块</span>
+</span></span><span class="line"><span class="cl"><span class="err">绝对定位的包含块</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="err">包含块就是离它最近的开启了定位的祖先元素，如果所有的祖先元素都没有开启定位则根元素就是它的包含块</span>
 </span></span></code></pre></div><h3 id="固定定位">固定定位</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">将元素的position属性设置为fixed则开启了元素的固定定位</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">固定定位也是一种绝对定位</span><span class="err">，</span><span class="nt">所以固定定位的大部分特点都和绝对定位一样</span><span class="o">,</span><span class="nt">唯一不同的是固定定位永远参照于浏览器的视口进行定位</span><span class="o">,</span><span class="nt">固定定位的元素不会随网页的滚动条滚动</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">将元素的</span><span class="nt">position</span><span class="err">属性设置为</span><span class="nt">fixed</span><span class="err">则开启了元素的固定定位</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">固定定位也是一种绝对定位，所以固定定位的大部分特点都和绝对定位一样</span><span class="o">,</span><span class="err">唯一不同的是固定定位永远参照于浏览器的视口进行定位</span><span class="o">,</span><span class="err">固定定位的元素不会随网页的滚动条滚动</span>
 </span></span></code></pre></div><h3 id="粘滞定位">粘滞定位</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">当元素的position属性设置为sticky时则开启了元素的粘滞定位</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">粘滞定位和相对定位的特点基本一致</span><span class="err">，</span><span class="nt">不同的是粘滞定位可以在元素到达某个位置时将其固定</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">当元素的</span><span class="nt">position</span><span class="err">属性设置为</span><span class="nt">sticky</span><span class="err">时则开启了元素的粘滞定位</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">粘滞定位和相对定位的特点基本一致，不同的是粘滞定位可以在元素到达某个位置时将其固定</span>
 </span></span></code></pre></div><h3 id="元素层级">元素层级</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">对于开启了定位元素</span><span class="err">，</span><span class="nt">可以通过z-index属性来指定元素的层级</span>
-</span></span><span class="line"><span class="cl"><span class="nt">z-index需要一个整数作为参数</span><span class="err">，</span><span class="nt">值越大元素的层级越高</span><span class="err">，</span><span class="nt">元素的层级越高越优先显示</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">对于开启了定位元素，可以通过</span><span class="nt">z-index</span><span class="err">属性来指定元素的层级</span>
+</span></span><span class="line"><span class="cl"><span class="nt">z-index</span><span class="err">需要一个整数作为参数，值越大元素的层级越高，元素的层级越高越优先显示</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">如果元素的层级一样</span><span class="err">，</span><span class="nt">则优先显示靠下的元素</span>
+</span></span><span class="line"><span class="cl"><span class="err">如果元素的层级一样，则优先显示靠下的元素</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">祖先的元素的层级再高也不会盖住后代元素</span>
+</span></span><span class="line"><span class="cl"><span class="err">祖先的元素的层级再高也不会盖住后代元素</span>
 </span></span></code></pre></div><h2 id="字体">字体</h2>
 <h3 id="提供字体">提供字体</h3>
 <p>font-face 可以将服务器中的字体直接提供给用户去使用</p>
@@ -906,135 +912,135 @@ if (!doNotTrack) {
 <p>颜色（color）</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">color</span><span class="o">:</span> <span class="p">#</span><span class="nn">fff</span><span class="o">;</span>
 </span></span></code></pre></div><p>字体大小（font-size）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">和font-size相关的单位</span>
-</span></span><span class="line"><span class="cl"><span class="nt">em</span> <span class="nt">相当于当前元素的一个font-size</span>
-</span></span><span class="line"><span class="cl"><span class="nt">rem</span> <span class="nt">相对于根元素的一个font-size</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">和</span><span class="nt">font-size</span><span class="err">相关的单位</span>
+</span></span><span class="line"><span class="cl"><span class="nt">em</span> <span class="err">相当于当前元素的一个</span><span class="nt">font-size</span>
+</span></span><span class="line"><span class="cl"><span class="nt">rem</span> <span class="err">相对于根元素的一个</span><span class="nt">font-size</span>
 </span></span></code></pre></div><p>字体族（font-family）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">serif</span>  <span class="nt">衬线字体</span>
-</span></span><span class="line"><span class="cl"><span class="nt">sans-serif</span> <span class="nt">非衬线字体</span>
-</span></span><span class="line"><span class="cl"><span class="nt">monospace</span> <span class="nt">等宽字体</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">指定字体的类别</span><span class="err">，</span><span class="nt">浏览器会自动使用该类别下的字体</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">font-family</span> <span class="nt">可以同时指定多个字体</span><span class="err">，</span><span class="nt">多个字体间使用</span><span class="o">,</span><span class="nt">隔开</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">字体生效时优先使用第一个</span><span class="err">，</span><span class="nt">第一个无法使用则使用第二个</span> <span class="nt">以此类推</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">serif</span>  <span class="err">衬线字体</span>
+</span></span><span class="line"><span class="cl"><span class="nt">sans-serif</span> <span class="err">非衬线字体</span>
+</span></span><span class="line"><span class="cl"><span class="nt">monospace</span> <span class="err">等宽字体</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">指定字体的类别，浏览器会自动使用该类别下的字体</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">font-family</span> <span class="err">可以同时指定多个字体，多个字体间使用</span><span class="o">,</span><span class="err">隔开</span>
+</span></span><span class="line"><span class="cl">    <span class="err">字体生效时优先使用第一个，第一个无法使用则使用第二个</span> <span class="err">以此类推</span>
 </span></span></code></pre></div><p>字重（font-weight）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">字体的加粗</span>
-</span></span><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">normal</span> <span class="nt">默认值</span> <span class="nt">不加粗</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">bold</span> <span class="nt">加粗</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">100-900</span> <span class="nt">九个级别</span><span class="err">（</span><span class="nt">没什么用</span><span class="err">）</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">字体的加粗</span>
+</span></span><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">normal</span> <span class="err">默认值</span> <span class="err">不加粗</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">bold</span> <span class="err">加粗</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">100-900</span> <span class="err">九个级别（没什么用）</span>
 </span></span></code></pre></div><p>字体的风格（font-style）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">normal</span> <span class="nt">正常的</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">italic</span> <span class="nt">斜体</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">normal</span> <span class="err">正常的</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">italic</span> <span class="err">斜体</span>
 </span></span></code></pre></div><h3 id="图标字体">图标字体</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">在网页中经常需要使用一些图标</span><span class="err">，</span><span class="nt">可以通过图片来引入图标</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">但是图片大小本身比较大</span><span class="err">，</span><span class="nt">并且非常的不灵活</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">在网页中经常需要使用一些图标，可以通过图片来引入图标</span>
+</span></span><span class="line"><span class="cl">    <span class="err">但是图片大小本身比较大，并且非常的不灵活</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">所以在使用图标时</span><span class="err">，</span><span class="nt">我们还可以将图标直接设置为字体</span><span class="err">，</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">然后通过font-face的形式来对字体进行引入</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">所以在使用图标时，我们还可以将图标直接设置为字体，</span>
+</span></span><span class="line"><span class="cl">    <span class="err">然后通过</span><span class="nt">font-face</span><span class="err">的形式来对字体进行引入</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">这样我们就可以通过使用字体的形式来使用图标</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">这样我们就可以通过使用字体的形式来使用图标</span>
 </span></span></code></pre></div><h3 id="文本属性">文本属性</h3>
 <p>行高（line-height）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">行高指的是文字占有的实际高度</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">可以通过line-height来设置行高</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">行高可以直接指定一个大小</span><span class="err">（</span><span class="nt">px</span> <span class="nt">em</span><span class="err">）</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">也可以直接为行高设置一个整数</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">如果是一个整数的话</span><span class="err">，</span><span class="nt">行高将会是字体的指定的倍数</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">行高经常还用来设置文字的行间距</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">行间距</span> <span class="o">=</span> <span class="nt">行高</span> <span class="nt">-</span> <span class="nt">字体大小</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">行高指的是文字占有的实际高度</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">可以通过</span><span class="nt">line-height</span><span class="err">来设置行高</span>
+</span></span><span class="line"><span class="cl">    <span class="err">行高可以直接指定一个大小（</span><span class="nt">px</span> <span class="nt">em</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">    <span class="err">也可以直接为行高设置一个整数</span>
+</span></span><span class="line"><span class="cl">        <span class="err">如果是一个整数的话，行高将会是字体的指定的倍数</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">行高经常还用来设置文字的行间距</span>
+</span></span><span class="line"><span class="cl">    <span class="err">行间距</span> <span class="o">=</span> <span class="err">行高</span> <span class="nt">-</span> <span class="err">字体大小</span>
 </span></span></code></pre></div><p>水平对齐（text-align）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">left</span> <span class="nt">左侧对齐</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">right</span> <span class="nt">右对齐</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">center</span> <span class="nt">居中对齐</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">justify</span> <span class="nt">两端对齐</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">left</span> <span class="err">左侧对齐</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">right</span> <span class="err">右对齐</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">center</span> <span class="err">居中对齐</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">justify</span> <span class="err">两端对齐</span>
 </span></span></code></pre></div><p>垂直对齐（ vertical-align）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">baseline</span> <span class="nt">默认值</span> <span class="nt">基线对齐</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">top</span> <span class="nt">顶部对齐</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">bottom</span> <span class="nt">底部对齐</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">middle</span> <span class="nt">居中对齐</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">baseline</span> <span class="err">默认值</span> <span class="err">基线对齐</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">top</span> <span class="err">顶部对齐</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">bottom</span> <span class="err">底部对齐</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">middle</span> <span class="err">居中对齐</span>
 </span></span></code></pre></div><p>文本修饰（text-decoration）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">none</span> <span class="nt">什么都没有</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">underline</span> <span class="nt">下划线</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">line-through</span> <span class="nt">删除线</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">overline</span> <span class="nt">上划线</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">none</span> <span class="err">什么都没有</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">underline</span> <span class="err">下划线</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">line-through</span> <span class="err">删除线</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">overline</span> <span class="err">上划线</span>
 </span></span></code></pre></div><p>空白（white-space）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">normal</span> <span class="nt">正常</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">nowrap</span> <span class="nt">不换行</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">pre</span> <span class="nt">保留空白</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">normal</span> <span class="err">正常</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">nowrap</span> <span class="err">不换行</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">pre</span> <span class="err">保留空白</span>
 </span></span></code></pre></div><h2 id="背景">背景</h2>
 <p>背景颜色（background-color）</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">background-color</span><span class="o">:</span> <span class="p">#</span><span class="nn">bfa</span><span class="o">;</span>
 </span></span></code></pre></div><p>背景图片 （background-image）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">可以同时设置背景图片和背景颜色</span><span class="err">，</span><span class="nt">这样背景颜色将会成为图片的背景色</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">如果背景的图片小于元素</span><span class="err">，</span><span class="nt">则背景图片会自动在元素中平铺将元素铺满</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">如果背景的图片大于元素</span><span class="err">，</span><span class="nt">将会一个部分背景无法完全显示</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">如果背景图片和元素一样大</span><span class="err">，</span><span class="nt">则会直接正常显示</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">可以同时设置背景图片和背景颜色，这样背景颜色将会成为图片的背景色</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">如果背景的图片小于元素，则背景图片会自动在元素中平铺将元素铺满</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">如果背景的图片大于元素，将会一个部分背景无法完全显示</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">如果背景图片和元素一样大，则会直接正常显示</span>
 </span></span><span class="line"><span class="cl"><span class="nt">background-image</span><span class="o">:</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&#34;./img/1.png&#34;</span><span class="o">);</span>
 </span></span></code></pre></div><p>背景的重复（background-repeat）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">可选值</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">repeat</span> <span class="nt">默认值</span> <span class="err">，</span> <span class="nt">背景会沿着x轴</span> <span class="nt">y轴双方向重复</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">repeat-x</span> <span class="nt">沿着x轴方向重复</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">repeat-y</span> <span class="nt">沿着y轴方向重复</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">no-repeat</span> <span class="nt">背景图片不重复</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">可选值：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">repeat</span> <span class="err">默认值</span> <span class="err">，</span> <span class="err">背景会沿着</span><span class="nt">x</span><span class="err">轴</span> <span class="nt">y</span><span class="err">轴双方向重复</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">repeat-x</span> <span class="err">沿着</span><span class="nt">x</span><span class="err">轴方向重复</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">repeat-y</span> <span class="err">沿着</span><span class="nt">y</span><span class="err">轴方向重复</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">no-repeat</span> <span class="err">背景图片不重复</span>
 </span></span></code></pre></div><p>背景图片的位置（background-position）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">通过</span> <span class="nt">top</span> <span class="nt">left</span> <span class="nt">right</span> <span class="nt">bottom</span> <span class="nt">center</span> <span class="nt">几个表示方位的词来设置背景图片的位置</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">使用方位词时必须要同时指定两个值</span><span class="err">，</span><span class="nt">如果只写一个则第二个默认就是center</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">通过</span> <span class="nt">top</span> <span class="nt">left</span> <span class="nt">right</span> <span class="nt">bottom</span> <span class="nt">center</span> <span class="err">几个表示方位的词来设置背景图片的位置</span>
+</span></span><span class="line"><span class="cl">    <span class="err">使用方位词时必须要同时指定两个值，如果只写一个则第二个默认就是</span><span class="nt">center</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">通过偏移量来指定背景图片的位置</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">水平方向的偏移量</span> <span class="nt">垂直方向变量</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">通过偏移量来指定背景图片的位置</span>
+</span></span><span class="line"><span class="cl">    <span class="err">水平方向的偏移量</span> <span class="err">垂直方向变量</span>
 </span></span></code></pre></div><p>背景的范围（background-clip、background-origin）</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">background-clip</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">border-box</span> <span class="nt">默认值</span><span class="err">，</span><span class="nt">背景会出现在边框的下边</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">padding-box</span> <span class="nt">背景不会出现在边框</span><span class="err">，</span><span class="nt">只出现在内容区和内边距</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">content-box</span> <span class="nt">背景只会出现在内容区</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">border-box</span> <span class="err">默认值，背景会出现在边框的下边</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">padding-box</span> <span class="err">背景不会出现在边框，只出现在内容区和内边距</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">content-box</span> <span class="err">背景只会出现在内容区</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">background-origin</span> <span class="nt">背景图片的偏移量计算的原点</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">padding-box</span> <span class="nt">默认值</span><span class="err">，</span><span class="nt">background-position从内边距处开始计算</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">content-box</span> <span class="nt">背景图片的偏移量从内容区处计算</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">border-box</span> <span class="nt">背景图片的变量从边框处开始计算</span>
+</span></span><span class="line"><span class="cl"><span class="nt">background-origin</span> <span class="err">背景图片的偏移量计算的原点</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">padding-box</span> <span class="err">默认值，</span><span class="nt">background-position</span><span class="err">从内边距处开始计算</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">content-box</span> <span class="err">背景图片的偏移量从内容区处计算</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">border-box</span> <span class="err">背景图片的变量从边框处开始计算</span>
 </span></span></code></pre></div><p>背景图片的大小(background-size)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">第一个值表示宽度</span>
-</span></span><span class="line"><span class="cl"><span class="nt">第二个值表示高度</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">如果只写一个</span><span class="err">，</span><span class="nt">则第二个值默认是</span> <span class="nt">auto</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">第一个值表示宽度</span>
+</span></span><span class="line"><span class="cl"><span class="err">第二个值表示高度</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">如果只写一个，则第二个值默认是</span> <span class="nt">auto</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">cover</span> <span class="nt">图片的比例不变</span><span class="err">，</span><span class="nt">将元素铺满</span>
-</span></span><span class="line"><span class="cl"><span class="nt">contain</span> <span class="nt">图片比例不变</span><span class="err">，</span><span class="nt">将图片在元素中完整显示</span>
+</span></span><span class="line"><span class="cl"><span class="nt">cover</span> <span class="err">图片的比例不变，将元素铺满</span>
+</span></span><span class="line"><span class="cl"><span class="nt">contain</span> <span class="err">图片比例不变，将图片在元素中完整显示</span>
 </span></span></code></pre></div><p>背景图片的固定（background-attachment）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">scroll</span> <span class="nt">默认值</span><span class="err">。</span><span class="nt">背景图像会随着页面其余部分的滚动而移动</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl"><span class="nt">fixed</span> <span class="nt">当页面的其余部分滚动时</span><span class="err">，</span><span class="nt">背景图像不会移动</span><span class="err">。</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">scroll</span> <span class="err">默认值。背景图像会随着页面其余部分的滚动而移动。</span>
+</span></span><span class="line"><span class="cl"><span class="nt">fixed</span> <span class="err">当页面的其余部分滚动时，背景图像不会移动。</span>
 </span></span></code></pre></div><p>渐变</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">通过渐变可以设置一些复杂的背景颜色</span><span class="err">，</span><span class="nt">可以实现从一个颜色向其他颜色过渡的效果</span>
-</span></span><span class="line"><span class="cl"><span class="err">！！</span><span class="nt">渐变是图片</span><span class="err">，</span><span class="nt">需要通过background-image来设置</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">通过渐变可以设置一些复杂的背景颜色，可以实现从一个颜色向其他颜色过渡的效果</span>
+</span></span><span class="line"><span class="cl"><span class="err">！！渐变是图片，需要通过</span><span class="nt">background-image</span><span class="err">来设置</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">线性渐变linear-gradient</span><span class="o">()</span>
-</span></span><span class="line"><span class="cl"><span class="nt">语法</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl"><span class="err">线性渐变</span><span class="nt">linear-gradient</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="err">语法：</span>
 </span></span><span class="line"><span class="cl"> <span class="nt">linear-gradient</span><span class="o">(</span><span class="nt">red</span><span class="o">,</span><span class="nt">yellow</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"> <span class="nt">红色在开头</span><span class="err">，</span><span class="nt">黄色在结尾</span><span class="err">，</span><span class="nt">中间是过渡区域</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">线性渐变的开头</span><span class="err">，</span><span class="nt">我们可以指定一个渐变的方向</span>
+</span></span><span class="line"><span class="cl"> <span class="err">红色在开头，黄色在结尾，中间是过渡区域</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">线性渐变的开头，我们可以指定一个渐变的方向</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">to</span> <span class="nt">left</span><span class="err">、</span><span class="nt">to</span> <span class="nt">right</span><span class="err">、</span><span class="nt">to</span> <span class="nt">bottom</span><span class="err">、</span><span class="nt">to</span> <span class="nt">top</span><span class="err">、</span><span class="nt">deg</span><span class="err">、</span><span class="nt">turn</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">渐变可以同时指定多个颜色</span><span class="err">，</span><span class="nt">多个颜色默认情况下平均分布</span><span class="err">，</span> <span class="nt">也可以手动指定渐变的分布情况</span>
-</span></span><span class="line"><span class="cl"><span class="nt">repeating-linear-gradient</span><span class="o">()</span> <span class="nt">可以平铺的线性渐变</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">渐变可以同时指定多个颜色，多个颜色默认情况下平均分布，</span> <span class="err">也可以手动指定渐变的分布情况</span>
+</span></span><span class="line"><span class="cl"><span class="nt">repeating-linear-gradient</span><span class="o">()</span> <span class="err">可以平铺的线性渐变</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">径向渐变radial-gradient</span><span class="o">()</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">语法</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">radial-gradient</span><span class="o">(</span><span class="nt">形状</span> <span class="nt">at</span> <span class="nt">位置</span><span class="o">,</span> <span class="nt">颜色</span> <span class="nt">位置</span> <span class="o">,</span><span class="nt">颜色</span> <span class="nt">位置</span> <span class="o">,</span><span class="nt">颜色</span> <span class="nt">位置</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">形状</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">circle</span> <span class="nt">圆形</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">ellipse</span> <span class="nt">椭圆</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">closest-side</span> <span class="nt">近边</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">closest-corner</span> <span class="nt">近角</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">farthest-side</span> <span class="nt">远边</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">farthest-corner</span> <span class="nt">远角</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">位置</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">top</span> <span class="nt">right</span> <span class="nt">left</span> <span class="nt">center</span> <span class="nt">bottom</span> <span class="nt">坐标</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">默认情况下径向渐变的形状根据元素的形状来计算的</span>
-</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="nt">我们也可以手动指定径向渐变的形状circle</span><span class="err">、</span><span class="nt">ellipse</span>
+</span></span><span class="line"><span class="cl"><span class="err">径向渐变</span><span class="nt">radial-gradient</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">语法：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">radial-gradient</span><span class="o">(</span><span class="err">形状</span> <span class="nt">at</span> <span class="err">位置</span><span class="o">,</span> <span class="err">颜色</span> <span class="err">位置</span> <span class="o">,</span><span class="err">颜色</span> <span class="err">位置</span> <span class="o">,</span><span class="err">颜色</span> <span class="err">位置</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="err">形状：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">circle</span> <span class="err">圆形</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">ellipse</span> <span class="err">椭圆</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">closest-side</span> <span class="err">近边</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">closest-corner</span> <span class="err">近角</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">farthest-side</span> <span class="err">远边</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">farthest-corner</span> <span class="err">远角</span>
+</span></span><span class="line"><span class="cl">    <span class="err">位置：</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">top</span> <span class="nt">right</span> <span class="nt">left</span> <span class="nt">center</span> <span class="nt">bottom</span> <span class="err">坐标</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">默认情况下径向渐变的形状根据元素的形状来计算的</span>
+</span></span><span class="line"><span class="cl"><span class="nt">-</span> <span class="err">我们也可以手动指定径向渐变的形状</span><span class="nt">circle</span><span class="err">、</span><span class="nt">ellipse</span>
 </span></span></code></pre></div><h2 id="表单">表单</h2>
 <blockquote>
 <p>在现实生活中表单用于提交数据</p>

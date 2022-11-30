@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>RFC on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.ml/tags/rfc/</link>
+        <link>https://aecra.github.io/tags/rfc/</link>
         <description>Recent content in RFC on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 21 Feb 2022 22:44:13 +0000</lastBuildDate><atom:link href="https://aecra.ml/tags/rfc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 21 Feb 2022 22:44:13 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/rfc/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>RFC6749 | OAuth 2.0 授权框架 中文版</title>
-        <link>https://aecra.ml/article/the-oauth-2.0-authorization-framework-in-chinese/</link>
+        <link>https://aecra.github.io/article/the-oauth-2.0-authorization-framework-in-chinese/</link>
         <pubDate>Mon, 21 Feb 2022 22:44:13 +0000</pubDate>
         
-        <guid>https://aecra.ml/article/the-oauth-2.0-authorization-framework-in-chinese/</guid>
+        <guid>https://aecra.github.io/article/the-oauth-2.0-authorization-framework-in-chinese/</guid>
         <description>&lt;img src="https://static.aecra.ml/cover/The-OAuth-2.0-Authorization-Framework-in-Chinese.png" alt="Featured image of post RFC6749 | OAuth 2.0 授权框架 中文版" /&gt;前言 摘要 OAuth2.0 授权框架允许第三方应用获取对 HTTP 服务的有限的访问权限，既可以以资源所有者名义在资源所有者和 HTTP 服务之间进行允许的交互，也可以允许第三方</description>
         </item>
         
