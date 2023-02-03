@@ -66,11 +66,31 @@
             <url>
                 <loc>https://aecra.github.io/tags/gdb/</loc>
                 <lastmod>2022-10-31T20:27:48+00:00</lastmod>
+                <xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://aecra.github.io/tags/gdb/"
+                />
+                <xhtml:link
+                        rel="alternate"
+                        hreflang="zh-cn"
+                        href="https://aecra.github.io/tags/gdb/"
+                />
             </url>
             
             <url>
                 <loc>https://aecra.github.io/article/brief-instructions-for-using-gdb/</loc>
                 <lastmod>2022-10-31T20:27:48+00:00</lastmod>
+                <xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://aecra.github.io/article/brief-instructions-for-using-gdb/"
+                />
+                <xhtml:link
+                        rel="alternate"
+                        hreflang="zh-cn"
+                        href="https://aecra.github.io/article/brief-instructions-for-using-gdb/"
+                />
             </url>
             
             <url>

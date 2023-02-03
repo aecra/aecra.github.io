@@ -6,7 +6,15 @@
         <description>Recent content in Tags on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Tue, 16 Aug 2022 10:43:50 +0000</lastBuildDate><atom:link href="https://aecra.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 31 Oct 2022 20:27:48 +0000</lastBuildDate><atom:link href="https://aecra.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>GDB</title>
+        <link>https://aecra.github.io/en/tags/gdb/</link>
+        <pubDate>Mon, 31 Oct 2022 20:27:48 +0000</pubDate>
+        
+        <guid>https://aecra.github.io/en/tags/gdb/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>podman</title>
         <link>https://aecra.github.io/en/tags/podman/</link>
         <pubDate>Tue, 16 Aug 2022 10:43:50 +0000</pubDate>

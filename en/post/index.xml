@@ -6,7 +6,17 @@
         <description>Recent content in Posts on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Tue, 16 Aug 2022 10:43:50 +0000</lastBuildDate><atom:link href="https://aecra.github.io/en/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 31 Oct 2022 20:27:48 +0000</lastBuildDate><atom:link href="https://aecra.github.io/en/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Brief Instructions for Using GDB</title>
+        <link>https://aecra.github.io/en/article/brief-instructions-for-using-gdb/</link>
+        <pubDate>Mon, 31 Oct 2022 20:27:48 +0000</pubDate>
+        
+        <guid>https://aecra.github.io/en/article/brief-instructions-for-using-gdb/</guid>
+        <description>&lt;img src="https://static.aecra.ml/cover/Brief-Instructions-for-Using-GDB.png" alt="Featured image of post Brief Instructions for Using GDB" /&gt;What is GDB？ GDB is the GNU Project debugger that allows you to see what&amp;rsquo;s going on &amp;ldquo;inside&amp;rdquo; another program while it&amp;rsquo;s executing &amp;ndash; or what another program was doing when it crashed.
+There are four main things GDB can do (plus other things to support them) to help you catch errors on the fly:
+Start the program, specifying anything that might affect its behavior. Causes your program to stop on specified conditions.</description>
+        </item>
+        <item>
         <title>Podman build container residual problem when the build process is forced to terminate</title>
         <link>https://aecra.github.io/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</link>
         <pubDate>Tue, 16 Aug 2022 10:43:50 +0000</pubDate>

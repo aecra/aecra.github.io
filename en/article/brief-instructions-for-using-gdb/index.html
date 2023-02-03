@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='学编程也有五六年了，但仍然不会使用 GDB 这样一个强大的调试工具，学了学之后，就写了这篇简陋的文章，更多的是提供一个如何使用的参照，更多详细的内容还是需要查看 GDB 的官方文档。'><meta name='keywords' content='GDB'><title>GDB 简要使用说明</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='I have been learning programming for five or six years, but I still don’t know how to use a powerful debugging tool such as GDB. After I learned it, I wrote this simple article. It is more about providing a reference on how to use it, and more detailed The content still needs to check the official documentation of GDB.'><meta name='keywords' content='GDB'><title>Brief Instructions for Using GDB</title>
 
 
 
-<link rel='canonical' href='https://aecra.github.io/article/brief-instructions-for-using-gdb/'>
+<link rel='canonical' href='https://aecra.github.io/en/article/brief-instructions-for-using-gdb/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='GDB 简要使用说明'>
-<meta property='og:description' content='学编程也有五六年了，但仍然不会使用 GDB 这样一个强大的调试工具，学了学之后，就写了这篇简陋的文章，更多的是提供一个如何使用的参照，更多详细的内容还是需要查看 GDB 的官方文档。'>
+<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='Brief Instructions for Using GDB'>
+<meta property='og:description' content='I have been learning programming for five or six years, but I still don’t know how to use a powerful debugging tool such as GDB. After I learned it, I wrote this simple article. It is more about providing a reference on how to use it, and more detailed The content still needs to check the official documentation of GDB.'>
 
 
-<meta property='og:url' content='https://aecra.github.io/article/brief-instructions-for-using-gdb/'>
+<meta property='og:url' content='https://aecra.github.io/en/article/brief-instructions-for-using-gdb/'>
 <meta property='og:site_name' content='Tian Jiale&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='GDB' /><meta property='article:published_time' content='2022-10-31T20:27:48&#43;00:00'/><meta property='article:modified_time' content='2022-10-31T20:27:48&#43;00:00'/><meta property='og:image' content='https://static.aecra.ml/cover/Brief-Instructions-for-Using-GDB.png' />
-<meta name="twitter:title" content="GDB 简要使用说明">
-<meta name="twitter:description" content="学编程也有五六年了，但仍然不会使用 GDB 这样一个强大的调试工具，学了学之后，就写了这篇简陋的文章，更多的是提供一个如何使用的参照，更多详细的内容还是需要查看 GDB 的官方文档。"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brief Instructions for Using GDB">
+<meta name="twitter:description" content="I have been learning programming for five or six years, but I still don’t know how to use a powerful debugging tool such as GDB. After I learned it, I wrote this simple article. It is more about providing a reference on how to use it, and more detailed The content still needs to check the official documentation of GDB."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://static.aecra.ml/cover/Brief-Instructions-for-Using-GDB.png' />
     <link rel="shortcut icon" href="/img/favicon.png" />
 
@@ -58,7 +58,7 @@ if (!doNotTrack) {
 </script>
 <div class="container main-container flex on-phone--column extended">
     <aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -68,7 +68,7 @@ if (!doNotTrack) {
         
             
             <figure class="site-avatar">
-                <a href="/">
+                <a href="/en">
                 
                     
                     
@@ -87,7 +87,7 @@ if (!doNotTrack) {
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Tian Jiale&#39;s Blog</a></h1>
+            <h1 class="site-name"><a href="/en">Tian Jiale&#39;s Blog</a></h1>
             <h2 class="site-description">Leave a line of dialogue for the years to come.</h2>
         </div>
     </header><ol class="social-menu">
@@ -117,7 +117,7 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='/about/' >
+            <a href='/en/about/' >
                 
                 
                 
@@ -130,14 +130,14 @@ if (!doNotTrack) {
 
 
                 
-                <span>关 于</span>
+                <span>About</span>
             </a>
         </li>
         
         
 
         <li >
-            <a href='/archives/' >
+            <a href='/en/archives/' >
                 
                 
                 
@@ -151,14 +151,14 @@ if (!doNotTrack) {
 
 
                 
-                <span>归 档</span>
+                <span>Archives</span>
             </a>
         </li>
         
         
 
         <li >
-            <a href='/search/' >
+            <a href='/en/search/' >
                 
                 
                 
@@ -171,14 +171,14 @@ if (!doNotTrack) {
 
 
                 
-                <span>搜 索</span>
+                <span>Search</span>
             </a>
         </li>
         
         
 
         <li >
-            <a href='/link/' >
+            <a href='/en/link/' >
                 
                 
                 
@@ -191,14 +191,14 @@ if (!doNotTrack) {
 
 
                 
-                <span>友 链</span>
+                <span>Friends</span>
             </a>
         </li>
         
         
 
         <li >
-            <a href='/index.xml' >
+            <a href='/en/index.xml' >
                 
                 
                 
@@ -232,9 +232,9 @@ if (!doNotTrack) {
 
                     <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
                         
-                            <option value="https://aecra.github.io/" selected>中文</option>
+                            <option value="https://aecra.github.io/" >中文</option>
                         
-                            <option value="https://aecra.github.io/en/" >English</option>
+                            <option value="https://aecra.github.io/en/" selected>English</option>
                         
                     </select>
                 </li>
@@ -258,7 +258,7 @@ if (!doNotTrack) {
 
 
 
-                    <span>暗 色</span>
+                    <span>Dark Mode</span>
                 </li>
             
         </div>
@@ -271,9 +271,9 @@ if (!doNotTrack) {
         <div class="article-image">
             
             
-            <a href="/article/brief-instructions-for-using-gdb/">
+            <a href="/en/article/brief-instructions-for-using-gdb/">
                 
-                    <img src="https://static.aecra.ml/cover/Brief-Instructions-for-Using-GDB.png" loading="lazy" alt="Featured image of post GDB 简要使用说明" />
+                    <img src="https://static.aecra.ml/cover/Brief-Instructions-for-Using-GDB.png" loading="lazy" alt="Featured image of post Brief Instructions for Using GDB" />
                 
             </a>
         </div>
@@ -284,12 +284,12 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/article/brief-instructions-for-using-gdb/">GDB 简要使用说明</a>
+            <a href="/en/article/brief-instructions-for-using-gdb/">Brief Instructions for Using GDB</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            学编程也有五六年了，但仍然不会使用 GDB 这样一个强大的调试工具，学了学之后，就写了这篇简陋的文章，更多的是提供一个如何使用的参照，更多详细的内容还是需要查看 GDB 的官方文档。
+            I have been learning programming for five or six years, but I still don’t know how to use a powerful debugging tool such as GDB. After I learned it, I wrote this simple article. It is more about providing a reference on how to use it, and more detailed The content still needs to check the official documentation of GDB.
         </h3>
         
     </div>
@@ -322,7 +322,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    阅读时长: 6 分钟
+                    7 minute read
                 </time>
             </div>
         
@@ -344,7 +344,7 @@ if (!doNotTrack) {
 
             <div>
                 
-                    <a href="https://aecra.github.io/en/article/brief-instructions-for-using-gdb/" class="link">English</a>
+                    <a href="https://aecra.github.io/article/brief-instructions-for-using-gdb/" class="link">中文</a>
                 
             </div>
         </footer>
@@ -355,18 +355,18 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <h2 id="什么是-gdb">什么是 GDB？</h2>
+    <h2 id="what-is-gdb">What is GDB？</h2>
 <p><a class="link" href="https://www.sourceware.org/gdb/"  target="_blank" rel="noopener"
-    >GDB</a> 是 GNU Project 调试器，它允许您查看另一个程序在执行时“内部”发生了什么——或者在它崩溃时另一个程序正在做什么。</p>
-<p>GDB 可以做四种主要的事情(加上支持这些事情的其他事情)来帮助你在行动中捕捉错误:</p>
+    >GDB</a> is the GNU Project debugger that allows you to see what&rsquo;s going on &ldquo;inside&rdquo; another program while it&rsquo;s executing &ndash; or what another program was doing when it crashed.</p>
+<p>There are four main things GDB can do (plus other things to support them) to help you catch errors on the fly:</p>
 <ul>
-<li>启动程序，指定任何可能影响其行为的内容。</li>
-<li>使您的程序在指定条件下停止。</li>
-<li>检查程序停止时发生了什么。</li>
-<li>更改程序中的内容，这样您就可以尝试纠正一个 bug 的影响，然后继续了解另一个 bug。</li>
+<li>Start the program, specifying anything that might affect its behavior.</li>
+<li>Causes your program to stop on specified conditions.</li>
+<li>Check what happens when the program stops.</li>
+<li>Change things in a program so you can try to correct the effects of one bug and move on to another bug.</li>
 </ul>
-<p>这些程序可能与 GDB (本机)在同一台机器上执行，也可能在另一台机器(远程)上执行，或者在模拟器上执行。GDB 可以在大多数流行的 UNIX 和 Microsoft Windows 变体，以及 Mac OS X 上运行。</p>
-<p>GDB 支持如下语言：</p>
+<p>These programs may be executed on the same machine as GDB (native), on another machine (remote), or on an emulator. GDB runs on most popular UNIX and Microsoft Windows variants, as well as Mac OS X.</p>
+<p>GDB support many programming languages, including:</p>
 <ul>
 <li>Ada</li>
 <li>Assembly</li>
@@ -381,9 +381,9 @@ if (!doNotTrack) {
 <li>Pascal</li>
 <li>Rust</li>
 </ul>
-<h2 id="如何启动-gdb">如何启动 GDB？</h2>
-<p>如果我们使用 [tldr](<a class="link" href="https://tldr.sh/"  target="_blank" rel="noopener"
-    >tldr pages</a>) 来查看 gdb 使用方法，我们可以得到如下提示：</p>
+<h2 id="how-to-run-a-gdb">How to run a GDB？</h2>
+<p>If we use [tldr](<a class="link" href="https://tldr.sh/"  target="_blank" rel="noopener"
+    >tldr pages</a>) to see how to use gdb, we can get the following prompt:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tldr gdb
 </span></span><span class="line"><span class="cl">gdb
 </span></span><span class="line"><span class="cl">The GNU Debugger.More information: https://www.gnu.org/software/gdb.
@@ -402,15 +402,15 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"> - Start gdb and pass arguments to the executable:
 </span></span><span class="line"><span class="cl">   gdb --args <span class="o">{{</span>executable<span class="o">}}</span> <span class="o">{{</span>argument1<span class="o">}}</span> <span class="o">{{</span>argument2<span class="o">}}</span>
-</span></span></code></pre></div><p>这是 <code>GDB</code> 的几种常见用法，分别是：</p>
+</span></span></code></pre></div><p>Here are several common uses of <code>GDB</code>, namely:</p>
 <ul>
-<li>执行一个程序并 debug；</li>
-<li>通过指定程序的 <code>proceID</code> 进入一个正在运行的程序并 debug；</li>
-<li>通过指定程序出错时生成的 [core 文件](<a class="link" href="https://portal.perforce.com/s/article/2979"  target="_blank" rel="noopener"
-    >Core Files in Linux (perforce.com)</a>) 还原程序出错时的现场来 debug；</li>
-<li>执行一个程序并传入参数并 debug。</li>
+<li>Execute a program and debug;</li>
+<li>Enter a running program and debug it by specifying the program&rsquo;s <code>proceID</code>;</li>
+<li>By specifying the [core file](<a class="link" href="https://portal.perforce.com/s/article/2979"  target="_blank" rel="noopener"
+    >Core Files in Linux (perforce.com)</a>) generated when the program fails, restore the scene when the program fails to debug;</li>
+<li>Execute a program and pass in parameters and debug.</li>
 </ul>
-<p>我们编写一个简单的 C 语言程序作为我们调试程序。</p>
+<p>We write a simple C language program as our debugger.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
@@ -421,11 +421,11 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>编译链接为可执行文件同时附带调试信息：</p>
+</span></span></code></pre></div><p>Compile and link to an executable file with debugging information:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -g a.c -o a
-</span></span></code></pre></div><p>使用如下命令开启 GDB 调试：</p>
+</span></span></code></pre></div><p>Start GDB debugging with the following command:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gdb a
-</span></span></code></pre></div><p>进入 GDB 后将显示类似如下的信息：</p>
+</span></span></code></pre></div><p>After entering GDB, information similar to the following will be displayed:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">GNU gdb (Debian 10.1-1.7) 10.1.90.20210103-git
 </span></span><span class="line"><span class="cl">Copyright (C) 2021 Free Software Foundation, Inc.
 </span></span><span class="line"><span class="cl">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
@@ -444,69 +444,69 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">Reading symbols from a...
 </span></span><span class="line"><span class="cl">(No debugging symbols found in a)
 </span></span><span class="line"><span class="cl">(gdb)
-</span></span></code></pre></div><p>它给我们提示可以使用 <code>apropos word</code> 来查找相关的命令，所以在不查询文档时可以通过这种方法快速查找某个命令如何使用。</p>
-<p>更多启动相关命令见官方文档 <a class="link" href="https://sourceware.org/gdb/current/onlinedocs/gdb#Running"  target="_blank" rel="noopener"
+</span></span></code></pre></div><p>It gives us a hint that <code>apropos word</code> can be used to find related commands, so we can quickly find out how to use a certain command without querying the document.</p>
+<p>For more startup related commands, see the official documentation <a class="link" href="https://sourceware.org/gdb/current/onlinedocs/gdb#Running"  target="_blank" rel="noopener"
     >Running (Debugging with GDB) (sourceware.org)</a>。</p>
-<h2 id="如何在-gdb-中调试程序">如何在 GDB 中调试程序？</h2>
-<p>调试无非是了解程序的运行逻辑，以及在某个执行步骤中程序的状态，所以作为入门只需要知道如何中断、启动、查询，以及如何使用 display  来提供代码展示。</p>
-<h3 id="中断">中断</h3>
+<h2 id="how-to-debug-a-program-in-gdb">How to debug a program in GDB?</h2>
+<p>Debugging is nothing more than understanding the running logic of the program and the state of the program in a certain execution step, so as an introduction, you only need to know how to interrupt, start, query, and how to use <code>display</code> to provide code display.</p>
+<h3 id="interrupt">Interrupt</h3>
 <p><a class="link" href="https://sourceware.org/gdb/current/onlinedocs/gdb#Breakpoints"  target="_blank" rel="noopener"
-    >中断</a>可以使用断点(Breakpoints)、观察点(Watchpoints)、捕捉点(Catchpoints)。断点是程序运行到此处则中断；观察点用于观察某个变量甚至是由运算符组合的许多变量，如果变量值发生变化则中断；捕捉点则是在程序触发某种事件时中断，如 catch、throw、assert、exec、syscall、fork、vfork、signal。</p>
-<p>可以使用 list 命令来查询代码，每次执行将输出十行代码，如果需要获取更多可以多次使用 list 命令，同时 list 也支持打印指定行的代码，用法如下：</p>
+    >Break</a> can use Breakpoints, Watchpoints, Catchpoints. A breakpoint is where the program runs and breaks; an Watchpoint is used to observe a variable or even many variables combined by operators, and break if the value of the variable changes; a Catchpoint is to break when the program triggers an event, Such as catch, throw, assert, exec, syscall, fork, vfork, signal.</p>
+<p>You can use the <code>list</code> command to query the code. Each execution will output ten lines of code. If you need to get more, you can use the <code>list</code> command multiple times. Similarly, <code>list</code> also supports printing the code of the specified line. The usage is as follows:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) list
 (gdb) list 3,5
-</code></pre><p>使用如下命令设置断点：</p>
+</code></pre><p>Set a breakpoint with the following command:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) break locspec
-</code></pre><p>locspecc 可以指定函数名、行号、指令地址等，break 可以缩写为 b。</p>
-<p>使用如下命令来查询断点：</p>
+</code></pre><p>locspecc can specify the function name, line number, instruction address, etc., and break can be abbreviated as b.</p>
+<p>Use the following command to query breakpoints:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) info breakpoints
 (gdb) info b
-</code></pre><p>使用如下命令设置观察点：</p>
+</code></pre><p>Use the following command to set the watchpoint:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) watch expr
-</code></pre><p>使用如下方式来查询观察点：</p>
+</code></pre><p>Use the following method to query watchpoints:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) info watchpoints
-</code></pre><p>使用如下方式来设置捕捉点：</p>
+</code></pre><p>Use the following method to set the catchpoints:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) catch event
-</code></pre><p>捕捉点同样使用 <code>info b</code> 来查看，值得一提的是，此命令同样会列出我们设置的观察点。</p>
-<h3 id="启动">启动</h3>
-<p>启动分为从最开始启动程序和中断后继续执行程序。</p>
-<p>从最开始启动程序的命令有starti 和 run两个命令。其中 starti 是开启程序，并停止在第一个指令，该指令在 linux 为 _start 而非 main 函数，因为堆栈、全局函数等一系列程序初始状态尚未设置。run 命令则是开启程序并在到达设置的断点处中断。</p>
-<p>中断后继续执行程序，其实是 <a class="link" href="https://sourceware.org/gdb/current/onlinedocs/gdb#Continuing-and-Stepping"  target="_blank" rel="noopener"
-    >Continuing and Stepping</a> ，这里只介绍最常用的几个命令：</p>
+</code></pre><p>The catchpoints is also viewed using <code>info b</code>. It is worth mentioning that this command will also list the watchpoints we set.</p>
+<h3 id="start">Start</h3>
+<p>Startup is divided into starting the program from the beginning and continuing the program after interruption.</p>
+<p>There are two commands to start the program from the very beginning: <code>starti</code> and <code>run</code>. Among them, starti is to start the program and stop at the first instruction. This instruction is <code>_start</code> instead of the <code>main</code> function in Linux, because the initial state of a series of programs such as the stack and global functions has not been set. The <code>run</code> command starts the program and interrupts when it reaches the set breakpoint.</p>
+<p>Continuing to execute the program after interruption is actually <a class="link" href="https://sourceware.org/gdb/current/onlinedocs/gdb#Continuing-and-Stepping"  target="_blank" rel="noopener"
+    >Continuing and Stepping</a>. Only the most commonly used ones are introduced here A few commands:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) continue / c
-# 在程序上次停止的地址处恢复程序执行；绕过在该地址设置的任何断点，直到遇到下一个断点。
+# Resume program execution, at the address where your program last stopped; any breakpoints set at that address are bypassed until the next breakpoint is reached.
 
 (gdb) step / s
-# 继续运行程序，直到控制到达另一个源代码行，然后停止它并将控制返回给 GDB，如果遇到函数则进入函数。
+# Continue running the program until control reaches another source line, then stop it and return control to GDB, stepping into a function if it encounters it.
 
 (gdb) step count
-# 按步骤继续运行，但要计算次数。如果在计数步骤之前出现断点或与单步执行无关的信号，则单步执行立即停止。
+# Continue to run step by step, but count times. If a breakpoint or a signal unrelated to single stepping occurs before the count step, single stepping stops immediately.
 
 (gdb) next [count] / n [count]
-# 继续到当前(最内层)堆栈帧中的下一个源行。这与 step 类似，但是在代码行中出现的函数调用不会停止执行，即将函数看作一个原子指令。
+# Continue to the next source line in the current (innermost) stack frame. This is similar to `step`, but the occurrence of a function call within a line of code does not stop execution, ie the function is treated as an atomic instruction.
 
 (gdb) finish
-# 继续运行，直到所选堆栈帧中的函数返回之后。
+# Continue running until after the function in the selected stack frame returns.
 
 (gdb) until locspec
-# 继续运行程序，直到程序到达解析 locspec 的代码位置，或者当前堆栈帧返回。
+# Continue running the program until the program reaches a location in the code that resolves the `locspec`, or the current stack frame returns.
 
 (gdb) stepi / si
-# 执行一个指令，然后停止并返回到调试器。
+# Executes an instruction, then stops and returns to the debugger.
 
 (gdb) nexti / ni
-# 执行一个指令，但如果是函数调用，则继续执行，直到函数返回。
-</code></pre><h3 id="查询">查询</h3>
-<p>在程序执行过程中，我们可能需要获取某些信息，如前文提到的查询断点指令 <code>info breakpoints</code>，如下是常用的查询：</p>
-<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) print expr       # 打印表达式的值
-(gdb) info breakpoints # 查询断点
-(gdb) info frame       # 查询堆栈信息
-(gdb) info registers   # 查询寄存器的值
-</code></pre><h3 id="更友好的页面">更友好的页面</h3>
-<p>为了更清晰地直到程序运行到哪里，我们可以显示源代码，甚至是汇编代码。</p>
-<p>显示当前运行的源代码：</p>
+# Executes an instruction, but if it is a function call, continues execution until the function returns.
+</code></pre><h3 id="queries">Queries</h3>
+<p>During program execution, we may need to obtain certain information, such as the query breakpoint instruction <code>info breakpoints</code> mentioned above, the following are commonly used queries:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) print expr       # print the value of the expression
+(gdb) info breakpoints # query breakpoint
+(gdb) info frame       # Query stack information
+(gdb) info registers   # Query the value of the register
+</code></pre><h3 id="friendlier-page">Friendlier page</h3>
+<p>To see exactly where the program is going, we can show the source code, or even the assembly code.</p>
+<p>Display the currently running source code:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) layout src
-</code></pre><p>我们可以得到如下页面：</p>
+</code></pre><p>We can get the following page:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">┌─a.c────────────────────────────────────────────────────────────────────────────┐
 </span></span><span class="line"><span class="cl">│   1           #include &lt;stdio.h&gt;                                               │
 </span></span><span class="line"><span class="cl">│   2                                                                            │
@@ -531,9 +531,9 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">native process 134526 In: main                           L5    PC: 0x55555555513d
 </span></span><span class="line"><span class="cl">(gdb) layout asm
 </span></span><span class="line"><span class="cl">(gdb)
-</span></span></code></pre></div><p>显示汇编代码：</p>
+</span></span></code></pre></div><p>Show assembly code:</p>
 <pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) layout src
-</code></pre><p>得到如下页面：</p>
+</code></pre><p>Get the following page:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">┌────────────────────────────────────────────────────────────────────────────────┐
 </span></span><span class="line"><span class="cl">│   0x555555555135 &lt;main&gt;           push   %rbp                                  │
 </span></span><span class="line"><span class="cl">│   0x555555555136 &lt;main+1&gt;         mov    %rsp,%rbp                             │
@@ -568,7 +568,7 @@ if (!doNotTrack) {
         
             
             
-            <a href="/tags/gdb/">GDB</a>
+            <a href="/en/tags/gdb/">GDB</a>
         
     </section>
 
@@ -634,7 +634,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -735,19 +735,19 @@ if (!doNotTrack) {
 
 
         </div>
-        <h2 class="widget-title section-title">目录</h2>
+        <h2 class="widget-title section-title">Table of contents</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#什么是-gdb">什么是 GDB？</a></li>
-    <li><a href="#如何启动-gdb">如何启动 GDB？</a></li>
-    <li><a href="#如何在-gdb-中调试程序">如何在 GDB 中调试程序？</a>
+    <li><a href="#what-is-gdb">What is GDB？</a></li>
+    <li><a href="#how-to-run-a-gdb">How to run a GDB？</a></li>
+    <li><a href="#how-to-debug-a-program-in-gdb">How to debug a program in GDB?</a>
       <ol>
-        <li><a href="#中断">中断</a></li>
-        <li><a href="#启动">启动</a></li>
-        <li><a href="#查询">查询</a></li>
-        <li><a href="#更友好的页面">更友好的页面</a></li>
+        <li><a href="#interrupt">Interrupt</a></li>
+        <li><a href="#start">Start</a></li>
+        <li><a href="#queries">Queries</a></li>
+        <li><a href="#friendlier-page">Friendlier page</a></li>
       </ol>
     </li>
   </ol>
