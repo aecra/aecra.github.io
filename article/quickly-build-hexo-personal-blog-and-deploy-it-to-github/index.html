@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文通过简略的步骤展示了 hexo 静态博客生成器的使用方法，并介绍了 GitHub 推送个人博客的方法，最后还有一个不知道有没有用的绑定域名的说明。'><meta name='keywords' content='hexo'><title>快速搭建 Hexo 个人博客并部署至 GitHub</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文通过简略的步骤展示了 hexo 静态博客生成器的使用方法，并介绍了 GitHub 推送个人博客的方法，最后还有一个不知道有没有用的绑定域名的说明。'>
+<meta name='keywords' content='hexo'><title>快速搭建 Hexo 个人博客并部署至 GitHub</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/quickly-build-hexo-personal-blog-and-deploy-it-to-github/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='快速搭建 Hexo 个人博客并部署至 GitHub'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='快速搭建 Hexo 个人博客并部署至 GitHub'>
 <meta property='og:description' content='本文通过简略的步骤展示了 hexo 静态博客生成器的使用方法，并介绍了 GitHub 推送个人博客的方法，最后还有一个不知道有没有用的绑定域名的说明。'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,78 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#准备环境">准备环境</a>
+      <ol>
+        <li><a href="#安装-git">安装 Git</a></li>
+        <li><a href="#安装-nodejs">安装 Node.js</a></li>
+      </ol>
+    </li>
+    <li><a href="#安装-hexo">安装 Hexo</a>
+      <ol>
+        <li><a href="#安装-cnpm">安装 cnpm</a></li>
+        <li><a href="#安装-hexo-cli">安装 hexo-cli</a>
+          <ol>
+            <li><a href="#用命令创建-hexo-文件夹">用命令创建 hexo 文件夹</a></li>
+            <li><a href="#用命令安装-hexo">用命令安装 hexo</a></li>
+            <li><a href="#初始化-hexo">初始化 hexo</a></li>
+            <li><a href="#测试安装成功">测试安装成功</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#将博客部署到-github">将博客部署到 GitHub</a>
+      <ol>
+        <li><a href="#如果没有-github-账户的先去注册有-github-账户的直接下一步">如果没有 GitHub 账户的先去注册，有 GitHub 账户的直接下一步</a></li>
+        <li><a href="#设置-username-和-useremail">设置 user.name 和 user.email</a></li>
+        <li><a href="#生成-ssh-密匙">生成 ssh 密匙</a></li>
+        <li><a href="#查看-ssh-密匙">查看 ssh 密匙</a></li>
+        <li><a href="#在-github-账户下添加-ssh-key">在 GitHub 账户下添加 SSH key</a></li>
+        <li><a href="#创建-github-仓库">创建 GitHub 仓库</a></li>
+        <li><a href="#修改-hexo-配置">修改 hexo 配置</a></li>
+        <li><a href="#测试并部署">测试并部署</a></li>
+      </ol>
+    </li>
+    <li><a href="#绑定域名">绑定域名</a>
+      <ol>
+        <li><a href="#添加解析记录">添加解析记录</a></li>
+        <li><a href="#配置-hexo">配置 hexo</a></li>
+      </ol>
+    </li>
+    <li><a href="#hexo-博客已搭建完成">Hexo 博客已搭建完成</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +362,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +402,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -506,7 +578,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -590,76 +662,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#准备环境">准备环境</a>
-      <ol>
-        <li><a href="#安装-git">安装 Git</a></li>
-        <li><a href="#安装-nodejs">安装 Node.js</a></li>
-      </ol>
-    </li>
-    <li><a href="#安装-hexo">安装 Hexo</a>
-      <ol>
-        <li><a href="#安装-cnpm">安装 cnpm</a></li>
-        <li><a href="#安装-hexo-cli">安装 hexo-cli</a>
-          <ol>
-            <li><a href="#用命令创建-hexo-文件夹">用命令创建 hexo 文件夹</a></li>
-            <li><a href="#用命令安装-hexo">用命令安装 hexo</a></li>
-            <li><a href="#初始化-hexo">初始化 hexo</a></li>
-            <li><a href="#测试安装成功">测试安装成功</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#将博客部署到-github">将博客部署到 GitHub</a>
-      <ol>
-        <li><a href="#如果没有-github-账户的先去注册有-github-账户的直接下一步">如果没有 GitHub 账户的先去注册，有 GitHub 账户的直接下一步</a></li>
-        <li><a href="#设置-username-和-useremail">设置 user.name 和 user.email</a></li>
-        <li><a href="#生成-ssh-密匙">生成 ssh 密匙</a></li>
-        <li><a href="#查看-ssh-密匙">查看 ssh 密匙</a></li>
-        <li><a href="#在-github-账户下添加-ssh-key">在 GitHub 账户下添加 SSH key</a></li>
-        <li><a href="#创建-github-仓库">创建 GitHub 仓库</a></li>
-        <li><a href="#修改-hexo-配置">修改 hexo 配置</a></li>
-        <li><a href="#测试并部署">测试并部署</a></li>
-      </ol>
-    </li>
-    <li><a href="#绑定域名">绑定域名</a>
-      <ol>
-        <li><a href="#添加解析记录">添加解析记录</a></li>
-        <li><a href="#配置-hexo">配置 hexo</a></li>
-      </ol>
-    </li>
-    <li><a href="#hexo-博客已搭建完成">Hexo 博客已搭建完成</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -677,18 +679,6 @@ if (!doNotTrack) {
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

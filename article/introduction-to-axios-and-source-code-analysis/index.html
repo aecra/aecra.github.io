@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='别看记了这么多，我甚至都忘了我学过这玩意；axios 号称前端最流行的 ajax 请求库，本文从 HTTP 协议开始叙述，真正的零基础。'><meta name='keywords' content='JavaScript'><title>axios 入门和源码分析</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='别看记了这么多，我甚至都忘了我学过这玩意；axios 号称前端最流行的 ajax 请求库，本文从 HTTP 协议开始叙述，真正的零基础。'>
+<meta name='keywords' content='JavaScript'><title>axios 入门和源码分析</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/introduction-to-axios-and-source-code-analysis/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='axios 入门和源码分析'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='axios 入门和源码分析'>
 <meta property='og:description' content='别看记了这么多，我甚至都忘了我学过这玩意；axios 号称前端最流行的 ajax 请求库，本文从 HTTP 协议开始叙述，真正的零基础。'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,91 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#http-介绍">http 介绍</a>
+      <ol>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#http-请求方法">HTTP 请求方法</a></li>
+        <li><a href="#http-请求头">HTTP 请求头</a></li>
+        <li><a href="#http-请求体">HTTP 请求体</a></li>
+        <li><a href="#http-响应代码">HTTP 响应代码</a></li>
+      </ol>
+    </li>
+    <li><a href="#xhr-的理解和使用">XHR 的理解和使用</a>
+      <ol>
+        <li><a href="#mdn-文档">MDN 文档</a></li>
+        <li><a href="#理解">理解</a></li>
+        <li><a href="#区别一般-http-请求与-ajax-请求">区别一般 http 请求与 ajax 请求</a></li>
+        <li><a href="#api">API</a>
+          <ol>
+            <li><a href="#构造函数">构造函数</a></li>
+            <li><a href="#属性">属性</a></li>
+            <li><a href="#方法">方法</a></li>
+            <li><a href="#事件">事件</a></li>
+          </ol>
+        </li>
+        <li><a href="#xhr-的-ajax-封装简单版-axios">XHR 的 Ajax 封装（简单版 axios）</a></li>
+      </ol>
+    </li>
+    <li><a href="#axios-的理解和使用">axios 的理解和使用</a>
+      <ol>
+        <li><a href="#axios-是什么">axios 是什么</a></li>
+        <li><a href="#axios-特点">.axios 特点</a></li>
+        <li><a href="#axios-常用语法">axios 常用语法</a></li>
+        <li><a href="#难点语法的理解和使用">难点语法的理解和使用</a>
+          <ol>
+            <li><a href="#axioscreateconfig">axios.create(config)</a></li>
+            <li><a href="#拦截器函数ajax-请求请求的回调函数的调用顺序">拦截器函数/ajax 请求/请求的回调函数的调用顺序</a></li>
+            <li><a href="#取消请求">取消请求</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#axios-源码分析">axios 源码分析</a>
+      <ol>
+        <li><a href="#axios-与-axios-的关系">axios 与 Axios 的关系?</a></li>
+        <li><a href="#instance-与-axios-的区别">instance 与 axios 的区别?</a></li>
+        <li><a href="#axios-运行的整体流程">axios 运行的整体流程</a></li>
+        <li><a href="#axios-的请求响应拦截器是什么">axios 的请求/响应拦截器是什么?</a></li>
+        <li><a href="#axios-的请求响应数据转换器是什么">axios 的请求/响应数据转换器是什么?</a></li>
+        <li><a href="#response-的整体结构">response 的整体结构</a></li>
+        <li><a href="#error-的整体结构">error 的整体结构</a></li>
+        <li><a href="#如何取消未完成的请求">如何取消未完成的请求?</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +375,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +415,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1008,7 +1093,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -1092,89 +1177,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#http-介绍">http 介绍</a>
-      <ol>
-        <li><a href="#概述">概述</a></li>
-        <li><a href="#http-请求方法">HTTP 请求方法</a></li>
-        <li><a href="#http-请求头">HTTP 请求头</a></li>
-        <li><a href="#http-请求体">HTTP 请求体</a></li>
-        <li><a href="#http-响应代码">HTTP 响应代码</a></li>
-      </ol>
-    </li>
-    <li><a href="#xhr-的理解和使用">XHR 的理解和使用</a>
-      <ol>
-        <li><a href="#mdn-文档">MDN 文档</a></li>
-        <li><a href="#理解">理解</a></li>
-        <li><a href="#区别一般-http-请求与-ajax-请求">区别一般 http 请求与 ajax 请求</a></li>
-        <li><a href="#api">API</a>
-          <ol>
-            <li><a href="#构造函数">构造函数</a></li>
-            <li><a href="#属性">属性</a></li>
-            <li><a href="#方法">方法</a></li>
-            <li><a href="#事件">事件</a></li>
-          </ol>
-        </li>
-        <li><a href="#xhr-的-ajax-封装简单版-axios">XHR 的 Ajax 封装（简单版 axios）</a></li>
-      </ol>
-    </li>
-    <li><a href="#axios-的理解和使用">axios 的理解和使用</a>
-      <ol>
-        <li><a href="#axios-是什么">axios 是什么</a></li>
-        <li><a href="#axios-特点">.axios 特点</a></li>
-        <li><a href="#axios-常用语法">axios 常用语法</a></li>
-        <li><a href="#难点语法的理解和使用">难点语法的理解和使用</a>
-          <ol>
-            <li><a href="#axioscreateconfig">axios.create(config)</a></li>
-            <li><a href="#拦截器函数ajax-请求请求的回调函数的调用顺序">拦截器函数/ajax 请求/请求的回调函数的调用顺序</a></li>
-            <li><a href="#取消请求">取消请求</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#axios-源码分析">axios 源码分析</a>
-      <ol>
-        <li><a href="#axios-与-axios-的关系">axios 与 Axios 的关系?</a></li>
-        <li><a href="#instance-与-axios-的区别">instance 与 axios 的区别?</a></li>
-        <li><a href="#axios-运行的整体流程">axios 运行的整体流程</a></li>
-        <li><a href="#axios-的请求响应拦截器是什么">axios 的请求/响应拦截器是什么?</a></li>
-        <li><a href="#axios-的请求响应数据转换器是什么">axios 的请求/响应数据转换器是什么?</a></li>
-        <li><a href="#response-的整体结构">response 的整体结构</a></li>
-        <li><a href="#error-的整体结构">error 的整体结构</a></li>
-        <li><a href="#如何取消未完成的请求">如何取消未完成的请求?</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -1192,18 +1194,6 @@ if (!doNotTrack) {
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

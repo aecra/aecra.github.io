@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='从无到有学习 JavaScript 的学习笔记，内容主要为 ES5，对于散乱的 JavaScript 知识算作一个整理吧，具体学习和查看还是 MDN 靠谱。“我记录了，所以我学了”又增一篇。'><meta name='keywords' content='JavaScript'><title>JavaScript 笔记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='从无到有学习 JavaScript 的学习笔记，内容主要为 ES5，对于散乱的 JavaScript 知识算作一个整理吧，具体学习和查看还是 MDN 靠谱。“我记录了，所以我学了”又增一篇。'>
+<meta name='keywords' content='JavaScript'><title>JavaScript 笔记</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/javascript-notes/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='JavaScript 笔记'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='JavaScript 笔记'>
 <meta property='og:description' content='从无到有学习 JavaScript 的学习笔记，内容主要为 ES5，对于散乱的 JavaScript 知识算作一个整理吧，具体学习和查看还是 MDN 靠谱。“我记录了，所以我学了”又增一篇。'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,240 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#基础内容">基础内容</a>
+      <ol>
+        <li><a href="#js-的编写的位置">JS 的编写的位置</a></li>
+        <li><a href="#输出语句">输出语句</a></li>
+        <li><a href="#基本的语法">基本的语法</a></li>
+        <li><a href="#字面量和变量">字面量和变量</a></li>
+        <li><a href="#标识符">标识符</a></li>
+      </ol>
+    </li>
+    <li><a href="#数据类型">数据类型</a>
+      <ol>
+        <li><a href="#string-字符串">String 字符串</a></li>
+        <li><a href="#number-数值">Number 数值</a></li>
+        <li><a href="#boolean-布尔值">Boolean 布尔值</a></li>
+        <li><a href="#null-空值">Null 空值</a></li>
+        <li><a href="#undefined-未定义">Undefined 未定义</a></li>
+        <li><a href="#引用数据类型">引用数据类型</a></li>
+      </ol>
+    </li>
+    <li><a href="#类型转换">类型转换</a>
+      <ol>
+        <li><a href="#转换为-string">转换为 String</a>
+          <ol>
+            <li><a href="#tostring方法">toString()方法</a></li>
+            <li><a href="#string函数">String()函数</a></li>
+            <li><a href="#为任意的数据类型--">为任意的数据类型 + &quot;&quot;</a></li>
+          </ol>
+        </li>
+        <li><a href="#转换为-number">转换为 Number</a>
+          <ol>
+            <li><a href="#number函数">Number()函数</a></li>
+            <li><a href="#parseint或-parsefloat">parseInt()或 parseFloat()</a></li>
+            <li><a href="#使用一元的">使用一元的+</a></li>
+          </ol>
+        </li>
+        <li><a href="#转换为布尔值">转换为布尔值</a>
+          <ol>
+            <li><a href="#boolean函数">Boolean()函数</a></li>
+            <li><a href="#两次非运算">两次非运算</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#基础语法">基础语法</a>
+      <ol>
+        <li><a href="#运算符">运算符</a>
+          <ol>
+            <li><a href="#typeof-运算符">typeof 运算符</a></li>
+            <li><a href="#算数运算符">算数运算符</a></li>
+            <li><a href="#一元运算符">一元运算符</a></li>
+            <li><a href="#逻辑运算符">逻辑运算符</a></li>
+            <li><a href="#赋值运算符">赋值运算符</a></li>
+            <li><a href="#关系运算符">关系运算符</a></li>
+            <li><a href="#相等运算符">相等运算符</a></li>
+            <li><a href="#三元运算符">三元运算符</a></li>
+          </ol>
+        </li>
+        <li><a href="#流程控制语句">流程控制语句</a>
+          <ol>
+            <li><a href="#条件判断和分支语句">条件判断和分支语句</a></li>
+            <li><a href="#循环语句">循环语句</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#对象object">对象（Object）</a>
+      <ol>
+        <li><a href="#对象的分类">对象的分类</a></li>
+        <li><a href="#创建对象">创建对象</a></li>
+        <li><a href="#对象的属性">对象的属性</a></li>
+        <li><a href="#遍历">遍历</a>
+          <ol>
+            <li><a href="#使用-in-检查对象中是否含有指定属性">使用 in 检查对象中是否含有指定属性</a></li>
+            <li><a href="#使用对象字面量在创建对象时直接向对象中添加属性">使用对象字面量，在创建对象时直接向对象中添加属性</a></li>
+            <li><a href="#基本数据类型和引用数据类型">基本数据类型和引用数据类型</a></li>
+          </ol>
+        </li>
+        <li><a href="#函数function">函数（Function）</a>
+          <ol>
+            <li><a href="#创建函数">创建函数</a></li>
+            <li><a href="#调用函数">调用函数</a></li>
+            <li><a href="#立即执行函数">立即执行函数</a></li>
+            <li><a href="#形参和实参">形参和实参</a></li>
+            <li><a href="#返回值">返回值</a></li>
+            <li><a href="#breakcontinue-和-return">break、continue 和 return</a></li>
+            <li><a href="#方法method">方法（method）</a></li>
+            <li><a href="#函数的属性和方法">函数的属性和方法</a></li>
+            <li><a href="#arguments">arguments</a></li>
+            <li><a href="#this">this</a></li>
+          </ol>
+        </li>
+        <li><a href="#作用域">作用域</a>
+          <ol>
+            <li><a href="#全局作用域">全局作用域</a></li>
+            <li><a href="#函数作用域">函数作用域</a></li>
+            <li><a href="#变量的声明提前">变量的声明提前</a></li>
+            <li><a href="#函数的声明提前">函数的声明提前</a></li>
+          </ol>
+        </li>
+        <li><a href="#this上下文对象">this（上下文对象）</a></li>
+        <li><a href="#构造函数">构造函数</a></li>
+        <li><a href="#原型prototype">原型（prototype）</a></li>
+        <li><a href="#tostring-方法">toString 方法</a></li>
+        <li><a href="#垃圾回收gc">垃圾回收（GC）</a></li>
+      </ol>
+    </li>
+    <li><a href="#数组array">数组（Array）</a>
+      <ol>
+        <li><a href="#数组的操作">数组的操作</a></li>
+        <li><a href="#数组的方法">数组的方法</a>
+          <ol>
+            <li><a href="#slicesartend">slice(sart,[end])</a></li>
+            <li><a href="#splice">splice()</a></li>
+            <li><a href="#joinsplitor">join([splitor])</a></li>
+            <li><a href="#sort">sort()</a></li>
+          </ol>
+        </li>
+        <li><a href="#遍历数组">遍历数组</a></li>
+      </ol>
+    </li>
+    <li><a href="#常用类和方法">常用类和方法</a>
+      <ol>
+        <li><a href="#包装类">包装类</a></li>
+        <li><a href="#date">Date</a></li>
+        <li><a href="#math">Math</a></li>
+        <li><a href="#字符串的相关的方法">字符串的相关的方法</a></li>
+      </ol>
+    </li>
+    <li><a href="#正则表达式">正则表达式</a>
+      <ol>
+        <li><a href="#语法">语法</a></li>
+        <li><a href="#方法">方法</a></li>
+      </ol>
+    </li>
+    <li><a href="#dom">DOM</a>
+      <ol>
+        <li><a href="#dom-操作">DOM 操作</a>
+          <ol>
+            <li><a href="#dom-查询">DOM 查询</a></li>
+            <li><a href="#dom-修改">DOM 修改</a></li>
+          </ol>
+        </li>
+        <li><a href="#dom-对-css-的操作">DOM 对 CSS 的操作</a>
+          <ol>
+            <li><a href="#读取和修改内联样式">读取和修改内联样式</a></li>
+            <li><a href="#读取元素的当前样式">读取元素的当前样式</a></li>
+            <li><a href="#其他的样式相关的属性">其他的样式相关的属性</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#事件">事件</a>
+      <ol>
+        <li><a href="#事件对象">事件对象</a></li>
+        <li><a href="#事件的冒泡bubble">事件的冒泡（Bubble）</a></li>
+        <li><a href="#事件的委派">事件的委派</a></li>
+        <li><a href="#事件的绑定">事件的绑定</a>
+          <ol>
+            <li><a href="#addeventlistener">addEventListener()</a></li>
+            <li><a href="#attachevent">attachEvent()</a></li>
+            <li><a href="#实现兼容性">实现兼容性</a></li>
+          </ol>
+        </li>
+        <li><a href="#事件的传播">事件的传播</a></li>
+        <li><a href="#常用事件">常用事件</a>
+          <ol>
+            <li><a href="#鼠标事件">鼠标事件</a></li>
+            <li><a href="#键盘事件">键盘事件</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#bom">BOM</a>
+      <ol>
+        <li><a href="#navigator">Navigator</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#window">window</a>
+          <ol>
+            <li><a href="#定时器">定时器</a></li>
+            <li><a href="#延时调用">延时调用</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#修改元素的类更改样式">修改元素的类更改样式</a></li>
+    <li><a href="#json">JSON</a>
+      <ol>
+        <li><a href="#json-格式">JSON 格式</a></li>
+        <li><a href="#json-和-js-对象转换">JSON 和 JS 对象转换</a></li>
+      </ol>
+    </li>
+    <li><a href="#other">other</a>
+      <ol>
+        <li><a href="#localstorage">localStorage</a></li>
+        <li><a href="#eval">eval()</a></li>
+        <li><a href="#编码">编码</a></li>
+        <li><a href="#confirm">confirm()</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +524,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +564,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -2331,7 +2565,7 @@ BOM 对象。这些 BOM 对象在浏览器中都是作为 window 对象的属性
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -2415,238 +2649,6 @@ BOM 对象。这些 BOM 对象在浏览器中都是作为 window 对象的属性
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#基础内容">基础内容</a>
-      <ol>
-        <li><a href="#js-的编写的位置">JS 的编写的位置</a></li>
-        <li><a href="#输出语句">输出语句</a></li>
-        <li><a href="#基本的语法">基本的语法</a></li>
-        <li><a href="#字面量和变量">字面量和变量</a></li>
-        <li><a href="#标识符">标识符</a></li>
-      </ol>
-    </li>
-    <li><a href="#数据类型">数据类型</a>
-      <ol>
-        <li><a href="#string-字符串">String 字符串</a></li>
-        <li><a href="#number-数值">Number 数值</a></li>
-        <li><a href="#boolean-布尔值">Boolean 布尔值</a></li>
-        <li><a href="#null-空值">Null 空值</a></li>
-        <li><a href="#undefined-未定义">Undefined 未定义</a></li>
-        <li><a href="#引用数据类型">引用数据类型</a></li>
-      </ol>
-    </li>
-    <li><a href="#类型转换">类型转换</a>
-      <ol>
-        <li><a href="#转换为-string">转换为 String</a>
-          <ol>
-            <li><a href="#tostring方法">toString()方法</a></li>
-            <li><a href="#string函数">String()函数</a></li>
-            <li><a href="#为任意的数据类型--">为任意的数据类型 + &quot;&quot;</a></li>
-          </ol>
-        </li>
-        <li><a href="#转换为-number">转换为 Number</a>
-          <ol>
-            <li><a href="#number函数">Number()函数</a></li>
-            <li><a href="#parseint或-parsefloat">parseInt()或 parseFloat()</a></li>
-            <li><a href="#使用一元的">使用一元的+</a></li>
-          </ol>
-        </li>
-        <li><a href="#转换为布尔值">转换为布尔值</a>
-          <ol>
-            <li><a href="#boolean函数">Boolean()函数</a></li>
-            <li><a href="#两次非运算">两次非运算</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#基础语法">基础语法</a>
-      <ol>
-        <li><a href="#运算符">运算符</a>
-          <ol>
-            <li><a href="#typeof-运算符">typeof 运算符</a></li>
-            <li><a href="#算数运算符">算数运算符</a></li>
-            <li><a href="#一元运算符">一元运算符</a></li>
-            <li><a href="#逻辑运算符">逻辑运算符</a></li>
-            <li><a href="#赋值运算符">赋值运算符</a></li>
-            <li><a href="#关系运算符">关系运算符</a></li>
-            <li><a href="#相等运算符">相等运算符</a></li>
-            <li><a href="#三元运算符">三元运算符</a></li>
-          </ol>
-        </li>
-        <li><a href="#流程控制语句">流程控制语句</a>
-          <ol>
-            <li><a href="#条件判断和分支语句">条件判断和分支语句</a></li>
-            <li><a href="#循环语句">循环语句</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#对象object">对象（Object）</a>
-      <ol>
-        <li><a href="#对象的分类">对象的分类</a></li>
-        <li><a href="#创建对象">创建对象</a></li>
-        <li><a href="#对象的属性">对象的属性</a></li>
-        <li><a href="#遍历">遍历</a>
-          <ol>
-            <li><a href="#使用-in-检查对象中是否含有指定属性">使用 in 检查对象中是否含有指定属性</a></li>
-            <li><a href="#使用对象字面量在创建对象时直接向对象中添加属性">使用对象字面量，在创建对象时直接向对象中添加属性</a></li>
-            <li><a href="#基本数据类型和引用数据类型">基本数据类型和引用数据类型</a></li>
-          </ol>
-        </li>
-        <li><a href="#函数function">函数（Function）</a>
-          <ol>
-            <li><a href="#创建函数">创建函数</a></li>
-            <li><a href="#调用函数">调用函数</a></li>
-            <li><a href="#立即执行函数">立即执行函数</a></li>
-            <li><a href="#形参和实参">形参和实参</a></li>
-            <li><a href="#返回值">返回值</a></li>
-            <li><a href="#breakcontinue-和-return">break、continue 和 return</a></li>
-            <li><a href="#方法method">方法（method）</a></li>
-            <li><a href="#函数的属性和方法">函数的属性和方法</a></li>
-            <li><a href="#arguments">arguments</a></li>
-            <li><a href="#this">this</a></li>
-          </ol>
-        </li>
-        <li><a href="#作用域">作用域</a>
-          <ol>
-            <li><a href="#全局作用域">全局作用域</a></li>
-            <li><a href="#函数作用域">函数作用域</a></li>
-            <li><a href="#变量的声明提前">变量的声明提前</a></li>
-            <li><a href="#函数的声明提前">函数的声明提前</a></li>
-          </ol>
-        </li>
-        <li><a href="#this上下文对象">this（上下文对象）</a></li>
-        <li><a href="#构造函数">构造函数</a></li>
-        <li><a href="#原型prototype">原型（prototype）</a></li>
-        <li><a href="#tostring-方法">toString 方法</a></li>
-        <li><a href="#垃圾回收gc">垃圾回收（GC）</a></li>
-      </ol>
-    </li>
-    <li><a href="#数组array">数组（Array）</a>
-      <ol>
-        <li><a href="#数组的操作">数组的操作</a></li>
-        <li><a href="#数组的方法">数组的方法</a>
-          <ol>
-            <li><a href="#slicesartend">slice(sart,[end])</a></li>
-            <li><a href="#splice">splice()</a></li>
-            <li><a href="#joinsplitor">join([splitor])</a></li>
-            <li><a href="#sort">sort()</a></li>
-          </ol>
-        </li>
-        <li><a href="#遍历数组">遍历数组</a></li>
-      </ol>
-    </li>
-    <li><a href="#常用类和方法">常用类和方法</a>
-      <ol>
-        <li><a href="#包装类">包装类</a></li>
-        <li><a href="#date">Date</a></li>
-        <li><a href="#math">Math</a></li>
-        <li><a href="#字符串的相关的方法">字符串的相关的方法</a></li>
-      </ol>
-    </li>
-    <li><a href="#正则表达式">正则表达式</a>
-      <ol>
-        <li><a href="#语法">语法</a></li>
-        <li><a href="#方法">方法</a></li>
-      </ol>
-    </li>
-    <li><a href="#dom">DOM</a>
-      <ol>
-        <li><a href="#dom-操作">DOM 操作</a>
-          <ol>
-            <li><a href="#dom-查询">DOM 查询</a></li>
-            <li><a href="#dom-修改">DOM 修改</a></li>
-          </ol>
-        </li>
-        <li><a href="#dom-对-css-的操作">DOM 对 CSS 的操作</a>
-          <ol>
-            <li><a href="#读取和修改内联样式">读取和修改内联样式</a></li>
-            <li><a href="#读取元素的当前样式">读取元素的当前样式</a></li>
-            <li><a href="#其他的样式相关的属性">其他的样式相关的属性</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#事件">事件</a>
-      <ol>
-        <li><a href="#事件对象">事件对象</a></li>
-        <li><a href="#事件的冒泡bubble">事件的冒泡（Bubble）</a></li>
-        <li><a href="#事件的委派">事件的委派</a></li>
-        <li><a href="#事件的绑定">事件的绑定</a>
-          <ol>
-            <li><a href="#addeventlistener">addEventListener()</a></li>
-            <li><a href="#attachevent">attachEvent()</a></li>
-            <li><a href="#实现兼容性">实现兼容性</a></li>
-          </ol>
-        </li>
-        <li><a href="#事件的传播">事件的传播</a></li>
-        <li><a href="#常用事件">常用事件</a>
-          <ol>
-            <li><a href="#鼠标事件">鼠标事件</a></li>
-            <li><a href="#键盘事件">键盘事件</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#bom">BOM</a>
-      <ol>
-        <li><a href="#navigator">Navigator</a></li>
-        <li><a href="#history">History</a></li>
-        <li><a href="#location">Location</a></li>
-        <li><a href="#window">window</a>
-          <ol>
-            <li><a href="#定时器">定时器</a></li>
-            <li><a href="#延时调用">延时调用</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#修改元素的类更改样式">修改元素的类更改样式</a></li>
-    <li><a href="#json">JSON</a>
-      <ol>
-        <li><a href="#json-格式">JSON 格式</a></li>
-        <li><a href="#json-和-js-对象转换">JSON 和 JS 对象转换</a></li>
-      </ol>
-    </li>
-    <li><a href="#other">other</a>
-      <ol>
-        <li><a href="#localstorage">localStorage</a></li>
-        <li><a href="#eval">eval()</a></li>
-        <li><a href="#编码">编码</a></li>
-        <li><a href="#confirm">confirm()</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -2664,18 +2666,6 @@ BOM 对象。这些 BOM 对象在浏览器中都是作为 window 对象的属性
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

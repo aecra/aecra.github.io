@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The official docker tutorial is reproduced for reference.'><meta name='keywords' content='docker'><title>Docker tutorial</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The official docker tutorial is reproduced for reference.'>
+<meta name='keywords' content='docker'><title>Docker tutorial</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/en/article/docker-tutorial/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='Docker tutorial'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='Docker tutorial'>
 <meta property='og:description' content='The official docker tutorial is reproduced for reference.'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/en/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/en/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/en/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/en/link/' >
                 
@@ -196,9 +194,8 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
-            <a href='/en/index.xml' >
+            <a href='/index.xml' >
                 
                 
                 
@@ -265,7 +262,141 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#getting-started">Getting Started</a>
+      <ol>
+        <li><a href="#the-command-you-just-ran">The command you just ran</a></li>
+        <li><a href="#the-docker-dashboard">The Docker Dashboard</a></li>
+        <li><a href="#what-is-a-container">What is a container?</a></li>
+        <li><a href="#what-is-a-container-image">What is a container image?</a></li>
+      </ol>
+    </li>
+    <li><a href="#our-application">Our Application</a>
+      <ol>
+        <li><a href="#getting-our-app">Getting our App</a></li>
+        <li><a href="#building-the-apps-container-image">Building the App&rsquo;s Container Image</a></li>
+        <li><a href="#starting-an-app-container">Starting an App Container</a></li>
+        <li><a href="#recap">Recap</a></li>
+      </ol>
+    </li>
+    <li><a href="#updating-our-app">Updating our App</a>
+      <ol>
+        <li><a href="#updating-our-source-code">Updating our Source Code</a></li>
+        <li><a href="#replacing-our-old-container">Replacing our Old Container</a>
+          <ol>
+            <li><a href="#removing-a-container-using-the-cli">Removing a container using the CLI</a></li>
+            <li><a href="#removing-a-container-using-the-docker-dashboard">Removing a container using the Docker Dashboard</a></li>
+            <li><a href="#starting-our-updated-app-container">Starting our updated app container</a></li>
+          </ol>
+        </li>
+        <li><a href="#recap-">Recap-</a></li>
+      </ol>
+    </li>
+    <li><a href="#sharing-our-app">Sharing our App</a>
+      <ol>
+        <li><a href="#create-a-repo">Create a Repo</a></li>
+        <li><a href="#pushing-our-image">Pushing our Image</a></li>
+        <li><a href="#running-our-image-on-a-new-instance">Running our Image on a New Instance</a></li>
+        <li><a href="#recap--">Recap&ndash;</a></li>
+      </ol>
+    </li>
+    <li><a href="#persisting-our-db">Persisting our DB</a>
+      <ol>
+        <li><a href="#the-containers-filesystem">The Container&rsquo;s Filesystem</a>
+          <ol>
+            <li><a href="#seeing-this-in-practice">Seeing this in Practice</a></li>
+          </ol>
+        </li>
+        <li><a href="#container-volumes">Container Volumes</a></li>
+        <li><a href="#persisting-our-todo-data">Persisting our Todo Data</a></li>
+        <li><a href="#diving-into-our-volume">Diving into our Volume</a></li>
+        <li><a href="#recap-1">Recap+</a></li>
+      </ol>
+    </li>
+    <li><a href="#using-bind-mounts">Using Bind Mounts</a>
+      <ol>
+        <li><a href="#quick-volume-type-comparisons">Quick Volume Type Comparisons</a></li>
+        <li><a href="#starting-a-dev-mode-container">Starting a Dev-Mode Container</a></li>
+        <li><a href="#recap-2">Recap=</a></li>
+      </ol>
+    </li>
+    <li><a href="#multi-container-apps">Multi-Container Apps</a>
+      <ol>
+        <li><a href="#container-networking">Container Networking</a></li>
+        <li><a href="#starting-mysql">Starting MySQL</a></li>
+        <li><a href="#connecting-to-mysql">Connecting to MySQL</a></li>
+        <li><a href="#running-our-app-with-mysql">Running our App with MySQL</a></li>
+        <li><a href="#recap_">Recap_</a></li>
+      </ol>
+    </li>
+    <li><a href="#using-docker-compose">Using Docker Compose</a>
+      <ol>
+        <li><a href="#installing-docker-compose">Installing Docker Compose</a></li>
+        <li><a href="#creating-our-compose-file">Creating our Compose File</a></li>
+        <li><a href="#defining-the-app-service">Defining the App Service</a>
+          <ol>
+            <li><a href="#defining-the-mysql-service">Defining the MySQL Service</a></li>
+          </ol>
+        </li>
+        <li><a href="#running-our-application-stack">Running our Application Stack</a></li>
+        <li><a href="#seeing-our-app-stack-in-docker-dashboard">Seeing our App Stack in Docker Dashboard</a></li>
+        <li><a href="#tearing-it-all-down">Tearing it All Down</a></li>
+        <li><a href="#recap-3">Recap\</a></li>
+      </ol>
+    </li>
+    <li><a href="#image-building-best-practices">Image Building Best Practices</a>
+      <ol>
+        <li><a href="#security-scanning">Security Scanning</a></li>
+        <li><a href="#image-layering">Image Layering</a></li>
+        <li><a href="#layer-caching">Layer Caching</a></li>
+        <li><a href="#multi-stage-builds">Multi-Stage Builds</a>
+          <ol>
+            <li><a href="#maventomcat-example">Maven/Tomcat Example</a></li>
+            <li><a href="#react-example">React Example</a></li>
+          </ol>
+        </li>
+        <li><a href="#recap-4">Recap`</a></li>
+      </ol>
+    </li>
+    <li><a href="#what-next">What Next?</a>
+      <ol>
+        <li><a href="#container-orchestration">Container Orchestration</a></li>
+        <li><a href="#cloud-native-computing-foundation-projects">Cloud Native Computing Foundation Projects</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +425,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +465,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1621,7 +1756,7 @@ doesn&rsquo;t get much simpler than that!</p>
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1705,139 +1840,6 @@ doesn&rsquo;t get much simpler than that!</p>
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#getting-started">Getting Started</a>
-      <ol>
-        <li><a href="#the-command-you-just-ran">The command you just ran</a></li>
-        <li><a href="#the-docker-dashboard">The Docker Dashboard</a></li>
-        <li><a href="#what-is-a-container">What is a container?</a></li>
-        <li><a href="#what-is-a-container-image">What is a container image?</a></li>
-      </ol>
-    </li>
-    <li><a href="#our-application">Our Application</a>
-      <ol>
-        <li><a href="#getting-our-app">Getting our App</a></li>
-        <li><a href="#building-the-apps-container-image">Building the App&rsquo;s Container Image</a></li>
-        <li><a href="#starting-an-app-container">Starting an App Container</a></li>
-        <li><a href="#recap">Recap</a></li>
-      </ol>
-    </li>
-    <li><a href="#updating-our-app">Updating our App</a>
-      <ol>
-        <li><a href="#updating-our-source-code">Updating our Source Code</a></li>
-        <li><a href="#replacing-our-old-container">Replacing our Old Container</a>
-          <ol>
-            <li><a href="#removing-a-container-using-the-cli">Removing a container using the CLI</a></li>
-            <li><a href="#removing-a-container-using-the-docker-dashboard">Removing a container using the Docker Dashboard</a></li>
-            <li><a href="#starting-our-updated-app-container">Starting our updated app container</a></li>
-          </ol>
-        </li>
-        <li><a href="#recap-">Recap-</a></li>
-      </ol>
-    </li>
-    <li><a href="#sharing-our-app">Sharing our App</a>
-      <ol>
-        <li><a href="#create-a-repo">Create a Repo</a></li>
-        <li><a href="#pushing-our-image">Pushing our Image</a></li>
-        <li><a href="#running-our-image-on-a-new-instance">Running our Image on a New Instance</a></li>
-        <li><a href="#recap--">Recap&ndash;</a></li>
-      </ol>
-    </li>
-    <li><a href="#persisting-our-db">Persisting our DB</a>
-      <ol>
-        <li><a href="#the-containers-filesystem">The Container&rsquo;s Filesystem</a>
-          <ol>
-            <li><a href="#seeing-this-in-practice">Seeing this in Practice</a></li>
-          </ol>
-        </li>
-        <li><a href="#container-volumes">Container Volumes</a></li>
-        <li><a href="#persisting-our-todo-data">Persisting our Todo Data</a></li>
-        <li><a href="#diving-into-our-volume">Diving into our Volume</a></li>
-        <li><a href="#recap-1">Recap+</a></li>
-      </ol>
-    </li>
-    <li><a href="#using-bind-mounts">Using Bind Mounts</a>
-      <ol>
-        <li><a href="#quick-volume-type-comparisons">Quick Volume Type Comparisons</a></li>
-        <li><a href="#starting-a-dev-mode-container">Starting a Dev-Mode Container</a></li>
-        <li><a href="#recap-2">Recap=</a></li>
-      </ol>
-    </li>
-    <li><a href="#multi-container-apps">Multi-Container Apps</a>
-      <ol>
-        <li><a href="#container-networking">Container Networking</a></li>
-        <li><a href="#starting-mysql">Starting MySQL</a></li>
-        <li><a href="#connecting-to-mysql">Connecting to MySQL</a></li>
-        <li><a href="#running-our-app-with-mysql">Running our App with MySQL</a></li>
-        <li><a href="#recap_">Recap_</a></li>
-      </ol>
-    </li>
-    <li><a href="#using-docker-compose">Using Docker Compose</a>
-      <ol>
-        <li><a href="#installing-docker-compose">Installing Docker Compose</a></li>
-        <li><a href="#creating-our-compose-file">Creating our Compose File</a></li>
-        <li><a href="#defining-the-app-service">Defining the App Service</a>
-          <ol>
-            <li><a href="#defining-the-mysql-service">Defining the MySQL Service</a></li>
-          </ol>
-        </li>
-        <li><a href="#running-our-application-stack">Running our Application Stack</a></li>
-        <li><a href="#seeing-our-app-stack-in-docker-dashboard">Seeing our App Stack in Docker Dashboard</a></li>
-        <li><a href="#tearing-it-all-down">Tearing it All Down</a></li>
-        <li><a href="#recap-3">Recap\</a></li>
-      </ol>
-    </li>
-    <li><a href="#image-building-best-practices">Image Building Best Practices</a>
-      <ol>
-        <li><a href="#security-scanning">Security Scanning</a></li>
-        <li><a href="#image-layering">Image Layering</a></li>
-        <li><a href="#layer-caching">Layer Caching</a></li>
-        <li><a href="#multi-stage-builds">Multi-Stage Builds</a>
-          <ol>
-            <li><a href="#maventomcat-example">Maven/Tomcat Example</a></li>
-            <li><a href="#react-example">React Example</a></li>
-          </ol>
-        </li>
-        <li><a href="#recap-4">Recap`</a></li>
-      </ol>
-    </li>
-    <li><a href="#what-next">What Next?</a>
-      <ol>
-        <li><a href="#container-orchestration">Container Orchestration</a></li>
-        <li><a href="#cloud-native-computing-foundation-projects">Cloud Native Computing Foundation Projects</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -1855,18 +1857,6 @@ doesn&rsquo;t get much simpler than that!</p>
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

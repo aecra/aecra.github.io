@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文是 19 年秋在学校实验室处理计算机视觉相关问题时学习的，当时做的思维导图导出的 markdown 附件，现在当作一个大纲比较好。下面附带的计算机视觉相关视频是我认为对初学者比较友好的课程，毕竟这些图像特征相关的内容也没老师教。'><meta name='keywords' content='深度学习, 目标检测'><title>计算机视觉-目标检测</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文是 19 年秋在学校实验室处理计算机视觉相关问题时学习的，当时做的思维导图导出的 markdown 附件，现在当作一个大纲比较好。下面附带的计算机视觉相关视频是我认为对初学者比较友好的课程，毕竟这些图像特征相关的内容也没老师教。'>
+<meta name='keywords' content='深度学习, 目标检测'><title>计算机视觉-目标检测</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/computer-vision-target-detection/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='计算机视觉-目标检测'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='计算机视觉-目标检测'>
 <meta property='og:description' content='本文是 19 年秋在学校实验室处理计算机视觉相关问题时学习的，当时做的思维导图导出的 markdown 附件，现在当作一个大纲比较好。下面附带的计算机视觉相关视频是我认为对初学者比较友好的课程，毕竟这些图像特征相关的内容也没老师教。'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,127 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#图像预处理">图像预处理</a>
+      <ol>
+        <li><a href="#空间域处理">空间域处理</a>
+          <ol>
+            <li><a href="#点运算">点运算</a></li>
+            <li><a href="#形态学运算">形态学运算</a></li>
+            <li><a href="#临域运算">临域运算</a></li>
+          </ol>
+        </li>
+        <li><a href="#频率与处理">频率与处理</a>
+          <ol>
+            <li><a href="#傅里叶变换">傅里叶变换</a></li>
+            <li><a href="#小波变换">小波变换</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#图像特征与描述">图像特征与描述</a>
+      <ol>
+        <li><a href="#颜色特征">颜色特征</a>
+          <ol>
+            <li><a href="#量化颜色直方图">量化颜色直方图</a></li>
+            <li><a href="#聚类颜色直方图">聚类颜色直方图</a></li>
+            <li><a href="#优化">优化</a></li>
+          </ol>
+        </li>
+        <li><a href="#几何特征">几何特征</a>
+          <ol>
+            <li><a href="#边缘edge">边缘(Edge)</a></li>
+            <li><a href="#特征点corner">特征点(Corner)</a></li>
+            <li><a href="#斑点blob">斑点(Blob)</a></li>
+          </ol>
+        </li>
+        <li><a href="#基于关键点的特征描述子">基于关键点的特征描述子</a>
+          <ol>
+            <li><a href="#sift">SIFT</a></li>
+            <li><a href="#surf">SURF</a></li>
+            <li><a href="#orb">ORB</a></li>
+          </ol>
+        </li>
+        <li><a href="#其他特征提取">其他特征提取</a>
+          <ol>
+            <li><a href="#lbp局部二值模式">LBP（局部二值模式）</a></li>
+            <li><a href="#gabor">Gabor</a></li>
+          </ol>
+        </li>
+        <li><a href="#代码实现">代码实现</a></li>
+      </ol>
+    </li>
+    <li><a href="#深度学习之前的目标检测">深度学习之前的目标检测</a>
+      <ol>
+        <li><a href="#图像分割">图像分割</a>
+          <ol>
+            <li><a href="#含义">含义</a></li>
+            <li><a href="#分割依据">分割依据</a></li>
+            <li><a href="#分类">分类</a></li>
+          </ol>
+        </li>
+        <li><a href="#人脸检测">人脸检测</a>
+          <ol>
+            <li><a href="#haar-like-特征">Haar-like 特征</a></li>
+            <li><a href="#级联分类器">级联分类器</a></li>
+          </ol>
+        </li>
+        <li><a href="#行人检测">行人检测</a>
+          <ol>
+            <li><a href="#hogsvm">HOG+SVM</a></li>
+            <li><a href="#dpm可变形的组件模型">DPM（可变形的组件模型）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#神经网络与误差反向传播算法">神经网络与误差反向传播算法</a>
+      <ol>
+        <li><a href="#神经网络">神经网络</a>
+          <ol>
+            <li><a href="#神经网络概述">神经网络概述</a></li>
+            <li><a href="#神经元">神经元</a></li>
+            <li><a href="#人工神经网络">人工神经网络</a></li>
+            <li><a href="#前馈神经">前馈神经</a></li>
+            <li><a href="#梯度下降">梯度下降</a></li>
+            <li><a href="#误差反向传播">误差反向传播</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#视频及课件">视频及课件</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +411,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +451,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1037,7 +1158,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -1121,125 +1242,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#图像预处理">图像预处理</a>
-      <ol>
-        <li><a href="#空间域处理">空间域处理</a>
-          <ol>
-            <li><a href="#点运算">点运算</a></li>
-            <li><a href="#形态学运算">形态学运算</a></li>
-            <li><a href="#临域运算">临域运算</a></li>
-          </ol>
-        </li>
-        <li><a href="#频率与处理">频率与处理</a>
-          <ol>
-            <li><a href="#傅里叶变换">傅里叶变换</a></li>
-            <li><a href="#小波变换">小波变换</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#图像特征与描述">图像特征与描述</a>
-      <ol>
-        <li><a href="#颜色特征">颜色特征</a>
-          <ol>
-            <li><a href="#量化颜色直方图">量化颜色直方图</a></li>
-            <li><a href="#聚类颜色直方图">聚类颜色直方图</a></li>
-            <li><a href="#优化">优化</a></li>
-          </ol>
-        </li>
-        <li><a href="#几何特征">几何特征</a>
-          <ol>
-            <li><a href="#边缘edge">边缘(Edge)</a></li>
-            <li><a href="#特征点corner">特征点(Corner)</a></li>
-            <li><a href="#斑点blob">斑点(Blob)</a></li>
-          </ol>
-        </li>
-        <li><a href="#基于关键点的特征描述子">基于关键点的特征描述子</a>
-          <ol>
-            <li><a href="#sift">SIFT</a></li>
-            <li><a href="#surf">SURF</a></li>
-            <li><a href="#orb">ORB</a></li>
-          </ol>
-        </li>
-        <li><a href="#其他特征提取">其他特征提取</a>
-          <ol>
-            <li><a href="#lbp局部二值模式">LBP（局部二值模式）</a></li>
-            <li><a href="#gabor">Gabor</a></li>
-          </ol>
-        </li>
-        <li><a href="#代码实现">代码实现</a></li>
-      </ol>
-    </li>
-    <li><a href="#深度学习之前的目标检测">深度学习之前的目标检测</a>
-      <ol>
-        <li><a href="#图像分割">图像分割</a>
-          <ol>
-            <li><a href="#含义">含义</a></li>
-            <li><a href="#分割依据">分割依据</a></li>
-            <li><a href="#分类">分类</a></li>
-          </ol>
-        </li>
-        <li><a href="#人脸检测">人脸检测</a>
-          <ol>
-            <li><a href="#haar-like-特征">Haar-like 特征</a></li>
-            <li><a href="#级联分类器">级联分类器</a></li>
-          </ol>
-        </li>
-        <li><a href="#行人检测">行人检测</a>
-          <ol>
-            <li><a href="#hogsvm">HOG+SVM</a></li>
-            <li><a href="#dpm可变形的组件模型">DPM（可变形的组件模型）</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#神经网络与误差反向传播算法">神经网络与误差反向传播算法</a>
-      <ol>
-        <li><a href="#神经网络">神经网络</a>
-          <ol>
-            <li><a href="#神经网络概述">神经网络概述</a></li>
-            <li><a href="#神经元">神经元</a></li>
-            <li><a href="#人工神经网络">人工神经网络</a></li>
-            <li><a href="#前馈神经">前馈神经</a></li>
-            <li><a href="#梯度下降">梯度下降</a></li>
-            <li><a href="#误差反向传播">误差反向传播</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#视频及课件">视频及课件</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -1257,18 +1259,6 @@ if (!doNotTrack) {
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

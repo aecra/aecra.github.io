@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='MySQL 数据库这么火怎么能不学习一下呢？本篇文章记录了 MySQL 数据库的一般使用方法，涉及到优化原理的内容以后再补吧。'><meta name='keywords' content='MySQL, 数据库'><title>MySQL 数据库</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='MySQL 数据库这么火怎么能不学习一下呢？本篇文章记录了 MySQL 数据库的一般使用方法，涉及到优化原理的内容以后再补吧。'>
+<meta name='keywords' content='MySQL, 数据库'><title>MySQL 数据库</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/mysql-database/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='MySQL 数据库'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='MySQL 数据库'>
 <meta property='og:description' content='MySQL 数据库这么火怎么能不学习一下呢？本篇文章记录了 MySQL 数据库的一般使用方法，涉及到优化原理的内容以后再补吧。'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,119 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#数据库的好处">数据库的好处</a></li>
+    <li><a href="#数据库相关概念">数据库相关概念</a></li>
+    <li><a href="#数据库存储数据的特点">数据库存储数据的特点</a></li>
+    <li><a href="#mysql-产品的介绍和安装">MySQL 产品的介绍和安装</a>
+      <ol>
+        <li><a href="#mysql-服务的启动和停止">MySQL 服务的启动和停止</a></li>
+        <li><a href="#mysql-服务的登录和退出">MySQL 服务的登录和退出</a></li>
+        <li><a href="#mysql-的常见命令">MySQL 的常见命令</a></li>
+        <li><a href="#mysql-的语法规范">MySQL 的语法规范</a></li>
+        <li><a href="#sql-的语言分类">SQL 的语言分类</a></li>
+        <li><a href="#sql-的常见命令">SQL 的常见命令</a></li>
+      </ol>
+    </li>
+    <li><a href="#dql-语句">DQL 语句</a>
+      <ol>
+        <li><a href="#进阶-1基础查询">进阶 1：基础查询</a></li>
+        <li><a href="#进阶-2条件查询">进阶 2：条件查询</a></li>
+        <li><a href="#进阶-3排序查询">进阶 3：排序查询</a></li>
+        <li><a href="#进阶-4常见函数">进阶 4：常见函数</a></li>
+        <li><a href="#进阶-5分组查询">进阶 5：分组查询</a></li>
+        <li><a href="#进阶-6多表连接查询">进阶 6：多表连接查询</a></li>
+        <li><a href="#进阶-7子查询">进阶 7：子查询</a></li>
+        <li><a href="#进阶-8分页查询">进阶 8：分页查询</a></li>
+        <li><a href="#进阶-9联合查询">进阶 9：联合查询</a></li>
+      </ol>
+    </li>
+    <li><a href="#dml-语句">DML 语句</a>
+      <ol>
+        <li><a href="#插入">插入</a></li>
+        <li><a href="#修改">修改</a></li>
+        <li><a href="#删除">删除</a></li>
+      </ol>
+    </li>
+    <li><a href="#ddl-语句">DDL 语句</a>
+      <ol>
+        <li><a href="#库和表的管理">库和表的管理</a></li>
+        <li><a href="#常见类型">常见类型</a></li>
+        <li><a href="#常见约束">常见约束</a></li>
+        <li><a href="#标识列">标识列</a></li>
+      </ol>
+    </li>
+    <li><a href="#事务">事务</a>
+      <ol>
+        <li><a href="#特点">特点</a></li>
+        <li><a href="#事务的分类">事务的分类</a></li>
+        <li><a href="#事务的隔离级别">事务的隔离级别</a></li>
+      </ol>
+    </li>
+    <li><a href="#视图">视图</a>
+      <ol>
+        <li><a href="#视图的创建">视图的创建</a></li>
+        <li><a href="#视图的更新">视图的更新</a></li>
+        <li><a href="#视图的删除">视图的删除</a></li>
+        <li><a href="#视图结构的查看">视图结构的查看</a></li>
+        <li><a href="#视图数据的增删改查">视图数据的增删改查</a></li>
+        <li><a href="#某些视图不能更新">某些视图不能更新</a></li>
+      </ol>
+    </li>
+    <li><a href="#存储">存储</a>
+      <ol>
+        <li><a href="#创建存储过程">创建存储过程</a></li>
+        <li><a href="#调用存储过程">调用存储过程</a></li>
+      </ol>
+    </li>
+    <li><a href="#函数">函数</a>
+      <ol>
+        <li><a href="#创建函数">创建函数</a></li>
+        <li><a href="#调用函数">调用函数</a></li>
+        <li><a href="#函数和存储过程的区别">函数和存储过程的区别</a></li>
+      </ol>
+    </li>
+    <li><a href="#流程控制结构">流程控制结构</a>
+      <ol>
+        <li><a href="#系统变量">系统变量</a></li>
+        <li><a href="#自定义变量">自定义变量</a></li>
+        <li><a href="#分支">分支</a></li>
+        <li><a href="#循环">循环</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +403,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +443,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1440,7 +1553,7 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -1524,117 +1637,6 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#数据库的好处">数据库的好处</a></li>
-    <li><a href="#数据库相关概念">数据库相关概念</a></li>
-    <li><a href="#数据库存储数据的特点">数据库存储数据的特点</a></li>
-    <li><a href="#mysql-产品的介绍和安装">MySQL 产品的介绍和安装</a>
-      <ol>
-        <li><a href="#mysql-服务的启动和停止">MySQL 服务的启动和停止</a></li>
-        <li><a href="#mysql-服务的登录和退出">MySQL 服务的登录和退出</a></li>
-        <li><a href="#mysql-的常见命令">MySQL 的常见命令</a></li>
-        <li><a href="#mysql-的语法规范">MySQL 的语法规范</a></li>
-        <li><a href="#sql-的语言分类">SQL 的语言分类</a></li>
-        <li><a href="#sql-的常见命令">SQL 的常见命令</a></li>
-      </ol>
-    </li>
-    <li><a href="#dql-语句">DQL 语句</a>
-      <ol>
-        <li><a href="#进阶-1基础查询">进阶 1：基础查询</a></li>
-        <li><a href="#进阶-2条件查询">进阶 2：条件查询</a></li>
-        <li><a href="#进阶-3排序查询">进阶 3：排序查询</a></li>
-        <li><a href="#进阶-4常见函数">进阶 4：常见函数</a></li>
-        <li><a href="#进阶-5分组查询">进阶 5：分组查询</a></li>
-        <li><a href="#进阶-6多表连接查询">进阶 6：多表连接查询</a></li>
-        <li><a href="#进阶-7子查询">进阶 7：子查询</a></li>
-        <li><a href="#进阶-8分页查询">进阶 8：分页查询</a></li>
-        <li><a href="#进阶-9联合查询">进阶 9：联合查询</a></li>
-      </ol>
-    </li>
-    <li><a href="#dml-语句">DML 语句</a>
-      <ol>
-        <li><a href="#插入">插入</a></li>
-        <li><a href="#修改">修改</a></li>
-        <li><a href="#删除">删除</a></li>
-      </ol>
-    </li>
-    <li><a href="#ddl-语句">DDL 语句</a>
-      <ol>
-        <li><a href="#库和表的管理">库和表的管理</a></li>
-        <li><a href="#常见类型">常见类型</a></li>
-        <li><a href="#常见约束">常见约束</a></li>
-        <li><a href="#标识列">标识列</a></li>
-      </ol>
-    </li>
-    <li><a href="#事务">事务</a>
-      <ol>
-        <li><a href="#特点">特点</a></li>
-        <li><a href="#事务的分类">事务的分类</a></li>
-        <li><a href="#事务的隔离级别">事务的隔离级别</a></li>
-      </ol>
-    </li>
-    <li><a href="#视图">视图</a>
-      <ol>
-        <li><a href="#视图的创建">视图的创建</a></li>
-        <li><a href="#视图的更新">视图的更新</a></li>
-        <li><a href="#视图的删除">视图的删除</a></li>
-        <li><a href="#视图结构的查看">视图结构的查看</a></li>
-        <li><a href="#视图数据的增删改查">视图数据的增删改查</a></li>
-        <li><a href="#某些视图不能更新">某些视图不能更新</a></li>
-      </ol>
-    </li>
-    <li><a href="#存储">存储</a>
-      <ol>
-        <li><a href="#创建存储过程">创建存储过程</a></li>
-        <li><a href="#调用存储过程">调用存储过程</a></li>
-      </ol>
-    </li>
-    <li><a href="#函数">函数</a>
-      <ol>
-        <li><a href="#创建函数">创建函数</a></li>
-        <li><a href="#调用函数">调用函数</a></li>
-        <li><a href="#函数和存储过程的区别">函数和存储过程的区别</a></li>
-      </ol>
-    </li>
-    <li><a href="#流程控制结构">流程控制结构</a>
-      <ol>
-        <li><a href="#系统变量">系统变量</a></li>
-        <li><a href="#自定义变量">自定义变量</a></li>
-        <li><a href="#分支">分支</a></li>
-        <li><a href="#循环">循环</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -1652,18 +1654,6 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

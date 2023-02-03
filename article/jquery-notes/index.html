@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='jQuery 是一个快速、小且功能丰富的 JavaScript 库。它使 HTML 文档遍历和操作、事件处理、动画和 Ajax 等工作变得更加简单，并提供了一个跨多种浏览器的易于使用的 API。jQuery 结合了多功能性和可扩展性，改变了数百万人编写 JavaScript 的方式。'><meta name='keywords' content='JavaScript, jQuery'><title>jQuery 笔记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='jQuery 是一个快速、小且功能丰富的 JavaScript 库。它使 HTML 文档遍历和操作、事件处理、动画和 Ajax 等工作变得更加简单，并提供了一个跨多种浏览器的易于使用的 API。jQuery 结合了多功能性和可扩展性，改变了数百万人编写 JavaScript 的方式。'>
+<meta name='keywords' content='JavaScript, jQuery'><title>jQuery 笔记</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/jquery-notes/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='jQuery 笔记'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='jQuery 笔记'>
 <meta property='og:description' content='jQuery 是一个快速、小且功能丰富的 JavaScript 库。它使 HTML 文档遍历和操作、事件处理、动画和 Ajax 等工作变得更加简单，并提供了一个跨多种浏览器的易于使用的 API。jQuery 结合了多功能性和可扩展性，改变了数百万人编写 JavaScript 的方式。'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,129 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#jquery-简介">jQuery 简介</a>
+      <ol>
+        <li><a href="#javascript-库的概念">JavaScript 库的概念</a></li>
+        <li><a href="#jquery-的优点好处">jQuery 的优点好处</a></li>
+        <li><a href="#jquery-的版本">jQuery 的版本</a></li>
+        <li><a href="#体验-jquery">体验 jQuery</a></li>
+        <li><a href="#jquery-中顶级对象">jQuery 中顶级对象</a></li>
+        <li><a href="#jquery-中页面加载事件">jQuery 中页面加载事件</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-对象和-dom-对象">jQuery 对象和 DOM 对象</a>
+      <ol>
+        <li><a href="#jquery-对象和-dom-对象的区别">jQuery 对象和 DOM 对象的区别</a>
+          <ol>
+            <li><a href="#dom-对象">DOM 对象</a></li>
+            <li><a href="#jquery-对象">jQuery 对象</a></li>
+            <li><a href="#区别">区别</a></li>
+          </ol>
+        </li>
+        <li><a href="#jquery-对象和-dom-对象的相互转换">jQuery 对象和 DOM 对象的相互转换</a></li>
+      </ol>
+    </li>
+    <li><a href="#选择器">选择器</a>
+      <ol>
+        <li><a href="#jquery-基本选择器">jQuery 基本选择器</a></li>
+        <li><a href="#jquery-层级选择器">jQuery 层级选择器</a></li>
+        <li><a href="#jquery-过滤选择器">jQuery 过滤选择器</a></li>
+        <li><a href="#jquery-筛选选择器方法">jQuery 筛选选择器(方法)</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-操作样式">jQuery 操作样式</a>
+      <ol>
+        <li><a href="#css-操作">CSS 操作</a></li>
+        <li><a href="#class-操作">class 操作</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-动画">jQuery 动画</a>
+      <ol>
+        <li><a href="#三组基本动画">三组基本动画</a></li>
+        <li><a href="#自定义动画">自定义动画</a></li>
+        <li><a href="#动画队列与停止动画">动画队列与停止动画</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-节点操作">jQuery 节点操作</a>
+      <ol>
+        <li><a href="#创建节点">创建节点</a></li>
+        <li><a href="#添加节点">添加节点</a></li>
+        <li><a href="#清空节点与删除节点">清空节点与删除节点</a></li>
+        <li><a href="#克隆节点">克隆节点</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-操作属性">jQuery 操作属性</a>
+      <ol>
+        <li><a href="#attr-操作">attr 操作</a></li>
+        <li><a href="#prop-操作">prop 操作</a></li>
+        <li><a href="#valtexthtml">val()/text/()html()</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-尺寸和位置操作">jQuery 尺寸和位置操作</a>
+      <ol>
+        <li><a href="#width-方法与-height-方法">width 方法与 height 方法</a></li>
+        <li><a href="#innerwidthinnerheightouterwidthouterheight">innerWidth/innerHeight/outerWidth/outerHeight</a></li>
+        <li><a href="#scrolltop-与-scrollleft">scrollTop 与 scrollLeft</a></li>
+        <li><a href="#offset-方法与-position-方法">offset 方法与 position 方法</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-事件机制">jQuery 事件机制</a>
+      <ol>
+        <li><a href="#jquery-事件发展历程了解">jQuery 事件发展历程(了解)</a></li>
+        <li><a href="#on-注册事件重点">on 注册事件(重点)</a></li>
+        <li><a href="#事件解绑">事件解绑</a></li>
+        <li><a href="#触发事件">触发事件</a></li>
+        <li><a href="#jquery-事件对象">jQuery 事件对象</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-补充知识点">jQuery 补充知识点</a>
+      <ol>
+        <li><a href="#链式编程">链式编程</a></li>
+        <li><a href="#each-方法">each 方法</a></li>
+        <li><a href="#多库共存">多库共存</a></li>
+      </ol>
+    </li>
+    <li><a href="#插件">插件</a>
+      <ol>
+        <li><a href="#常用插件">常用插件</a></li>
+        <li><a href="#自己探索插件">自己探索插件</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery-插件开发">jQuery 插件开发</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +413,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +453,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1170,7 +1293,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -1254,127 +1377,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#jquery-简介">jQuery 简介</a>
-      <ol>
-        <li><a href="#javascript-库的概念">JavaScript 库的概念</a></li>
-        <li><a href="#jquery-的优点好处">jQuery 的优点好处</a></li>
-        <li><a href="#jquery-的版本">jQuery 的版本</a></li>
-        <li><a href="#体验-jquery">体验 jQuery</a></li>
-        <li><a href="#jquery-中顶级对象">jQuery 中顶级对象</a></li>
-        <li><a href="#jquery-中页面加载事件">jQuery 中页面加载事件</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-对象和-dom-对象">jQuery 对象和 DOM 对象</a>
-      <ol>
-        <li><a href="#jquery-对象和-dom-对象的区别">jQuery 对象和 DOM 对象的区别</a>
-          <ol>
-            <li><a href="#dom-对象">DOM 对象</a></li>
-            <li><a href="#jquery-对象">jQuery 对象</a></li>
-            <li><a href="#区别">区别</a></li>
-          </ol>
-        </li>
-        <li><a href="#jquery-对象和-dom-对象的相互转换">jQuery 对象和 DOM 对象的相互转换</a></li>
-      </ol>
-    </li>
-    <li><a href="#选择器">选择器</a>
-      <ol>
-        <li><a href="#jquery-基本选择器">jQuery 基本选择器</a></li>
-        <li><a href="#jquery-层级选择器">jQuery 层级选择器</a></li>
-        <li><a href="#jquery-过滤选择器">jQuery 过滤选择器</a></li>
-        <li><a href="#jquery-筛选选择器方法">jQuery 筛选选择器(方法)</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-操作样式">jQuery 操作样式</a>
-      <ol>
-        <li><a href="#css-操作">CSS 操作</a></li>
-        <li><a href="#class-操作">class 操作</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-动画">jQuery 动画</a>
-      <ol>
-        <li><a href="#三组基本动画">三组基本动画</a></li>
-        <li><a href="#自定义动画">自定义动画</a></li>
-        <li><a href="#动画队列与停止动画">动画队列与停止动画</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-节点操作">jQuery 节点操作</a>
-      <ol>
-        <li><a href="#创建节点">创建节点</a></li>
-        <li><a href="#添加节点">添加节点</a></li>
-        <li><a href="#清空节点与删除节点">清空节点与删除节点</a></li>
-        <li><a href="#克隆节点">克隆节点</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-操作属性">jQuery 操作属性</a>
-      <ol>
-        <li><a href="#attr-操作">attr 操作</a></li>
-        <li><a href="#prop-操作">prop 操作</a></li>
-        <li><a href="#valtexthtml">val()/text/()html()</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-尺寸和位置操作">jQuery 尺寸和位置操作</a>
-      <ol>
-        <li><a href="#width-方法与-height-方法">width 方法与 height 方法</a></li>
-        <li><a href="#innerwidthinnerheightouterwidthouterheight">innerWidth/innerHeight/outerWidth/outerHeight</a></li>
-        <li><a href="#scrolltop-与-scrollleft">scrollTop 与 scrollLeft</a></li>
-        <li><a href="#offset-方法与-position-方法">offset 方法与 position 方法</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-事件机制">jQuery 事件机制</a>
-      <ol>
-        <li><a href="#jquery-事件发展历程了解">jQuery 事件发展历程(了解)</a></li>
-        <li><a href="#on-注册事件重点">on 注册事件(重点)</a></li>
-        <li><a href="#事件解绑">事件解绑</a></li>
-        <li><a href="#触发事件">触发事件</a></li>
-        <li><a href="#jquery-事件对象">jQuery 事件对象</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-补充知识点">jQuery 补充知识点</a>
-      <ol>
-        <li><a href="#链式编程">链式编程</a></li>
-        <li><a href="#each-方法">each 方法</a></li>
-        <li><a href="#多库共存">多库共存</a></li>
-      </ol>
-    </li>
-    <li><a href="#插件">插件</a>
-      <ol>
-        <li><a href="#常用插件">常用插件</a></li>
-        <li><a href="#自己探索插件">自己探索插件</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery-插件开发">jQuery 插件开发</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -1392,18 +1394,6 @@ if (!doNotTrack) {
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

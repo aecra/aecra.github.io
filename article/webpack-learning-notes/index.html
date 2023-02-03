@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='webpack 是前端开发不能避开的管理工具，本文是学习过程中对 webpack 如何使用的笔记，吐槽见文末 :)'><meta name='keywords' content='node'><title>webpack 学习笔记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='webpack 是前端开发不能避开的管理工具，本文是学习过程中对 webpack 如何使用的笔记，吐槽见文末 :)'>
+<meta name='keywords' content='node'><title>webpack 学习笔记</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/webpack-learning-notes/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='webpack 学习笔记'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='webpack 学习笔记'>
 <meta property='og:description' content='webpack 是前端开发不能避开的管理工具，本文是学习过程中对 webpack 如何使用的笔记，吐槽见文末 :)'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,116 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#webpack-简介">webpack 简介</a>
+      <ol>
+        <li><a href="#webpack-是什么">webpack 是什么</a></li>
+        <li><a href="#webpack-五个核心概念">webpack 五个核心概念</a></li>
+      </ol>
+    </li>
+    <li><a href="#webpack-的简易使用">webpack 的简易使用</a>
+      <ol>
+        <li><a href="#初始化配置">初始化配置</a></li>
+        <li><a href="#编译打包应用">编译打包应用</a></li>
+      </ol>
+    </li>
+    <li><a href="#webpack-开发环境的基本配置">webpack 开发环境的基本配置</a>
+      <ol>
+        <li><a href="#创建配置文件">创建配置文件</a></li>
+        <li><a href="#打包样式资源">打包样式资源</a></li>
+        <li><a href="#打包-html-资源">打包 HTML 资源</a></li>
+        <li><a href="#打包图片资源">打包图片资源</a></li>
+        <li><a href="#打包其他资源">打包其他资源</a></li>
+        <li><a href="#source-map">source map</a></li>
+        <li><a href="#开发工具">开发工具</a></li>
+      </ol>
+    </li>
+    <li><a href="#webpack-生产环境的基本配置">webpack 生产环境的基本配置</a>
+      <ol>
+        <li><a href="#启用-source-map">启用 source map</a></li>
+        <li><a href="#提取所有的-css-到一个文件中">提取所有的 CSS 到一个文件中</a></li>
+        <li><a href="#css-兼容性处理">css 兼容性处理</a></li>
+        <li><a href="#压缩-css">压缩 css</a></li>
+        <li><a href="#js-语法检查-eslint">js 语法检查 Eslint</a></li>
+        <li><a href="#js-兼容性处理">js 兼容性处理</a></li>
+        <li><a href="#js-压缩">js 压缩</a></li>
+      </ol>
+    </li>
+    <li><a href="#性能优化功能提升">性能优化/功能提升</a>
+      <ol>
+        <li><a href="#模块热替换hot-module-replacement">模块热替换(hot module replacement)</a></li>
+        <li><a href="#生产环境和开发环境配置分离">生产环境和开发环境配置分离</a>
+          <ol>
+            <li><a href="#webpackdevjs">webpack.dev.js</a></li>
+            <li><a href="#webpackprodjs">webpack.prod.js</a></li>
+            <li><a href="#packagejson">package.json</a></li>
+          </ol>
+        </li>
+        <li><a href="#source-map-详解">source-map 详解</a></li>
+        <li><a href="#oneof">oneOf</a></li>
+        <li><a href="#tree-shaking">Tree Shaking</a></li>
+        <li><a href="#代码分割">代码分割</a></li>
+        <li><a href="#懒加载">懒加载</a></li>
+        <li><a href="#渐进式网络应用程序">渐进式网络应用程序</a>
+          <ol>
+            <li><a href="#添加-workbox">添加 Workbox</a></li>
+            <li><a href="#注册-service-worker">注册 Service Worker</a></li>
+          </ol>
+        </li>
+        <li><a href="#多进程打包">多进程打包</a></li>
+        <li><a href="#外部扩展externals">外部扩展(externals)</a>
+          <ol>
+            <li><a href="#方法-1字符串">方法 1：字符串</a></li>
+            <li><a href="#方法-2函数">方法 2：函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#dll">DLL</a></li>
+      </ol>
+    </li>
+    <li><a href="#提升">提升</a>
+      <ol>
+        <li><a href="#enrty">enrty</a></li>
+        <li><a href="#output">output</a></li>
+        <li><a href="#resolve">resolve</a></li>
+        <li><a href="#dev-server">dev server</a></li>
+        <li><a href="#optimization">optimization</a></li>
+        <li><a href="#webpack-中的默认配置">webpack 中的默认配置</a></li>
+      </ol>
+    </li>
+    <li><a href="#题外话">题外话</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +400,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +440,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1297,7 +1407,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -1381,114 +1491,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#webpack-简介">webpack 简介</a>
-      <ol>
-        <li><a href="#webpack-是什么">webpack 是什么</a></li>
-        <li><a href="#webpack-五个核心概念">webpack 五个核心概念</a></li>
-      </ol>
-    </li>
-    <li><a href="#webpack-的简易使用">webpack 的简易使用</a>
-      <ol>
-        <li><a href="#初始化配置">初始化配置</a></li>
-        <li><a href="#编译打包应用">编译打包应用</a></li>
-      </ol>
-    </li>
-    <li><a href="#webpack-开发环境的基本配置">webpack 开发环境的基本配置</a>
-      <ol>
-        <li><a href="#创建配置文件">创建配置文件</a></li>
-        <li><a href="#打包样式资源">打包样式资源</a></li>
-        <li><a href="#打包-html-资源">打包 HTML 资源</a></li>
-        <li><a href="#打包图片资源">打包图片资源</a></li>
-        <li><a href="#打包其他资源">打包其他资源</a></li>
-        <li><a href="#source-map">source map</a></li>
-        <li><a href="#开发工具">开发工具</a></li>
-      </ol>
-    </li>
-    <li><a href="#webpack-生产环境的基本配置">webpack 生产环境的基本配置</a>
-      <ol>
-        <li><a href="#启用-source-map">启用 source map</a></li>
-        <li><a href="#提取所有的-css-到一个文件中">提取所有的 CSS 到一个文件中</a></li>
-        <li><a href="#css-兼容性处理">css 兼容性处理</a></li>
-        <li><a href="#压缩-css">压缩 css</a></li>
-        <li><a href="#js-语法检查-eslint">js 语法检查 Eslint</a></li>
-        <li><a href="#js-兼容性处理">js 兼容性处理</a></li>
-        <li><a href="#js-压缩">js 压缩</a></li>
-      </ol>
-    </li>
-    <li><a href="#性能优化功能提升">性能优化/功能提升</a>
-      <ol>
-        <li><a href="#模块热替换hot-module-replacement">模块热替换(hot module replacement)</a></li>
-        <li><a href="#生产环境和开发环境配置分离">生产环境和开发环境配置分离</a>
-          <ol>
-            <li><a href="#webpackdevjs">webpack.dev.js</a></li>
-            <li><a href="#webpackprodjs">webpack.prod.js</a></li>
-            <li><a href="#packagejson">package.json</a></li>
-          </ol>
-        </li>
-        <li><a href="#source-map-详解">source-map 详解</a></li>
-        <li><a href="#oneof">oneOf</a></li>
-        <li><a href="#tree-shaking">Tree Shaking</a></li>
-        <li><a href="#代码分割">代码分割</a></li>
-        <li><a href="#懒加载">懒加载</a></li>
-        <li><a href="#渐进式网络应用程序">渐进式网络应用程序</a>
-          <ol>
-            <li><a href="#添加-workbox">添加 Workbox</a></li>
-            <li><a href="#注册-service-worker">注册 Service Worker</a></li>
-          </ol>
-        </li>
-        <li><a href="#多进程打包">多进程打包</a></li>
-        <li><a href="#外部扩展externals">外部扩展(externals)</a>
-          <ol>
-            <li><a href="#方法-1字符串">方法 1：字符串</a></li>
-            <li><a href="#方法-2函数">方法 2：函数</a></li>
-          </ol>
-        </li>
-        <li><a href="#dll">DLL</a></li>
-      </ol>
-    </li>
-    <li><a href="#提升">提升</a>
-      <ol>
-        <li><a href="#enrty">enrty</a></li>
-        <li><a href="#output">output</a></li>
-        <li><a href="#resolve">resolve</a></li>
-        <li><a href="#dev-server">dev server</a></li>
-        <li><a href="#optimization">optimization</a></li>
-        <li><a href="#webpack-中的默认配置">webpack 中的默认配置</a></li>
-      </ol>
-    </li>
-    <li><a href="#题外话">题外话</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -1506,18 +1508,6 @@ if (!doNotTrack) {
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

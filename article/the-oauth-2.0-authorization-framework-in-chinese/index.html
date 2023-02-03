@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='在寻找 RFC6749 中文版翻译时找到的版本都存在较大的问题，所以自己翻译后在这里提供一个经校对的人工翻译版本。'><meta name='keywords' content='RFC, 翻译'><title>RFC6749 | OAuth 2.0 授权框架 中文版</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='在寻找 RFC6749 中文版翻译时找到的版本都存在较大的问题，所以自己翻译后在这里提供一个经校对的人工翻译版本。'>
+<meta name='keywords' content='RFC, 翻译'><title>RFC6749 | OAuth 2.0 授权框架 中文版</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/the-oauth-2.0-authorization-framework-in-chinese/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='RFC6749 | OAuth 2.0 授权框架 中文版'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='RFC6749 | OAuth 2.0 授权框架 中文版'>
 <meta property='og:description' content='在寻找 RFC6749 中文版翻译时找到的版本都存在较大的问题，所以自己翻译后在这里提供一个经校对的人工翻译版本。'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,230 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a>
+      <ol>
+        <li><a href="#摘要">摘要</a></li>
+        <li><a href="#本备忘录状态">本备忘录状态</a></li>
+        <li><a href="#版权声明">版权声明</a></li>
+      </ol>
+    </li>
+    <li><a href="#目录">目录</a></li>
+    <li><a href="#1-简介">1. 简介</a>
+      <ol>
+        <li><a href="#11-角色">1.1. 角色</a></li>
+        <li><a href="#12-协议流程">1.2. 协议流程</a></li>
+        <li><a href="#13-授权许可">1.3. 授权许可</a>
+          <ol>
+            <li><a href="#131-授权码">1.3.1. 授权码</a></li>
+            <li><a href="#132-隐式授权">1.3.2. 隐式授权</a></li>
+            <li><a href="#133-资源所有者密码凭据">1.3.3. 资源所有者密码凭据</a></li>
+            <li><a href="#134-客户端凭据">1.3.4. 客户端凭据</a></li>
+          </ol>
+        </li>
+        <li><a href="#14-访问令牌">1.4. 访问令牌</a></li>
+        <li><a href="#15-刷新令牌">1.5. 刷新令牌</a></li>
+        <li><a href="#16-tls-版本">1.6. TLS 版本</a></li>
+        <li><a href="#17-http-重定向">1.7. HTTP 重定向</a></li>
+        <li><a href="#18-互操作性">1.8. 互操作性</a></li>
+        <li><a href="#19-符号约定">1.9. 符号约定</a></li>
+      </ol>
+    </li>
+    <li><a href="#20-客户端注册">2.0 客户端注册</a>
+      <ol>
+        <li><a href="#21-客户端类型">2.1. 客户端类型</a></li>
+        <li><a href="#22-客户端标识">2.2. 客户端标识</a></li>
+        <li><a href="#23-客户端身份验证">2.3. 客户端身份验证</a>
+          <ol>
+            <li><a href="#231-客户端密码">2.3.1. 客户端密码</a></li>
+            <li><a href="#232-其他身份验证方法">2.3.2. 其他身份验证方法</a></li>
+          </ol>
+        </li>
+        <li><a href="#24-未注册的客户端">2.4. 未注册的客户端</a></li>
+      </ol>
+    </li>
+    <li><a href="#3-协议端点">3. 协议端点</a>
+      <ol>
+        <li><a href="#31-授权端点">3.1. 授权端点</a>
+          <ol>
+            <li><a href="#311-响应类型">3.1.1. 响应类型</a></li>
+            <li><a href="#312-重定向端点">3.1.2. 重定向端点</a></li>
+          </ol>
+        </li>
+        <li><a href="#32-令牌端点">3.2. 令牌端点</a>
+          <ol>
+            <li><a href="#321-客户端身份验证">3.2.1. 客户端身份验证</a></li>
+          </ol>
+        </li>
+        <li><a href="#33-访问令牌作用域">3.3. 访问令牌作用域</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-获得授权">4. 获得授权</a>
+      <ol>
+        <li><a href="#41-授权码许可">4.1. 授权码许可</a>
+          <ol>
+            <li><a href="#411-授权请求">4.1.1. 授权请求</a></li>
+            <li><a href="#412-授权响应">4.1.2. 授权响应</a></li>
+            <li><a href="#413-访问令牌请求">4.1.3. 访问令牌请求</a></li>
+            <li><a href="#414-访问令牌响应">4.1.4. 访问令牌响应</a></li>
+          </ol>
+        </li>
+        <li><a href="#42-隐式授权">4.2. 隐式授权</a>
+          <ol>
+            <li><a href="#421-授权请求">4.2.1. 授权请求</a></li>
+            <li><a href="#422-访问令牌响应">4.2.2. 访问令牌响应</a></li>
+          </ol>
+        </li>
+        <li><a href="#43-资源所有者密码凭据许可">4.3. 资源所有者密码凭据许可</a>
+          <ol>
+            <li><a href="#431-授权请求和响应">4.3.1. 授权请求和响应</a></li>
+            <li><a href="#432-访问令牌请求">4.3.2. 访问令牌请求</a></li>
+            <li><a href="#433-访问令牌响应">4.3.3. 访问令牌响应</a></li>
+          </ol>
+        </li>
+        <li><a href="#44-客户端凭据许可">4.4. 客户端凭据许可</a>
+          <ol>
+            <li><a href="#441-授权请求和响应">4.4.1. 授权请求和响应</a></li>
+            <li><a href="#442-访问令牌请求">4.4.2. 访问令牌请求</a></li>
+            <li><a href="#443-访问令牌响应">4.4.3. 访问令牌响应</a></li>
+          </ol>
+        </li>
+        <li><a href="#45-扩展许可">4.5. 扩展许可</a></li>
+      </ol>
+    </li>
+    <li><a href="#5-颁发访问令牌">5. 颁发访问令牌</a>
+      <ol>
+        <li><a href="#51-成功的响应">5.1. 成功的响应</a></li>
+        <li><a href="#52-错误响应">5.2. 错误响应</a></li>
+      </ol>
+    </li>
+    <li><a href="#6-刷新访问令牌">6. 刷新访问令牌</a></li>
+    <li><a href="#7-访问受保护资源">7. 访问受保护资源</a>
+      <ol>
+        <li><a href="#71-访问令牌类型">7.1. 访问令牌类型</a></li>
+        <li><a href="#72-错误响应">7.2. 错误响应</a></li>
+      </ol>
+    </li>
+    <li><a href="#8-可扩展性">8. 可扩展性</a>
+      <ol>
+        <li><a href="#81-定义访问令牌类型">8.1. 定义访问令牌类型</a></li>
+        <li><a href="#82-定义新的端点参数">8.2. 定义新的端点参数</a></li>
+        <li><a href="#83-定义新的授权许可类型">8.3. 定义新的授权许可类型</a></li>
+        <li><a href="#84-定义新的授权端点响应类型">8.4. 定义新的授权端点响应类型</a></li>
+        <li><a href="#85-定义其他错误代码">8.5. 定义其他错误代码</a></li>
+      </ol>
+    </li>
+    <li><a href="#9-本机应用程序">9. 本机应用程序</a></li>
+    <li><a href="#10-安全考量">10. 安全考量</a>
+      <ol>
+        <li><a href="#101-客户端身份验证">10.1. 客户端身份验证</a></li>
+        <li><a href="#102-客户端仿冒">10.2. 客户端仿冒</a></li>
+        <li><a href="#103-访问令牌">10.3. 访问令牌</a></li>
+        <li><a href="#104-刷新令牌">10.4. 刷新令牌</a></li>
+        <li><a href="#105-授权码">10.5. 授权码</a></li>
+        <li><a href="#106-授权码重定向-uri-伪造">10.6. 授权码重定向 URI 伪造</a></li>
+        <li><a href="#107-资源所有者密码凭据">10.7. 资源所有者密码凭据</a></li>
+        <li><a href="#108-请求机密性">10.8. 请求机密性</a></li>
+        <li><a href="#109-确保端点真实性">10.9. 确保端点真实性</a></li>
+        <li><a href="#1010-凭据猜测攻击">10.10. 凭据猜测攻击</a></li>
+        <li><a href="#1011-钓鱼攻击">10.11. 钓鱼攻击</a></li>
+        <li><a href="#1012-跨站请求伪造">10.12. 跨站请求伪造</a></li>
+        <li><a href="#1013-点击劫持">10.13. 点击劫持</a></li>
+        <li><a href="#1014-代码注入和输入验证">10.14. 代码注入和输入验证</a></li>
+        <li><a href="#1015-自由重定向器">10.15. 自由重定向器</a></li>
+        <li><a href="#1016-在隐式授权流程中滥用访问令牌假冒资源所有者">10.16. 在隐式授权流程中滥用访问令牌假冒资源所有者</a></li>
+      </ol>
+    </li>
+    <li><a href="#11-iana-考量">11. IANA 考量</a>
+      <ol>
+        <li><a href="#111-oauth-访问令牌类型注册表">11.1. OAuth 访问令牌类型注册表</a>
+          <ol>
+            <li><a href="#1111-注册模板">11.1.1. 注册模板</a></li>
+          </ol>
+        </li>
+        <li><a href="#112-oauth-参数注册表">11.2. OAuth 参数注册表</a>
+          <ol>
+            <li><a href="#1121-注册模板">11.2.1. 注册模板</a></li>
+            <li><a href="#1122-初始的注册表内容">11.2.2. 初始的注册表内容</a></li>
+          </ol>
+        </li>
+        <li><a href="#113-oauth-授权端点响应类型注册表">11.3. OAuth 授权端点响应类型注册表</a>
+          <ol>
+            <li><a href="#1131-注册模板">11.3.1. 注册模板</a></li>
+            <li><a href="#1132-初始的注册表内容">11.3.2. 初始的注册表内容</a></li>
+          </ol>
+        </li>
+        <li><a href="#114-oauth-扩展错误注册表">11.4. OAuth 扩展错误注册表</a>
+          <ol>
+            <li><a href="#1141-注册模板">11.4.1. 注册模板</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#12-参考文献">12. 参考文献</a>
+      <ol>
+        <li><a href="#121-规范性参考文件">12.1. 规范性参考文件</a></li>
+        <li><a href="#122-参考性引用文献">12.2. 参考性引用文献</a></li>
+      </ol>
+    </li>
+    <li><a href="#附录-a-扩充巴库斯-瑙尔形式-abnf-语法">附录 A. 扩充巴库斯-瑙尔形式 (ABNF) 语法</a>
+      <ol>
+        <li><a href="#a1-client_id-语法">A.1. &ldquo;client_id&rdquo; 语法</a></li>
+        <li><a href="#a2-client_secret-语法">A.2. &ldquo;client_secret&rdquo; 语法</a></li>
+        <li><a href="#a3-response_type-语法">A.3. &ldquo;response_type&rdquo; 语法</a></li>
+        <li><a href="#a4-scope-语法">A.4. &ldquo;scope&rdquo; 语法</a></li>
+        <li><a href="#a5-state-语法">A.5. &ldquo;state&rdquo; 语法</a></li>
+        <li><a href="#a6-redirect_uri-语法">A.6. &ldquo;redirect_uri&rdquo; 语法</a></li>
+        <li><a href="#a7-error-语法">A.7. &ldquo;error&rdquo; 语法</a></li>
+        <li><a href="#a8-error_description-语法">A.8. &ldquo;error_description&rdquo; 语法</a></li>
+        <li><a href="#a9-error_uri-语法">A.9. &ldquo;error_uri&rdquo; 语法</a></li>
+        <li><a href="#a10-grant_type-语法">A.10. &ldquo;grant_type&rdquo; 语法</a></li>
+        <li><a href="#a11-code-语法">A.11. &ldquo;code&rdquo; 语法</a></li>
+        <li><a href="#a12-access_token-语法">A.12. &ldquo;access_token&rdquo; 语法</a></li>
+        <li><a href="#a13-token_type-语法">A.13. &ldquo;token_type&rdquo; 语法</a></li>
+        <li><a href="#a14-expires_in-语法">A.14. &ldquo;expires_in&rdquo; 语法</a></li>
+        <li><a href="#a15-username-语法">A.15. &ldquo;username&rdquo; 语法</a></li>
+        <li><a href="#a16-password-语法">A.16. &ldquo;password&rdquo; 语法</a></li>
+        <li><a href="#a17-refresh_token-语法">A.17. &ldquo;refresh_token&rdquo; 语法</a></li>
+        <li><a href="#a18-endpoint-parameter-语法">A.18. Endpoint Parameter 语法</a></li>
+      </ol>
+    </li>
+    <li><a href="#附录-b-applicationx-www-form-urlencoded-媒体类型的使用">附录 B. application/x-www-form-urlencoded 媒体类型的使用</a></li>
+    <li><a href="#附录-c-致谢">附录 C. 致谢</a></li>
+    <li><a href="#作者地址">作者地址</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +514,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +554,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -2092,7 +2316,7 @@ URI: <a class="link" href="http://dickhardt.org/"  target="_blank" rel="noopener
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -2176,228 +2400,6 @@ URI: <a class="link" href="http://dickhardt.org/"  target="_blank" rel="noopener
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#前言">前言</a>
-      <ol>
-        <li><a href="#摘要">摘要</a></li>
-        <li><a href="#本备忘录状态">本备忘录状态</a></li>
-        <li><a href="#版权声明">版权声明</a></li>
-      </ol>
-    </li>
-    <li><a href="#目录">目录</a></li>
-    <li><a href="#1-简介">1. 简介</a>
-      <ol>
-        <li><a href="#11-角色">1.1. 角色</a></li>
-        <li><a href="#12-协议流程">1.2. 协议流程</a></li>
-        <li><a href="#13-授权许可">1.3. 授权许可</a>
-          <ol>
-            <li><a href="#131-授权码">1.3.1. 授权码</a></li>
-            <li><a href="#132-隐式授权">1.3.2. 隐式授权</a></li>
-            <li><a href="#133-资源所有者密码凭据">1.3.3. 资源所有者密码凭据</a></li>
-            <li><a href="#134-客户端凭据">1.3.4. 客户端凭据</a></li>
-          </ol>
-        </li>
-        <li><a href="#14-访问令牌">1.4. 访问令牌</a></li>
-        <li><a href="#15-刷新令牌">1.5. 刷新令牌</a></li>
-        <li><a href="#16-tls-版本">1.6. TLS 版本</a></li>
-        <li><a href="#17-http-重定向">1.7. HTTP 重定向</a></li>
-        <li><a href="#18-互操作性">1.8. 互操作性</a></li>
-        <li><a href="#19-符号约定">1.9. 符号约定</a></li>
-      </ol>
-    </li>
-    <li><a href="#20-客户端注册">2.0 客户端注册</a>
-      <ol>
-        <li><a href="#21-客户端类型">2.1. 客户端类型</a></li>
-        <li><a href="#22-客户端标识">2.2. 客户端标识</a></li>
-        <li><a href="#23-客户端身份验证">2.3. 客户端身份验证</a>
-          <ol>
-            <li><a href="#231-客户端密码">2.3.1. 客户端密码</a></li>
-            <li><a href="#232-其他身份验证方法">2.3.2. 其他身份验证方法</a></li>
-          </ol>
-        </li>
-        <li><a href="#24-未注册的客户端">2.4. 未注册的客户端</a></li>
-      </ol>
-    </li>
-    <li><a href="#3-协议端点">3. 协议端点</a>
-      <ol>
-        <li><a href="#31-授权端点">3.1. 授权端点</a>
-          <ol>
-            <li><a href="#311-响应类型">3.1.1. 响应类型</a></li>
-            <li><a href="#312-重定向端点">3.1.2. 重定向端点</a></li>
-          </ol>
-        </li>
-        <li><a href="#32-令牌端点">3.2. 令牌端点</a>
-          <ol>
-            <li><a href="#321-客户端身份验证">3.2.1. 客户端身份验证</a></li>
-          </ol>
-        </li>
-        <li><a href="#33-访问令牌作用域">3.3. 访问令牌作用域</a></li>
-      </ol>
-    </li>
-    <li><a href="#4-获得授权">4. 获得授权</a>
-      <ol>
-        <li><a href="#41-授权码许可">4.1. 授权码许可</a>
-          <ol>
-            <li><a href="#411-授权请求">4.1.1. 授权请求</a></li>
-            <li><a href="#412-授权响应">4.1.2. 授权响应</a></li>
-            <li><a href="#413-访问令牌请求">4.1.3. 访问令牌请求</a></li>
-            <li><a href="#414-访问令牌响应">4.1.4. 访问令牌响应</a></li>
-          </ol>
-        </li>
-        <li><a href="#42-隐式授权">4.2. 隐式授权</a>
-          <ol>
-            <li><a href="#421-授权请求">4.2.1. 授权请求</a></li>
-            <li><a href="#422-访问令牌响应">4.2.2. 访问令牌响应</a></li>
-          </ol>
-        </li>
-        <li><a href="#43-资源所有者密码凭据许可">4.3. 资源所有者密码凭据许可</a>
-          <ol>
-            <li><a href="#431-授权请求和响应">4.3.1. 授权请求和响应</a></li>
-            <li><a href="#432-访问令牌请求">4.3.2. 访问令牌请求</a></li>
-            <li><a href="#433-访问令牌响应">4.3.3. 访问令牌响应</a></li>
-          </ol>
-        </li>
-        <li><a href="#44-客户端凭据许可">4.4. 客户端凭据许可</a>
-          <ol>
-            <li><a href="#441-授权请求和响应">4.4.1. 授权请求和响应</a></li>
-            <li><a href="#442-访问令牌请求">4.4.2. 访问令牌请求</a></li>
-            <li><a href="#443-访问令牌响应">4.4.3. 访问令牌响应</a></li>
-          </ol>
-        </li>
-        <li><a href="#45-扩展许可">4.5. 扩展许可</a></li>
-      </ol>
-    </li>
-    <li><a href="#5-颁发访问令牌">5. 颁发访问令牌</a>
-      <ol>
-        <li><a href="#51-成功的响应">5.1. 成功的响应</a></li>
-        <li><a href="#52-错误响应">5.2. 错误响应</a></li>
-      </ol>
-    </li>
-    <li><a href="#6-刷新访问令牌">6. 刷新访问令牌</a></li>
-    <li><a href="#7-访问受保护资源">7. 访问受保护资源</a>
-      <ol>
-        <li><a href="#71-访问令牌类型">7.1. 访问令牌类型</a></li>
-        <li><a href="#72-错误响应">7.2. 错误响应</a></li>
-      </ol>
-    </li>
-    <li><a href="#8-可扩展性">8. 可扩展性</a>
-      <ol>
-        <li><a href="#81-定义访问令牌类型">8.1. 定义访问令牌类型</a></li>
-        <li><a href="#82-定义新的端点参数">8.2. 定义新的端点参数</a></li>
-        <li><a href="#83-定义新的授权许可类型">8.3. 定义新的授权许可类型</a></li>
-        <li><a href="#84-定义新的授权端点响应类型">8.4. 定义新的授权端点响应类型</a></li>
-        <li><a href="#85-定义其他错误代码">8.5. 定义其他错误代码</a></li>
-      </ol>
-    </li>
-    <li><a href="#9-本机应用程序">9. 本机应用程序</a></li>
-    <li><a href="#10-安全考量">10. 安全考量</a>
-      <ol>
-        <li><a href="#101-客户端身份验证">10.1. 客户端身份验证</a></li>
-        <li><a href="#102-客户端仿冒">10.2. 客户端仿冒</a></li>
-        <li><a href="#103-访问令牌">10.3. 访问令牌</a></li>
-        <li><a href="#104-刷新令牌">10.4. 刷新令牌</a></li>
-        <li><a href="#105-授权码">10.5. 授权码</a></li>
-        <li><a href="#106-授权码重定向-uri-伪造">10.6. 授权码重定向 URI 伪造</a></li>
-        <li><a href="#107-资源所有者密码凭据">10.7. 资源所有者密码凭据</a></li>
-        <li><a href="#108-请求机密性">10.8. 请求机密性</a></li>
-        <li><a href="#109-确保端点真实性">10.9. 确保端点真实性</a></li>
-        <li><a href="#1010-凭据猜测攻击">10.10. 凭据猜测攻击</a></li>
-        <li><a href="#1011-钓鱼攻击">10.11. 钓鱼攻击</a></li>
-        <li><a href="#1012-跨站请求伪造">10.12. 跨站请求伪造</a></li>
-        <li><a href="#1013-点击劫持">10.13. 点击劫持</a></li>
-        <li><a href="#1014-代码注入和输入验证">10.14. 代码注入和输入验证</a></li>
-        <li><a href="#1015-自由重定向器">10.15. 自由重定向器</a></li>
-        <li><a href="#1016-在隐式授权流程中滥用访问令牌假冒资源所有者">10.16. 在隐式授权流程中滥用访问令牌假冒资源所有者</a></li>
-      </ol>
-    </li>
-    <li><a href="#11-iana-考量">11. IANA 考量</a>
-      <ol>
-        <li><a href="#111-oauth-访问令牌类型注册表">11.1. OAuth 访问令牌类型注册表</a>
-          <ol>
-            <li><a href="#1111-注册模板">11.1.1. 注册模板</a></li>
-          </ol>
-        </li>
-        <li><a href="#112-oauth-参数注册表">11.2. OAuth 参数注册表</a>
-          <ol>
-            <li><a href="#1121-注册模板">11.2.1. 注册模板</a></li>
-            <li><a href="#1122-初始的注册表内容">11.2.2. 初始的注册表内容</a></li>
-          </ol>
-        </li>
-        <li><a href="#113-oauth-授权端点响应类型注册表">11.3. OAuth 授权端点响应类型注册表</a>
-          <ol>
-            <li><a href="#1131-注册模板">11.3.1. 注册模板</a></li>
-            <li><a href="#1132-初始的注册表内容">11.3.2. 初始的注册表内容</a></li>
-          </ol>
-        </li>
-        <li><a href="#114-oauth-扩展错误注册表">11.4. OAuth 扩展错误注册表</a>
-          <ol>
-            <li><a href="#1141-注册模板">11.4.1. 注册模板</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#12-参考文献">12. 参考文献</a>
-      <ol>
-        <li><a href="#121-规范性参考文件">12.1. 规范性参考文件</a></li>
-        <li><a href="#122-参考性引用文献">12.2. 参考性引用文献</a></li>
-      </ol>
-    </li>
-    <li><a href="#附录-a-扩充巴库斯-瑙尔形式-abnf-语法">附录 A. 扩充巴库斯-瑙尔形式 (ABNF) 语法</a>
-      <ol>
-        <li><a href="#a1-client_id-语法">A.1. &ldquo;client_id&rdquo; 语法</a></li>
-        <li><a href="#a2-client_secret-语法">A.2. &ldquo;client_secret&rdquo; 语法</a></li>
-        <li><a href="#a3-response_type-语法">A.3. &ldquo;response_type&rdquo; 语法</a></li>
-        <li><a href="#a4-scope-语法">A.4. &ldquo;scope&rdquo; 语法</a></li>
-        <li><a href="#a5-state-语法">A.5. &ldquo;state&rdquo; 语法</a></li>
-        <li><a href="#a6-redirect_uri-语法">A.6. &ldquo;redirect_uri&rdquo; 语法</a></li>
-        <li><a href="#a7-error-语法">A.7. &ldquo;error&rdquo; 语法</a></li>
-        <li><a href="#a8-error_description-语法">A.8. &ldquo;error_description&rdquo; 语法</a></li>
-        <li><a href="#a9-error_uri-语法">A.9. &ldquo;error_uri&rdquo; 语法</a></li>
-        <li><a href="#a10-grant_type-语法">A.10. &ldquo;grant_type&rdquo; 语法</a></li>
-        <li><a href="#a11-code-语法">A.11. &ldquo;code&rdquo; 语法</a></li>
-        <li><a href="#a12-access_token-语法">A.12. &ldquo;access_token&rdquo; 语法</a></li>
-        <li><a href="#a13-token_type-语法">A.13. &ldquo;token_type&rdquo; 语法</a></li>
-        <li><a href="#a14-expires_in-语法">A.14. &ldquo;expires_in&rdquo; 语法</a></li>
-        <li><a href="#a15-username-语法">A.15. &ldquo;username&rdquo; 语法</a></li>
-        <li><a href="#a16-password-语法">A.16. &ldquo;password&rdquo; 语法</a></li>
-        <li><a href="#a17-refresh_token-语法">A.17. &ldquo;refresh_token&rdquo; 语法</a></li>
-        <li><a href="#a18-endpoint-parameter-语法">A.18. Endpoint Parameter 语法</a></li>
-      </ol>
-    </li>
-    <li><a href="#附录-b-applicationx-www-form-urlencoded-媒体类型的使用">附录 B. application/x-www-form-urlencoded 媒体类型的使用</a></li>
-    <li><a href="#附录-c-致谢">附录 C. 致谢</a></li>
-    <li><a href="#作者地址">作者地址</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -2415,18 +2417,6 @@ URI: <a class="link" href="http://dickhardt.org/"  target="_blank" rel="noopener
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

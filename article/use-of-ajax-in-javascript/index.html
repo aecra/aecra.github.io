@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文简要介绍了 Ajax 技术使用的几种方法'><meta name='keywords' content='JavaScript, AJAX'><title>JavaScript 中 AJAX 的使用</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文简要介绍了 Ajax 技术使用的几种方法'>
+<meta name='keywords' content='JavaScript, AJAX'><title>JavaScript 中 AJAX 的使用</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/use-of-ajax-in-javascript/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='JavaScript 中 AJAX 的使用'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='JavaScript 中 AJAX 的使用'>
 <meta property='og:description' content='本文简要介绍了 Ajax 技术使用的几种方法'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,67 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#原生-js">原生 js</a>
+      <ol>
+        <li><a href="#get1">GET1</a></li>
+        <li><a href="#post1">POST1</a></li>
+        <li><a href="#设置响应体格式">设置响应体格式</a></li>
+        <li><a href="#ie-缓存问题">IE 缓存问题</a></li>
+        <li><a href="#超时与网络异常">超时与网络异常</a></li>
+        <li><a href="#取消请求">取消请求</a></li>
+        <li><a href="#重复请求">重复请求</a></li>
+      </ol>
+    </li>
+    <li><a href="#jquery">jQuery</a>
+      <ol>
+        <li><a href="#get2">GET2</a></li>
+        <li><a href="#post2">POST2</a></li>
+        <li><a href="#ajax">AJAX</a></li>
+      </ol>
+    </li>
+    <li><a href="#axios">axios</a>
+      <ol>
+        <li><a href="#get3">GET3</a></li>
+        <li><a href="#post3">POST3</a></li>
+        <li><a href="#axious">axious</a></li>
+      </ol>
+    </li>
+    <li><a href="#fetch">fetch</a></li>
+    <li><a href="#跨域-cors">跨域 CORS</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +351,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +391,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -746,7 +807,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -830,65 +891,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#原生-js">原生 js</a>
-      <ol>
-        <li><a href="#get1">GET1</a></li>
-        <li><a href="#post1">POST1</a></li>
-        <li><a href="#设置响应体格式">设置响应体格式</a></li>
-        <li><a href="#ie-缓存问题">IE 缓存问题</a></li>
-        <li><a href="#超时与网络异常">超时与网络异常</a></li>
-        <li><a href="#取消请求">取消请求</a></li>
-        <li><a href="#重复请求">重复请求</a></li>
-      </ol>
-    </li>
-    <li><a href="#jquery">jQuery</a>
-      <ol>
-        <li><a href="#get2">GET2</a></li>
-        <li><a href="#post2">POST2</a></li>
-        <li><a href="#ajax">AJAX</a></li>
-      </ol>
-    </li>
-    <li><a href="#axios">axios</a>
-      <ol>
-        <li><a href="#get3">GET3</a></li>
-        <li><a href="#post3">POST3</a></li>
-        <li><a href="#axious">axious</a></li>
-      </ol>
-    </li>
-    <li><a href="#fetch">fetch</a></li>
-    <li><a href="#跨域-cors">跨域 CORS</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -906,18 +908,6 @@ if (!doNotTrack) {
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>

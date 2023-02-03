@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文是学习 html 和 css 时所做的学习笔记'><meta name='keywords' content='HTML, css'><title>HTML &#43; CSS</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文是学习 html 和 css 时所做的学习笔记'>
+<meta name='keywords' content='HTML, css'><title>HTML &#43; CSS</title>
 
 
 
 <link rel='canonical' href='https://aecra.github.io/article/html-css/'>
 
-<link rel="stylesheet" href="/scss/style.min.49efbd60809f94209900a2125634493930b2a299cd430d619fc24c3ad2c77d28.css"><meta property='og:title' content='HTML &#43; CSS'>
+<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='HTML &#43; CSS'>
 <meta property='og:description' content='本文是学习 html 和 css 时所做的学习笔记'>
 
 
@@ -97,6 +98,7 @@ if (!doNotTrack) {
                         href='https://github.com/aecra'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -115,7 +117,6 @@ if (!doNotTrack) {
         
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -135,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -156,7 +156,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -176,7 +175,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/link/' >
                 
@@ -196,7 +194,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/index.xml' >
                 
@@ -265,7 +262,124 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#html-基础">HTML 基础</a>
+      <ol>
+        <li><a href="#文档声明">文档声明</a></li>
+        <li><a href="#语言声明">语言声明</a></li>
+        <li><a href="#实体">实体</a></li>
+        <li><a href="#meta-标签">meta 标签</a></li>
+        <li><a href="#语义化标签">语义化标签</a></li>
+        <li><a href="#列表">列表</a></li>
+        <li><a href="#超链接">超链接</a></li>
+        <li><a href="#图片标签">图片标签</a></li>
+        <li><a href="#内联框架">内联框架</a></li>
+        <li><a href="#音视频">音视频</a></li>
+        <li><a href="#表格">表格</a></li>
+        <li><a href="#注释">注释</a></li>
+      </ol>
+    </li>
+    <li><a href="#css-基础">CSS 基础</a>
+      <ol>
+        <li><a href="#使用方式">使用方式</a></li>
+        <li><a href="#语法">语法</a></li>
+        <li><a href="#选择器">选择器</a>
+          <ol>
+            <li><a href="#基本选择器">基本选择器</a></li>
+            <li><a href="#复合选择器">复合选择器</a></li>
+            <li><a href="#关系选择器">关系选择器</a></li>
+            <li><a href="#属性选择器">属性选择器</a></li>
+            <li><a href="#伪类选择器">伪类选择器</a></li>
+            <li><a href="#a-元素的伪类">a 元素的伪类</a></li>
+            <li><a href="#伪元素选择器">伪元素选择器</a></li>
+            <li><a href="#样式的继承">样式的继承</a></li>
+            <li><a href="#选择器的权重">选择器的权重</a></li>
+          </ol>
+        </li>
+        <li><a href="#单位">单位</a></li>
+        <li><a href="#颜色">颜色</a></li>
+      </ol>
+    </li>
+    <li><a href="#盒模型">盒模型</a>
+      <ol>
+        <li><a href="#文档流normal-flow">文档流（normal flow）</a></li>
+        <li><a href="#盒模型示例">盒模型示例</a></li>
+        <li><a href="#子元素溢出">子元素溢出</a></li>
+        <li><a href="#margin-的折叠">margin 的折叠</a></li>
+        <li><a href="#行内元素的盒模型">行内元素的盒模型</a></li>
+        <li><a href="#盒模型类别">盒模型类别</a></li>
+        <li><a href="#重置样式表">重置样式表</a></li>
+        <li><a href="#盒子的尺寸">盒子的尺寸</a></li>
+        <li><a href="#轮廓和圆角">轮廓和圆角</a></li>
+      </ol>
+    </li>
+    <li><a href="#浮动">浮动</a>
+      <ol>
+        <li><a href="#简介">简介</a></li>
+        <li><a href="#其他特点">其他特点</a></li>
+        <li><a href="#高度坍塌">高度坍塌</a>
+          <ol>
+            <li><a href="#bfc">BFC</a></li>
+            <li><a href="#clear">clear</a></li>
+            <li><a href="#理想的解决方案">理想的解决方案</a></li>
+          </ol>
+        </li>
+        <li><a href="#clearfix">clearfix</a></li>
+      </ol>
+    </li>
+    <li><a href="#定位">定位</a>
+      <ol>
+        <li><a href="#相对定位">相对定位</a></li>
+        <li><a href="#绝对定位">绝对定位</a></li>
+        <li><a href="#固定定位">固定定位</a></li>
+        <li><a href="#粘滞定位">粘滞定位</a></li>
+        <li><a href="#元素层级">元素层级</a></li>
+      </ol>
+    </li>
+    <li><a href="#字体">字体</a>
+      <ol>
+        <li><a href="#提供字体">提供字体</a></li>
+        <li><a href="#字体样式">字体样式</a></li>
+        <li><a href="#图标字体">图标字体</a></li>
+        <li><a href="#文本属性">文本属性</a></li>
+      </ol>
+    </li>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#表单">表单</a></li>
+    <li><a href="#弹性盒模型">弹性盒模型</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -294,6 +408,9 @@ if (!doNotTrack) {
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -331,6 +448,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1201,7 +1319,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -1285,122 +1403,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#html-基础">HTML 基础</a>
-      <ol>
-        <li><a href="#文档声明">文档声明</a></li>
-        <li><a href="#语言声明">语言声明</a></li>
-        <li><a href="#实体">实体</a></li>
-        <li><a href="#meta-标签">meta 标签</a></li>
-        <li><a href="#语义化标签">语义化标签</a></li>
-        <li><a href="#列表">列表</a></li>
-        <li><a href="#超链接">超链接</a></li>
-        <li><a href="#图片标签">图片标签</a></li>
-        <li><a href="#内联框架">内联框架</a></li>
-        <li><a href="#音视频">音视频</a></li>
-        <li><a href="#表格">表格</a></li>
-        <li><a href="#注释">注释</a></li>
-      </ol>
-    </li>
-    <li><a href="#css-基础">CSS 基础</a>
-      <ol>
-        <li><a href="#使用方式">使用方式</a></li>
-        <li><a href="#语法">语法</a></li>
-        <li><a href="#选择器">选择器</a>
-          <ol>
-            <li><a href="#基本选择器">基本选择器</a></li>
-            <li><a href="#复合选择器">复合选择器</a></li>
-            <li><a href="#关系选择器">关系选择器</a></li>
-            <li><a href="#属性选择器">属性选择器</a></li>
-            <li><a href="#伪类选择器">伪类选择器</a></li>
-            <li><a href="#a-元素的伪类">a 元素的伪类</a></li>
-            <li><a href="#伪元素选择器">伪元素选择器</a></li>
-            <li><a href="#样式的继承">样式的继承</a></li>
-            <li><a href="#选择器的权重">选择器的权重</a></li>
-          </ol>
-        </li>
-        <li><a href="#单位">单位</a></li>
-        <li><a href="#颜色">颜色</a></li>
-      </ol>
-    </li>
-    <li><a href="#盒模型">盒模型</a>
-      <ol>
-        <li><a href="#文档流normal-flow">文档流（normal flow）</a></li>
-        <li><a href="#盒模型示例">盒模型示例</a></li>
-        <li><a href="#子元素溢出">子元素溢出</a></li>
-        <li><a href="#margin-的折叠">margin 的折叠</a></li>
-        <li><a href="#行内元素的盒模型">行内元素的盒模型</a></li>
-        <li><a href="#盒模型类别">盒模型类别</a></li>
-        <li><a href="#重置样式表">重置样式表</a></li>
-        <li><a href="#盒子的尺寸">盒子的尺寸</a></li>
-        <li><a href="#轮廓和圆角">轮廓和圆角</a></li>
-      </ol>
-    </li>
-    <li><a href="#浮动">浮动</a>
-      <ol>
-        <li><a href="#简介">简介</a></li>
-        <li><a href="#其他特点">其他特点</a></li>
-        <li><a href="#高度坍塌">高度坍塌</a>
-          <ol>
-            <li><a href="#bfc">BFC</a></li>
-            <li><a href="#clear">clear</a></li>
-            <li><a href="#理想的解决方案">理想的解决方案</a></li>
-          </ol>
-        </li>
-        <li><a href="#clearfix">clearfix</a></li>
-      </ol>
-    </li>
-    <li><a href="#定位">定位</a>
-      <ol>
-        <li><a href="#相对定位">相对定位</a></li>
-        <li><a href="#绝对定位">绝对定位</a></li>
-        <li><a href="#固定定位">固定定位</a></li>
-        <li><a href="#粘滞定位">粘滞定位</a></li>
-        <li><a href="#元素层级">元素层级</a></li>
-      </ol>
-    </li>
-    <li><a href="#字体">字体</a>
-      <ol>
-        <li><a href="#提供字体">提供字体</a></li>
-        <li><a href="#字体样式">字体样式</a></li>
-        <li><a href="#图标字体">图标字体</a></li>
-        <li><a href="#文本属性">文本属性</a></li>
-      </ol>
-    </li>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#表单">表单</a></li>
-    <li><a href="#弹性盒模型">弹性盒模型</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -1418,18 +1420,6 @@ if (!doNotTrack) {
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript">
-    console.log("%c aecra %c Leave a dialogue for the years to come！ ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-</script>
-<script>
-    
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
     </body>
 </html>
