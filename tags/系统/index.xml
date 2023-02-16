@@ -12,7 +12,7 @@
         <pubDate>Thu, 28 Oct 2021 18:52:34 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/windows-linux-dual-system-boot-problem/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/windows-linux-dual-system-boot-problem.jpg" alt="Featured image of post Windows &amp; Linux 双系统启动引导问题" /&gt;问题描述 该问题是 Windows 和 Linux 双系统中，因先安装 Windows 后安装 Linux 而导致 Linux 引导 Windows。该情况下系统可以正常启动，无论启动 Windows 还是 Linux 都是没问题的，至于为</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/windows-linux-dual-system-boot-problem.jpg" alt="Featured image of post Windows &amp; Linux 双系统启动引导问题" /&gt;问题描述 该问题是 Windows 和 Linux 双系统中，因先安装 Windows 后安装 Linux 而导致 Linux 引导 Windows。该情况下系统可以正常启动，无论启动 Windows 还是 Linux 都是没问题的，至于为</description>
         </item>
         
     </channel>

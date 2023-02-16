@@ -12,7 +12,7 @@
         <pubDate>Mon, 31 Oct 2022 20:27:48 +0000</pubDate>
         
         <guid>https://aecra.github.io/en/article/brief-instructions-for-using-gdb/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/Brief-Instructions-for-Using-GDB.png" alt="Featured image of post Brief Instructions for Using GDB" /&gt;What is GDB？ GDB is the GNU Project debugger that allows you to see what&amp;rsquo;s going on &amp;ldquo;inside&amp;rdquo; another program while it&amp;rsquo;s executing &amp;ndash; or what another program was doing when it crashed.
+        <description>&lt;img src="https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.png" alt="Featured image of post Brief Instructions for Using GDB" /&gt;What is GDB？ GDB is the GNU Project debugger that allows you to see what&amp;rsquo;s going on &amp;ldquo;inside&amp;rdquo; another program while it&amp;rsquo;s executing &amp;ndash; or what another program was doing when it crashed.
 There are four main things GDB can do (plus other things to support them) to help you catch errors on the fly:
 Start the program, specifying anything that might affect its behavior. Causes your program to stop on specified conditions.</description>
         </item>

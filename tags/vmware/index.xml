@@ -12,7 +12,7 @@
         <pubDate>Sun, 13 Feb 2022 20:19:13 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post Vmware 开发虚拟机随系统启动与关闭" /&gt;Vmware 虚拟机开发的缘由 Windows 开发有时总是那么地不尽人意，尤其是当开发的服务需要在 Linux 中运行时，如果使用 Windows 开发，总是会出现一些莫名其妙的问题，所以使用 Linux</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post Vmware 开发虚拟机随系统启动与关闭" /&gt;Vmware 虚拟机开发的缘由 Windows 开发有时总是那么地不尽人意，尤其是当开发的服务需要在 Linux 中运行时，如果使用 Windows 开发，总是会出现一些莫名其妙的问题，所以使用 Linux</description>
         </item>
         
     </channel>

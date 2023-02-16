@@ -12,7 +12,7 @@
         <pubDate>Sun, 13 Feb 2022 20:19:13 +0000</pubDate>
         
         <guid>https://aecra.github.io/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post VMware development virtual machine starts and shuts down with the system." /&gt;Reasons for Vmware Virtual Machine Development Windows development is sometimes so unsatisfactory, especially when the services developed need to run in Linux, and there are always some inexplicable problems if you develop in Windows, so it is necessary to develop in Linux. There are several options for using Linux development environment in Windows, such as WSL2, Hyper-V, VitualBox and Vmware. WSL2 is so tied to Windows that many configurations cannot</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post VMware development virtual machine starts and shuts down with the system." /&gt;Reasons for Vmware Virtual Machine Development Windows development is sometimes so unsatisfactory, especially when the services developed need to run in Linux, and there are always some inexplicable problems if you develop in Windows, so it is necessary to develop in Linux. There are several options for using Linux development environment in Windows, such as WSL2, Hyper-V, VitualBox and Vmware. WSL2 is so tied to Windows that many configurations cannot</description>
         </item>
         
     </channel>

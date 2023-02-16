@@ -12,7 +12,7 @@
         <pubDate>Thu, 26 Jan 2023 21:34:00 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/problems-in-using-clashforwindows/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/problems-in-using-ClashForWindows.png" alt="Featured image of post 使用 ClashForWindows 时的一些问题" /&gt;什么是 ClashForWindows ClashForWindows 是一个开源的 Clash 的图形化界面，可以在 Windows 上使用。既然看了这篇文章，那就意味着你已经知道 Clash 是什么了，所以这里就不再赘述了。 安装 我选择的是</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/problems-in-using-ClashForWindows.png" alt="Featured image of post 使用 ClashForWindows 时的一些问题" /&gt;什么是 ClashForWindows ClashForWindows 是一个开源的 Clash 的图形化界面，可以在 Windows 上使用。既然看了这篇文章，那就意味着你已经知道 Clash 是什么了，所以这里就不再赘述了。 安装 我选择的是</description>
         </item>
         <item>
         <title>GDB 简要使用说明</title>
@@ -20,7 +20,7 @@
         <pubDate>Mon, 31 Oct 2022 20:27:48 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/brief-instructions-for-using-gdb/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/Brief-Instructions-for-Using-GDB.png" alt="Featured image of post GDB 简要使用说明" /&gt;什么是 GDB？ GDB 是 GNU Project 调试器，它允许您查看另一个程序在执行时“内部”发生了什么——或者在它崩溃时另一个程序正在做什么。 GDB 可以做四种主要的事情</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/Brief-Instructions-for-Using-GDB.png" alt="Featured image of post GDB 简要使用说明" /&gt;什么是 GDB？ GDB 是 GNU Project 调试器，它允许您查看另一个程序在执行时“内部”发生了什么——或者在它崩溃时另一个程序正在做什么。 GDB 可以做四种主要的事情</description>
         </item>
         <item>
         <title>Golang 中的 GC 算法：三色标记与混合写屏障</title>
@@ -28,7 +28,7 @@
         <pubDate>Thu, 20 Oct 2022 20:07:32 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png" alt="Featured image of post Golang 中的 GC 算法：三色标记与混合写屏障" /&gt;标记清除法 在 v1.0~v1.3 版本中都是用的是标记清除算法。首先我们需要了解 STW（Stop The World）是什么，顾名思义，STW 是将当前程序完全暂停，不执</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png" alt="Featured image of post Golang 中的 GC 算法：三色标记与混合写屏障" /&gt;标记清除法 在 v1.0~v1.3 版本中都是用的是标记清除算法。首先我们需要了解 STW（Stop The World）是什么，顾名思义，STW 是将当前程序完全暂停，不执</description>
         </item>
         <item>
         <title>在 Golang 中使用优先队列</title>
@@ -36,7 +36,7 @@
         <pubDate>Tue, 13 Sep 2022 23:41:00 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/use-priority-queue-in-golang/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/use-priority-queue-in-golang.png" alt="Featured image of post 在 Golang 中使用优先队列" /&gt;在 Golang 中我们可以找到 heap 的实现，但是，基于 heap 的优先队列没有提供支持，只在 heap 文档中提供了优先队列的一个示例，Go 团队是在是太狗了，这对于我们这些要</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/use-priority-queue-in-golang.png" alt="Featured image of post 在 Golang 中使用优先队列" /&gt;在 Golang 中我们可以找到 heap 的实现，但是，基于 heap 的优先队列没有提供支持，只在 heap 文档中提供了优先队列的一个示例，Go 团队是在是太狗了，这对于我们这些要</description>
         </item>
         <item>
         <title>Podman 构建过程强制终止时构建容器残留问题</title>
@@ -44,7 +44,7 @@
         <pubDate>Tue, 16 Aug 2022 10:43:50 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/Podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate.png" alt="Featured image of post Podman 构建过程强制终止时构建容器残留问题" /&gt;问题描述 先简要描述一下，在构建 Podman 过程中，如果使用 Ctrl + C 强制终止，会使构建中的容器残留在 Podman 中，不仅占用空间还影响无用镜像的删除。 之前多次构建时</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/Podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate.png" alt="Featured image of post Podman 构建过程强制终止时构建容器残留问题" /&gt;问题描述 先简要描述一下，在构建 Podman 过程中，如果使用 Ctrl + C 强制终止，会使构建中的容器残留在 Podman 中，不仅占用空间还影响无用镜像的删除。 之前多次构建时</description>
         </item>
         <item>
         <title>wsl 中构建 Golang 项目时网络代理引起构建卡壳的问题</title>
@@ -52,7 +52,7 @@
         <pubDate>Sat, 13 Aug 2022 21:09:21 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/Web-proxy-causes-build-jam-when-building-Golang-projects-in-wsl.png" alt="Featured image of post wsl 中构建 Golang 项目时网络代理引起构建卡壳的问题" /&gt;问题背景和描述 Windows 系统中使用 Clash-for-Windows 作为代理应用，同时 wsl 中设置了系统代理，配置如下： export http_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export https_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export ftp_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export no_proxy=&amp;#34;127.0.0.1,localhost&amp;#34; export HTTP_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export HTTPS_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export FTP_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export NO_PROXY=&amp;#34;127.0.0.1,localhost&amp;#34; 我的目标是构建 Golang 应用，涉及到的 Dockerfile</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/Web-proxy-causes-build-jam-when-building-Golang-projects-in-wsl.png" alt="Featured image of post wsl 中构建 Golang 项目时网络代理引起构建卡壳的问题" /&gt;问题背景和描述 Windows 系统中使用 Clash-for-Windows 作为代理应用，同时 wsl 中设置了系统代理，配置如下： export http_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export https_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export ftp_proxy=&amp;#34;http://192.168.1.3:7890/&amp;#34; export no_proxy=&amp;#34;127.0.0.1,localhost&amp;#34; export HTTP_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export HTTPS_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export FTP_PROXY=&amp;#34;http://192.168.1.3:7890/&amp;#34; export NO_PROXY=&amp;#34;127.0.0.1,localhost&amp;#34; 我的目标是构建 Golang 应用，涉及到的 Dockerfile</description>
         </item>
         <item>
         <title>NGINX 问题集锦</title>
@@ -60,7 +60,7 @@
         <pubDate>Thu, 14 Jul 2022 11:25:54 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/collection-of-nginx-issues/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/collection-of-nginx-issues.png" alt="Featured image of post NGINX 问题集锦" /&gt;NGINX 安装 NGINX 入门指导 网站强制使用 HTTPS 监听 80 端口上的所有请求，将其重定向到 443 端口，之后每个服务只需要监听 443 点扣上对应的域名即可。 server { listen 80 default_server; server_name _; return 301 https://$host$request_uri;</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/collection-of-nginx-issues.png" alt="Featured image of post NGINX 问题集锦" /&gt;NGINX 安装 NGINX 入门指导 网站强制使用 HTTPS 监听 80 端口上的所有请求，将其重定向到 443 端口，之后每个服务只需要监听 443 点扣上对应的域名即可。 server { listen 80 default_server; server_name _; return 301 https://$host$request_uri;</description>
         </item>
         <item>
         <title>为服务器配置畅通的网络环境</title>
@@ -68,7 +68,7 @@
         <pubDate>Thu, 26 May 2022 19:00:25 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/configure-a-smooth-network-environment-for-the-server/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/configure-a-smooth-network-environment-for-the-server.jpg" alt="Featured image of post 为服务器配置畅通的网络环境" /&gt;简述 因为国内网络不能畅通，在配置服务器和更新资源时常常需要更换成国内的镜像源，过多的配置实在是繁杂，倒不如直接将本机流量转发到处于正常的网络</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/configure-a-smooth-network-environment-for-the-server.jpg" alt="Featured image of post 为服务器配置畅通的网络环境" /&gt;简述 因为国内网络不能畅通，在配置服务器和更新资源时常常需要更换成国内的镜像源，过多的配置实在是繁杂，倒不如直接将本机流量转发到处于正常的网络</description>
         </item>
         <item>
         <title>使用 Kong 搭建网关</title>
@@ -76,7 +76,7 @@
         <pubDate>Fri, 20 May 2022 19:31:35 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/build-a-gateway-by-kong/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/build-a-gateway-by-kong.png" alt="Featured image of post 使用 Kong 搭建网关" /&gt;为什么要自己搭建网关？ 首先明确网关的用途，我使用网关完全是统一管理自己的各种后台接口。在搭建自己的网关前我的后台接口十分散乱，有的部署在云函</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/build-a-gateway-by-kong.png" alt="Featured image of post 使用 Kong 搭建网关" /&gt;为什么要自己搭建网关？ 首先明确网关的用途，我使用网关完全是统一管理自己的各种后台接口。在搭建自己的网关前我的后台接口十分散乱，有的部署在云函</description>
         </item>
         <item>
         <title>GO 中哈希表的实现</title>
@@ -84,7 +84,7 @@
         <pubDate>Wed, 20 Apr 2022 19:51:21 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/hash-table-implementation-in-go/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/hash-table-implementation-in-go.png" alt="Featured image of post GO 中哈希表的实现" /&gt;什么是哈希表 哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。 哈希函数提供了对键的散列编码，可以将</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/hash-table-implementation-in-go.png" alt="Featured image of post GO 中哈希表的实现" /&gt;什么是哈希表 哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。 哈希函数提供了对键的散列编码，可以将</description>
         </item>
         <item>
         <title>Vim 命令速查表</title>
@@ -100,7 +100,7 @@
         <pubDate>Mon, 21 Feb 2022 22:44:13 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/the-oauth-2.0-authorization-framework-in-chinese/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/The-OAuth-2.0-Authorization-Framework-in-Chinese.png" alt="Featured image of post RFC6749 | OAuth 2.0 授权框架 中文版" /&gt;前言 摘要 OAuth2.0 授权框架允许第三方应用获取对 HTTP 服务的有限的访问权限，既可以以资源所有者名义在资源所有者和 HTTP 服务之间进行允许的交互，也可以允许第三方</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/The-OAuth-2.0-Authorization-Framework-in-Chinese.png" alt="Featured image of post RFC6749 | OAuth 2.0 授权框架 中文版" /&gt;前言 摘要 OAuth2.0 授权框架允许第三方应用获取对 HTTP 服务的有限的访问权限，既可以以资源所有者名义在资源所有者和 HTTP 服务之间进行允许的交互，也可以允许第三方</description>
         </item>
         <item>
         <title>Vmware 开发虚拟机随系统启动与关闭</title>
@@ -108,7 +108,7 @@
         <pubDate>Sun, 13 Feb 2022 20:19:13 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post Vmware 开发虚拟机随系统启动与关闭" /&gt;Vmware 虚拟机开发的缘由 Windows 开发有时总是那么地不尽人意，尤其是当开发的服务需要在 Linux 中运行时，如果使用 Windows 开发，总是会出现一些莫名其妙的问题，所以使用 Linux</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/VMware-development-virtual-machine-starts-and-shuts-down-with-the-system.jpg" alt="Featured image of post Vmware 开发虚拟机随系统启动与关闭" /&gt;Vmware 虚拟机开发的缘由 Windows 开发有时总是那么地不尽人意，尤其是当开发的服务需要在 Linux 中运行时，如果使用 Windows 开发，总是会出现一些莫名其妙的问题，所以使用 Linux</description>
         </item>
         <item>
         <title>排序算法</title>
@@ -116,7 +116,7 @@
         <pubDate>Sun, 13 Feb 2022 11:58:25 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/sorting-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/Sorting-algorithm.png" alt="Featured image of post 排序算法" /&gt;插入排序 Java public class Insertion { private Insertion() { } public static void sort(Comparable[] a) { int n = a.length; for (int i = 1; i &amp;lt; n; i++) { for (int j = i; j &amp;gt; 0 &amp;amp;&amp;amp; less(a[j], a[j-1]); j--) { exch(a, j, j-1); } } } private static boolean less(Comparable v, Comparable w) { return v.compareTo(w) &amp;lt; 0; } private static void exch(Object[] a,</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/Sorting-algorithm.png" alt="Featured image of post 排序算法" /&gt;插入排序 Java public class Insertion { private Insertion() { } public static void sort(Comparable[] a) { int n = a.length; for (int i = 1; i &amp;lt; n; i++) { for (int j = i; j &amp;gt; 0 &amp;amp;&amp;amp; less(a[j], a[j-1]); j--) { exch(a, j, j-1); } } } private static boolean less(Comparable v, Comparable w) { return v.compareTo(w) &amp;lt; 0; } private static void exch(Object[] a,</description>
         </item>
         <item>
         <title>Nginx 中按域名转发 TCP 连接</title>
@@ -124,7 +124,7 @@
         <pubDate>Fri, 11 Feb 2022 17:08:45 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/forwarding-tcp-connections-by-domain-name-in-nginx/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/Forwarding-TCP-connections-by-domain-name-in-Nginx.png" alt="Featured image of post Nginx 中按域名转发 TCP 连接" /&gt;编译安装 Nginx 上接 NGINX 入门指导,由于安装版本号为 1.20.1 所以不考虑旧版适配问题，其中编译选项增加的模块 --with-stream 和 --with-stream_ssl_preread_module 就是本次需要的功能模块。 配置 Nginx 由于是转发的 TCP</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/Forwarding-TCP-connections-by-domain-name-in-Nginx.png" alt="Featured image of post Nginx 中按域名转发 TCP 连接" /&gt;编译安装 Nginx 上接 NGINX 入门指导,由于安装版本号为 1.20.1 所以不考虑旧版适配问题，其中编译选项增加的模块 --with-stream 和 --with-stream_ssl_preread_module 就是本次需要的功能模块。 配置 Nginx 由于是转发的 TCP</description>
         </item>
         <item>
         <title>PowerShell 美化之 ys 主题</title>
@@ -132,7 +132,7 @@
         <pubDate>Sun, 12 Dec 2021 17:06:38 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/powershell-beautification-for-ys-themes/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/powershell-beautification-for-ys-themes.png" alt="Featured image of post PowerShell 美化之 ys 主题" /&gt;简要说明 这篇文章本来是没有的，但之前突发奇想在 Windows上整了一个 Oh My Zsh，见文章Windows 中使用 Oh My Zsh 的各种方式，可 TMD 第二天就卡</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/powershell-beautification-for-ys-themes.png" alt="Featured image of post PowerShell 美化之 ys 主题" /&gt;简要说明 这篇文章本来是没有的，但之前突发奇想在 Windows上整了一个 Oh My Zsh，见文章Windows 中使用 Oh My Zsh 的各种方式，可 TMD 第二天就卡</description>
         </item>
         <item>
         <title>Windows 中使用 Oh My Zsh 的各种方式</title>
@@ -140,7 +140,7 @@
         <pubDate>Fri, 10 Dec 2021 16:00:28 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/use-oh-my-zsh-in-windows/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/use-oh-my-zsh-in-windows.png" alt="Featured image of post Windows 中使用 Oh My Zsh 的各种方式" /&gt;方式介绍 首先需要明确的是 zsh 不存在 Windows 版本的命令工具。所以在实现上都需要我们有一个 Linux 系统。在 Windows 中既有 WSL2 这种 Windows 支持的 Linux 子系统，也可以使用 cygwin 和 MSYS2 这类</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/use-oh-my-zsh-in-windows.png" alt="Featured image of post Windows 中使用 Oh My Zsh 的各种方式" /&gt;方式介绍 首先需要明确的是 zsh 不存在 Windows 版本的命令工具。所以在实现上都需要我们有一个 Linux 系统。在 Windows 中既有 WSL2 这种 Windows 支持的 Linux 子系统，也可以使用 cygwin 和 MSYS2 这类</description>
         </item>
         <item>
         <title>修改 Git 记录中的作者信息</title>
@@ -148,7 +148,7 @@
         <pubDate>Thu, 09 Dec 2021 21:01:46 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/change-author-in-git-commit/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/change-author-in-git-commit.png" alt="Featured image of post 修改 Git 记录中的作者信息" /&gt;Git 设置用户名和邮箱 既然要做多人开发，那么必然要设置不同的用户名和邮箱，下面是设置的命令。 # 全局设置 git config --global user.name &amp;lt;username&amp;gt; git config --global user.email &amp;lt;email&amp;gt; # 分支设置 git config user.name &amp;lt;username&amp;gt; git config</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/change-author-in-git-commit.png" alt="Featured image of post 修改 Git 记录中的作者信息" /&gt;Git 设置用户名和邮箱 既然要做多人开发，那么必然要设置不同的用户名和邮箱，下面是设置的命令。 # 全局设置 git config --global user.name &amp;lt;username&amp;gt; git config --global user.email &amp;lt;email&amp;gt; # 分支设置 git config user.name &amp;lt;username&amp;gt; git config</description>
         </item>
         <item>
         <title>JavaScript 实现发布订阅</title>
@@ -156,7 +156,7 @@
         <pubDate>Sun, 05 Dec 2021 21:38:25 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/implementation-publish-and-subscription-by-javascript/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/implementation-publish-and-subscription-by-javascript.png" alt="Featured image of post JavaScript 实现发布订阅" /&gt;事由 在开发微信小程序的过程中，因为要维护全局用户数据，所以各个页面都要从 app.js 同步用户数据；另外在一些其他的全局数据中也需要使用此功能。 在微信开</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/implementation-publish-and-subscription-by-javascript.png" alt="Featured image of post JavaScript 实现发布订阅" /&gt;事由 在开发微信小程序的过程中，因为要维护全局用户数据，所以各个页面都要从 app.js 同步用户数据；另外在一些其他的全局数据中也需要使用此功能。 在微信开</description>
         </item>
         <item>
         <title>Go 中的面向对象</title>
@@ -164,7 +164,7 @@
         <pubDate>Mon, 22 Nov 2021 18:11:40 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/object-oriented-in-go/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/object-oriented-in-go.png" alt="Featured image of post Go 中的面向对象" /&gt;结构体 Golang 中没有类，但可以定义类型上的方法，同时有接口，可以通过接口定义对象的要求。也可以通过类型定义对象的构造方法及行为。 什么是结构体？在 Go</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/object-oriented-in-go.png" alt="Featured image of post Go 中的面向对象" /&gt;结构体 Golang 中没有类，但可以定义类型上的方法，同时有接口，可以通过接口定义对象的要求。也可以通过类型定义对象的构造方法及行为。 什么是结构体？在 Go</description>
         </item>
         <item>
         <title>Windows &amp; Linux 双系统启动引导问题</title>
@@ -172,7 +172,7 @@
         <pubDate>Thu, 28 Oct 2021 18:52:34 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/windows-linux-dual-system-boot-problem/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/windows-linux-dual-system-boot-problem.jpg" alt="Featured image of post Windows &amp; Linux 双系统启动引导问题" /&gt;问题描述 该问题是 Windows 和 Linux 双系统中，因先安装 Windows 后安装 Linux 而导致 Linux 引导 Windows。该情况下系统可以正常启动，无论启动 Windows 还是 Linux 都是没问题的，至于为</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/windows-linux-dual-system-boot-problem.jpg" alt="Featured image of post Windows &amp; Linux 双系统启动引导问题" /&gt;问题描述 该问题是 Windows 和 Linux 双系统中，因先安装 Windows 后安装 Linux 而导致 Linux 引导 Windows。该情况下系统可以正常启动，无论启动 Windows 还是 Linux 都是没问题的，至于为</description>
         </item>
         <item>
         <title>如何优雅地实现 async/await 的错误处理</title>
@@ -180,7 +180,7 @@
         <pubDate>Mon, 18 Oct 2021 16:53:59 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/how-to-gracefully-implement-async-await-error-handing/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/how-to-gracefully-implement-async-await-error-handing.jpg" alt="Featured image of post 如何优雅地实现 async/await 的错误处理" /&gt;异步编程 该部分可以参考 JavaScript 中的异步编程，其中较为详细地介绍了各种异步编程的实现方案的优缺点，为了方便开发我使用了 async/await 方式去解决异步编程的问题。 错</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/how-to-gracefully-implement-async-await-error-handing.jpg" alt="Featured image of post 如何优雅地实现 async/await 的错误处理" /&gt;异步编程 该部分可以参考 JavaScript 中的异步编程，其中较为详细地介绍了各种异步编程的实现方案的优缺点，为了方便开发我使用了 async/await 方式去解决异步编程的问题。 错</description>
         </item>
         <item>
         <title>Go 的异常处理</title>
@@ -188,7 +188,7 @@
         <pubDate>Tue, 12 Oct 2021 20:44:50 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/go-exception-handling/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/go-exception-handling.png" alt="Featured image of post Go 的异常处理" /&gt;前言 Go 语言追求简洁优雅，所以，Go 语言不支持传统的 try … catch … finally 这种异常，因为 Go 语言的设计者们认为，将异常与控制结构混在一起会很容易使得代码变得</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/go-exception-handling.png" alt="Featured image of post Go 的异常处理" /&gt;前言 Go 语言追求简洁优雅，所以，Go 语言不支持传统的 try … catch … finally 这种异常，因为 Go 语言的设计者们认为，将异常与控制结构混在一起会很容易使得代码变得</description>
         </item>
         <item>
         <title>记 SSL 证书使用一大坑</title>
@@ -196,7 +196,7 @@
         <pubDate>Fri, 17 Sep 2021 15:37:09 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/remember-a-bug-in-use-ssl-certificates/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/remember-a-bug-in-use-ssl-certificates.jpg" alt="Featured image of post 记 SSL 证书使用一大坑" /&gt;SSL 是什么？ SSL(Secure Sockets Layer 安全套接字协议),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/remember-a-bug-in-use-ssl-certificates.jpg" alt="Featured image of post 记 SSL 证书使用一大坑" /&gt;SSL 是什么？ SSL(Secure Sockets Layer 安全套接字协议),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种</description>
         </item>
         <item>
         <title>docker 镜像的创建</title>
@@ -204,7 +204,7 @@
         <pubDate>Sun, 04 Jul 2021 10:23:09 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/create-docker-image/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/create-docker-image.jpg" alt="Featured image of post docker 镜像的创建" /&gt;docker 镜像是什么？ Docker 镜像 是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/create-docker-image.jpg" alt="Featured image of post docker 镜像的创建" /&gt;docker 镜像是什么？ Docker 镜像 是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿</description>
         </item>
         <item>
         <title>NGINX 入门指导</title>
@@ -212,7 +212,7 @@
         <pubDate>Sat, 03 Jul 2021 08:50:45 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/nginx-getting-started-guide/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/nginx-getting-started-guide.png" alt="Featured image of post NGINX 入门指导" /&gt;简介 Nginx 是一款轻量级的 HTTP 服务器，采用事件驱动的异步非阻塞处理方式框架，这让其具有极好的 IO 性能，时常用于服务端的反向代理和负载均衡。 快速入门 安装</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/nginx-getting-started-guide.png" alt="Featured image of post NGINX 入门指导" /&gt;简介 Nginx 是一款轻量级的 HTTP 服务器，采用事件驱动的异步非阻塞处理方式框架，这让其具有极好的 IO 性能，时常用于服务端的反向代理和负载均衡。 快速入门 安装</description>
         </item>
         <item>
         <title>KMP 字符串匹配算法</title>
@@ -220,7 +220,7 @@
         <pubDate>Mon, 24 May 2021 19:41:22 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/kmp-string-matching-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/kmp-string-matching-algorithm.jpg" alt="Featured image of post KMP 字符串匹配算法" /&gt;暴力算法低效在哪？ 字符串匹配如果使用暴力写法的话，我们需要不断移动匹配字符串的位置，同时一一对比此时字符串是否相同。这个过程中有没有浪费时间</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/kmp-string-matching-algorithm.jpg" alt="Featured image of post KMP 字符串匹配算法" /&gt;暴力算法低效在哪？ 字符串匹配如果使用暴力写法的话，我们需要不断移动匹配字符串的位置，同时一一对比此时字符串是否相同。这个过程中有没有浪费时间</description>
         </item>
         <item>
         <title>axios 入门和源码分析</title>
@@ -228,7 +228,7 @@
         <pubDate>Sat, 17 Apr 2021 00:26:25 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/introduction-to-axios-and-source-code-analysis/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/introduction-to-axios-and-source-code-analysis.jpg" alt="Featured image of post axios 入门和源码分析" /&gt;http 介绍 概述 HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol(通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/introduction-to-axios-and-source-code-analysis.jpg" alt="Featured image of post axios 入门和源码分析" /&gt;http 介绍 概述 HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol(通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是</description>
         </item>
         <item>
         <title>webpack 学习笔记</title>
@@ -236,7 +236,7 @@
         <pubDate>Sat, 27 Mar 2021 22:55:10 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/webpack-learning-notes/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/webpack-learning-notes.jpg" alt="Featured image of post webpack 学习笔记" /&gt;webpack 简介 webpack 是什么 webpack 是一种前端资源构建工具，一个静态模块打包器(module bundler)。 在 webpack 看来, 前端的所有资源文件(js/json/cs</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/webpack-learning-notes.jpg" alt="Featured image of post webpack 学习笔记" /&gt;webpack 简介 webpack 是什么 webpack 是一种前端资源构建工具，一个静态模块打包器(module bundler)。 在 webpack 看来, 前端的所有资源文件(js/json/cs</description>
         </item>
         <item>
         <title>最小生成树（kruskal 算法）</title>
@@ -244,7 +244,7 @@
         <pubDate>Sat, 27 Mar 2021 22:47:46 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/minimum-spanning-tree-kruskal-algorithm.jpg" alt="Featured image of post 最小生成树（kruskal 算法）" /&gt;说明 此算法可以称为“加边法”，初始最小生成树边数为 0，每迭代一次就选择一条满足条件的最小代价边，加入到最小生成树的边集合里。 实现思路 把图中的</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/minimum-spanning-tree-kruskal-algorithm.jpg" alt="Featured image of post 最小生成树（kruskal 算法）" /&gt;说明 此算法可以称为“加边法”，初始最小生成树边数为 0，每迭代一次就选择一条满足条件的最小代价边，加入到最小生成树的边集合里。 实现思路 把图中的</description>
         </item>
         <item>
         <title>更换国内源</title>
@@ -252,7 +252,7 @@
         <pubDate>Wed, 24 Mar 2021 16:44:54 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/replace-domestic-source/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/replace-domestic-source.jpg" alt="Featured image of post 更换国内源" /&gt;pip 国内源 豆瓣 http://pypi.douban.com/simple/ 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ 阿里云 https://mirrors.aliyun.com/pypi/simple/ 中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/ 临时更换 pip install pythonModuleName -i https://mirrors.aliyun.com/pypi/simple 永久更换 windows 直接在 user 目录中创建一个 pip 目录，如：C:\Users\xx\pip，</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/replace-domestic-source.jpg" alt="Featured image of post 更换国内源" /&gt;pip 国内源 豆瓣 http://pypi.douban.com/simple/ 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ 阿里云 https://mirrors.aliyun.com/pypi/simple/ 中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/ 临时更换 pip install pythonModuleName -i https://mirrors.aliyun.com/pypi/simple 永久更换 windows 直接在 user 目录中创建一个 pip 目录，如：C:\Users\xx\pip，</description>
         </item>
         <item>
         <title>最近公共祖先lca</title>
@@ -260,7 +260,7 @@
         <pubDate>Wed, 17 Mar 2021 23:50:14 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/last-common-ancestor-lca/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/last-common-ancestor-lca.jpg" alt="Featured image of post 最近公共祖先lca" /&gt;含义 对于有根树 T 的两个结点 u、v，最近公共祖先 LCA(T,u,v)表示一个结点 x，满足 x 是 u 和 v 的祖先且 x 的深度尽可能大。在这里，一个节点也</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/last-common-ancestor-lca.jpg" alt="Featured image of post 最近公共祖先lca" /&gt;含义 对于有根树 T 的两个结点 u、v，最近公共祖先 LCA(T,u,v)表示一个结点 x，满足 x 是 u 和 v 的祖先且 x 的深度尽可能大。在这里，一个节点也</description>
         </item>
         <item>
         <title>Promise 深入 &#43; 自定义 Promise</title>
@@ -268,7 +268,7 @@
         <pubDate>Mon, 15 Mar 2021 16:06:58 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/promise-deep-custom-promise/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/promise-deep-custom-promise.jpg" alt="Featured image of post Promise 深入 &#43; 自定义 Promise" /&gt;前置知识准备 函数对象与实例对象 函数对象：将函数作为对象使用时, 简称为函数对象。 实例对象：new 函数产生的对象, 简称为实例对象。 function Fn() { // Fn函</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/promise-deep-custom-promise.jpg" alt="Featured image of post Promise 深入 &#43; 自定义 Promise" /&gt;前置知识准备 函数对象与实例对象 函数对象：将函数作为对象使用时, 简称为函数对象。 实例对象：new 函数产生的对象, 简称为实例对象。 function Fn() { // Fn函</description>
         </item>
         <item>
         <title>JavaScript 中 call()、apply()、bind() 的用法差异</title>
@@ -276,7 +276,7 @@
         <pubDate>Sun, 14 Mar 2021 23:47:57 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/differences-in-the-usage-of-call-apply-and-bind-in-javascript.jpg" alt="Featured image of post JavaScript 中 call()、apply()、bind() 的用法差异" /&gt;对象中 this 指向问题 var name = &amp;#39;小王&amp;#39;, age = 17; var persion = { name: &amp;#39;小王&amp;#39;, myAge: this.age, introduce() { console.log(&amp;#39;我叫&amp;#</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/differences-in-the-usage-of-call-apply-and-bind-in-javascript.jpg" alt="Featured image of post JavaScript 中 call()、apply()、bind() 的用法差异" /&gt;对象中 this 指向问题 var name = &amp;#39;小王&amp;#39;, age = 17; var persion = { name: &amp;#39;小王&amp;#39;, myAge: this.age, introduce() { console.log(&amp;#39;我叫&amp;#</description>
         </item>
         <item>
         <title>Ubuntu、Deepin 安装软件</title>
@@ -284,7 +284,7 @@
         <pubDate>Fri, 12 Mar 2021 19:47:32 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/ubuntu-deepin-installation-software/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/ubuntu-deepin-installation-software.jpg" alt="Featured image of post Ubuntu、Deepin 安装软件" /&gt;apt-get 安装 apt-get，是一条 linux 命令，适用于 deb 包管理式的操作系统，主要用于自动从互联网的软件仓库中搜索、安装、升级、卸载软件或操作系统。如果下</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/ubuntu-deepin-installation-software.jpg" alt="Featured image of post Ubuntu、Deepin 安装软件" /&gt;apt-get 安装 apt-get，是一条 linux 命令，适用于 deb 包管理式的操作系统，主要用于自动从互联网的软件仓库中搜索、安装、升级、卸载软件或操作系统。如果下</description>
         </item>
         <item>
         <title>拓展欧几里得定理</title>
@@ -292,7 +292,7 @@
         <pubDate>Mon, 08 Mar 2021 19:02:08 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/extended-euclidean-theorem/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/extended-euclidean-theorem.jpg" alt="Featured image of post 拓展欧几里得定理" /&gt;简述 拓展欧几里得定理也称辗转相除法 公示表述：gcd(a,b)=gcd(b,a mod b)； 具体解释在代码里。 （沙雕一下：终极版本为求组合数） 补充知</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/extended-euclidean-theorem.jpg" alt="Featured image of post 拓展欧几里得定理" /&gt;简述 拓展欧几里得定理也称辗转相除法 公示表述：gcd(a,b)=gcd(b,a mod b)； 具体解释在代码里。 （沙雕一下：终极版本为求组合数） 补充知</description>
         </item>
         <item>
         <title>JavaScript 中的异步编程</title>
@@ -300,7 +300,7 @@
         <pubDate>Fri, 05 Mar 2021 20:54:11 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/asynchronous-programming-in-javascript/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/asynchronous-programming-in-javascript.jpg" alt="Featured image of post JavaScript 中的异步编程" /&gt;什么是异步编程 在谈论异步编程概念之提前，先了解什么是同步编程。同步编程是指程序的执行是按着代码顺序执行的，若一段代码因任何原因而卡住（htt</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/asynchronous-programming-in-javascript.jpg" alt="Featured image of post JavaScript 中的异步编程" /&gt;什么是异步编程 在谈论异步编程概念之提前，先了解什么是同步编程。同步编程是指程序的执行是按着代码顺序执行的，若一段代码因任何原因而卡住（htt</description>
         </item>
         <item>
         <title>快速幂和快速幂取模</title>
@@ -308,7 +308,7 @@
         <pubDate>Thu, 04 Mar 2021 10:43:14 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/fast-power-and-fast-power-modulus/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/fast-power-and-fast-power-modulus.jpg" alt="Featured image of post 快速幂和快速幂取模" /&gt;首先，快速幂的目的就是做到快速求幂，假设我们要求 a^b，按照朴素算法就是把 a 连乘 b 次，这样一来时间复杂度是 O(b)也即是 O(n)级别，快速幂</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/fast-power-and-fast-power-modulus.jpg" alt="Featured image of post 快速幂和快速幂取模" /&gt;首先，快速幂的目的就是做到快速求幂，假设我们要求 a^b，按照朴素算法就是把 a 连乘 b 次，这样一来时间复杂度是 O(b)也即是 O(n)级别，快速幂</description>
         </item>
         <item>
         <title>计算机视觉-目标检测</title>
@@ -316,7 +316,7 @@
         <pubDate>Wed, 03 Mar 2021 20:06:10 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/computer-vision-target-detection/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/computer-vision-target-detection.jpg" alt="Featured image of post 计算机视觉-目标检测" /&gt;图像预处理 空间域处理 点运算 HE 直方图均衡 AHE 自适应直方图均衡（局部均衡、模板滑动） CLAHE 限制对比度自适应直方图均衡（裁剪均衡直方图、线性插值） 形态学</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/computer-vision-target-detection.jpg" alt="Featured image of post 计算机视觉-目标检测" /&gt;图像预处理 空间域处理 点运算 HE 直方图均衡 AHE 自适应直方图均衡（局部均衡、模板滑动） CLAHE 限制对比度自适应直方图均衡（裁剪均衡直方图、线性插值） 形态学</description>
         </item>
         <item>
         <title>拓扑排序</title>
@@ -324,7 +324,7 @@
         <pubDate>Sun, 28 Feb 2021 13:14:08 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/topological-sorting/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/topological-sorting.jpg" alt="Featured image of post 拓扑排序" /&gt;百度百科 对一个有向无环图(Directed Acyclic Graph 简称 DAG)G 进行拓扑排序，是将 G 中所有顶点排成一个线性序列，使得图中任意一对顶点 u 和 v，若边(u,v</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/topological-sorting.jpg" alt="Featured image of post 拓扑排序" /&gt;百度百科 对一个有向无环图(Directed Acyclic Graph 简称 DAG)G 进行拓扑排序，是将 G 中所有顶点排成一个线性序列，使得图中任意一对顶点 u 和 v，若边(u,v</description>
         </item>
         <item>
         <title>链式前向星</title>
@@ -332,7 +332,7 @@
         <pubDate>Fri, 26 Feb 2021 18:59:07 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/chain-forward-star/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/chain-forward-star.jpg" alt="Featured image of post 链式前向星" /&gt;介绍 有权边的图的存储一般有两种：邻接矩阵、前向星。 若图是稀疏图，边很少，开二维数组 a[][]很浪费;若点很多(如 10000 个点)a[10000][1</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/chain-forward-star.jpg" alt="Featured image of post 链式前向星" /&gt;介绍 有权边的图的存储一般有两种：邻接矩阵、前向星。 若图是稀疏图，边很少，开二维数组 a[][]很浪费;若点很多(如 10000 个点)a[10000][1</description>
         </item>
         <item>
         <title>巴什（Bash）博弈和尼姆（Nimm）博弈</title>
@@ -340,7 +340,7 @@
         <pubDate>Thu, 25 Feb 2021 14:35:42 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/bash-game-and-nimm-game/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/bash-game-and-nimm-game.jpg" alt="Featured image of post 巴什（Bash）博弈和尼姆（Nimm）博弈" /&gt;巴什（Bash）博弈 题目： 只有一堆 n 个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取 m 个。最后取光者得胜。问是否存在先手必胜的</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/bash-game-and-nimm-game.jpg" alt="Featured image of post 巴什（Bash）博弈和尼姆（Nimm）博弈" /&gt;巴什（Bash）博弈 题目： 只有一堆 n 个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取 m 个。最后取光者得胜。问是否存在先手必胜的</description>
         </item>
         <item>
         <title>使用 Hexo 之后原有博客怎么办？</title>
@@ -348,7 +348,7 @@
         <pubDate>Mon, 22 Feb 2021 18:57:38 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/what-about-the-original-blog-after-using-hexo/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/what-about-the-original-blog-after-using-hexo.jpg" alt="Featured image of post 使用 Hexo 之后原有博客怎么办？" /&gt;想法与思路 在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/what-about-the-original-blog-after-using-hexo.jpg" alt="Featured image of post 使用 Hexo 之后原有博客怎么办？" /&gt;想法与思路 在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废</description>
         </item>
         <item>
         <title>Vercel 使用之部署博客</title>
@@ -356,7 +356,7 @@
         <pubDate>Mon, 22 Feb 2021 00:08:23 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/deployment-blog-used-by-vercel/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/deployment-blog-used-by-vercel.jpg" alt="Featured image of post Vercel 使用之部署博客" /&gt;Vercel 是什么 如果你曾听说过 ZEIT Now，是的，它是 Vercel 的前身。在去年早些时候，ZEIT Now 进行了「品牌升级」，成为了现在的 Vercel。 注册与安装 首先，</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/deployment-blog-used-by-vercel.jpg" alt="Featured image of post Vercel 使用之部署博客" /&gt;Vercel 是什么 如果你曾听说过 ZEIT Now，是的，它是 Vercel 的前身。在去年早些时候，ZEIT Now 进行了「品牌升级」，成为了现在的 Vercel。 注册与安装 首先，</description>
         </item>
         <item>
         <title>快速搭建 Hexo 个人博客并部署至 GitHub</title>
@@ -364,7 +364,7 @@
         <pubDate>Sun, 21 Feb 2021 23:51:38 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/quickly-build-hexo-personal-blog-and-deploy-it-to-github/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/quickly-build-hexo-personal-blog-and-deploy-it-to-github.jpg" alt="Featured image of post 快速搭建 Hexo 个人博客并部署至 GitHub" /&gt;准备环境 安装 Git sudo apt install git-core -y 安装 Node.js 使用以下命令安装 Node.js wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh 更新一下 source ~/.profile 安装 Node.js nvm install stable 安装 Hexo 安装 cnpm 使用以下命令安装 cnpm npm install -g cnpm --registry=https://registry.npm.taobao.org 安装 hexo-cli 用命令创建 hexo</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/quickly-build-hexo-personal-blog-and-deploy-it-to-github.jpg" alt="Featured image of post 快速搭建 Hexo 个人博客并部署至 GitHub" /&gt;准备环境 安装 Git sudo apt install git-core -y 安装 Node.js 使用以下命令安装 Node.js wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh 更新一下 source ~/.profile 安装 Node.js nvm install stable 安装 Hexo 安装 cnpm 使用以下命令安装 cnpm npm install -g cnpm --registry=https://registry.npm.taobao.org 安装 hexo-cli 用命令创建 hexo</description>
         </item>
         <item>
         <title>JavaScript 笔记</title>
@@ -372,7 +372,7 @@
         <pubDate>Sun, 21 Feb 2021 15:27:32 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/javascript-notes/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/javascript-notes.jpg" alt="Featured image of post JavaScript 笔记" /&gt;JavaScript 负责页面中的的行为。 它是一门运行在浏览器端的脚本语言。 基础内容 JS 的编写的位置 1.可以编写到标签的指定属性中 &amp;lt;button onclick=&amp;#34;al</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/javascript-notes.jpg" alt="Featured image of post JavaScript 笔记" /&gt;JavaScript 负责页面中的的行为。 它是一门运行在浏览器端的脚本语言。 基础内容 JS 的编写的位置 1.可以编写到标签的指定属性中 &amp;lt;button onclick=&amp;#34;al</description>
         </item>
         <item>
         <title>Floyd 最小环算法</title>
@@ -380,7 +380,7 @@
         <pubDate>Sat, 20 Feb 2021 16:38:46 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/floyd-minimum-ring/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/floyd-minimum-ring.jpg" alt="Featured image of post Floyd 最小环算法" /&gt;思路一 首先，理解 Floyd 算法是按照点的编号增加的顺序更新最短路径的。 因为 Floyd 算法基于动态规划思想，动态规划过程必定存在一个顺序，这里的顺序就是节点编</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/floyd-minimum-ring.jpg" alt="Featured image of post Floyd 最小环算法" /&gt;思路一 首先，理解 Floyd 算法是按照点的编号增加的顺序更新最短路径的。 因为 Floyd 算法基于动态规划思想，动态规划过程必定存在一个顺序，这里的顺序就是节点编</description>
         </item>
         <item>
         <title>Tarjan 强连通算法</title>
@@ -388,7 +388,7 @@
         <pubDate>Fri, 19 Feb 2021 14:42:09 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/tarjan-strong-connectivity-algorithm.jpg" alt="Featured image of post Tarjan 强连通算法" /&gt;定义 1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg+（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。 2、</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/tarjan-strong-connectivity-algorithm.jpg" alt="Featured image of post Tarjan 强连通算法" /&gt;定义 1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg+（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。 2、</description>
         </item>
         <item>
         <title>最短路问题</title>
@@ -404,7 +404,7 @@
         <pubDate>Wed, 17 Feb 2021 13:22:57 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/mysql-database/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/mysql-database.jpg" alt="Featured image of post MySQL 数据库" /&gt;数据库的好处 持久化数据到本地 可以实现结构化查询，方便管理 数据库相关概念 DB：数据库，保存一组有组织的数据的容器 DBMS：数据库管理系统，又称</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/mysql-database.jpg" alt="Featured image of post MySQL 数据库" /&gt;数据库的好处 持久化数据到本地 可以实现结构化查询，方便管理 数据库相关概念 DB：数据库，保存一组有组织的数据的容器 DBMS：数据库管理系统，又称</description>
         </item>
         <item>
         <title>使用 JavaScript 实现打字机效果</title>
@@ -412,7 +412,7 @@
         <pubDate>Wed, 17 Feb 2021 13:22:57 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/using-javascript-to-achieve-typewriter-effect/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/using-javascript-to-achieve-typewriter-effect.jpg" alt="Featured image of post 使用 JavaScript 实现打字机效果" /&gt;功能：打字机效果、切换光标、设置打字时间间隔和光标闪烁时间间隔 拓展：可以自行修改参数，实现自定义内容 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width&amp;#34; /&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34; /&amp;gt; &amp;lt;titl</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/using-javascript-to-achieve-typewriter-effect.jpg" alt="Featured image of post 使用 JavaScript 实现打字机效果" /&gt;功能：打字机效果、切换光标、设置打字时间间隔和光标闪烁时间间隔 拓展：可以自行修改参数，实现自定义内容 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width&amp;#34; /&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34; /&amp;gt; &amp;lt;titl</description>
         </item>
         <item>
         <title>C&#43;&#43; 面向对象</title>
@@ -420,7 +420,7 @@
         <pubDate>Tue, 16 Feb 2021 20:01:41 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/cpp-object-oriented/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/cpp-object-oriented.jpg" alt="Featured image of post C&#43;&#43; 面向对象" /&gt;引用 引用： int n = 4; int &amp;amp; r = n; // r引用了n,r的类型是int &amp;amp; 某个变量的引用，等价与这个变量，相当于这个变量的别名 常引用： int n=4; const int &amp;amp; r = n; // r</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/cpp-object-oriented.jpg" alt="Featured image of post C&#43;&#43; 面向对象" /&gt;引用 引用： int n = 4; int &amp;amp; r = n; // r引用了n,r的类型是int &amp;amp; 某个变量的引用，等价与这个变量，相当于这个变量的别名 常引用： int n=4; const int &amp;amp; r = n; // r</description>
         </item>
         <item>
         <title>用 python 操作表格</title>
@@ -428,7 +428,7 @@
         <pubDate>Fri, 12 Feb 2021 13:23:47 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/manipulating-tables-with-python/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/manipulating-tables-with-python.jpg" alt="Featured image of post 用 python 操作表格" /&gt;一、xlrd 和 xlwt 需要先执行 pip3 install xlrd 和 pip3 install xlwt 安装模块 对于 excel 来说，整个 excel 文件称为工作簿，工作簿中的每个页称为工作表，工作表又由单元格组成。 对于 xlrd 和</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/manipulating-tables-with-python.jpg" alt="Featured image of post 用 python 操作表格" /&gt;一、xlrd 和 xlwt 需要先执行 pip3 install xlrd 和 pip3 install xlwt 安装模块 对于 excel 来说，整个 excel 文件称为工作簿，工作簿中的每个页称为工作表，工作表又由单元格组成。 对于 xlrd 和</description>
         </item>
         <item>
         <title>jQuery 笔记</title>
@@ -436,7 +436,7 @@
         <pubDate>Wed, 10 Feb 2021 10:44:52 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/jquery-notes/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/jquery-notes.jpg" alt="Featured image of post jQuery 笔记" /&gt;jQuery 简介 JavaScript 库的概念 JavaScript 开发的过程中，处理浏览器的兼容很复杂而且很耗时，于是一些封装了这些操作的库应运而生。这些库还会把一些常用的代码进行封装。 把</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/jquery-notes.jpg" alt="Featured image of post jQuery 笔记" /&gt;jQuery 简介 JavaScript 库的概念 JavaScript 开发的过程中，处理浏览器的兼容很复杂而且很耗时，于是一些封装了这些操作的库应运而生。这些库还会把一些常用的代码进行封装。 把</description>
         </item>
         <item>
         <title>Less 笔记</title>
@@ -444,7 +444,7 @@
         <pubDate>Sun, 07 Feb 2021 11:13:35 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/less-notes/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/less-notes.jpg" alt="Featured image of post Less 笔记" /&gt;less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言， 增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展 LESS 既可以在 客户端 上运行 ，也</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/less-notes.jpg" alt="Featured image of post Less 笔记" /&gt;less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言， 增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展 LESS 既可以在 客户端 上运行 ，也</description>
         </item>
         <item>
         <title>vue 基础入门</title>
@@ -452,7 +452,7 @@
         <pubDate>Sat, 06 Feb 2021 12:09:14 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/introduction-to-vue-basics/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/introduction-to-vue-basics.jpg" alt="Featured image of post vue 基础入门" /&gt;官网 前置知识 完整的学习 vue：html + css、JavaScript、css3、HTML5、第三方库、网络通信、ES6+、webpack、模</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/introduction-to-vue-basics.jpg" alt="Featured image of post vue 基础入门" /&gt;官网 前置知识 完整的学习 vue：html + css、JavaScript、css3、HTML5、第三方库、网络通信、ES6+、webpack、模</description>
         </item>
         <item>
         <title>JavaScript 中 AJAX 的使用</title>
@@ -460,7 +460,7 @@
         <pubDate>Fri, 05 Feb 2021 10:17:04 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/use-of-ajax-in-javascript/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/use-of-ajax-in-javascript.jpg" alt="Featured image of post JavaScript 中 AJAX 的使用" /&gt;AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。 AJAX 不是新的编程语言，而是一种使用现有标准的新方法。 AJAX 最大的优点是在不重新加载整个页面的情况下，可以与服</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/use-of-ajax-in-javascript.jpg" alt="Featured image of post JavaScript 中 AJAX 的使用" /&gt;AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。 AJAX 不是新的编程语言，而是一种使用现有标准的新方法。 AJAX 最大的优点是在不重新加载整个页面的情况下，可以与服</description>
         </item>
         <item>
         <title>HTML &#43; CSS</title>
@@ -468,7 +468,7 @@
         <pubDate>Sun, 31 Jan 2021 13:18:45 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/html-css/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/html-css.jpg" alt="Featured image of post HTML &#43; CSS" /&gt;HTML 基础 文档声明 文档声明用来告诉浏览器当前网页的版本 &amp;lt;!DOCTYPE html&amp;gt; 语言声明 声明在 html 根标签中 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;html lang=&amp;#34;zh&amp;#34;&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;/html&amp;gt; 实体 html 实体用来呈现特殊字符 &amp;amp;nbsp; 空格 &amp;amp;gt; 大于号 &amp;amp;lt; 小于号 &amp;amp;copy; 版</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/html-css.jpg" alt="Featured image of post HTML &#43; CSS" /&gt;HTML 基础 文档声明 文档声明用来告诉浏览器当前网页的版本 &amp;lt;!DOCTYPE html&amp;gt; 语言声明 声明在 html 根标签中 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;html lang=&amp;#34;zh&amp;#34;&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;/html&amp;gt; 实体 html 实体用来呈现特殊字符 &amp;amp;nbsp; 空格 &amp;amp;gt; 大于号 &amp;amp;lt; 小于号 &amp;amp;copy; 版</description>
         </item>
         
     </channel>

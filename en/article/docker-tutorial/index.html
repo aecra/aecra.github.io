@@ -14,10 +14,10 @@
 
 <meta property='og:url' content='https://aecra.github.io/en/article/docker-tutorial/'>
 <meta property='og:site_name' content='Tian Jiale&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='docker' /><meta property='article:published_time' content='2021-04-20T10:35:12&#43;00:00'/><meta property='article:modified_time' content='2021-04-20T10:35:12&#43;00:00'/><meta property='og:image' content='https://static.aecra.ml/cover/docker-tutorial.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='docker' /><meta property='article:published_time' content='2021-04-20T10:35:12&#43;00:00'/><meta property='article:modified_time' content='2021-04-20T10:35:12&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/docker-tutorial.jpg' />
 <meta name="twitter:title" content="Docker tutorial">
 <meta name="twitter:description" content="The official docker tutorial is reproduced for reference."><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://static.aecra.ml/cover/docker-tutorial.jpg' />
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/docker-tutorial.jpg' />
     <link rel="shortcut icon" href="/img/favicon.png" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
@@ -404,7 +404,7 @@ if (!doNotTrack) {
             
             <a href="/en/article/docker-tutorial/">
                 
-                    <img src="https://static.aecra.ml/cover/docker-tutorial.jpg" loading="lazy" alt="Featured image of post Docker tutorial" />
+                    <img src="https://static.aecra.cn/cover/docker-tutorial.jpg" loading="lazy" alt="Featured image of post Docker tutorial" />
                 
             </a>
         </div>
@@ -490,7 +490,7 @@ if (!doNotTrack) {
 <p>To access the dashboard, follow the instructions for either <a class="link" href="https://docs.docker.com/docker-for-mac/dashboard/"  target="_blank" rel="noopener"
     >Mac</a> or <a class="link" href="https://docs.docker.com/docker-for-windows/dashboard/"  target="_blank" rel="noopener"
     >Windows</a>. If you open the dashboard now, you will see this tutorial running! The container name (<code>jolly_bouman</code> below) is a randomly created name. So, you&rsquo;ll most likely have a different name.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/629e7fe7f1247328ad7c39a05e5403e0.png"
+<p><img src="https://static.aecra.cn/markdown/202104/629e7fe7f1247328ad7c39a05e5403e0.png"
 	
 	
 	
@@ -515,7 +515,7 @@ if (!doNotTrack) {
 <h2 id="our-application">Our Application</h2>
 <p>For the rest of this tutorial, we will be working with a simple todo list manager that is running in Node.js. If you&rsquo;re not familiar with Node.js, don&rsquo;t worry! No real JavaScript experience is needed!</p>
 <p>At this point, your development team is quite small and you&rsquo;re simply building an app to prove out your MVP (minimum viable product). You want to show how it works and what it&rsquo;s capable of doing without needing to think about how it will work for a large team, multiple developers, etc.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/eb7dc36e07d82642d69f8ef7283d8ef1.png"
+<p><img src="https://static.aecra.cn/markdown/202104/eb7dc36e07d82642d69f8ef7283d8ef1.png"
 	
 	
 	
@@ -529,13 +529,13 @@ if (!doNotTrack) {
 <p>Before we can run the application, we need to get the application source code onto our machine. For real projects, you will typically clone the repo. But, for this tutorial, we have created a ZIP file containing the application.</p>
 <ol>
 <li>
-<p><a class="link" href="https://static.aecra.ml/markdown/202104/app.zip"  target="_blank" rel="noopener"
+<p><a class="link" href="https://static.aecra.cn/markdown/202104/app.zip"  target="_blank" rel="noopener"
     >Download the ZIP</a>. Open the ZIP file and make sure you extract the contents.</p>
 </li>
 <li>
 <p>Once extracted, use your favorite code editor to open the project. If you&rsquo;re in need of an editor, you can use <a class="link" href="https://code.visualstudio.com/"  target="_blank" rel="noopener"
     >Visual Studio Code</a>. You should see the <code>package.json</code> and two subdirectories (<code>src</code> and <code>spec</code>).</p>
-<p><img src="https://static.aecra.ml/markdown/202104/fc7d00bef419c38a15bf940286635357.png"
+<p><img src="https://static.aecra.cn/markdown/202104/fc7d00bef419c38a15bf940286635357.png"
 	
 	
 	
@@ -580,7 +580,7 @@ if (!doNotTrack) {
 <li>
 <p>After a few seconds, open your web browser to <a class="link" href="http://localhost:3000"  target="_blank" rel="noopener"
     >http://localhost:3000</a>. You should see our app!</p>
-<p><img src="https://static.aecra.ml/markdown/202104/885eba5692f6bb08855298217a7a03f3.png"
+<p><img src="https://static.aecra.cn/markdown/202104/885eba5692f6bb08855298217a7a03f3.png"
 	
 	
 	
@@ -595,7 +595,7 @@ if (!doNotTrack) {
 <p>Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove items. Your frontend is successfully storing items in the backend! Pretty quick and easy, huh?</p>
 <p>At this point, you should have a running todo list manager with a few items, all built by you! Now, let&rsquo;s make a few changes and learn about managing our containers.</p>
 <p>If you take a quick look at the Docker Dashboard, you should see your two containers running now (this tutorial and your freshly launched app container)!</p>
-<p><img src="https://static.aecra.ml/markdown/202104/853c89818607ac4341fe2399bc62a70c.png"
+<p><img src="https://static.aecra.cn/markdown/202104/853c89818607ac4341fe2399bc62a70c.png"
 	
 	
 	
@@ -670,7 +670,7 @@ if (!doNotTrack) {
 <p>Confirm the removal and you&rsquo;re done!</p>
 </li>
 </ol>
-<p><img src="https://static.aecra.ml/markdown/202104/50cc19890b8d05d477dbbf9c82c55fb5.png"
+<p><img src="https://static.aecra.cn/markdown/202104/50cc19890b8d05d477dbbf9c82c55fb5.png"
 	
 	
 	
@@ -689,7 +689,7 @@ if (!doNotTrack) {
 <li>
 <p>Refresh your browser on <a class="link" href="http://localhost:3000"  target="_blank" rel="noopener"
     >http://localhost:3000</a> and you should see your updated help text!</p>
-<p><img src="https://static.aecra.ml/markdown/202104/10ead5c26776b3198faa596720614126.png"
+<p><img src="https://static.aecra.cn/markdown/202104/10ead5c26776b3198faa596720614126.png"
 	
 	
 	
@@ -728,7 +728,7 @@ if (!doNotTrack) {
 </li>
 </ol>
 <p>If you look on the right-side of the page, you&rsquo;ll see a section named <strong>Docker commands</strong>. This gives an example command that you will need to run to push to this repo.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/00d18f0766c70548eb092f1f3fcf9e5b.png"
+<p><img src="https://static.aecra.cn/markdown/202104/00d18f0766c70548eb092f1f3fcf9e5b.png"
 	
 	
 	
@@ -772,7 +772,7 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>Once you&rsquo;re logged in, click on the &ldquo;+ ADD NEW INSTANCE&rdquo; link in the left side bar. (If you don&rsquo;t see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/9f22be1ba5d91b0318ebda83e7c0b5d0.png"
+<p><img src="https://static.aecra.cn/markdown/202104/9f22be1ba5d91b0318ebda83e7c0b5d0.png"
 	
 	
 	
@@ -809,7 +809,7 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>Validate we can see the output by <code>exec</code>&lsquo;ing into the container. To do so, open the Dashboard and click the first action of the container that is running the <code>ubuntu</code> image.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/249c0a74b522f02b314fd223fccc2245.png"
+<p><img src="https://static.aecra.cn/markdown/202104/249c0a74b522f02b314fd223fccc2245.png"
 	
 	
 	
@@ -858,7 +858,7 @@ if (!doNotTrack) {
 </span></span></code></pre></div></li>
 <li>
 <p>Once the container starts up, open the app and add a few items to your todo list.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/60b10f9e01299f57f32113682ffbd786.png"
+<p><img src="https://static.aecra.cn/markdown/202104/60b10f9e01299f57f32113682ffbd786.png"
 	
 	
 	
@@ -1000,7 +1000,7 @@ if (!doNotTrack) {
 </span></span></span></code></pre></div></li>
 <li>
 <p>Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might take a few seconds for the Node server to restart, so if you get an error, just try refreshing after a few seconds.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/b15fc1009476e897a61bdcbeeba30949.png"
+<p><img src="https://static.aecra.cn/markdown/202104/b15fc1009476e897a61bdcbeeba30949.png"
 	
 	
 	
@@ -1029,7 +1029,7 @@ if (!doNotTrack) {
 <li>Running multiple processes will require a process manager (the container only starts one process), which adds complexity to container startup/shutdown</li>
 </ul>
 <p>And there are more reasons. So, we will update our application to work like this:</p>
-<p><img src="https://static.aecra.ml/markdown/202104/c56dd71fc2c07e8ade158f39572990c9.png"
+<p><img src="https://static.aecra.cn/markdown/202104/c56dd71fc2c07e8ade158f39572990c9.png"
 	
 	
 	
@@ -1193,7 +1193,7 @@ is <strong>secret</strong>.</p>
 </li>
 </ol>
 <p>If you take a quick look at the Docker Dashboard, you&rsquo;ll see that we have two app containers running. But, there&rsquo;s no real indication that they are grouped together in a single app. We&rsquo;ll see how to make that better shortly!</p>
-<p><img src="https://static.aecra.ml/markdown/202104/71235cab7f723bb685e88360a5a2ab41.png"
+<p><img src="https://static.aecra.cn/markdown/202104/71235cab7f723bb685e88360a5a2ab41.png"
 	
 	
 	
@@ -1449,7 +1449,7 @@ background.</p>
 </ol>
 <h3 id="seeing-our-app-stack-in-docker-dashboard">Seeing our App Stack in Docker Dashboard</h3>
 <p>If we look at the Docker Dashboard, we&rsquo;ll see that there is a group named <strong>app</strong>. This is the &ldquo;project name&rdquo; from Docker Compose and used to group the containers together. By default, the project name is simply the name of the directory that the <code>docker-compose.yml</code> was located in.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/218bb2d647b110c9fbf272ac12ab377f.png"
+<p><img src="https://static.aecra.cn/markdown/202104/218bb2d647b110c9fbf272ac12ab377f.png"
 	
 	
 	
@@ -1460,7 +1460,7 @@ background.</p>
 	
 ></p>
 <p>If you twirl down the app, you will see the two containers we defined in the compose file. The names are also a little more descriptive, as they follow the pattern of <code>&lt;project-name&gt;_&lt;service-name&gt;_&lt;replica-number&gt;</code>. So, it&rsquo;s very easy to quickly see what container is our app and which container is the mysql database.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/61043e0fe60692b1b876e29434451184.png"
+<p><img src="https://static.aecra.cn/markdown/202104/61043e0fe60692b1b876e29434451184.png"
 	
 	
 	
@@ -1509,7 +1509,7 @@ doesn&rsquo;t get much simpler than that!</p>
     >docker scan documentation</a>.</p>
 <p>As well as scanning your newly built image on the command line, you can also <a class="link" href="https://docs.docker.com/docker-hub/vulnerability-scanning/"  target="_blank" rel="noopener"
     >configure Docker Hub</a> to scan all newly pushed images automatically, and you can then see the results in both Docker Hub and Docker Desktop.</p>
-<p><img src="https://static.aecra.ml/markdown/202104/e38429ba3f980a5deb09fa6435aa7e59.png"
+<p><img src="https://static.aecra.cn/markdown/202104/e38429ba3f980a5deb09fa6435aa7e59.png"
 	
 	
 	

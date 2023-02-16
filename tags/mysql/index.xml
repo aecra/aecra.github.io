@@ -12,7 +12,7 @@
         <pubDate>Wed, 17 Feb 2021 13:22:57 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/mysql-database/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/mysql-database.jpg" alt="Featured image of post MySQL 数据库" /&gt;数据库的好处 持久化数据到本地 可以实现结构化查询，方便管理 数据库相关概念 DB：数据库，保存一组有组织的数据的容器 DBMS：数据库管理系统，又称</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/mysql-database.jpg" alt="Featured image of post MySQL 数据库" /&gt;数据库的好处 持久化数据到本地 可以实现结构化查询，方便管理 数据库相关概念 DB：数据库，保存一组有组织的数据的容器 DBMS：数据库管理系统，又称</description>
         </item>
         
     </channel>

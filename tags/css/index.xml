@@ -12,7 +12,7 @@
         <pubDate>Sun, 07 Feb 2021 11:13:35 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/less-notes/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/less-notes.jpg" alt="Featured image of post Less 笔记" /&gt;less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言， 增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展 LESS 既可以在 客户端 上运行 ，也</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/less-notes.jpg" alt="Featured image of post Less 笔记" /&gt;less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言， 增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展 LESS 既可以在 客户端 上运行 ，也</description>
         </item>
         <item>
         <title>HTML &#43; CSS</title>
@@ -20,7 +20,7 @@
         <pubDate>Sun, 31 Jan 2021 13:18:45 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/html-css/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/html-css.jpg" alt="Featured image of post HTML &#43; CSS" /&gt;HTML 基础 文档声明 文档声明用来告诉浏览器当前网页的版本 &amp;lt;!DOCTYPE html&amp;gt; 语言声明 声明在 html 根标签中 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;html lang=&amp;#34;zh&amp;#34;&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;/html&amp;gt; 实体 html 实体用来呈现特殊字符 &amp;amp;nbsp; 空格 &amp;amp;gt; 大于号 &amp;amp;lt; 小于号 &amp;amp;copy; 版</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/html-css.jpg" alt="Featured image of post HTML &#43; CSS" /&gt;HTML 基础 文档声明 文档声明用来告诉浏览器当前网页的版本 &amp;lt;!DOCTYPE html&amp;gt; 语言声明 声明在 html 根标签中 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;html lang=&amp;#34;zh&amp;#34;&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;/html&amp;gt; 实体 html 实体用来呈现特殊字符 &amp;amp;nbsp; 空格 &amp;amp;gt; 大于号 &amp;amp;lt; 小于号 &amp;amp;copy; 版</description>
         </item>
         
     </channel>

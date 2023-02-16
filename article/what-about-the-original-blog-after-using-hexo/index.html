@@ -14,10 +14,10 @@
 
 <meta property='og:url' content='https://aecra.github.io/article/what-about-the-original-blog-after-using-hexo/'>
 <meta property='og:site_name' content='Tian Jiale&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='python' /><meta property='article:tag' content='建站' /><meta property='article:published_time' content='2021-02-22T18:57:38&#43;00:00'/><meta property='article:modified_time' content='2021-02-22T18:57:38&#43;00:00'/><meta property='og:image' content='https://static.aecra.ml/cover/what-about-the-original-blog-after-using-hexo.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='python' /><meta property='article:tag' content='建站' /><meta property='article:published_time' content='2021-02-22T18:57:38&#43;00:00'/><meta property='article:modified_time' content='2021-02-22T18:57:38&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/what-about-the-original-blog-after-using-hexo.jpg' />
 <meta name="twitter:title" content="使用 Hexo 之后原有博客怎么办？">
 <meta name="twitter:description" content="在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废那不是得每更一篇文就要去博客后台提交文章？而且有的文章小毛病一大堆可能要三天两头地修改，就这繁杂的工作能把我折腾地放弃写博客。从一贯的删繁就简的思路来看，用 python 这种简单的语言来干这种事情那是最好的了。"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://static.aecra.ml/cover/what-about-the-original-blog-after-using-hexo.jpg' />
+    <meta name="twitter:image" content='https://static.aecra.cn/cover/what-about-the-original-blog-after-using-hexo.jpg' />
     <link rel="shortcut icon" href="/img/favicon.png" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
@@ -319,7 +319,7 @@ if (!doNotTrack) {
             
             <a href="/article/what-about-the-original-blog-after-using-hexo/">
                 
-                    <img src="https://static.aecra.ml/cover/what-about-the-original-blog-after-using-hexo.jpg" loading="lazy" alt="Featured image of post 使用 Hexo 之后原有博客怎么办？" />
+                    <img src="https://static.aecra.cn/cover/what-about-the-original-blog-after-using-hexo.jpg" loading="lazy" alt="Featured image of post 使用 Hexo 之后原有博客怎么办？" />
                 
             </a>
         </div>
@@ -415,7 +415,7 @@ if (!doNotTrack) {
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="nf">articletb</span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="kp">auto_increment</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">title</span><span class="w"> </span><span class="kt">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="no">null</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">img_url</span><span class="w"> </span><span class="kt">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s2">&#34;https://static.aecra.ml/aecra.png&#34;</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="no">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">img_url</span><span class="w"> </span><span class="kt">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s2">&#34;https://static.aecra.cn/aecra.png&#34;</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="no">null</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">content</span><span class="w"> </span><span class="kt">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="no">null</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">publish_time</span><span class="w"> </span><span class="kt">timestamp</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="no">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s2">&#34;2021-01-01 00:00:00&#34;</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">update_time</span><span class="w"> </span><span class="kt">timestamp</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="no">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s2">&#34;2021-01-01 00:00:00&#34;</span><span class="p">,</span><span class="w">
@@ -607,7 +607,7 @@ if (!doNotTrack) {
         
             <div class="article-image">
                 
-                    <img src="https://static.aecra.ml/cover/deployment-blog-used-by-vercel.jpg" loading="lazy" data-key="deployment-blog-used-by-vercel" data-hash="https://static.aecra.ml/cover/deployment-blog-used-by-vercel.jpg"/>
+                    <img src="https://static.aecra.cn/cover/deployment-blog-used-by-vercel.jpg" loading="lazy" data-key="deployment-blog-used-by-vercel" data-hash="https://static.aecra.cn/cover/deployment-blog-used-by-vercel.jpg"/>
                 
             </div>
         
@@ -628,7 +628,7 @@ if (!doNotTrack) {
         
             <div class="article-image">
                 
-                    <img src="https://static.aecra.ml/cover/manipulating-tables-with-python.jpg" loading="lazy" data-key="manipulating-tables-with-python" data-hash="https://static.aecra.ml/cover/manipulating-tables-with-python.jpg"/>
+                    <img src="https://static.aecra.cn/cover/manipulating-tables-with-python.jpg" loading="lazy" data-key="manipulating-tables-with-python" data-hash="https://static.aecra.cn/cover/manipulating-tables-with-python.jpg"/>
                 
             </div>
         

@@ -12,7 +12,7 @@
         <pubDate>Fri, 20 May 2022 19:31:35 +0000</pubDate>
         
         <guid>https://aecra.github.io/en/article/build-a-gateway-by-kong/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/build-a-gateway-by-kong.png" alt="Featured image of post Build a gateway by kong." /&gt;Why should we build our own gateway？ First of all, to clarify the purpose of the gateway, I use the gateway completely to unifiedly manage the various background interfaces. Before building my own gateway my background interfaces are very scattered, some are deployed on the HTTP event trigger of the cloud function, some are deployed on the Web cloud function of the cloud function, some are on the API gateway of Tencent cloud, some are on the nginx proxy.</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/build-a-gateway-by-kong.png" alt="Featured image of post Build a gateway by kong." /&gt;Why should we build our own gateway？ First of all, to clarify the purpose of the gateway, I use the gateway completely to unifiedly manage the various background interfaces. Before building my own gateway my background interfaces are very scattered, some are deployed on the HTTP event trigger of the cloud function, some are deployed on the Web cloud function of the cloud function, some are on the API gateway of Tencent cloud, some are on the nginx proxy.</description>
         </item>
         
     </channel>

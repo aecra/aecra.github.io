@@ -12,7 +12,7 @@
         <pubDate>Fri, 10 Dec 2021 16:00:28 +0000</pubDate>
         
         <guid>https://aecra.github.io/article/use-oh-my-zsh-in-windows/</guid>
-        <description>&lt;img src="https://static.aecra.ml/cover/use-oh-my-zsh-in-windows.png" alt="Featured image of post Windows 中使用 Oh My Zsh 的各种方式" /&gt;方式介绍 首先需要明确的是 zsh 不存在 Windows 版本的命令工具。所以在实现上都需要我们有一个 Linux 系统。在 Windows 中既有 WSL2 这种 Windows 支持的 Linux 子系统，也可以使用 cygwin 和 MSYS2 这类</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/use-oh-my-zsh-in-windows.png" alt="Featured image of post Windows 中使用 Oh My Zsh 的各种方式" /&gt;方式介绍 首先需要明确的是 zsh 不存在 Windows 版本的命令工具。所以在实现上都需要我们有一个 Linux 系统。在 Windows 中既有 WSL2 这种 Windows 支持的 Linux 子系统，也可以使用 cygwin 和 MSYS2 这类</description>
         </item>
         
     </channel>
