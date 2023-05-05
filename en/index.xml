@@ -57,13 +57,8 @@ sudo apt install open-vm-tools-desktop Then close the virtual machine.</descript
         <pubDate>Mon, 13 Sep 2021 18:24:34 +0000</pubDate>
         
         <guid>https://aecra.github.io/en/about/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/about.jpg" alt="Featured image of post About" /&gt;tags：
-Technology house, late stage of lazy cancer, no understanding
-Previous Blog：blog2021
-Contact me：
-Github：aecra
-Email：admin@aecra.cn
-All kinds of technical exchanges are welcome :)</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/about.jpg" alt="Featured image of post About" /&gt;Hello, I am a technology enthusiast who loves open source and programming. Currently, I work in software development and while I may not be an expert in any particular technology, I have learned a lot about various aspects of technology, including front-end development, back-end development, algorithms, and databases. I primarily use Golang, but I also have experience using other programming languages.
+I am extremely passionate about the open source community and actively participate in the development and support of open source projects.</description>
         </item>
         <item>
         <title>Nginx getting started guide.</title>
@@ -113,7 +108,7 @@ And the later PHP developer team has taken the decision to generate E_DEPRECATED
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://aecra.github.io/en/link/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/link.jpg" alt="Featured image of post Friends" /&gt;Friends You can apply for adding a friends link by sending an email (admin@aecra.cn)!</description>
+        <description>&lt;img src="https://static.aecra.cn/cover/link.jpg" alt="Featured image of post Friends" /&gt;Friends You can apply for adding a friends link by sending an email (Tian-Jiale@outlook.com)!</description>
         </item>
         <item>
         <title>Search</title>
