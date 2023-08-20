@@ -5,7 +5,7 @@
         <link>https://aecra.github.io/en/tags/php/</link>
         <description>Recent content in PHP on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
+        <language>en</language>
         <lastBuildDate>Sun, 14 Feb 2021 14:26:56 +0000</lastBuildDate><atom:link href="https://aecra.github.io/en/tags/php/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Why shouldn&#39;t I use mysql_* functions in PHP?</title>
         <link>https://aecra.github.io/en/article/why-should-not-i-use-mysql-functions-in-php/</link>

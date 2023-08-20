@@ -6,7 +6,15 @@
         <description>Recent content in Posts on Tian Jiale&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Thu, 26 Jan 2023 21:34:00 +0000</lastBuildDate><atom:link href="https://aecra.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 15 Aug 2023 20:46:43 +0000</lastBuildDate><atom:link href="https://aecra.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>NGINX 入门指导</title>
+        <link>https://aecra.github.io/article/network-encoding-and-decoding-algorithm-in-p2p-file-sharing-system/</link>
+        <pubDate>Tue, 15 Aug 2023 20:46:43 +0000</pubDate>
+        
+        <guid>https://aecra.github.io/article/network-encoding-and-decoding-algorithm-in-p2p-file-sharing-system/</guid>
+        <description>&lt;img src="https://static.aecra.cn/cover/Network-Encoding-and-Decoding-Algorithm-in-P2P-File-Sharing-System.png" alt="Featured image of post NGINX 入门指导" /&gt;摘要 P2P文件共享在互联网上越来越受欢迎，其中基于P2P技术的内容分发系统BitTorrent是最广泛应用的一种。然而，该系统存在一些限制，</description>
+        </item>
+        <item>
         <title>使用 ClashForWindows 时的一些问题</title>
         <link>https://aecra.github.io/article/problems-in-using-clashforwindows/</link>
         <pubDate>Thu, 26 Jan 2023 21:34:00 +0000</pubDate>

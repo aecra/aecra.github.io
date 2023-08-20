@@ -2,16 +2,12 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='MySQL 数据库这么火怎么能不学习一下呢？本篇文章记录了 MySQL 数据库的一般使用方法，涉及到优化原理的内容以后再补吧。'>
-<meta name='keywords' content='MySQL, 数据库'><title>MySQL 数据库</title>
-
-
+<title>MySQL 数据库</title>
 
 <link rel='canonical' href='https://aecra.github.io/article/mysql-database/'>
 
-<link rel="stylesheet" href="/scss/style.min.b771f3a8e175f211026b9cb99aeca05bb1faab8c4f744da12555a7df76a771d6.css"><meta property='og:title' content='MySQL 数据库'>
+<link rel="stylesheet" href="/scss/style.min.ff300df33b80e2ac49809c825614392ed1c7b27591d65d3c4043602cd162e25f.css"><meta property='og:title' content='MySQL 数据库'>
 <meta property='og:description' content='MySQL 数据库这么火怎么能不学习一下呢？本篇文章记录了 MySQL 数据库的一般使用方法，涉及到优化原理的内容以后再补吧。'>
-
-
 <meta property='og:url' content='https://aecra.github.io/article/mysql-database/'>
 <meta property='og:site_name' content='Tian Jiale&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='MySQL' /><meta property='article:tag' content='数据库' /><meta property='article:published_time' content='2021-02-17T13:22:57&#43;00:00'/><meta property='article:modified_time' content='2021-02-17T13:22:57&#43;00:00'/><meta property='og:image' content='https://static.aecra.cn/cover/mysql-database.jpg' />
@@ -57,8 +53,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended">
-    <aside class="sidebar left-sidebar sticky ">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -255,13 +250,12 @@ if (!doNotTrack) {
 
 
 
-                    <span>暗 色</span>
+                    <span>暗色模式</span>
                 </li>
             
         </div>
     </ol>
 </aside>
-
 
     <aside class="sidebar right-sidebar sticky">
         
@@ -378,8 +372,6 @@ if (!doNotTrack) {
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
-            
-            
             <a href="/article/mysql-database/">
                 
                     <img src="https://static.aecra.cn/cover/mysql-database.jpg" loading="lazy" alt="Featured image of post MySQL 数据库" />
@@ -1254,9 +1246,9 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">存储过程体</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">end</span><span class="w">
 </span></span></span></code></pre></div><p>类似于方法：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">修饰符</span> <span class="err">返回类型</span> <span class="err">方法名</span><span class="o">(</span><span class="err">参数类型</span> <span class="err">参数名</span><span class="o">,...){</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">修饰符</span> <span class="n">返回类型</span> <span class="nf">方法名</span><span class="o">(</span><span class="n">参数类型</span> <span class="n">参数名</span><span class="o">,...){</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="err">方法体</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">方法体</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></div><p>注意</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="c1"># 需要设置新的结束标记
@@ -1266,8 +1258,8 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="err">存储过程名</span><span class="p">(</span><span class="k">IN</span><span class="o">|</span><span class="k">OUT</span><span class="o">|</span><span class="k">INOUT</span><span class="w"> </span><span class="err">参数名</span><span class="w">  </span><span class="err">参数类型</span><span class="p">,...)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BEGIN</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sql</span><span class="err">语句</span><span class="mi">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sql</span><span class="err">语句</span><span class="mi">2</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sql语句1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sql语句2</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">END</span><span class="w"> </span><span class="err">$</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -1412,7 +1404,7 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">when</span><span class="w"> </span><span class="err">值</span><span class="mi">1</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="err">结果</span><span class="mi">1</span><span class="err">或语句</span><span class="mi">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">when</span><span class="w"> </span><span class="err">值</span><span class="mi">2</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="err">结果</span><span class="mi">2</span><span class="err">或语句</span><span class="mi">2</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">else</span><span class="w"> </span><span class="err">结果</span><span class="n">n</span><span class="err">或语句</span><span class="n">n</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">else</span><span class="w"> </span><span class="err">结果</span><span class="n">n或语句n</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">end</span><span class="w"> </span><span class="p">[</span><span class="k">case</span><span class="p">]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1"># 情况二：类似于多重if
@@ -1422,7 +1414,7 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">when</span><span class="w"> </span><span class="err">条件</span><span class="mi">1</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="err">结果</span><span class="mi">1</span><span class="err">或语句</span><span class="mi">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">when</span><span class="w"> </span><span class="err">条件</span><span class="mi">2</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="err">结果</span><span class="mi">2</span><span class="err">或语句</span><span class="mi">2</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">else</span><span class="w"> </span><span class="err">结果</span><span class="n">n</span><span class="err">或语句</span><span class="n">n</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">else</span><span class="w"> </span><span class="err">结果</span><span class="n">n或语句n</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">end</span><span class="w"> </span><span class="p">[</span><span class="k">case</span><span class="p">]</span><span class="w">
 </span></span></span></code></pre></div><p>特点：可以用在任何位置</p>
 <p>三、if elseif 语句</p>
@@ -1481,12 +1473,8 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
     
     <section class="article-tags">
         
-            
-            
             <a href="/tags/mysql/">MySQL</a>
         
-            
-            
             <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
         
     </section>
@@ -1554,7 +1542,7 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -1655,19 +1643,6 @@ delete 删除带自增长列的表后，如果再插入数据，数据从上一�
         document.head.appendChild(customFont);
     }());
 </script>
-
-<script>
-  
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?63f15ba6b5eafecd5a7d2290491d47ce";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
-</script>
-
-
 
     </body>
 </html>
