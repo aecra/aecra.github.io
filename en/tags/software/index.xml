@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>software on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.github.io/en/tags/software/</link>
-        <description>Recent content in software on Tian Jiale&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en</language>
-        <lastBuildDate>Sat, 03 Jul 2021 08:50:45 +0000</lastBuildDate><atom:link href="https://aecra.github.io/en/tags/software/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Nginx getting started guide.</title>
-        <link>https://aecra.github.io/en/article/nginx-getting-started-guide/</link>
-        <pubDate>Sat, 03 Jul 2021 08:50:45 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/en/article/nginx-getting-started-guide/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/nginx-getting-started-guide.png" alt="Featured image of post Nginx getting started guide." /&gt;Introduction Nginx is a lightweight HTTP server that uses an event-driven, asynchronous, non-blocking processing framework, which gives it excellent IO performance and is often used for server-side reverse proxying and load balancing.
-Quick Start Install nginx
-sudo apt-get install nginx Uninstall nginx
-sudo apt-get uninstall nginx Start nginx
-nginx Stop nginx
-nginx -s stop Hot restart nginx
-nginx -s reload install in CentOS Install compilation tools and library files yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel Install Download PCRE PCRE is used to enable Nginx to support Rewrite.</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>software on Tian Jiale&#39;s Blog</title>
+    <link>https://aecra.github.io/en/tags/software/</link>
+    <description>Recent content in software on Tian Jiale&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 03 Jul 2021 08:50:45 +0000</lastBuildDate>
+    <atom:link href="https://aecra.github.io/en/tags/software/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nginx getting started guide.</title>
+      <link>https://aecra.github.io/en/article/nginx-getting-started-guide/</link>
+      <pubDate>Sat, 03 Jul 2021 08:50:45 +0000</pubDate>
+      <guid>https://aecra.github.io/en/article/nginx-getting-started-guide/</guid>
+      <description>Introduction Nginx is a lightweight HTTP server that uses an event-driven, asynchronous, non-blocking processing framework, which gives it excellent IO performance and is often used for server-side reverse proxying and load balancing.&#xA;Quick Start Install nginx&#xA;sudo apt-get install nginx Uninstall nginx&#xA;sudo apt-get uninstall nginx Start nginx&#xA;nginx Stop nginx&#xA;nginx -s stop Hot restart nginx&#xA;nginx -s reload install in CentOS Install compilation tools and library files yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel Install Download PCRE PCRE is used to enable Nginx to support Rewrite.</description>
+    </item>
+  </channel>
 </rss>

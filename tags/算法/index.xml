@@ -1,107 +1,96 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>算法 on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.github.io/tags/%E7%AE%97%E6%B3%95/</link>
-        <description>Recent content in 算法 on Tian Jiale&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <lastBuildDate>Tue, 13 Sep 2022 23:41:00 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>在 Golang 中使用优先队列</title>
-        <link>https://aecra.github.io/article/use-priority-queue-in-golang/</link>
-        <pubDate>Tue, 13 Sep 2022 23:41:00 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/use-priority-queue-in-golang/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/use-priority-queue-in-golang.png" alt="Featured image of post 在 Golang 中使用优先队列" /&gt;在 Golang 中我们可以找到 heap 的实现，但是，基于 heap 的优先队列没有提供支持，只在 heap 文档中提供了优先队列的一个示例，Go 团队是在是太狗了，这对于我们这些要</description>
-        </item>
-        <item>
-        <title>排序算法</title>
-        <link>https://aecra.github.io/article/sorting-algorithm/</link>
-        <pubDate>Sun, 13 Feb 2022 11:58:25 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/sorting-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/Sorting-algorithm.png" alt="Featured image of post 排序算法" /&gt;插入排序 Java public class Insertion { private Insertion() { } public static void sort(Comparable[] a) { int n = a.length; for (int i = 1; i &amp;lt; n; i++) { for (int j = i; j &amp;gt; 0 &amp;amp;&amp;amp; less(a[j], a[j-1]); j--) { exch(a, j, j-1); } } } private static boolean less(Comparable v, Comparable w) { return v.compareTo(w) &amp;lt; 0; } private static void exch(Object[] a,</description>
-        </item>
-        <item>
-        <title>KMP 字符串匹配算法</title>
-        <link>https://aecra.github.io/article/kmp-string-matching-algorithm/</link>
-        <pubDate>Mon, 24 May 2021 19:41:22 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/kmp-string-matching-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/kmp-string-matching-algorithm.jpg" alt="Featured image of post KMP 字符串匹配算法" /&gt;暴力算法低效在哪？ 字符串匹配如果使用暴力写法的话，我们需要不断移动匹配字符串的位置，同时一一对比此时字符串是否相同。这个过程中有没有浪费时间</description>
-        </item>
-        <item>
-        <title>最小生成树（kruskal 算法）</title>
-        <link>https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/</link>
-        <pubDate>Sat, 27 Mar 2021 22:47:46 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/minimum-spanning-tree-kruskal-algorithm.jpg" alt="Featured image of post 最小生成树（kruskal 算法）" /&gt;说明 此算法可以称为“加边法”，初始最小生成树边数为 0，每迭代一次就选择一条满足条件的最小代价边，加入到最小生成树的边集合里。 实现思路 把图中的</description>
-        </item>
-        <item>
-        <title>最近公共祖先lca</title>
-        <link>https://aecra.github.io/article/last-common-ancestor-lca/</link>
-        <pubDate>Wed, 17 Mar 2021 23:50:14 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/last-common-ancestor-lca/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/last-common-ancestor-lca.jpg" alt="Featured image of post 最近公共祖先lca" /&gt;含义 对于有根树 T 的两个结点 u、v，最近公共祖先 LCA(T,u,v)表示一个结点 x，满足 x 是 u 和 v 的祖先且 x 的深度尽可能大。在这里，一个节点也</description>
-        </item>
-        <item>
-        <title>拓展欧几里得定理</title>
-        <link>https://aecra.github.io/article/extended-euclidean-theorem/</link>
-        <pubDate>Mon, 08 Mar 2021 19:02:08 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/extended-euclidean-theorem/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/extended-euclidean-theorem.jpg" alt="Featured image of post 拓展欧几里得定理" /&gt;简述 拓展欧几里得定理也称辗转相除法 公示表述：gcd(a,b)=gcd(b,a mod b)； 具体解释在代码里。 （沙雕一下：终极版本为求组合数） 补充知</description>
-        </item>
-        <item>
-        <title>快速幂和快速幂取模</title>
-        <link>https://aecra.github.io/article/fast-power-and-fast-power-modulus/</link>
-        <pubDate>Thu, 04 Mar 2021 10:43:14 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/fast-power-and-fast-power-modulus/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/fast-power-and-fast-power-modulus.jpg" alt="Featured image of post 快速幂和快速幂取模" /&gt;首先，快速幂的目的就是做到快速求幂，假设我们要求 a^b，按照朴素算法就是把 a 连乘 b 次，这样一来时间复杂度是 O(b)也即是 O(n)级别，快速幂</description>
-        </item>
-        <item>
-        <title>拓扑排序</title>
-        <link>https://aecra.github.io/article/topological-sorting/</link>
-        <pubDate>Sun, 28 Feb 2021 13:14:08 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/topological-sorting/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/topological-sorting.jpg" alt="Featured image of post 拓扑排序" /&gt;百度百科 对一个有向无环图(Directed Acyclic Graph 简称 DAG)G 进行拓扑排序，是将 G 中所有顶点排成一个线性序列，使得图中任意一对顶点 u 和 v，若边(u,v</description>
-        </item>
-        <item>
-        <title>链式前向星</title>
-        <link>https://aecra.github.io/article/chain-forward-star/</link>
-        <pubDate>Fri, 26 Feb 2021 18:59:07 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/chain-forward-star/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/chain-forward-star.jpg" alt="Featured image of post 链式前向星" /&gt;介绍 有权边的图的存储一般有两种：邻接矩阵、前向星。 若图是稀疏图，边很少，开二维数组 a[][]很浪费;若点很多(如 10000 个点)a[10000][1</description>
-        </item>
-        <item>
-        <title>Floyd 最小环算法</title>
-        <link>https://aecra.github.io/article/floyd-minimum-ring/</link>
-        <pubDate>Sat, 20 Feb 2021 16:38:46 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/floyd-minimum-ring/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/floyd-minimum-ring.jpg" alt="Featured image of post Floyd 最小环算法" /&gt;思路一 首先，理解 Floyd 算法是按照点的编号增加的顺序更新最短路径的。 因为 Floyd 算法基于动态规划思想，动态规划过程必定存在一个顺序，这里的顺序就是节点编</description>
-        </item>
-        <item>
-        <title>Tarjan 强连通算法</title>
-        <link>https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/</link>
-        <pubDate>Fri, 19 Feb 2021 14:42:09 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/tarjan-strong-connectivity-algorithm.jpg" alt="Featured image of post Tarjan 强连通算法" /&gt;定义 1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg+（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。 2、</description>
-        </item>
-        <item>
-        <title>最短路问题</title>
-        <link>https://aecra.github.io/article/shortest-path-problem/</link>
-        <pubDate>Thu, 18 Feb 2021 20:52:34 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/shortest-path-problem/</guid>
-        <description>弗洛伊德算法 通过中间节点 k 来实现 i 和 j 的距离缩短，空间和时间复杂度都为 n3，一般数据在 400 以内可以使用。 for (int i = 0; i &amp;lt; n; i++) for (int j = 0; j &amp;lt; n; j++) for</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>算法 on Tian Jiale&#39;s Blog</title>
+    <link>https://aecra.github.io/tags/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on Tian Jiale&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 13 Sep 2022 23:41:00 +0000</lastBuildDate>
+    <atom:link href="https://aecra.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在 Golang 中使用优先队列</title>
+      <link>https://aecra.github.io/article/use-priority-queue-in-golang/</link>
+      <pubDate>Tue, 13 Sep 2022 23:41:00 +0000</pubDate>
+      <guid>https://aecra.github.io/article/use-priority-queue-in-golang/</guid>
+      <description>在 Golang 中我们可以找到 heap 的实现，但是，基于 heap 的优先队列没有提供支持，只在 heap 文档中提供了优先队列的一个示例，Go 团队是在是太狗了，这对于我们这些要</description>
+    </item>
+    <item>
+      <title>排序算法</title>
+      <link>https://aecra.github.io/article/sorting-algorithm/</link>
+      <pubDate>Sun, 13 Feb 2022 11:58:25 +0000</pubDate>
+      <guid>https://aecra.github.io/article/sorting-algorithm/</guid>
+      <description>插入排序 Java public class Insertion { private Insertion() { } public static void sort(Comparable[] a) { int n = a.length; for (int i = 1; i &amp;lt; n; i++) { for (int j = i; j &amp;gt; 0 &amp;amp;&amp;amp; less(a[j], a[j-1]); j--) { exch(a, j, j-1); } } } private static boolean less(Comparable v, Comparable w) { return v.compareTo(w) &amp;lt; 0; } private static void exch(Object[] a,</description>
+    </item>
+    <item>
+      <title>KMP 字符串匹配算法</title>
+      <link>https://aecra.github.io/article/kmp-string-matching-algorithm/</link>
+      <pubDate>Mon, 24 May 2021 19:41:22 +0000</pubDate>
+      <guid>https://aecra.github.io/article/kmp-string-matching-algorithm/</guid>
+      <description>暴力算法低效在哪？ 字符串匹配如果使用暴力写法的话，我们需要不断移动匹配字符串的位置，同时一一对比此时字符串是否相同。这个过程中有没有浪费时间</description>
+    </item>
+    <item>
+      <title>最小生成树（kruskal 算法）</title>
+      <link>https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/</link>
+      <pubDate>Sat, 27 Mar 2021 22:47:46 +0000</pubDate>
+      <guid>https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/</guid>
+      <description>说明 此算法可以称为“加边法”，初始最小生成树边数为 0，每迭代一次就选择一条满足条件的最小代价边，加入到最小生成树的边集合里。 实现思路 把图中的</description>
+    </item>
+    <item>
+      <title>最近公共祖先lca</title>
+      <link>https://aecra.github.io/article/last-common-ancestor-lca/</link>
+      <pubDate>Wed, 17 Mar 2021 23:50:14 +0000</pubDate>
+      <guid>https://aecra.github.io/article/last-common-ancestor-lca/</guid>
+      <description>含义 对于有根树 T 的两个结点 u、v，最近公共祖先 LCA(T,u,v)表示一个结点 x，满足 x 是 u 和 v 的祖先且 x 的深度尽可能大。在这里，一个节点也</description>
+    </item>
+    <item>
+      <title>拓展欧几里得定理</title>
+      <link>https://aecra.github.io/article/extended-euclidean-theorem/</link>
+      <pubDate>Mon, 08 Mar 2021 19:02:08 +0000</pubDate>
+      <guid>https://aecra.github.io/article/extended-euclidean-theorem/</guid>
+      <description>简述 拓展欧几里得定理也称辗转相除法 公示表述：gcd(a,b)=gcd(b,a mod b)； 具体解释在代码里。 （沙雕一下：终极版本为求组合数） 补充知</description>
+    </item>
+    <item>
+      <title>快速幂和快速幂取模</title>
+      <link>https://aecra.github.io/article/fast-power-and-fast-power-modulus/</link>
+      <pubDate>Thu, 04 Mar 2021 10:43:14 +0000</pubDate>
+      <guid>https://aecra.github.io/article/fast-power-and-fast-power-modulus/</guid>
+      <description>首先，快速幂的目的就是做到快速求幂，假设我们要求 a^b，按照朴素算法就是把 a 连乘 b 次，这样一来时间复杂度是 O(b)也即是 O(n)级别，快速幂</description>
+    </item>
+    <item>
+      <title>拓扑排序</title>
+      <link>https://aecra.github.io/article/topological-sorting/</link>
+      <pubDate>Sun, 28 Feb 2021 13:14:08 +0000</pubDate>
+      <guid>https://aecra.github.io/article/topological-sorting/</guid>
+      <description>百度百科 对一个有向无环图(Directed Acyclic Graph 简称 DAG)G 进行拓扑排序，是将 G 中所有顶点排成一个线性序列，使得图中任意一对顶点 u 和 v，若边(u,v</description>
+    </item>
+    <item>
+      <title>链式前向星</title>
+      <link>https://aecra.github.io/article/chain-forward-star/</link>
+      <pubDate>Fri, 26 Feb 2021 18:59:07 +0000</pubDate>
+      <guid>https://aecra.github.io/article/chain-forward-star/</guid>
+      <description>介绍 有权边的图的存储一般有两种：邻接矩阵、前向星。 若图是稀疏图，边很少，开二维数组 a[][]很浪费;若点很多(如 10000 个点)a[10000][1</description>
+    </item>
+    <item>
+      <title>Floyd 最小环算法</title>
+      <link>https://aecra.github.io/article/floyd-minimum-ring/</link>
+      <pubDate>Sat, 20 Feb 2021 16:38:46 +0000</pubDate>
+      <guid>https://aecra.github.io/article/floyd-minimum-ring/</guid>
+      <description>思路一 首先，理解 Floyd 算法是按照点的编号增加的顺序更新最短路径的。 因为 Floyd 算法基于动态规划思想，动态规划过程必定存在一个顺序，这里的顺序就是节点编</description>
+    </item>
+    <item>
+      <title>Tarjan 强连通算法</title>
+      <link>https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/</link>
+      <pubDate>Fri, 19 Feb 2021 14:42:09 +0000</pubDate>
+      <guid>https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/</guid>
+      <description>定义 1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg+（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。 2、</description>
+    </item>
+    <item>
+      <title>最短路问题</title>
+      <link>https://aecra.github.io/article/shortest-path-problem/</link>
+      <pubDate>Thu, 18 Feb 2021 20:52:34 +0000</pubDate>
+      <guid>https://aecra.github.io/article/shortest-path-problem/</guid>
+      <description>弗洛伊德算法 通过中间节点 k 来实现 i 和 j 的距离缩短，空间和时间复杂度都为 n3，一般数据在 400 以内可以使用。 for (int i = 0; i &amp;lt; n; i++) for (int j = 0; j &amp;lt; n; j++) for</description>
+    </item>
+  </channel>
 </rss>

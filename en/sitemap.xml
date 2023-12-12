@@ -55,7 +55,7 @@
                 />
   </url><url>
     <loc>https://aecra.github.io/en/</loc>
-    <lastmod>2023-05-06T01:29:45+00:00</lastmod>
+    <lastmod>2023-02-03T16:52:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -141,32 +141,6 @@
     <loc>https://aecra.github.io/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</loc>
     <lastmod>2022-01-22T15:25:34+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/about/</loc>
-    <lastmod>2023-05-06T01:29:45+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/about/"
-                />
-  </url><url>
-    <loc>https://aecra.github.io/en/page/</loc>
-    <lastmod>2023-05-06T01:29:45+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/page/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/page/"
-                />
-  </url><url>
     <loc>https://aecra.github.io/en/article/nginx-getting-started-guide/</loc>
     <lastmod>2021-10-01T19:55:34+00:00</lastmod>
     <xhtml:link
@@ -221,19 +195,6 @@
     <loc>https://aecra.github.io/en/article/why-should-not-i-use-mysql-functions-in-php/</loc>
     <lastmod>2021-02-14T14:26:56+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/archives/</loc>
-    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/archives/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/archives/"
-                />
-  </url><url>
     <loc>https://aecra.github.io/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -244,30 +205,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://aecra.github.io/en/categories/"
-                />
-  </url><url>
-    <loc>https://aecra.github.io/en/link/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/link/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/link/"
-                />
-  </url><url>
-    <loc>https://aecra.github.io/en/search/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/search/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/search/"
                 />
   </url>
 </urlset>

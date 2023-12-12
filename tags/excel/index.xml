@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>excel on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.github.io/tags/excel/</link>
-        <description>Recent content in excel on Tian Jiale&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <lastBuildDate>Fri, 12 Feb 2021 13:23:47 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/excel/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>用 python 操作表格</title>
-        <link>https://aecra.github.io/article/manipulating-tables-with-python/</link>
-        <pubDate>Fri, 12 Feb 2021 13:23:47 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/manipulating-tables-with-python/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/manipulating-tables-with-python.jpg" alt="Featured image of post 用 python 操作表格" /&gt;一、xlrd 和 xlwt 需要先执行 pip3 install xlrd 和 pip3 install xlwt 安装模块 对于 excel 来说，整个 excel 文件称为工作簿，工作簿中的每个页称为工作表，工作表又由单元格组成。 对于 xlrd 和</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>excel on Tian Jiale&#39;s Blog</title>
+    <link>https://aecra.github.io/tags/excel/</link>
+    <description>Recent content in excel on Tian Jiale&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 12 Feb 2021 13:23:47 +0000</lastBuildDate>
+    <atom:link href="https://aecra.github.io/tags/excel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用 python 操作表格</title>
+      <link>https://aecra.github.io/article/manipulating-tables-with-python/</link>
+      <pubDate>Fri, 12 Feb 2021 13:23:47 +0000</pubDate>
+      <guid>https://aecra.github.io/article/manipulating-tables-with-python/</guid>
+      <description>一、xlrd 和 xlwt 需要先执行 pip3 install xlrd 和 pip3 install xlwt 安装模块 对于 excel 来说，整个 excel 文件称为工作簿，工作簿中的每个页称为工作表，工作表又由单元格组成。 对于 xlrd 和</description>
+    </item>
+  </channel>
 </rss>

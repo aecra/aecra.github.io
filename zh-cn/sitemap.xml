@@ -38,7 +38,7 @@
                 />
   </url><url>
     <loc>https://aecra.github.io/</loc>
-    <lastmod>2023-08-15T20:46:43+00:00</lastmod>
+    <lastmod>2023-12-12T18:24:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -275,30 +275,10 @@
     <lastmod>2021-09-17T15:37:09+00:00</lastmod>
   </url><url>
     <loc>https://aecra.github.io/page/</loc>
-    <lastmod>2021-09-13T20:14:45+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/page/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/page/"
-                />
+    <lastmod>2023-12-12T18:24:34+00:00</lastmod>
   </url><url>
     <loc>https://aecra.github.io/about/</loc>
-    <lastmod>2021-09-13T20:14:45+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/about/"
-                />
+    <lastmod>2023-12-12T18:24:34+00:00</lastmod>
   </url><url>
     <loc>https://aecra.github.io/article/create-docker-image/</loc>
     <lastmod>2021-07-04T10:23:09+00:00</lastmod>
@@ -482,19 +462,6 @@
     <loc>https://aecra.github.io/article/html-css/</loc>
     <lastmod>2021-01-31T13:18:45+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/archives/</loc>
-    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/archives/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/archives/"
-                />
-  </url><url>
     <loc>https://aecra.github.io/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -507,28 +474,6 @@
                 href="https://aecra.github.io/categories/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/search/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/search/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/search/"
-                />
-  </url><url>
     <loc>https://aecra.github.io/link/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/link/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/link/"
-                />
   </url>
 </urlset>

@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Go on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.github.io/tags/go/</link>
-        <description>Recent content in Go on Tian Jiale&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <lastBuildDate>Thu, 20 Oct 2022 20:07:32 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Golang 中的 GC 算法：三色标记与混合写屏障</title>
-        <link>https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</link>
-        <pubDate>Thu, 20 Oct 2022 20:07:32 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/GC-Algorithm-in-Golang-Tri-color-Marking-and-Hybrid-Write-Barrier.png" alt="Featured image of post Golang 中的 GC 算法：三色标记与混合写屏障" /&gt;标记清除法 在 v1.0~v1.3 版本中都是用的是标记清除算法。首先我们需要了解 STW（Stop The World）是什么，顾名思义，STW 是将当前程序完全暂停，不执</description>
-        </item>
-        <item>
-        <title>GO 中哈希表的实现</title>
-        <link>https://aecra.github.io/article/hash-table-implementation-in-go/</link>
-        <pubDate>Wed, 20 Apr 2022 19:51:21 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/hash-table-implementation-in-go/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/hash-table-implementation-in-go.png" alt="Featured image of post GO 中哈希表的实现" /&gt;什么是哈希表 哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。 哈希函数提供了对键的散列编码，可以将</description>
-        </item>
-        <item>
-        <title>Go 中的面向对象</title>
-        <link>https://aecra.github.io/article/object-oriented-in-go/</link>
-        <pubDate>Mon, 22 Nov 2021 18:11:40 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/object-oriented-in-go/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/object-oriented-in-go.png" alt="Featured image of post Go 中的面向对象" /&gt;结构体 Golang 中没有类，但可以定义类型上的方法，同时有接口，可以通过接口定义对象的要求。也可以通过类型定义对象的构造方法及行为。 什么是结构体？在 Go</description>
-        </item>
-        <item>
-        <title>Go 的异常处理</title>
-        <link>https://aecra.github.io/article/go-exception-handling/</link>
-        <pubDate>Tue, 12 Oct 2021 20:44:50 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/go-exception-handling/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/go-exception-handling.png" alt="Featured image of post Go 的异常处理" /&gt;前言 Go 语言追求简洁优雅，所以，Go 语言不支持传统的 try … catch … finally 这种异常，因为 Go 语言的设计者们认为，将异常与控制结构混在一起会很容易使得代码变得</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>Go on Tian Jiale&#39;s Blog</title>
+    <link>https://aecra.github.io/tags/go/</link>
+    <description>Recent content in Go on Tian Jiale&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 20 Oct 2022 20:07:32 +0000</lastBuildDate>
+    <atom:link href="https://aecra.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang 中的 GC 算法：三色标记与混合写屏障</title>
+      <link>https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</link>
+      <pubDate>Thu, 20 Oct 2022 20:07:32 +0000</pubDate>
+      <guid>https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</guid>
+      <description>标记清除法 在 v1.0~v1.3 版本中都是用的是标记清除算法。首先我们需要了解 STW（Stop The World）是什么，顾名思义，STW 是将当前程序完全暂停，不执</description>
+    </item>
+    <item>
+      <title>GO 中哈希表的实现</title>
+      <link>https://aecra.github.io/article/hash-table-implementation-in-go/</link>
+      <pubDate>Wed, 20 Apr 2022 19:51:21 +0000</pubDate>
+      <guid>https://aecra.github.io/article/hash-table-implementation-in-go/</guid>
+      <description>什么是哈希表 哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。 哈希函数提供了对键的散列编码，可以将</description>
+    </item>
+    <item>
+      <title>Go 中的面向对象</title>
+      <link>https://aecra.github.io/article/object-oriented-in-go/</link>
+      <pubDate>Mon, 22 Nov 2021 18:11:40 +0000</pubDate>
+      <guid>https://aecra.github.io/article/object-oriented-in-go/</guid>
+      <description>结构体 Golang 中没有类，但可以定义类型上的方法，同时有接口，可以通过接口定义对象的要求。也可以通过类型定义对象的构造方法及行为。 什么是结构体？在 Go</description>
+    </item>
+    <item>
+      <title>Go 的异常处理</title>
+      <link>https://aecra.github.io/article/go-exception-handling/</link>
+      <pubDate>Tue, 12 Oct 2021 20:44:50 +0000</pubDate>
+      <guid>https://aecra.github.io/article/go-exception-handling/</guid>
+      <description>前言 Go 语言追求简洁优雅，所以，Go 语言不支持传统的 try … catch … finally 这种异常，因为 Go 语言的设计者们认为，将异常与控制结构混在一起会很容易使得代码变得</description>
+    </item>
+  </channel>
 </rss>

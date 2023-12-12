@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>系统 on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.github.io/tags/%E7%B3%BB%E7%BB%9F/</link>
-        <description>Recent content in 系统 on Tian Jiale&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <lastBuildDate>Thu, 28 Oct 2021 18:52:34 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Windows &amp; Linux 双系统启动引导问题</title>
-        <link>https://aecra.github.io/article/windows-linux-dual-system-boot-problem/</link>
-        <pubDate>Thu, 28 Oct 2021 18:52:34 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/windows-linux-dual-system-boot-problem/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/windows-linux-dual-system-boot-problem.jpg" alt="Featured image of post Windows &amp; Linux 双系统启动引导问题" /&gt;问题描述 该问题是 Windows 和 Linux 双系统中，因先安装 Windows 后安装 Linux 而导致 Linux 引导 Windows。该情况下系统可以正常启动，无论启动 Windows 还是 Linux 都是没问题的，至于为</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>系统 on Tian Jiale&#39;s Blog</title>
+    <link>https://aecra.github.io/tags/%E7%B3%BB%E7%BB%9F/</link>
+    <description>Recent content in 系统 on Tian Jiale&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 28 Oct 2021 18:52:34 +0000</lastBuildDate>
+    <atom:link href="https://aecra.github.io/tags/%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows &amp; Linux 双系统启动引导问题</title>
+      <link>https://aecra.github.io/article/windows-linux-dual-system-boot-problem/</link>
+      <pubDate>Thu, 28 Oct 2021 18:52:34 +0000</pubDate>
+      <guid>https://aecra.github.io/article/windows-linux-dual-system-boot-problem/</guid>
+      <description>问题描述 该问题是 Windows 和 Linux 双系统中，因先安装 Windows 后安装 Linux 而导致 Linux 引导 Windows。该情况下系统可以正常启动，无论启动 Windows 还是 Linux 都是没问题的，至于为</description>
+    </item>
+  </channel>
 </rss>

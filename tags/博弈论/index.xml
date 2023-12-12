@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>博弈论 on Tian Jiale&#39;s Blog</title>
-        <link>https://aecra.github.io/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</link>
-        <description>Recent content in 博弈论 on Tian Jiale&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <lastBuildDate>Thu, 25 Feb 2021 14:35:42 +0000</lastBuildDate><atom:link href="https://aecra.github.io/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>巴什（Bash）博弈和尼姆（Nimm）博弈</title>
-        <link>https://aecra.github.io/article/bash-game-and-nimm-game/</link>
-        <pubDate>Thu, 25 Feb 2021 14:35:42 +0000</pubDate>
-        
-        <guid>https://aecra.github.io/article/bash-game-and-nimm-game/</guid>
-        <description>&lt;img src="https://static.aecra.cn/cover/bash-game-and-nimm-game.jpg" alt="Featured image of post 巴什（Bash）博弈和尼姆（Nimm）博弈" /&gt;巴什（Bash）博弈 题目： 只有一堆 n 个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取 m 个。最后取光者得胜。问是否存在先手必胜的</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>博弈论 on Tian Jiale&#39;s Blog</title>
+    <link>https://aecra.github.io/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</link>
+    <description>Recent content in 博弈论 on Tian Jiale&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 25 Feb 2021 14:35:42 +0000</lastBuildDate>
+    <atom:link href="https://aecra.github.io/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>巴什（Bash）博弈和尼姆（Nimm）博弈</title>
+      <link>https://aecra.github.io/article/bash-game-and-nimm-game/</link>
+      <pubDate>Thu, 25 Feb 2021 14:35:42 +0000</pubDate>
+      <guid>https://aecra.github.io/article/bash-game-and-nimm-game/</guid>
+      <description>巴什（Bash）博弈 题目： 只有一堆 n 个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取 m 个。最后取光者得胜。问是否存在先手必胜的</description>
+    </item>
+  </channel>
 </rss>
