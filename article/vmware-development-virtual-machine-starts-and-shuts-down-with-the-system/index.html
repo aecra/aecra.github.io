@@ -1,0 +1,413 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Vmware 开发虚拟机随系统启动与关闭 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Vmware 虚拟机开发的缘由 Windows 开发有时总是那么地不尽人意，尤其是当开发的服务需要在 Linux 中运行时，如果使用 Windows 开发，总是会出现一些莫名其妙的问题，所以使用 Linux" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Vmware 开发虚拟机随系统启动与关闭">
+<meta itemprop="description" content="使用 Vmware 的虚拟机进行开发如何能更高效呢？当然是无感最好喽。"><meta itemprop="datePublished" content="2022-02-13T20:19:13+00:00" />
+<meta itemprop="dateModified" content="2022-02-13T20:19:13+00:00" />
+<meta itemprop="wordCount" content="610">
+<meta itemprop="keywords" content="Vmware," />
+  
+  <meta property="og:title" content="Vmware 开发虚拟机随系统启动与关闭" />
+<meta property="og:description" content="使用 Vmware 的虚拟机进行开发如何能更高效呢？当然是无感最好喽。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-13T20:19:13+00:00" />
+<meta property="article:modified_time" content="2022-02-13T20:19:13+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Vmware 开发虚拟机随系统启动与关闭"/>
+<meta name="twitter:description" content="使用 Vmware 的虚拟机进行开发如何能更高效呢？当然是无感最好喽。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Vmware 开发虚拟机随系统启动与关闭</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 13, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="vmware-虚拟机开发的缘由">Vmware 虚拟机开发的缘由</h2>
+<p>Windows 开发有时总是那么地不尽人意，尤其是当开发的服务需要在 Linux 中运行时，如果使用 Windows 开发，总是会出现一些莫名其妙的问题，所以使用 Linux 开发就很有必要。</p>
+<p>Windows 中使用 Linux 开发环境目前有 WSL2、Hyper-V、VitualBox、Vmware 这几种方案，其中 WSL2 和 Windows 系统的羁绊太深了，以至于许多配置不能随心所欲；Hyper-V 虽然灵活度更高一些，但经过实际使用发现它的启动与关闭耗时很长，性能也不是很好，更突出的问题是我至今尚未知晓其网络拓扑如何，这对实际使用造成了很大的困扰；VirtualBox 没有使用过，但因其开源免费的原因以后可能会切换到这个；Vmware 是独立性最好的，虚拟机的配置和存储都以独立文件的形式保存，方便移植和备份，同时其网络配置较为灵活，所以成了 Linux 开发的首选。</p>
+<h2 id="vmware-虚拟机的启动与关闭">Vmware 虚拟机的启动与关闭</h2>
+<p>这里创建一个启动脚本和一个关闭脚本，两个脚本内容如下：</p>
+<p>启动脚本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#e6db74">&#34;C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe&#34;</span> start <span style="color:#e6db74">&#34;D:\virtual machine\ubuntu20.04\Ubuntu 20.04 64 位.vmx&#34;</span> nogui
+</span></span></code></pre></div><p>关闭脚本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#e6db74">&#34;C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe&#34;</span> stop <span style="color:#e6db74">&#34;D:\virtual machine\ubuntu20.04\Ubuntu 20.04 64 位.vmx&#34;</span> soft
+</span></span></code></pre></div><p>这里采用无 GUI 的方式启动，同时开启 ssh 服务以远程连接，这样就可以通过 ssh 远程连接到虚拟机进行开发了。</p>
+<h2 id="vmware-虚拟机的无感运行">Vmware 虚拟机的无感运行</h2>
+<p>Windows 中设置开机自启动可以使用 Startup 文件夹或计划任务，但这里使用组策略。</p>
+<p>设置方式：</p>
+<ol>
+<li><code>win</code> + <code>R</code> 打开运行。</li>
+<li>输入 <code>gpedit.msc</code> 打开本地组策略编辑器。</li>
+<li>找到 用户配置-&gt;Windows 设置 -&gt; 脚本(登录/注销)。</li>
+<li>在登陆和注销中分别添加上一小结的脚本。</li>
+</ol>
+<p>经过重启与关闭可发现虚拟机已无感运行。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/vmware"
+      >Vmware</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/the-oauth-2.0-authorization-framework-in-chinese/"
+      ><span class="mr-1.5">←</span><span>RFC6749 | OAuth 2.0 授权框架 中文版</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/sorting-algorithm/"
+      ><span>排序算法</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

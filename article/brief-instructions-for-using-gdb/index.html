@@ -1,0 +1,590 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>GDB 简要使用说明 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="什么是 GDB？ GDB 是 GNU Project 调试器，它允许您查看另一个程序在执行时“内部”发生了什么——或者在它崩溃时另一个程序正在做什么。 GDB 可以做四种主要的事情" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="GDB 简要使用说明">
+<meta itemprop="description" content="学编程也有五六年了，但仍然不会使用 GDB 这样一个强大的调试工具，学了学之后，就写了这篇简陋的文章，更多的是提供一个如何使用的参照，更多详细的内容还是需要查看 GDB 的官方文档。"><meta itemprop="datePublished" content="2022-10-31T20:27:48+00:00" />
+<meta itemprop="dateModified" content="2023-02-03T16:52:08+00:00" />
+<meta itemprop="wordCount" content="2506">
+<meta itemprop="keywords" content="GDB," />
+  
+  <meta property="og:title" content="GDB 简要使用说明" />
+<meta property="og:description" content="学编程也有五六年了，但仍然不会使用 GDB 这样一个强大的调试工具，学了学之后，就写了这篇简陋的文章，更多的是提供一个如何使用的参照，更多详细的内容还是需要查看 GDB 的官方文档。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/brief-instructions-for-using-gdb/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-31T20:27:48+00:00" />
+<meta property="article:modified_time" content="2023-02-03T16:52:08+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="GDB 简要使用说明"/>
+<meta name="twitter:description" content="学编程也有五六年了，但仍然不会使用 GDB 这样一个强大的调试工具，学了学之后，就写了这篇简陋的文章，更多的是提供一个如何使用的参照，更多详细的内容还是需要查看 GDB 的官方文档。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/brief-instructions-for-using-gdb/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">GDB 简要使用说明</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Oct 31, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="什么是-gdb">什么是 GDB？</h2>
+<p><a href="https://www.sourceware.org/gdb/">GDB</a> 是 GNU Project 调试器，它允许您查看另一个程序在执行时“内部”发生了什么——或者在它崩溃时另一个程序正在做什么。</p>
+<p>GDB 可以做四种主要的事情(加上支持这些事情的其他事情)来帮助你在行动中捕捉错误:</p>
+<ul>
+<li>启动程序，指定任何可能影响其行为的内容。</li>
+<li>使您的程序在指定条件下停止。</li>
+<li>检查程序停止时发生了什么。</li>
+<li>更改程序中的内容，这样您就可以尝试纠正一个 bug 的影响，然后继续了解另一个 bug。</li>
+</ul>
+<p>这些程序可能与 GDB (本机)在同一台机器上执行，也可能在另一台机器(远程)上执行，或者在模拟器上执行。GDB 可以在大多数流行的 UNIX 和 Microsoft Windows 变体，以及 Mac OS X 上运行。</p>
+<p>GDB 支持如下语言：</p>
+<ul>
+<li>Ada</li>
+<li>Assembly</li>
+<li>C</li>
+<li>C++</li>
+<li>D</li>
+<li>Fortran</li>
+<li>Go</li>
+<li>Objective-C</li>
+<li>OpenCL</li>
+<li>Modula-2</li>
+<li>Pascal</li>
+<li>Rust</li>
+</ul>
+<h2 id="如何启动-gdb">如何启动 GDB？</h2>
+<p>如果我们使用 [tldr](<a href="https://tldr.sh/">tldr pages</a>) 来查看 gdb 使用方法，我们可以得到如下提示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ tldr gdb
+</span></span><span style="display:flex;"><span>gdb
+</span></span><span style="display:flex;"><span>The GNU Debugger.More information: https://www.gnu.org/software/gdb.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Debug an executable:
+</span></span><span style="display:flex;"><span>   gdb <span style="color:#f92672">{{</span>executable<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Attach a process to gdb:
+</span></span><span style="display:flex;"><span>   gdb -p <span style="color:#f92672">{{</span>procID<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Debug with a core file:
+</span></span><span style="display:flex;"><span>   gdb -c <span style="color:#f92672">{{</span>core<span style="color:#f92672">}}</span> <span style="color:#f92672">{{</span>executable<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Execute given GDB commands upon start:
+</span></span><span style="display:flex;"><span>   gdb -ex <span style="color:#e6db74">&#34;{{commands}}&#34;</span> <span style="color:#f92672">{{</span>executable<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Start gdb and pass arguments to the executable:
+</span></span><span style="display:flex;"><span>   gdb --args <span style="color:#f92672">{{</span>executable<span style="color:#f92672">}}</span> <span style="color:#f92672">{{</span>argument1<span style="color:#f92672">}}</span> <span style="color:#f92672">{{</span>argument2<span style="color:#f92672">}}</span>
+</span></span></code></pre></div><p>这是 <code>GDB</code> 的几种常见用法，分别是：</p>
+<ul>
+<li>执行一个程序并 debug；</li>
+<li>通过指定程序的 <code>proceID</code> 进入一个正在运行的程序并 debug；</li>
+<li>通过指定程序出错时生成的 [core 文件](<a href="https://portal.perforce.com/s/article/2979">Core Files in Linux (perforce.com)</a>) 还原程序出错时的现场来 debug；</li>
+<li>执行一个程序并传入参数并 debug。</li>
+</ul>
+<p>我们编写一个简单的 C 语言程序作为我们调试程序。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  c <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> b;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;c = %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, c);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>编译链接为可执行文件同时附带调试信息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gcc -g a.c -o a
+</span></span></code></pre></div><p>使用如下命令开启 GDB 调试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gdb a
+</span></span></code></pre></div><p>进入 GDB 后将显示类似如下的信息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>GNU gdb (Debian 10.1-1.7) 10.1.90.20210103-git
+</span></span><span style="display:flex;"><span>Copyright (C) 2021 Free Software Foundation, Inc.
+</span></span><span style="display:flex;"><span>License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+</span></span><span style="display:flex;"><span>This is free software: you are free to change and redistribute it.
+</span></span><span style="display:flex;"><span>There is NO WARRANTY, to the extent permitted by law.
+</span></span><span style="display:flex;"><span>Type &#34;show copying&#34; and &#34;show warranty&#34; for details.
+</span></span><span style="display:flex;"><span>This GDB was configured as &#34;x86_64-linux-gnu&#34;.
+</span></span><span style="display:flex;"><span>Type &#34;show configuration&#34; for configuration details.
+</span></span><span style="display:flex;"><span>For bug reporting instructions, please see:
+</span></span><span style="display:flex;"><span>&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
+</span></span><span style="display:flex;"><span>Find the GDB manual and other documentation resources online at:
+</span></span><span style="display:flex;"><span>    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>For help, type &#34;help&#34;.
+</span></span><span style="display:flex;"><span>Type &#34;apropos word&#34; to search for commands related to &#34;word&#34;...
+</span></span><span style="display:flex;"><span>Reading symbols from a...
+</span></span><span style="display:flex;"><span>(No debugging symbols found in a)
+</span></span><span style="display:flex;"><span>(gdb)
+</span></span></code></pre></div><p>它给我们提示可以使用 <code>apropos word</code> 来查找相关的命令，所以在不查询文档时可以通过这种方法快速查找某个命令如何使用。</p>
+<p>更多启动相关命令见官方文档 <a href="https://sourceware.org/gdb/current/onlinedocs/gdb#Running">Running (Debugging with GDB) (sourceware.org)</a>。</p>
+<h2 id="如何在-gdb-中调试程序">如何在 GDB 中调试程序？</h2>
+<p>调试无非是了解程序的运行逻辑，以及在某个执行步骤中程序的状态，所以作为入门只需要知道如何中断、启动、查询，以及如何使用 display  来提供代码展示。</p>
+<h3 id="中断">中断</h3>
+<p><a href="https://sourceware.org/gdb/current/onlinedocs/gdb#Breakpoints">中断</a>可以使用断点(Breakpoints)、观察点(Watchpoints)、捕捉点(Catchpoints)。断点是程序运行到此处则中断；观察点用于观察某个变量甚至是由运算符组合的许多变量，如果变量值发生变化则中断；捕捉点则是在程序触发某种事件时中断，如 catch、throw、assert、exec、syscall、fork、vfork、signal。</p>
+<p>可以使用 list 命令来查询代码，每次执行将输出十行代码，如果需要获取更多可以多次使用 list 命令，同时 list 也支持打印指定行的代码，用法如下：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) list
+(gdb) list 3,5
+</code></pre><p>使用如下命令设置断点：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) break locspec
+</code></pre><p>locspecc 可以指定函数名、行号、指令地址等，break 可以缩写为 b。</p>
+<p>使用如下命令来查询断点：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) info breakpoints
+(gdb) info b
+</code></pre><p>使用如下命令设置观察点：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) watch expr
+</code></pre><p>使用如下方式来查询观察点：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) info watchpoints
+</code></pre><p>使用如下方式来设置捕捉点：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) catch event
+</code></pre><p>捕捉点同样使用 <code>info b</code> 来查看，值得一提的是，此命令同样会列出我们设置的观察点。</p>
+<h3 id="启动">启动</h3>
+<p>启动分为从最开始启动程序和中断后继续执行程序。</p>
+<p>从最开始启动程序的命令有starti 和 run两个命令。其中 starti 是开启程序，并停止在第一个指令，该指令在 linux 为 _start 而非 main 函数，因为堆栈、全局函数等一系列程序初始状态尚未设置。run 命令则是开启程序并在到达设置的断点处中断。</p>
+<p>中断后继续执行程序，其实是 <a href="https://sourceware.org/gdb/current/onlinedocs/gdb#Continuing-and-Stepping">Continuing and Stepping</a> ，这里只介绍最常用的几个命令：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) continue / c
+# 在程序上次停止的地址处恢复程序执行；绕过在该地址设置的任何断点，直到遇到下一个断点。
+
+(gdb) step / s
+# 继续运行程序，直到控制到达另一个源代码行，然后停止它并将控制返回给 GDB，如果遇到函数则进入函数。
+
+(gdb) step count
+# 按步骤继续运行，但要计算次数。如果在计数步骤之前出现断点或与单步执行无关的信号，则单步执行立即停止。
+
+(gdb) next [count] / n [count]
+# 继续到当前(最内层)堆栈帧中的下一个源行。这与 step 类似，但是在代码行中出现的函数调用不会停止执行，即将函数看作一个原子指令。
+
+(gdb) finish
+# 继续运行，直到所选堆栈帧中的函数返回之后。
+
+(gdb) until locspec
+# 继续运行程序，直到程序到达解析 locspec 的代码位置，或者当前堆栈帧返回。
+
+(gdb) stepi / si
+# 执行一个指令，然后停止并返回到调试器。
+
+(gdb) nexti / ni
+# 执行一个指令，但如果是函数调用，则继续执行，直到函数返回。
+</code></pre><h3 id="查询">查询</h3>
+<p>在程序执行过程中，我们可能需要获取某些信息，如前文提到的查询断点指令 <code>info breakpoints</code>，如下是常用的查询：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) print expr       # 打印表达式的值
+(gdb) info breakpoints # 查询断点
+(gdb) info frame       # 查询堆栈信息
+(gdb) info registers   # 查询寄存器的值
+</code></pre><h3 id="更友好的页面">更友好的页面</h3>
+<p>为了更清晰地直到程序运行到哪里，我们可以显示源代码，甚至是汇编代码。</p>
+<p>显示当前运行的源代码：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) layout src
+</code></pre><p>我们可以得到如下页面：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌─a.c────────────────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│   1           #include &lt;stdio.h&gt;                                               │
+</span></span><span style="display:flex;"><span>│   2                                                                            │
+</span></span><span style="display:flex;"><span>│   3           int main()                                                       │
+</span></span><span style="display:flex;"><span>│   4           {                                                                │
+</span></span><span style="display:flex;"><span>│B+&gt;5             int a = 1, b = 2, c = 0;                                       │
+</span></span><span style="display:flex;"><span>│   6             c = a + b;                                                     │
+</span></span><span style="display:flex;"><span>│   7             printf(&#34;c = %d\n&#34;, c);                                         │
+</span></span><span style="display:flex;"><span>│   8                                                                            │
+</span></span><span style="display:flex;"><span>│   9             return 0;                                                      │
+</span></span><span style="display:flex;"><span>│   10          }                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>└────────────────────────────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>native process 134526 In: main                           L5    PC: 0x55555555513d
+</span></span><span style="display:flex;"><span>(gdb) layout asm
+</span></span><span style="display:flex;"><span>(gdb)
+</span></span></code></pre></div><p>显示汇编代码：</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) layout src
+</code></pre><p>得到如下页面：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌────────────────────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│   0x555555555135 &lt;main&gt;           push   %rbp                                  │
+</span></span><span style="display:flex;"><span>│   0x555555555136 &lt;main+1&gt;         mov    %rsp,%rbp                             │
+</span></span><span style="display:flex;"><span>│   0x555555555139 &lt;main+4&gt;         sub    $0x10,%rsp                            │
+</span></span><span style="display:flex;"><span>│B+&gt;0x55555555513d &lt;main+8&gt;         movl   $0x1,-0x4(%rbp)                       │
+</span></span><span style="display:flex;"><span>│   0x555555555144 &lt;main+15&gt;        movl   $0x2,-0x8(%rbp)                       │
+</span></span><span style="display:flex;"><span>│   0x55555555514b &lt;main+22&gt;        movl   $0x0,-0xc(%rbp)                       │
+</span></span><span style="display:flex;"><span>│   0x555555555152 &lt;main+29&gt;        mov    -0x4(%rbp),%edx                       │
+</span></span><span style="display:flex;"><span>│   0x555555555155 &lt;main+32&gt;        mov    -0x8(%rbp),%eax                       │
+</span></span><span style="display:flex;"><span>│   0x555555555158 &lt;main+35&gt;        add    %edx,%eax                             │
+</span></span><span style="display:flex;"><span>│   0x55555555515a &lt;main+37&gt;        mov    %eax,-0xc(%rbp)                       │
+</span></span><span style="display:flex;"><span>│   0x55555555515d &lt;main+40&gt;        mov    -0xc(%rbp),%eax                       │
+</span></span><span style="display:flex;"><span>│   0x555555555160 &lt;main+43&gt;        mov    %eax,%esi                             │
+</span></span><span style="display:flex;"><span>│   0x555555555162 &lt;main+45&gt;        lea    0xe9b(%rip),%rdi        # 0x555555556 │
+</span></span><span style="display:flex;"><span>│   0x555555555169 &lt;main+52&gt;        mov    $0x0,%eax                             │
+</span></span><span style="display:flex;"><span>│   0x55555555516e &lt;main+57&gt;        call   0x555555555030 &lt;printf@plt&gt;           │
+</span></span><span style="display:flex;"><span>│   0x555555555173 &lt;main+62&gt;        mov    $0x0,%eax                             │
+</span></span><span style="display:flex;"><span>│   0x555555555178 &lt;main+67&gt;        leave                                        │
+</span></span><span style="display:flex;"><span>│   0x555555555179 &lt;main+68&gt;        ret                                          │
+</span></span><span style="display:flex;"><span>│   0x55555555517a                      nopw   0x0(%rax,%rax,1)                  │
+</span></span><span style="display:flex;"><span>└────────────────────────────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>native process 134526 In: main                           L5    PC: 0x55555555513d
+</span></span><span style="display:flex;"><span>(gdb) layout asm
+</span></span><span style="display:flex;"><span>(gdb)
+</span></span></code></pre></div></section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/gdb"
+      >GDB</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/problems-in-using-clashforwindows/"
+      ><span class="mr-1.5">←</span><span>使用 ClashForWindows 时的一些问题</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/"
+      ><span>Golang 中的 GC 算法：三色标记与混合写屏障</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

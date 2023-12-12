@@ -1,0 +1,1423 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>MySQL 数据库 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="数据库的好处 持久化数据到本地 可以实现结构化查询，方便管理 数据库相关概念 DB：数据库，保存一组有组织的数据的容器 DBMS：数据库管理系统，又称" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="MySQL 数据库">
+<meta itemprop="description" content="MySQL 数据库这么火怎么能不学习一下呢？本篇文章记录了 MySQL 数据库的一般使用方法，涉及到优化原理的内容以后再补吧。"><meta itemprop="datePublished" content="2021-02-17T13:22:57+00:00" />
+<meta itemprop="dateModified" content="2021-02-17T13:22:57+00:00" />
+<meta itemprop="wordCount" content="6830">
+<meta itemprop="keywords" content="MySQL,数据库," />
+  
+  <meta property="og:title" content="MySQL 数据库" />
+<meta property="og:description" content="MySQL 数据库这么火怎么能不学习一下呢？本篇文章记录了 MySQL 数据库的一般使用方法，涉及到优化原理的内容以后再补吧。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/mysql-database/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-17T13:22:57+00:00" />
+<meta property="article:modified_time" content="2021-02-17T13:22:57+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="MySQL 数据库"/>
+<meta name="twitter:description" content="MySQL 数据库这么火怎么能不学习一下呢？本篇文章记录了 MySQL 数据库的一般使用方法，涉及到优化原理的内容以后再补吧。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/mysql-database/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">MySQL 数据库</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 17, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="数据库的好处">数据库的好处</h2>
+<ol>
+<li>
+<p>持久化数据到本地</p>
+</li>
+<li>
+<p>可以实现结构化查询，方便管理</p>
+</li>
+</ol>
+<h2 id="数据库相关概念">数据库相关概念</h2>
+<ol>
+<li>
+<p>DB：数据库，保存一组有组织的数据的容器</p>
+</li>
+<li>
+<p>DBMS：数据库管理系统，又称为数据库软件（产品），用于管理 DB 中的数据</p>
+</li>
+<li>
+<p>SQL:结构化查询语言，用于和 DBMS 通信的语言</p>
+</li>
+</ol>
+<h2 id="数据库存储数据的特点">数据库存储数据的特点</h2>
+<ol>
+<li>
+<p>将数据放到表中，表再放到库中</p>
+</li>
+<li>
+<p>一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。</p>
+</li>
+<li>
+<p>表具有一些特性，这些特性定义了数据在表中如何存储，类似 java 中 “类”的设计。</p>
+</li>
+<li>
+<p>表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似 java 中的”属性”</p>
+</li>
+<li>
+<p>表中的数据是按行存储的，每一行类似于 java 中的“对象”。</p>
+</li>
+</ol>
+<h2 id="mysql-产品的介绍和安装">MySQL 产品的介绍和安装</h2>
+<h3 id="mysql-服务的启动和停止">MySQL 服务的启动和停止</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>方式一：计算机——右击管理——服务
+</span></span><span style="display:flex;"><span>方式二：通过管理员身份运行
+</span></span><span style="display:flex;"><span>net start 服务名（启动服务）
+</span></span><span style="display:flex;"><span>net stop 服务名（停止服务）
+</span></span></code></pre></div><h3 id="mysql-服务的登录和退出">MySQL 服务的登录和退出</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>方式一：通过mysql自带的客户端
+</span></span><span style="display:flex;"><span>只限于root用户
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>方式二：通过windows自带的客户端
+</span></span><span style="display:flex;"><span>登录：
+</span></span><span style="display:flex;"><span>mysql 【-h主机名 -P端口号 】-u用户名 -p密码
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>退出：
+</span></span><span style="display:flex;"><span>exit或ctrl+C
+</span></span></code></pre></div><h3 id="mysql-的常见命令">MySQL 的常见命令</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 查看当前所有的数据库
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">databases</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 打开指定的库
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">use</span> <span style="color:#960050;background-color:#1e0010">库名</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看当前库的所有表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">tables</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看其它库的所有表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">tables</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span>(
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">列名</span> <span style="color:#960050;background-color:#1e0010">列类型</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">列名</span> <span style="color:#960050;background-color:#1e0010">列类型，</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">。。。</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看表结构
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">desc</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看服务器的版本
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式一：登录到mysql服务端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#a6e22e">version</span>();
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式二：没有登录到mysql服务端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql <span style="color:#f92672">--</span>version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql <span style="color:#f92672">--</span>V
+</span></span></code></pre></div><h3 id="mysql-的语法规范">MySQL 的语法规范</h3>
+<ol>
+<li>
+<p>不区分大小写,但建议关键字大写，表名、列名小写</p>
+</li>
+<li>
+<p>每条命令最好用分号结尾</p>
+</li>
+<li>
+<p>每条命令根据需要，可以进行缩进 或换行</p>
+</li>
+<li>
+<p>注释</p>
+</li>
+</ol>
+<p>单行注释：#注释文字</p>
+<p>单行注释：&ndash; 注释文字</p>
+<p>多行注释：/* 注释文字 */</p>
+<h3 id="sql-的语言分类">SQL 的语言分类</h3>
+<p>DQL（Data Query Language）：数据查询语言</p>
+<p>select</p>
+<p>DML(Data Manipulate Language):数据操作语言</p>
+<p>insert 、update、delete</p>
+<p>DDL（Data Define Languge）：数据定义语言</p>
+<p>create、drop、alter</p>
+<p>TCL（Transaction Control Language）：事务控制语言</p>
+<p>commit、rollback</p>
+<h3 id="sql-的常见命令">SQL 的常见命令</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 查看所有的数据库
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">databases</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 打开指定 的库
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">use</span> <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 显示库中的所有表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">tables</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 显示指定库中的所有表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">tables</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">字段名</span> <span style="color:#960050;background-color:#1e0010">字段类型</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">字段名</span> <span style="color:#960050;background-color:#1e0010">字段类型</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看指定表的结构
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">desc</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 显示表中的所有数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span></code></pre></div><h2 id="dql-语句">DQL 语句</h2>
+<h3 id="进阶-1基础查询">进阶 1：基础查询</h3>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#960050;background-color:#1e0010">要查询的东西</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span></code></pre></div><p>类似于 Java 中 :System.out.println(要打印的东西);</p>
+<p>特点：</p>
+<ol>
+<li>
+<p>通过 select 查询完的结果 ，是一个虚拟的表格，不是真实存在</p>
+</li>
+<li>
+<p>要查询的东西 可以是常量值、可以是表达式、可以是字段、可以是函数</p>
+</li>
+</ol>
+<p>起别名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> last_name <span style="color:#66d9ef">as</span> <span style="color:#960050;background-color:#1e0010">姓</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> last_name <span style="color:#960050;background-color:#1e0010">姓</span>;
+</span></span></code></pre></div><p>去重</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> department_id <span style="color:#66d9ef">from</span> employees;
+</span></span></code></pre></div><p>+号的作用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 两者都为数值型，则做加法运算
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">+</span><span style="color:#ae81ff">90</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一个是字符型，一个是数值型，将字符型转换为数值型做加法运算
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#e6db74">&#39;100&#39;</span><span style="color:#f92672">+</span><span style="color:#ae81ff">90</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一个是字符型，一个是数值型，将字符型转换为数值型做加法运算，转换失败则置为零
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#e6db74">&#39;jhon&#39;</span><span style="color:#f92672">+</span><span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一方为null，则结果肯定为null
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">+</span><span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><h3 id="进阶-2条件查询">进阶 2：条件查询</h3>
+<p>条件查询：根据条件过滤原始表的数据，查询到想要的数据</p>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">要查询的字段</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">常量值</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">条件</span>;
+</span></span></code></pre></div><p>分类：</p>
+<p>一、条件表达式</p>
+<p>示例：salary&gt;10000</p>
+<p>条件运算符：</p>
+<blockquote>
+<p>&ldquo;&gt; &lt; &gt;= &lt;= = != &lt;&gt;</p>
+</blockquote>
+<p>二、逻辑表达式</p>
+<p>示例：salary&gt;10000 &amp;&amp; salary&lt;20000</p>
+<p>逻辑运算符：</p>
+<blockquote>
+<p>and（&amp;&amp;）:两个条件如果同时成立，结果为 true，否则为 false
+or(||)：两个条件只要有一个成立，结果为 true，否则为 false
+not(!)：如果条件成立，则 not 后为 false，否则为 true</p>
+</blockquote>
+<p>三、模糊查询</p>
+<p>示例：last_name like &lsquo;_a%&rsquo;</p>
+<blockquote>
+<p>like、between and、in、is null</p>
+</blockquote>
+<h3 id="进阶-3排序查询">进阶 3：排序查询</h3>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">要查询的东西</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">条件</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#960050;background-color:#1e0010">排序的字段</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">函数</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">别名</span> <span style="color:#960050;background-color:#1e0010">【</span><span style="color:#66d9ef">asc</span><span style="color:#f92672">|</span><span style="color:#66d9ef">desc</span><span style="color:#960050;background-color:#1e0010">】</span>
+</span></span></code></pre></div><h3 id="进阶-4常见函数">进阶 4：常见函数</h3>
+<p>一、单行函数</p>
+<ol>
+<li>
+<p>字符函数</p>
+<p>concat 拼接</p>
+<p>substr 截取子串</p>
+<p>upper 转换成大写</p>
+<p>lower 转换成小写</p>
+<p>trim 去前后指定的空格和字符</p>
+<p>ltrim 去左边空格</p>
+<p>rtrim 去右边空格</p>
+<p>replace 替换</p>
+<p>lpad 左填充</p>
+<p>rpad 右填充</p>
+<p>instr 返回子串第一次出现的索引</p>
+<p>length 获取字节个数</p>
+</li>
+<li>
+<p>数学函数</p>
+<p>round 四舍五入</p>
+<p>rand 随机数</p>
+<p>floor 向下取整</p>
+<p>ceil 向上取整</p>
+<p>mod 取余</p>
+<p>truncate 截断</p>
+</li>
+<li>
+<p>日期函数</p>
+<p>now 当前系统日期+时间</p>
+<p>curdate 当前系统日期</p>
+<p>curtime 当前系统时间</p>
+<p>str_to_date 将字符转换成日期</p>
+<p>date_format 将日期转换成字符</p>
+</li>
+<li>
+<p>流程控制函数</p>
+<p>if 处理双分支</p>
+<p>case 语句 处理多分支,情况 1：处理等值判断,情况 2：处理条件判断</p>
+</li>
+<li>
+<p>其他函数</p>
+<p>version 版本</p>
+<p>database 当前库</p>
+<p>user 当前连接用户</p>
+</li>
+</ol>
+<p>二、分组函数</p>
+<p>sum 求和</p>
+<p>max 最大值</p>
+<p>min 最小值</p>
+<p>avg 平均值</p>
+<p>count 计数</p>
+<p>特点：</p>
+<ol>
+<li>
+<p>以上五个分组函数都忽略 null 值，除了 count(*)</p>
+</li>
+<li>
+<p>sum 和 avg 一般用于处理数值型
+max、min、count 可以处理任何数据类型</p>
+</li>
+<li>
+<p>都可以搭配 distinct 使用，用于统计去重后的结果</p>
+</li>
+<li>
+<p>count 的参数可以支持：
+字段、<em>、常量值，一般放 1
+建议使用 count(</em>)</p>
+</li>
+</ol>
+<h3 id="进阶-5分组查询">进阶 5：分组查询</h3>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">查询的字段，分组函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> <span style="color:#960050;background-color:#1e0010">分组的字段</span>
+</span></span></code></pre></div><p>特点：</p>
+<ol>
+<li>
+<p>可以按单个字段分组</p>
+</li>
+<li>
+<p>和分组函数一同查询的字段最好是分组后的字段</p>
+</li>
+<li>
+<p>分组筛选</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>针对的表</th>
+<th>位置</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分组前筛选</td>
+<td>原始表</td>
+<td>group by 的前面</td>
+<td>where</td>
+</tr>
+<tr>
+<td>分组后筛选</td>
+<td>分组后的结果集</td>
+<td>group by 的后面</td>
+<td>having</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>可以按多个字段分组，字段之间用逗号隔开</p>
+</li>
+<li>
+<p>可以支持排序</p>
+</li>
+<li>
+<p>having 后可以支持别名</p>
+</li>
+<li>
+<p>分组函数做条件肯定放在 having 子句中</p>
+</li>
+<li>
+<p>能用分组前筛选的，就优先使用分组前筛选</p>
+</li>
+</ol>
+<h3 id="进阶-6多表连接查询">进阶 6：多表连接查询</h3>
+<p>笛卡尔乘积：如果连接条件省略或无效则会出现</p>
+<p>解决办法：添加上连接条件</p>
+<p>一、分类</p>
+<p>按年代分类：</p>
+<ol>
+<li>
+<p>sql192 标准：内连接</p>
+</li>
+<li>
+<p>sql199 标准【推荐】：内连接+外链接（左外、右外）+交叉连接</p>
+</li>
+</ol>
+<p>按功能分类</p>
+<ol>
+<li>
+<p>内连接</p>
+<p>等值连接、非等值连接、自连接</p>
+</li>
+<li>
+<p>外连接</p>
+<p>左外连接、右外连接、全外连接</p>
+</li>
+<li>
+<p>交叉连接</p>
+</li>
+</ol>
+<p>二、sql192 标准</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 等值连接
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">1</span>.<span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#ae81ff">1</span>, <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">2</span>.<span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">1</span>,<span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">1</span>.<span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">2</span>.<span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 非等值连接
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">类比等值连接</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 自连接
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> e.last_name,m.last_name
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> employees e,employees m
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> e.<span style="color:#f92672">`</span>manager_id<span style="color:#f92672">`=</span>m.<span style="color:#f92672">`</span>employee_id<span style="color:#f92672">`</span>;
+</span></span></code></pre></div><p>三、sql199 标准</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">字段，</span>...
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">inner</span><span style="color:#f92672">|</span><span style="color:#66d9ef">left</span> <span style="color:#66d9ef">outer</span><span style="color:#f92672">|</span><span style="color:#66d9ef">right</span> <span style="color:#66d9ef">outer</span><span style="color:#f92672">|</span><span style="color:#66d9ef">cross</span>]<span style="color:#66d9ef">join</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">on</span>  <span style="color:#960050;background-color:#1e0010">连接条件</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">inner</span><span style="color:#f92672">|</span><span style="color:#66d9ef">left</span> <span style="color:#66d9ef">outer</span><span style="color:#f92672">|</span><span style="color:#66d9ef">right</span> <span style="color:#66d9ef">outer</span><span style="color:#f92672">|</span><span style="color:#66d9ef">cross</span>]<span style="color:#66d9ef">join</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">on</span>  <span style="color:#960050;background-color:#1e0010">连接条件</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">筛选条件</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> <span style="color:#960050;background-color:#1e0010">分组字段</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">having</span> <span style="color:#960050;background-color:#1e0010">分组后的筛选条件</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#960050;background-color:#1e0010">排序的字段或表达式</span>]
+</span></span></code></pre></div><p>好处：语句上，连接条件和筛选条件实现了分离，简洁明了！</p>
+<h3 id="进阶-7子查询">进阶 7：子查询</h3>
+<p>含义：</p>
+<blockquote>
+<p>一条查询语句中又嵌套了另一条完整的 select 语句，其中被嵌套的 select 语句，称为子查询或内查询</p>
+<p>在外面的查询语句，称为主查询或外查询</p>
+</blockquote>
+<p>特点：</p>
+<ol>
+<li>
+<p>子查询都放在小括号内</p>
+</li>
+<li>
+<p>子查询可以放在 from 后面、select 后面、where 后面、having 后面，但一般放在条件的右侧</p>
+</li>
+<li>
+<p>子查询优先于主查询执行，主查询使用了子查询的执行结果</p>
+</li>
+<li>
+<p>子查询根据查询结果的行数不同分为以下两类：</p>
+<p>单行子查询</p>
+<p>结果集只有一行</p>
+<p>一般搭配单行操作符使用：&gt; &lt; = &lt;&gt; &gt;= &lt;=</p>
+<p>非法使用子查询的情况：</p>
+<ol>
+<li>子查询的结果为一组值</li>
+<li>子查询的结果为空</li>
+</ol>
+<p>多行子查询</p>
+<p>结果集有多行</p>
+<p>一般搭配多行操作符使用：any、all、in、not in</p>
+<p>in： 属于子查询结果中的任意一个就行</p>
+<p>any 和 all 往往可以用其他查询代替</p>
+</li>
+</ol>
+<h3 id="进阶-8分页查询">进阶 8：分页查询</h3>
+<p>应用场景：</p>
+<p>web 项目中需要根据用户的需求提交对应的分页查询的 sql 语句</p>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">表达式</span>,...
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">条件</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> <span style="color:#960050;background-color:#1e0010">分组字段</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">having</span> <span style="color:#960050;background-color:#1e0010">条件</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#960050;background-color:#1e0010">排序的字段</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">limit</span> [<span style="color:#960050;background-color:#1e0010">起始的条目索引</span>,]<span style="color:#960050;background-color:#1e0010">条目数</span>;
+</span></span></code></pre></div><p>特点：</p>
+<ol>
+<li>
+<p>起始条目索引从 0 开始</p>
+</li>
+<li>
+<p>limit 子句放在查询语句的最后</p>
+</li>
+<li>
+<p>公式：select * from 表 limit （page-1）*sizePerPage,sizePerPage</p>
+<p>假如:</p>
+<p>每页显示条目数 sizePerPage</p>
+<p>要显示的页数 page</p>
+</li>
+</ol>
+<h3 id="进阶-9联合查询">进阶 9：联合查询</h3>
+<p>引入：</p>
+<p>union 联合、合并</p>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">常量</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">函数</span> [<span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span>] [<span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">条件</span>] <span style="color:#66d9ef">union</span> [<span style="color:#66d9ef">all</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">常量</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">函数</span> [<span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span>] [<span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">条件</span>] <span style="color:#66d9ef">union</span> [<span style="color:#66d9ef">all</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">常量</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">函数</span> [<span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span>] [<span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">条件</span>] <span style="color:#66d9ef">union</span>  [<span style="color:#66d9ef">all</span>]
+</span></span><span style="display:flex;"><span>.....
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">常量</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">函数</span> [<span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span>] [<span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">条件</span>]
+</span></span></code></pre></div><p>特点：</p>
+<ol>
+<li>
+<p>多条查询语句的查询的列数必须是一致的</p>
+</li>
+<li>
+<p>多条查询语句的查询的列的类型几乎相同</p>
+</li>
+<li>
+<p>union 代表去重，union all 代表不去重</p>
+</li>
+</ol>
+<h2 id="dml-语句">DML 语句</h2>
+<h3 id="插入">插入</h3>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 方式一
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#960050;background-color:#1e0010">表名</span>(<span style="color:#960050;background-color:#1e0010">字段名，</span>...)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span>(<span style="color:#960050;background-color:#1e0010">值</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">，</span>...);
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式二
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#960050;background-color:#1e0010">表名</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> <span style="color:#960050;background-color:#1e0010">列名</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>,<span style="color:#960050;background-color:#1e0010">列名</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>,...;
+</span></span></code></pre></div><p>特点：</p>
+<ol>
+<li>
+<p>字段类型和值类型一致或兼容，而且一一对应</p>
+</li>
+<li>
+<p>可以为空的字段，可以不用插入值，或用 null 填充</p>
+</li>
+<li>
+<p>不可以为空的字段，必须插入值</p>
+</li>
+<li>
+<p>字段个数和值的个数必须一致</p>
+</li>
+<li>
+<p>字段可以省略，但默认所有字段，并且顺序和表中的存储顺序一致</p>
+</li>
+</ol>
+<h3 id="修改">修改</h3>
+<p>修改单表语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">update</span> <span style="color:#960050;background-color:#1e0010">表名</span> <span style="color:#66d9ef">set</span> <span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">新值</span>,<span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">新值</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">条件</span>]
+</span></span></code></pre></div><p>修改多表语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">update</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">1</span> <span style="color:#960050;background-color:#1e0010">别名</span><span style="color:#ae81ff">1</span>,<span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">2</span> <span style="color:#960050;background-color:#1e0010">别名</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> <span style="color:#960050;background-color:#1e0010">字段</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">新值，字段</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">新值</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">连接条件</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">and</span> <span style="color:#960050;background-color:#1e0010">筛选条件</span>
+</span></span></code></pre></div><p>可以理解为把 select 改成 set 并变换位置</p>
+<h3 id="删除">删除</h3>
+<p>方式一：delete 语句</p>
+<p>单表的删除：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表名</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">筛选条件</span>]
+</span></span></code></pre></div><p>多表的删除：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> <span style="color:#960050;background-color:#1e0010">别名</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">，别名</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">表</span><span style="color:#ae81ff">1</span> <span style="color:#960050;background-color:#1e0010">别名</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">，表</span><span style="color:#ae81ff">2</span> <span style="color:#960050;background-color:#1e0010">别名</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> <span style="color:#960050;background-color:#1e0010">连接条件</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">and</span> <span style="color:#960050;background-color:#1e0010">筛选条件</span>;
+</span></span></code></pre></div><p>方式二：truncate 语句</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>truncate <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span>
+</span></span></code></pre></div><p>两种方式的区别【面试题】</p>
+<ol>
+<li>
+<p>truncate 不能加 where 条件，而 delete 可以加 where 条件</p>
+</li>
+<li>
+<p>truncate 的效率高一丢丢</p>
+</li>
+<li>
+<p>truncate 删除带自增长的列的表后，如果再插入数据，数据从 1 开始
+delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始</p>
+</li>
+<li>
+<p>truncate 删除不能回滚，delete 删除可以回滚</p>
+</li>
+</ol>
+<h2 id="ddl-语句">DDL 语句</h2>
+<h3 id="库和表的管理">库和表的管理</h3>
+<p>库的管理：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 创建库
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> [<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">exists</span>] <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 删除库
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">database</span> [<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">exists</span>] <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改字符集
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名</span> <span style="color:#66d9ef">character</span> <span style="color:#66d9ef">set</span> utf8;
+</span></span></code></pre></div><p>表的管理：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 创建表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">exists</span> <span style="color:#960050;background-color:#1e0010">表名</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">字段名</span> <span style="color:#960050;background-color:#1e0010">字段的类型</span>[(<span style="color:#960050;background-color:#1e0010">长度</span>) <span style="color:#960050;background-color:#1e0010">约束</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">字段名</span> <span style="color:#960050;background-color:#1e0010">字段的类型</span>[(<span style="color:#960050;background-color:#1e0010">长度</span>) <span style="color:#960050;background-color:#1e0010">约束</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">字段名</span> <span style="color:#960050;background-color:#1e0010">字段的类型</span>[(<span style="color:#960050;background-color:#1e0010">长度</span>) <span style="color:#960050;background-color:#1e0010">约束</span>],
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">字段名</span> <span style="color:#960050;background-color:#1e0010">字段的类型</span>[(<span style="color:#960050;background-color:#1e0010">长度</span>) <span style="color:#960050;background-color:#1e0010">约束</span>]
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改表名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">原表名</span> <span style="color:#66d9ef">rename</span> [<span style="color:#66d9ef">to</span>] <span style="color:#960050;background-color:#1e0010">新表名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改表内字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># add    添加字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span> <span style="color:#66d9ef">add</span>   <span style="color:#66d9ef">column</span> <span style="color:#960050;background-color:#1e0010">字段名</span> <span style="color:#960050;background-color:#1e0010">字段类型</span> [<span style="color:#960050;background-color:#1e0010">约束</span>];
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># modify  修改字段类型和约束
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span> modify <span style="color:#66d9ef">column</span> <span style="color:#960050;background-color:#1e0010">字段名</span> [<span style="color:#960050;background-color:#1e0010">字段类型</span>] [<span style="color:#960050;background-color:#1e0010">约束</span>];
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># drop   删除字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span> <span style="color:#66d9ef">drop</span>  <span style="color:#66d9ef">column</span> <span style="color:#960050;background-color:#1e0010">字段名</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># change  修改字段名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span> <span style="color:#66d9ef">change</span> <span style="color:#66d9ef">column</span> <span style="color:#960050;background-color:#1e0010">原字段名</span> <span style="color:#960050;background-color:#1e0010">新字段名</span> <span style="color:#960050;background-color:#1e0010">字段类型</span> [<span style="color:#960050;background-color:#1e0010">约束</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 删除表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> [<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">exists</span>] studentinfo;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 复制表结构
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">新表名</span> <span style="color:#66d9ef">like</span> <span style="color:#960050;background-color:#1e0010">旧表名</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 复制表结构和内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">新表名</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">旧表名</span>;
+</span></span></code></pre></div><h3 id="常见类型">常见类型</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>数值型：
+</span></span><span style="display:flex;"><span>    整型：Tinyint、Smallint、Mediumint、Int/integer、Bigint
+</span></span><span style="display:flex;"><span>    小数：
+</span></span><span style="display:flex;"><span>        浮点型：float、double
+</span></span><span style="display:flex;"><span>        定点型：dec、decimal
+</span></span><span style="display:flex;"><span>字符型：
+</span></span><span style="display:flex;"><span>    较短的文本：char、varchar
+</span></span><span style="display:flex;"><span>    较长的文本：text、blob
+</span></span><span style="display:flex;"><span>日期型：
+</span></span><span style="display:flex;"><span>    date、datetime、timestamp、time、year
+</span></span></code></pre></div><h3 id="常见约束">常见约束</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>    <span style="color:#75715e"># 非空约束：用于保证该字段不能为空
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span>     <span style="color:#75715e"># 默认约束：用于保证该字段有默认值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">unique</span>      <span style="color:#75715e">#唯一约束：用于保证该字段的值具有唯一性且可空
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">check</span>       <span style="color:#75715e"># 检查约束：mysql不支持
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span>  <span style="color:#75715e"># 主键约束：用于保证该字段的值具有唯一性且非空
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">foreign</span> <span style="color:#66d9ef">key</span>  <span style="color:#75715e"># 外键约束：用于限制两个表的关系，该字段必须来自于主表的关联字段的值
+</span></span></span></code></pre></div><p>列级约束</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 直接在字段名和类型后面追加即可
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 只支持：默认、非空、主键、唯一
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">字段名</span> <span style="color:#960050;background-color:#1e0010">字段的类型</span>[(<span style="color:#960050;background-color:#1e0010">长度</span>) <span style="color:#960050;background-color:#1e0010">约束</span>]
+</span></span></code></pre></div><p>表级约束</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 在各个字段最下面，主要写外键约束
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[<span style="color:#66d9ef">constraint</span> <span style="color:#960050;background-color:#1e0010">约束名</span>] <span style="color:#960050;background-color:#1e0010">约束类型</span>(<span style="color:#960050;background-color:#1e0010">字段名</span>);
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">constraint</span> <span style="color:#960050;background-color:#1e0010">约束名</span>] <span style="color:#66d9ef">foreign</span> <span style="color:#66d9ef">key</span>(<span style="color:#960050;background-color:#1e0010">字段名</span>) <span style="color:#66d9ef">references</span> <span style="color:#960050;background-color:#1e0010">主表名</span>(<span style="color:#960050;background-color:#1e0010">外键字段名</span>);
+</span></span></code></pre></div><h3 id="标识列">标识列</h3>
+<p>又称为自增长列</p>
+<p>含义：可以不用手动地插入值，系统提供默认的序列值</p>
+<p>关键字：auto_increment</p>
+<p>特点：</p>
+<ol>
+<li>
+<p>标识列必须和主键搭配吗？不一定，但要求是一个 key</p>
+</li>
+<li>
+<p>一个表中最多一个标识列</p>
+</li>
+<li>
+<p>标识列只能是数字型</p>
+</li>
+<li>
+<p>标识列可以通过 set auto_increment_increment=3;设置步长，可以通过手动插入值设置起始值</p>
+</li>
+</ol>
+<h2 id="事务">事务</h2>
+<blockquote>
+<p>通过一组逻辑操作单元（一组 DML——sql 语句），将数据从一种状态切换到另外一种状态</p>
+</blockquote>
+<h3 id="特点">特点</h3>
+<p>（ACID）</p>
+<ol>
+<li>
+<p>原子性：要么都执行，要么都回滚</p>
+</li>
+<li>
+<p>一致性：保证数据的状态操作前和操作后保持一致</p>
+</li>
+<li>
+<p>隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰</p>
+</li>
+<li>
+<p>持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改</p>
+</li>
+</ol>
+<p>相关步骤：</p>
+<ol>
+<li>开启事务</li>
+<li>编写事务的一组逻辑操作单元（多条 sql 语句）</li>
+<li>提交事务或回滚事务</li>
+</ol>
+<h3 id="事务的分类">事务的分类</h3>
+<p>隐式事务，没有明显的开启和结束事务的标志</p>
+<p>比如 insert、update、delete 语句本身就是一个事务</p>
+<p>显式事务，具有明显的开启和结束事务的标志</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 1、开启事务
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> autocommit<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>start transaction;<span style="color:#75715e"># 可选
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 取消自动提交事务的功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2、编写事务的一组逻辑操作单元（多条sql语句）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">insert</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">update</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#3、提交事务或回滚事务
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>commit;
+</span></span><span style="display:flex;"><span>rollback;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 其他
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>savepoint  <span style="color:#75715e"># 断点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>commit <span style="color:#66d9ef">to</span> <span style="color:#75715e"># 断点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>rollback <span style="color:#66d9ef">to</span> <span style="color:#75715e"># 断点
+</span></span></span></code></pre></div><h3 id="事务的隔离级别">事务的隔离级别</h3>
+<p>事务并发问题如何发生？</p>
+<ul>
+<li>当多个事务同时操作同一个数据库的相同数据时</li>
+</ul>
+<p>事务的并发问题有哪些？</p>
+<ul>
+<li>脏读：一个事务读取到了另外一个事务未提交的数据</li>
+<li>不可重复读：同一个事务中，多次读取到的数据不一致</li>
+<li>幻读：一个事务读取数据时，另外一个事务进行更新，导致第一个事务读取到了没有更新的数据</li>
+</ul>
+<p>如何避免事务的并发问题？</p>
+<ul>
+<li>通过设置事务的隔离级别
+<ol>
+<li>read uncommitted</li>
+<li>read committed 可以避免脏读</li>
+<li>repeatale read 可以避免脏读、不可重复读和一部分幻读</li>
+<li>serializable 可以避免脏读、不可重复读和幻读</li>
+</ol>
+</li>
+</ul>
+<p>设置隔离级别：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">set</span> session<span style="color:#f92672">|</span>global transaction isolation level <span style="color:#960050;background-color:#1e0010">隔离级别名</span>;
+</span></span></code></pre></div><p>查看隔离级别：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">@@</span>tx_isolation;
+</span></span></code></pre></div><h2 id="视图">视图</h2>
+<p>含义：<strong>理解成一张虚拟的表</strong></p>
+<p>视图和表的区别：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">使用方式</th>
+<th style="text-align:center">占用物理空间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">视图</td>
+<td style="text-align:center">完全相同</td>
+<td style="text-align:center">不占用，仅仅保存的是 sql 逻辑</td>
+</tr>
+<tr>
+<td style="text-align:center">表</td>
+<td style="text-align:center">完全相同</td>
+<td style="text-align:center">占用</td>
+</tr>
+</tbody>
+</table>
+<p>视图的好处：</p>
+<ol>
+<li>
+<p>sql 语句提高重用性，效率高</p>
+</li>
+<li>
+<p>和表实现了分离，提高了安全性</p>
+</li>
+</ol>
+<h3 id="视图的创建">视图的创建</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 语法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> VIEW  <span style="color:#960050;background-color:#1e0010">视图名</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">查询语句</span>;
+</span></span></code></pre></div><h3 id="视图的更新">视图的更新</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 方式一
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> VIEW test_v7
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> last_name <span style="color:#66d9ef">FROM</span> employees
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> employee_id<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">100</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式二
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> VIEW test_v7
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> employee_id <span style="color:#66d9ef">FROM</span> employees;
+</span></span></code></pre></div><h3 id="视图的删除">视图的删除</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> VIEW test_v1,test_v2,test_v3;
+</span></span></code></pre></div><h3 id="视图结构的查看">视图结构的查看</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">DESC</span> test_v7;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SHOW</span> <span style="color:#66d9ef">CREATE</span> VIEW test_v7;
+</span></span></code></pre></div><h3 id="视图数据的增删改查">视图数据的增删改查</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 查看视图的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> my_v4;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> my_v1 <span style="color:#66d9ef">WHERE</span> last_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Partners&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 插入视图的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#a6e22e">my_v4</span>(last_name,department_id) <span style="color:#66d9ef">VALUES</span>(<span style="color:#e6db74">&#39;虚竹&#39;</span>,<span style="color:#ae81ff">90</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改视图的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">UPDATE</span> my_v4 <span style="color:#66d9ef">SET</span> last_name <span style="color:#f92672">=</span><span style="color:#e6db74">&#39;梦姑&#39;</span> <span style="color:#66d9ef">WHERE</span> last_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;虚竹&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 删除视图的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> my_v4;
+</span></span></code></pre></div><h3 id="某些视图不能更新">某些视图不能更新</h3>
+<ol>
+<li>
+<p>包含以下关键字的 sql 语句：分组函数、distinct、group by、having、union 或者 union all</p>
+</li>
+<li>
+<p>常量视图</p>
+</li>
+<li>
+<p>Select 中包含子查询</p>
+</li>
+<li>
+<p>join</p>
+</li>
+<li>
+<p>from 一个不能更新的视图</p>
+</li>
+<li>
+<p>where 子句的子查询引用了 from 子句中的表</p>
+</li>
+</ol>
+<h2 id="存储">存储</h2>
+<p>含义：一组经过预先编译的 sql 语句的集合
+好处：</p>
+<p>1、提高了 sql 语句的重用性，减少了开发程序员的压力
+2、提高了效率
+3、减少了传输次数</p>
+<p>分类：</p>
+<ol>
+<li>
+<p>无返回无参</p>
+</li>
+<li>
+<p>仅仅带 in 类型，无返回有参</p>
+</li>
+<li>
+<p>仅仅带 out 类型，有返回无参</p>
+</li>
+<li>
+<p>既带 in 又带 out，有返回有参</p>
+</li>
+<li>
+<p>带 inout，有返回有参</p>
+</li>
+</ol>
+<p>注意：in、out、inout 都可以在一个存储过程中带多个</p>
+<h3 id="创建存储过程">创建存储过程</h3>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">procedure</span> <span style="color:#960050;background-color:#1e0010">存储过程名</span>(<span style="color:#66d9ef">in</span><span style="color:#f92672">|</span><span style="color:#66d9ef">out</span><span style="color:#f92672">|</span><span style="color:#66d9ef">inout</span> <span style="color:#960050;background-color:#1e0010">参数名</span>  <span style="color:#960050;background-color:#1e0010">参数类型</span>,...)
+</span></span><span style="display:flex;"><span>begin
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">存储过程体</span>
+</span></span><span style="display:flex;"><span>end
+</span></span></code></pre></div><p>类似于方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>修饰符 返回类型 <span style="color:#a6e22e">方法名</span>(参数类型 参数名,...){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    方法体;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>注意</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 需要设置新的结束标记
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>delimiter <span style="color:#960050;background-color:#1e0010">新的结束标记</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 示例：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>delimiter <span style="color:#960050;background-color:#1e0010">$</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> <span style="color:#960050;background-color:#1e0010">存储过程名</span>(<span style="color:#66d9ef">IN</span><span style="color:#f92672">|</span><span style="color:#66d9ef">OUT</span><span style="color:#f92672">|</span><span style="color:#66d9ef">INOUT</span> <span style="color:#960050;background-color:#1e0010">参数名</span>  <span style="color:#960050;background-color:#1e0010">参数类型</span>,...)
+</span></span><span style="display:flex;"><span>BEGIN
+</span></span><span style="display:flex;"><span>    sql语句1;
+</span></span><span style="display:flex;"><span>    sql语句2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>END <span style="color:#960050;background-color:#1e0010">$</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 存储过程体中可以有多条sql语句，如果仅仅一条sql语句，则可以省略begin end
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 参数前面的符号的意思
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">in</span>:<span style="color:#960050;background-color:#1e0010">该参数只能作为输入</span> <span style="color:#960050;background-color:#1e0010">（该参数不能做返回值）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">out</span><span style="color:#960050;background-color:#1e0010">：该参数只能作为输出（该参数只能做返回值）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inout</span><span style="color:#960050;background-color:#1e0010">：既能做输入又能做输出</span>
+</span></span></code></pre></div><h3 id="调用存储过程">调用存储过程</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">call</span> <span style="color:#960050;background-color:#1e0010">存储过程名</span>(<span style="color:#960050;background-color:#1e0010">实参列表</span>)
+</span></span></code></pre></div><h2 id="函数">函数</h2>
+<h3 id="创建函数">创建函数</h3>
+<p>学过的函数：LENGTH、SUBSTR、CONCAT 等
+语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> FUNCTION <span style="color:#960050;background-color:#1e0010">函数名</span>(<span style="color:#960050;background-color:#1e0010">参数名</span> <span style="color:#960050;background-color:#1e0010">参数类型</span>,...) RETURNS <span style="color:#960050;background-color:#1e0010">返回类型</span>
+</span></span><span style="display:flex;"><span>BEGIN
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">函数体</span>
+</span></span><span style="display:flex;"><span>END
+</span></span></code></pre></div><h3 id="调用函数">调用函数</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#960050;background-color:#1e0010">函数名（实参列表）</span>
+</span></span></code></pre></div><h3 id="函数和存储过程的区别">函数和存储过程的区别</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">关键字</th>
+<th style="text-align:center">调用语法</th>
+<th>返回值</th>
+<th style="text-align:center">应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">函数</td>
+<td style="text-align:center">FUNCTION</td>
+<td style="text-align:center">SELECT</td>
+<td>函数() 只能是一个</td>
+<td style="text-align:center">一般用于查询结果为一个值并返回时，当有返回值而且仅仅一个</td>
+</tr>
+<tr>
+<td style="text-align:center">存储过程</td>
+<td style="text-align:center">PROCEDURE</td>
+<td style="text-align:center">CALL</td>
+<td>存储过程() 可以有 0 个或多个</td>
+<td style="text-align:center">一般用于更新</td>
+</tr>
+</tbody>
+</table>
+<h2 id="流程控制结构">流程控制结构</h2>
+<h3 id="系统变量">系统变量</h3>
+<p>一、全局变量</p>
+<p>作用域：针对于所有会话（连接）有效，但不能跨重启</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 查看所有全局变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SHOW</span> GLOBAL VARIABLES;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看满足条件的部分系统变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SHOW</span> GLOBAL VARIABLES <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%char%&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看指定的系统变量的值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>global.autocommit;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 为某个系统变量赋值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@@</span>global.autocommit<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> GLOBAL autocommit<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>二、会话变量</p>
+<p>作用域：针对于当前会话（连接）有效</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 查看所有会话变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SHOW</span> SESSION VARIABLES;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看满足条件的部分会话变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SHOW</span> SESSION VARIABLES <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%char%&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看指定的会话变量的值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>autocommit;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>session.tx_isolation;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 为某个会话变量赋值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@@</span>session.tx_isolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;read-uncommitted&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> SESSION tx_isolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;read-committed&#39;</span>;
+</span></span></code></pre></div><h3 id="自定义变量">自定义变量</h3>
+<p>一、用户变量</p>
+<p>声明并初始化：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#960050;background-color:#1e0010">变量名</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#960050;background-color:#1e0010">变量名</span>:<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span><span style="color:#960050;background-color:#1e0010">变量名</span>:<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span></code></pre></div><p>赋值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">方式一：一般用于赋简单的值</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#960050;background-color:#1e0010">变量名</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#960050;background-color:#1e0010">变量名</span>:<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#960050;background-color:#1e0010">变量名</span>:<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">方式二：一般用于赋表</span> <span style="color:#960050;background-color:#1e0010">中的字段值</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#960050;background-color:#1e0010">字段名或表达式</span> <span style="color:#66d9ef">INTO</span> <span style="color:#960050;background-color:#1e0010">变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#960050;background-color:#1e0010">表</span>;
+</span></span></code></pre></div><p>使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">@</span><span style="color:#960050;background-color:#1e0010">变量名</span>;
+</span></span></code></pre></div><p>二、局部变量</p>
+<p>声明：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">declare</span> <span style="color:#960050;background-color:#1e0010">变量名</span> <span style="color:#960050;background-color:#1e0010">类型</span> [<span style="color:#66d9ef">default</span> <span style="color:#960050;background-color:#1e0010">值</span>];
+</span></span></code></pre></div><p>赋值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">方式一：一般用于赋简单的值</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#960050;background-color:#1e0010">变量名</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#960050;background-color:#1e0010">变量名</span>:<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#960050;background-color:#1e0010">变量名</span>:<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">值</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">方式二：一般用于赋表</span> <span style="color:#960050;background-color:#1e0010">中的字段值</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#960050;background-color:#1e0010">字段名或表达式</span> <span style="color:#66d9ef">INTO</span> <span style="color:#960050;background-color:#1e0010">变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#960050;background-color:#1e0010">表</span>;
+</span></span></code></pre></div><p>使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">变量名</span>
+</span></span></code></pre></div><p><strong>二者的区别：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>作用域</th>
+<th>定义位置</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户变量</td>
+<td>当前会话</td>
+<td>会话的任何地方</td>
+<td>加@符号，不用指定类型</td>
+</tr>
+<tr>
+<td>局部变量</td>
+<td>定义它的 BEGIN END 中</td>
+<td>BEGIN END 的第一句话</td>
+<td>一般不用加@,需要指定类型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分支">分支</h3>
+<p>一、if 函数</p>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#960050;background-color:#1e0010">条件</span>,<span style="color:#960050;background-color:#1e0010">值</span><span style="color:#ae81ff">1</span>,<span style="color:#960050;background-color:#1e0010">值</span><span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><p>特点：可以用在任何位置</p>
+<p>二、case 语句</p>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e"># 情况一：类似于switch
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># (如果是语句，需要加分号)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># （如果是放在begin end中需要加上case，如果放在select后面不需要）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">case</span> <span style="color:#960050;background-color:#1e0010">表达式</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">when</span> <span style="color:#960050;background-color:#1e0010">值</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">结果</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">或语句</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">when</span> <span style="color:#960050;background-color:#1e0010">值</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">结果</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">或语句</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#960050;background-color:#1e0010">结果</span>n或语句n
+</span></span><span style="display:flex;"><span>end [<span style="color:#66d9ef">case</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 情况二：类似于多重if
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># (如果是语句，需要加分号)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># （如果是放在begin end中需要加上case，如果放在select后面不需要）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">case</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">when</span> <span style="color:#960050;background-color:#1e0010">条件</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">结果</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">或语句</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">when</span> <span style="color:#960050;background-color:#1e0010">条件</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">结果</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">或语句</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#960050;background-color:#1e0010">结果</span>n或语句n
+</span></span><span style="display:flex;"><span>end [<span style="color:#66d9ef">case</span>]
+</span></span></code></pre></div><p>特点：可以用在任何位置</p>
+<p>三、if elseif 语句</p>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#960050;background-color:#1e0010">情况</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">语句</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elseif</span> <span style="color:#960050;background-color:#1e0010">情况</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">语句</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#960050;background-color:#1e0010">语句</span>n;
+</span></span><span style="display:flex;"><span>end <span style="color:#66d9ef">if</span>;
+</span></span></code></pre></div><p>特点：只能用在 begin end 中！</p>
+<p><strong>三者比较：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>应用场合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>if 函数</td>
+<td>简单双分支</td>
+</tr>
+<tr>
+<td>case 结构</td>
+<td>等值判断 的多分支</td>
+</tr>
+<tr>
+<td>if 结构</td>
+<td>区间判断 的多分支</td>
+</tr>
+</tbody>
+</table>
+<h3 id="循环">循环</h3>
+<p>语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">标签：</span>] <span style="color:#66d9ef">WHILE</span> <span style="color:#960050;background-color:#1e0010">循环条件</span> DO
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">循环体</span>
+</span></span><span style="display:flex;"><span>END <span style="color:#66d9ef">WHILE</span> [<span style="color:#960050;background-color:#1e0010">标签</span>];
+</span></span></code></pre></div><p>特点：</p>
+<ol>
+<li>
+<p>只能放在 BEGIN END 里面</p>
+</li>
+<li>
+<p>如果要搭配 leave 跳转语句，需要使用标签，否则可以不用标签</p>
+</li>
+<li>
+<p>leave 类似于 java 中的 break 语句，跳出所在循环！！！</p>
+</li>
+</ol>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/mysql"
+      >MySQL</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93"
+      >数据库</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/shortest-path-problem/"
+      ><span class="mr-1.5">←</span><span>最短路问题</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/using-javascript-to-achieve-typewriter-effect/"
+      ><span>使用 JavaScript 实现打字机效果</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

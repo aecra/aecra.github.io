@@ -1,0 +1,534 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>JavaScript 中的异步编程 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="什么是异步编程 在谈论异步编程概念之提前，先了解什么是同步编程。同步编程是指程序的执行是按着代码顺序执行的，若一段代码因任何原因而卡住（htt" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="JavaScript 中的异步编程">
+<meta itemprop="description" content="异步编程是反人类的，但不学习是不行的，本文介绍了 JavaScript 中实现异步编程的常见方式。"><meta itemprop="datePublished" content="2021-03-05T20:54:11+00:00" />
+<meta itemprop="dateModified" content="2021-03-05T20:54:11+00:00" />
+<meta itemprop="wordCount" content="3943">
+<meta itemprop="keywords" content="javascript," />
+  
+  <meta property="og:title" content="JavaScript 中的异步编程" />
+<meta property="og:description" content="异步编程是反人类的，但不学习是不行的，本文介绍了 JavaScript 中实现异步编程的常见方式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/asynchronous-programming-in-javascript/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-05T20:54:11+00:00" />
+<meta property="article:modified_time" content="2021-03-05T20:54:11+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="JavaScript 中的异步编程"/>
+<meta name="twitter:description" content="异步编程是反人类的，但不学习是不行的，本文介绍了 JavaScript 中实现异步编程的常见方式。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/asynchronous-programming-in-javascript/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">JavaScript 中的异步编程</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 5, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="什么是异步编程">什么是异步编程</h2>
+<p>在谈论异步编程概念之提前，先了解什么是同步编程。同步编程是指程序的执行是按着代码顺序执行的，若一段代码因任何原因而卡住（http 请求或死循环）时，程序将不再往下执行，只有等前面的事件执行完之后，后面的事件才会执行。</p>
+<p>异步编程是指在某段耗时较长的代码执行完之前就将代码的执行权交由下面的代码执行，当耗时长的代码执行完之后再重新拿回代码的执行权继续执行。</p>
+<h2 id="javascript-中的异步编程问题">JavaScript 中的异步编程问题</h2>
+<h3 id="浏览器的多线程">浏览器的多线程</h3>
+<p>在浏览器中，每一个 tab 页面都是一个独立的进程，在该进程中同时存在多个线程，每个进程一般有以下几个常驻线程：</p>
+<ul>
+<li>GUI 渲染线程</li>
+<li>JavaScript 引擎线程</li>
+<li>事件触发线程</li>
+<li>定时触发器线程</li>
+<li>异步 http 请求线程</li>
+</ul>
+<h4 id="gui-渲染线程">GUI 渲染线程</h4>
+<p>GUI 渲染线程负责渲染浏览器界面 HTML 元素，解析 HTML，CSS，构建 DOM 树和 RenderObject 树，布局和绘制等。</p>
+<p>当界面需要重绘(Repaint)或由于某种操作引发回流(重排)(reflow)时,该线程就会执行。</p>
+<p>在 Javascript 引擎运行脚本期间,GUI 渲染线程都是处于挂起状态的,也就是说被”冻结”了，GUI 更新会被保存在一个队列中等到 JS 引擎空闲时立即被执行。</p>
+<h4 id="javascript-引擎线程">JavaScript 引擎线程</h4>
+<p>JavaScript 引擎，也可以称为 JS 内核，主要负责处理 Javascript 脚本程序，例如 V8 引擎。</p>
+<p>JS 引擎一直等待着任务队列中任务的到来，然后加以处理，一个 Tab 页（renderer 进程）中无论什么时候都只有一个 JS 线程在运行 JS 程序（单线程）。</p>
+<p><strong>注意：GUI 渲染线程和 JavaScript 引擎线程互斥！</strong></p>
+<p>由于 JavaScript 是可操纵 DOM 的，如果在修改这些元素属性同时渲染界面（即 JavaScript 线程和 UI 线程同时运行），那么渲染线程前后获得的元素数据就可能不一致了。</p>
+<p>因此为了防止渲染出现不可预期的结果，浏览器设置 GUI 渲染线程与 JavaScript 引擎为互斥的关系，当 JavaScript 引擎执行时 GUI 线程会被挂起，GUI 更新会被保存在一个队列中等到引擎线程空闲时立即被执行。</p>
+<p>如果 JS 执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞的感觉。</p>
+<h4 id="事件触发线程">事件触发线程</h4>
+<p>当一个事件被触发时该线程会把事件添加到待处理队列的队尾，等待 JS 引擎的处理。</p>
+<p>这些事件可以是当前执行的代码块如定时任务、也可来自浏览器内核的其他线程如鼠标点击、AJAX 异步请求等，但由于 JS 的单线程关系所有这些事件都得排队等待 JS 引擎处理。</p>
+<h4 id="定时触发器线程">定时触发器线程</h4>
+<blockquote>
+<p>setInterval 与 setTimeout 所在线程</p>
+</blockquote>
+<p>浏览器定时计数器并不是由 JavaScript 引擎计数的, 因为 JavaScript 引擎是单线程的, 如果处于阻塞线程状态就会影响记计时的准确。</p>
+<p>通过单独线程来计时并触发定时（计时完毕后，添加到事件队列中，等待 JS 引擎空闲后执行）</p>
+<p>注意，W3C 在 HTML 标准中规定，规定要求 setTimeout 中低于 4ms 的时间间隔算为 4ms。</p>
+<h4 id="异步-http-请求线程">异步 http 请求线程</h4>
+<p>在 XMLHttpRequest 在连接后是通过浏览器新开一个线程请求。</p>
+<p>将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中，再由 JavaScript 引擎执行。</p>
+<p>摘自：<a href="https://www.cnblogs.com/gg-qq/p/11125652.html">浏览器的多线程</a></p>
+<h3 id="事件循环">事件循环</h3>
+<p>如图：</p>
+<p><img src="https://static.aecra.cn/markdown/202103/456bf58311bc1595f5e6a9598b0281fa.jpg" alt="698814-20180906145003189-254912994"></p>
+<p>事件循环是指 JavaScript 引擎线程在工作时不断从任务队列（Event Queue）中获取任务并执行的过程。</p>
+<p>宏任务主要包含：script( 整体代码)、setTimeout、setInterval、I/O、UI 交互事件、setImmediate(Node.js 环境)。</p>
+<p>微任务主要包含：Promise、MutaionObserver、process.nextTick(Node.js 环境)。</p>
+<p>从浏览器的多线程可知，事件触发线程、定时触发器线程、异步 http 请求线程都会向任务队列（Event Queue）中添加宏任务。</p>
+<p>参考：</p>
+<p><a href="https://www.cnblogs.com/yugege/p/9598265.html">深入理解 JavaScript 事件循环机制</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/87684858">【JS】深入理解事件循环,这一篇就够了!(必看)</a></p>
+<h2 id="实现异步编程">实现异步编程</h2>
+<h3 id="回调函数callback">回调函数（callback）</h3>
+<p>JavaScript 语言对异步编程的实现，就是回调函数。所谓回调函数，就是把任务的第二段单独写在一个函数里面，等到重新执行这个任务的时候，就直接调用这个函数。回调函数的英语名字<code>callback</code>，直译过来就是&quot;重新调用&quot;。以下代码就是一个回调函数的例子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">ajax</span>(<span style="color:#a6e22e">url</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 处理逻辑
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>});
+</span></span></code></pre></div><p>但是回调函数有一个致命的弱点，如果出现多重嵌套，代码不是纵向发展，而是横向发展，很快就会乱成一团，无法管理。因为多个异步操作形成了强耦合，只要有一个操作需要修改，它的上层回调函数和下层回调函数，可能都要跟着修改。即产生&quot;回调函数地狱&quot;（callback hell）。例如多个请求存在依赖性，就会有如下代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">ajax</span>(<span style="color:#a6e22e">url</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 处理逻辑
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ajax</span>(<span style="color:#a6e22e">url1</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 处理逻辑
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ajax</span>(<span style="color:#a6e22e">url2</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 处理逻辑
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    });
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>回调函数的优点是简单、容易理解和实现，缺点是不利于代码的阅读和维护，各个部分之间高度耦合，使得程序结构混乱、流程难以追踪（尤其是多个回调函数嵌套的情况），而且每个任务只能指定一个回调函数。此外它不能使用 try catch 捕获错误，不能直接 return。</p>
+<p>参考：<a href="https://es6.ruanyifeng.com/">es6 入门教程</a>、<a href="https://blog.csdn.net/howgod/article/details/93978297">JS 异步编程六种方案</a></p>
+<h3 id="事件监听">事件监听</h3>
+<p>采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</p>
+<p>还是以 f1 和 f2 为例。首先，为 f1 绑定一个事件（这里采用的 jQuery 的<a href="http://api.jquery.com/on/">写法</a>）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">f1</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;done&#39;</span>, <span style="color:#a6e22e">f2</span>);
+</span></span></code></pre></div><p>上面这行代码的意思是，当 f1 发生 done 事件，就执行 f2。然后，对 f1 进行改写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">f1</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// f1的任务代码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">f1</span>.<span style="color:#a6e22e">trigger</span>(<span style="color:#e6db74">&#39;done&#39;</span>);
+</span></span><span style="display:flex;"><span>  }, <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>f1.trigger(&lsquo;done&rsquo;)表示，执行完成后，立即触发 done 事件，从而开始执行 f2。</p>
+<p>这种方法的优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以<a href="http://en.wikipedia.org/wiki/Decoupling">&ldquo;去耦合&rdquo;</a>（Decoupling），有利于实现<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html">模块化</a>。缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰。</p>
+<p>摘自：<a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html">Javascript 异步编程的 4 种方法</a></p>
+<h3 id="发布订阅">发布/订阅</h3>
+<p>上一节的&quot;事件&quot;，完全可以理解成&quot;信号&quot;。</p>
+<p>我们假定，存在一个&quot;信号中心&quot;，某个任务执行完成，就向信号中心&quot;发布&quot;（publish）一个信号，其他任务可以向信号中心&quot;订阅&quot;（subscribe）这个信号，从而知道什么时候自己可以开始执行。这就叫做<a href="http://en.wikipedia.org/wiki/Publish-subscribe_pattern">&ldquo;发布/订阅模式&rdquo;</a>（publish-subscribe pattern），又称<a href="http://en.wikipedia.org/wiki/Observer_pattern">&ldquo;观察者模式&rdquo;</a>（observer pattern）。</p>
+<p>这个模式有多种<a href="http://msdn.microsoft.com/en-us/magazine/hh201955.aspx">实现</a>，下面采用的是 Ben Alman 的<a href="https://gist.github.com/661855">Tiny Pub/Sub</a>，这是 jQuery 的一个插件。</p>
+<p>首先，f2 向&quot;信号中心&quot;jQuery 订阅&quot;done&quot;信号。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">subscribe</span>(<span style="color:#e6db74">&#39;done&#39;</span>, <span style="color:#a6e22e">f2</span>);
+</span></span></code></pre></div><p>然后，f1 进行如下改写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">f1</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// f1的任务代码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">publish</span>(<span style="color:#e6db74">&#39;done&#39;</span>);
+</span></span><span style="display:flex;"><span>  }, <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>jQuery.publish(&ldquo;done&rdquo;)的意思是，f1 执行完成后，向&quot;信号中心&quot;jQuery 发布&quot;done&quot;信号，从而引发 f2 的执行。</p>
+<p>此外，f2 完成执行后，也可以取消订阅（unsubscribe）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">unsubscribe</span>(<span style="color:#e6db74">&#39;done&#39;</span>, <span style="color:#a6e22e">f2</span>);
+</span></span></code></pre></div><p>这种方法的性质与&quot;事件监听&quot;类似，但是明显优于后者。因为我们可以通过查看&quot;消息中心&quot;，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行。</p>
+<p>摘自：<a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html">Javascript 异步编程的 4 种方法</a></p>
+<h3 id="promise">Promise</h3>
+<p>Promise 对象就是为了解决回调地狱而提出的。它不是新的语法功能，而是一种新的写法，允许将回调函数的嵌套，改成链式调用。采用 Promise，连续执行多个读取文件内容的异步任务，写法如下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">readFile</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs-readfile-promise&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">readFile</span>(<span style="color:#a6e22e">fileA</span>)
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">data</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">readFile</span>(<span style="color:#a6e22e">fileB</span>);
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">data</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">err</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span></code></pre></div><p>上面代码中，我使用了<code>fs-readfile-promise</code>模块，它的作用就是返回一个 Promise 版本的<code>readFile</code>函数。Promise 提供<code>then</code>方法加载回调函数，<code>catch</code>方法捕捉执行过程中抛出的错误。</p>
+<p>可以看到，Promise 的写法只是回调函数的改进，使用<code>then</code>方法以后，异步任务的两段执行看得更清楚了，除此以外，并无新意。</p>
+<p>Promise 的最大问题是代码冗余，原来的任务被 Promise 包装了一下，不管什么操作，一眼看去都是一堆<code>then</code>，原来的语义变得很不清楚。</p>
+<p>摘自：<a href="https://es6.ruanyifeng.com/#docs/generator-async">Generator 函数的异步应用</a></p>
+<h3 id="生成器generatoryield">生成器（Generator/yield）</h3>
+<p>生成器中通过 yield 命令可以在异步任务执行过程时将程序的执行权移出 Generator 函数，并通过以下两种方法交回执行权：</p>
+<p>（1）回调函数。将异步操作包装成<a href="https://es6.ruanyifeng.com/#docs/generator-async#Thunk-%E5%87%BD%E6%95%B0">Thunk 函数</a>，在回调函数里面交回执行权。</p>
+<p>（2）Promise 对象。将异步操作包装成 Promise 对象，用<code>then</code>方法交回执行权。</p>
+<p>实现第二种方法的库有<a href="https://github.com/tj/co">co</a>，详细介绍见<a href="https://es6.ruanyifeng.com/#docs/generator-async#co-%E6%A8%A1%E5%9D%97">ECMAScript 6 入门教程：co-模块</a></p>
+<h3 id="asyncawait">async/await</h3>
+<p>async 函数是什么？一句话，它就是 Generator 函数的语法糖。</p>
+<p><code>async</code>函数就是将 Generator 函数的星号（<code>*</code>）替换成<code>async</code>，将<code>yield</code>替换成<code>await</code>。</p>
+<p><strong>改进：</strong></p>
+<p><code>async</code>函数对 Generator 函数的改进，体现在以下四点。</p>
+<p>（1）内置执行器。</p>
+<p>Generator 函数的执行必须靠执行器，所以才有了<code>co</code>模块，而<code>async</code>函数自带执行器。也就是说，<code>async</code>函数的执行，与普通函数一模一样，只要一行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">asyncReadFile</span>();
+</span></span></code></pre></div><p>上面的代码调用了<code>asyncReadFile</code>函数，然后它就会自动执行，输出最后结果。这完全不像 Generator 函数，需要调用<code>next</code>方法，或者用<code>co</code>模块，才能真正执行，得到最后结果。</p>
+<p>（2）更好的语义。</p>
+<p><code>async</code>和<code>await</code>，比起星号和<code>yield</code>，语义更清楚了。<code>async</code>表示函数里有异步操作，<code>await</code>表示紧跟在后面的表达式需要等待结果。</p>
+<p>（3）更广的适用性。</p>
+<p><code>co</code>模块约定，<code>yield</code>命令后面只能是 Thunk 函数或 Promise 对象，而<code>async</code>函数的<code>await</code>命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时会自动转成立即 resolved 的 Promise 对象）。</p>
+<p>（4）返回值是 Promise。</p>
+<p><code>async</code>函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用<code>then</code>方法指定下一步的操作。</p>
+<p>进一步说，<code>async</code>函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而<code>await</code>命令就是内部<code>then</code>命令的语法糖。</p>
+<p>摘自：<a href="https://es6.ruanyifeng.com/#docs/async">async 函数</a></p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/javascript"
+      >javascript</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/extended-euclidean-theorem/"
+      ><span class="mr-1.5">←</span><span>拓展欧几里得定理</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/fast-power-and-fast-power-modulus/"
+      ><span>快速幂和快速幂取模</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

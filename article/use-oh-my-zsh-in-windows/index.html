@@ -1,0 +1,487 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Windows 中使用 Oh My Zsh 的各种方式 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="方式介绍 首先需要明确的是 zsh 不存在 Windows 版本的命令工具。所以在实现上都需要我们有一个 Linux 系统。在 Windows 中既有 WSL2 这种 Windows 支持的 Linux 子系统，也可以使用 cygwin 和 MSYS2 这类" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Windows 中使用 Oh My Zsh 的各种方式">
+<meta itemprop="description" content="Oh My Zsh 这么好用为什么不在 Windows 中使用呢？"><meta itemprop="datePublished" content="2021-12-10T16:00:28+00:00" />
+<meta itemprop="dateModified" content="2021-12-12T17:06:38+00:00" />
+<meta itemprop="wordCount" content="1227">
+<meta itemprop="keywords" content="zsh," />
+  
+  <meta property="og:title" content="Windows 中使用 Oh My Zsh 的各种方式" />
+<meta property="og:description" content="Oh My Zsh 这么好用为什么不在 Windows 中使用呢？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/use-oh-my-zsh-in-windows/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-10T16:00:28+00:00" />
+<meta property="article:modified_time" content="2021-12-12T17:06:38+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Windows 中使用 Oh My Zsh 的各种方式"/>
+<meta name="twitter:description" content="Oh My Zsh 这么好用为什么不在 Windows 中使用呢？"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/use-oh-my-zsh-in-windows/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Windows 中使用 Oh My Zsh 的各种方式</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Dec 10, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="方式介绍">方式介绍</h2>
+<p>首先需要明确的是 <code>zsh</code> 不存在 <code>Windows</code> 版本的命令工具。所以在实现上都需要我们有一个 <code>Linux</code> 系统。在 <code>Windows</code> 中既有 <code>WSL2</code> 这种 <code>Windows</code> 支持的 <code>Linux</code> 子系统，也可以使用 <code>cygwin</code>  和 <code>MSYS2</code> 这类对 <code>Linux</code> 系统的模拟软件，所以我们得解决方案有以下三种，不排除有其他方法。</p>
+<ol>
+<li>WSL2</li>
+<li>MSYS2</li>
+<li>cygwin</li>
+</ol>
+<h2 id="wsl2-安装-oh-my-zsh">WSL2 安装 Oh My Zsh</h2>
+<p>在 <code>WSL2</code> 中安装 <code>Oh My Zsh</code> 的方法和 <code>Linux</code> 基本没有太大差别，<code>WSL2</code> 如何安装请自行搜索相关资料，先安装 zsh。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get install zsh
+</span></span></code></pre></div><p>然后需要安装 <code>oh my zsh</code>，在官网中提供了如下几种安装方式，如果你所在的地区可以正常访问 <code>Github</code> 则请用这种方法，如果不行请见下文。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Method</th>
+<th style="text-align:left">Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>curl</strong></td>
+<td style="text-align:left"><code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>wget</strong></td>
+<td style="text-align:left"><code>sh -c &quot;$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>fetch</strong></td>
+<td style="text-align:left"><code>sh -c &quot;$(fetch -o - https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<p>不能访问 <code>Github</code> 可以下载这个压缩包 <a href="https://wwx.lanzoux.com/icPRQxgd7qf">ohmyzsh</a> ，将其中的 <code>.oh-my-zsh.zip</code> 解压后放到 <code>WSL2</code> 用户根目录下，并在用户根目录下执行 <code>omz.sh</code> 文件，其中修改了需要克隆的文件资源过程。执行中可选择将 <code>zsh</code> 设置为默认 <code>bash</code>。</p>
+<p>之后修改 <code>.zshrc</code> 即可配置 <code>oh my zsh</code>，这里给出常用的配置修改。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 修改主题</span>
+</span></span><span style="display:flex;"><span>ZSH_THEME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ys&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 增加插件</span>
+</span></span><span style="display:flex;"><span>plugins<span style="color:#f92672">=(</span>
+</span></span><span style="display:flex;"><span>  git
+</span></span><span style="display:flex;"><span>  zsh-syntax-highlighting
+</span></span><span style="display:flex;"><span>  zsh-autosuggestions
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>默认是不带 <code>zsh-syntax-highlighting</code> 和 <code>zsh-autosuggestions</code> 的可以使用如下命令获取，如果添加的是我提供的文件夹，那么这两个已经附带了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># zsh-syntax-highlighting</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#e6db74">}</span>/plugins/zsh-syntax-highlighting
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># zsh-autosuggestions</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/zsh-users/zsh-autosuggestions <span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#e6db74">}</span>/plugins/zsh-autosuggestions
+</span></span></code></pre></div><p>到现在我们的 <code>oh my zsh</code> 已经可用了。对于需要使用 <code>Linux</code> 子系统开发的人来说还需要在 <code>Linux</code> 子系统中安装环境支持，这里不再赘述。</p>
+<h2 id="通过-msys2-使用-oh-my-zsh">通过 MSYS2 使用 Oh My Zsh</h2>
+<blockquote>
+<p>MSYS2 is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software.</p>
+</blockquote>
+<p>MSYS2 提供了了本地工具集，我们可以使用它来安装 <code>Oh My Zsh</code>，从 <a href="https://www.msys2.org/">MSYS2</a> 下载并安装 <code>MSYS2</code>，可以选择安装目录，这里如果是选择Windows的用户目录效果更好，如此便不需要修改用户目录；首次运行需要执行 <code>pacman -Syu</code> 更新包数据库和基本包。之后从启动菜单开启，运行 <code>pacman-Su</code> 来更新其他包。</p>
+<p>使用 <code>pacman -S zsh</code> 来安装 <code>zsh</code>，之后采用和上一节一样的方法安装即可。</p>
+<p>如果选择安装目录不是用户根目录，则最好将目录改为 <code>Windows</code> 用户根目录，先生成 <code>passwd</code> 文件，这一步需要在 <code>MSYS2</code> 中运行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/usr/bin/mkpasswd.exe &gt; /etc/passwd
+</span></span></code></pre></div><p>生成文件之后，修改文件中指定用户的根目录即可，一般修改为 <code>/c/Users/用户名</code>，然后将 <code>MSYS2</code> 用户根目录中的 <code>.zshrc</code> 复制到 <code>Windows</code> 用户根目录中即可。</p>
+<p>需要注意的是，把 <code>MSYS2</code> 中 <code>/usr/bin</code> 目录添加到 <code>Windows</code> 环境变量中就能使用各种支持的工具，另外，这种方法中使用 <code>zsh</code> 可以同时使用 <code>Windows</code> 的各种工具和 <code>Linux</code> 系列的工具，不需要额外配置开发工具了。</p>
+<p>注意：两天后因卡顿已放弃，既然因为颜值而折腾为什么就不能美化 <code>power shell</code> 呢？参见 <a href="/article/powershell-beautification-for-ys-themes/">PowerShell 美化之 ys 主题</a>。</p>
+<h2 id="通过-cygwin-使用-oh-my-zsh">通过 cygwin 使用 Oh My Zsh</h2>
+<blockquote>
+<p>a large collection of GNU and Open Source tools which provide functionality similar to a Linux distribution on Windows.
+a DLL (cygwin1.dll) which provides substantial POSIX API functionality.</p>
+</blockquote>
+<p>我没用这个东西，但使用上应该和 <code>MSYS2</code> 差不太多，可以参照官网使用或者自行搜索相关方法。</p>
+<h2 id="问题集合">问题集合</h2>
+<h3 id="wsl2-中-windows-文件夹背景色问题">WSL2 中 Windows 文件夹背景色问题</h3>
+<p>在 WSL2 中切换到用户根目录，执行如下指令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dircolors -p &gt; .dircolors
+</span></span></code></pre></div><p>在文件 <code>.dircolors</code> 中找到 <code>OTHER_WRITABLE</code> 字段，修改其后的第二个数字为 <code>49</code>，保存。</p>
+<p>在 <code>.zshrc</code> 中添加如下内容。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># enable color support of ls and also add handy aliases</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -x /usr/bin/dircolors <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    test -r ~/.dircolors <span style="color:#f92672">&amp;&amp;</span> eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>dircolors -b ~/.dircolors<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">||</span> eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>dircolors -b<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    alias ls<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls --color=auto&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#alias dir=&#39;dir --color=auto&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#alias vdir=&#39;vdir --color=auto&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    alias grep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;grep --color=auto&#39;</span>
+</span></span><span style="display:flex;"><span>    alias fgrep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;fgrep --color=auto&#39;</span>
+</span></span><span style="display:flex;"><span>    alias egrep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;egrep --color=auto&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>重新 <code>source</code> 之后即可消除背景色。</p>
+<h3 id="zsh-中中文乱码问题">zsh 中中文乱码问题</h3>
+<p>在 <code>.zshrc</code> 中添加如下内容。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export LC_ALL<span style="color:#f92672">=</span>en_US.UTF-8  
+</span></span><span style="display:flex;"><span>export LANG<span style="color:#f92672">=</span>en_US.UTF-8
+</span></span></code></pre></div><p>重新 <code>source</code> 之后即可正常显示中文。</p>
+<h3 id="terminal-推荐">terminal 推荐</h3>
+<p>在 <code>Windows</code> 中推荐使用 <code>Windows terminal</code>，其可以支持各种  <code>bash</code> 和 <code>shell</code> 工具，在设置中可以将 <code>MSYS2</code> 安装的 <code>zsh</code> 添加进去并设置为默认。</p>
+<p><code>terminal</code> 配色可以从 <a href="https://github.com/mbadolato/iTerm2-Color-Schemes">iTerm2-Color-Schemes</a> 和 <a href="https://windowsterminalthemes.dev/">Windows Terminal Themes</a> 获取。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/zsh"
+      >zsh</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/powershell-beautification-for-ys-themes/"
+      ><span class="mr-1.5">←</span><span>PowerShell 美化之 ys 主题</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/change-author-in-git-commit/"
+      ><span>修改 Git 记录中的作者信息</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,462 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Go 中的面向对象 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="结构体 Golang 中没有类，但可以定义类型上的方法，同时有接口，可以通过接口定义对象的要求。也可以通过类型定义对象的构造方法及行为。 什么是结构体？在 Go" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Go 中的面向对象">
+<meta itemprop="description" content="Golang 中没有类，那如何使用面向对象呢？"><meta itemprop="datePublished" content="2021-11-22T18:11:40+00:00" />
+<meta itemprop="dateModified" content="2021-11-23T23:55:49+00:00" />
+<meta itemprop="wordCount" content="1395">
+<meta itemprop="keywords" content="Go," />
+  
+  <meta property="og:title" content="Go 中的面向对象" />
+<meta property="og:description" content="Golang 中没有类，那如何使用面向对象呢？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/object-oriented-in-go/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-22T18:11:40+00:00" />
+<meta property="article:modified_time" content="2021-11-23T23:55:49+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Go 中的面向对象"/>
+<meta name="twitter:description" content="Golang 中没有类，那如何使用面向对象呢？"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/object-oriented-in-go/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Go 中的面向对象</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Nov 22, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="结构体">结构体</h2>
+<p>Golang 中没有类，但可以定义类型上的方法，同时有接口，可以通过接口定义对象的要求。也可以通过类型定义对象的构造方法及行为。</p>
+<p>什么是结构体？在 Go 结构体是字段的集合。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Vertex</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">X</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Y</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="访问方法">访问方法</h3>
+<p>对于结构体对象可以使用 <code>.</code> 访问对象成员。在使用指针时，虽然可以使用 <code>(*p)</code> 来访问对象成员，但在 Go 中可以直接使用 <code>指针.成员变量</code> 的方式访问成员变量。</p>
+<h3 id="结构体对象的定义">结构体对象的定义</h3>
+<p>结构体对象有多种定义方法，以上文的结构体来举例。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">v1</span> = <span style="color:#a6e22e">Vertex</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">v2</span> = <span style="color:#a6e22e">Vertex</span>{<span style="color:#a6e22e">X</span>: <span style="color:#ae81ff">1</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">v3</span> = <span style="color:#a6e22e">Vertex</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">p</span>  = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Vertex</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>}
+</span></span></code></pre></div><h2 id="方法">方法</h2>
+<p>方法是一个具有特殊接收器参数的函数。其中方法的调用变量在函数名之前，示例如下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Vertex</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">X</span>, <span style="color:#a6e22e">Y</span> <span style="color:#66d9ef">float64</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">v</span> <span style="color:#a6e22e">Vertex</span>) <span style="color:#a6e22e">Abs</span>() <span style="color:#66d9ef">float64</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Sqrt</span>(<span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">X</span><span style="color:#f92672">*</span><span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">X</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">Y</span><span style="color:#f92672">*</span><span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">Y</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Vertex</span>{<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">Abs</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里的方法与 Go 的函数只有接收对象的区别，其他和不同函数相同。</p>
+<p>前面说到但可以定义类型上的方法，这里需要指出，方法的定义只能与变量声明在一个包中，不能定义在其他包中定义的变量类型的方法，同样内置变量类型也是不可以的，但可以通过 <code>type MyFloat float64</code> 方式来定义自己的变量类型之后添加方法。</p>
+<h3 id="指针接收器">指针接收器</h3>
+<p>在 Go 中所有的对象复制都是拷贝，所以在声明方法时使用的不是指针变量，那么在方法中对变量的操作都是无法修改原变量的，可以使用指针接收器来修改原变量。</p>
+<p>那么值接收器改为了指针接收器，调用时也必须使用指针变量吗？当然不是，在 Go 中为方便，会自动将 <code>p</code> 转换成 <code>(&amp;p)</code> 因为 p 有一个指针接收器。同样的，如果声明的是值接收器，可以直接使用指针调用方法。</p>
+<p>需要注意的是，同一个方法只能设置一种接收器，即不可同时声明值接收器和指针接收器。</p>
+<h2 id="接口">接口</h2>
+<p>接口定义了一组方法的集合。</p>
+<p>和其他语一样，接口类型的值可以保存实现这些方法的任何值。</p>
+<p>需要注意的是，接口类型的值如果需要保存一个值变量或指针变量，那么该值类型必须实现接口定义的值接收器方法或指针接收器方法。如果函数定义在值类型上，那么接口类型的值可以保存指针变量（解除指针）。但是定义了指针接收器方法的值类型不能赋值给接口，因为 Golang 中赋值是拷贝，虽然可以把接口中保存的值的指针给到函数，但这个值已经不是原来的那个值了，如此毫无意义，甚至会让新手写出许多隐性 Bug。</p>
+<p>接口的实现是隐式的，不需要 <code>implements</code> 等关键字，隐式接口将接口的定义与其实现分离开来，然后接口可以不需要预先书写就出现在任何包中。</p>
+<p>接口类型的值保存了实现接口的值类型的值及其类型。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>(<span style="color:#a6e22e">value</span>, <span style="color:#66d9ef">type</span>)
+</span></span></code></pre></div><h3 id="空指针异常的处理">空指针异常的处理</h3>
+<p>在 Go 中通过 nil 接收器处理处理空指针异常的情况。当接口保存的对象值为空时，指针接收器中判断接收对象是否为 nil 即可处理空指针异常。</p>
+<p>需要注意的是，这种空指针异常的处理方法针对的是接口内部保存的是空值的情况，如果接口本身是空值是会报错的。</p>
+<h3 id="类型断言">类型断言</h3>
+<p>类型断言提供对接口值的底层具体值的访问。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">i</span>.(<span style="color:#a6e22e">T</span>)
+</span></span></code></pre></div><p>如果接口保存的值与指定的值类型不同，则会产生 panic。</p>
+<p>可以通过指定第二个参数来获取断言的正确性，此时不会产生 panic。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">i</span>.(<span style="color:#66d9ef">string</span>)
+</span></span></code></pre></div><h2 id="嵌入">嵌入</h2>
+<p>嵌入实现了部分类继承的需求。</p>
+<p>用类型声明但没有显式字段名称的字段称为嵌入字段。嵌入字段必须指定为类型名 t 或指向非接口类型名 * t 的指针，而且 t 本身可能不是指针类型。未限定的类型名充当字段名。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">T1</span>        <span style="color:#75715e">// field name is T1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">T2</span>       <span style="color:#75715e">// field name is T2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">P</span>.<span style="color:#a6e22e">T3</span>      <span style="color:#75715e">// field name is T3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">P</span>.<span style="color:#a6e22e">T4</span>     <span style="color:#75715e">// field name is T4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>  <span style="color:#75715e">// field names are x and y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>在创建有嵌入的结构体的对象时，必须显式地初始化嵌入类型。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">co</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">container</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">base</span>: <span style="color:#a6e22e">base</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">num</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">str</span>: <span style="color:#e6db74">&#34;some name&#34;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>含有嵌入类型的结构体会继承嵌入类型上所定义的方法，同样地会实现相关接口，对于嵌入类型的成员变量可以通过完整的变量寻址路径来获取，也可以直接通过 <code>.</code> 来获取。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/go"
+      >Go</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/implementation-publish-and-subscription-by-javascript/"
+      ><span class="mr-1.5">←</span><span>JavaScript 实现发布订阅</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/windows-linux-dual-system-boot-problem/"
+      ><span>Windows &amp; Linux 双系统启动引导问题</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

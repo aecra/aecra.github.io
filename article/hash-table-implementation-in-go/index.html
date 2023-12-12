@@ -1,0 +1,496 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>GO 中哈希表的实现 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="什么是哈希表 哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。 哈希函数提供了对键的散列编码，可以将" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="GO 中哈希表的实现">
+<meta itemprop="description" content="哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。"><meta itemprop="datePublished" content="2022-04-20T19:51:21+00:00" />
+<meta itemprop="dateModified" content="2022-04-20T19:51:21+00:00" />
+<meta itemprop="wordCount" content="1699">
+<meta itemprop="keywords" content="Go," />
+  
+  <meta property="og:title" content="GO 中哈希表的实现" />
+<meta property="og:description" content="哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/hash-table-implementation-in-go/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-20T19:51:21+00:00" />
+<meta property="article:modified_time" content="2022-04-20T19:51:21+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="GO 中哈希表的实现"/>
+<meta name="twitter:description" content="哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/hash-table-implementation-in-go/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">GO 中哈希表的实现</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Apr 20, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="什么是哈希表">什么是哈希表</h2>
+<p>哈希表是键值对映射的数据结构，可以通过键对数据进行存取，其中实现的关键是哈希函数和哈希冲突。</p>
+<p>哈希函数提供了对键的散列编码，可以将存取的数据分散到底层的数据空间中，所以哈希函数的均匀分布可以提高哈希表的读写性能。</p>
+<p>哈希冲突的结果可以使用开放寻址法和拉链法来解决。</p>
+<blockquote>
+<p>源码位置：<a href="https://github.com/golang/go/blob/master/src/runtime/map.go">go/map.go</a></p>
+</blockquote>
+<h2 id="数据结构">数据结构</h2>
+<p>哈希表使用 <code>runtime.hmap</code> 表示，其中每个存储桶使用 <code>runtime.bmap</code> 表示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">hmap</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">count</span>     <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">flags</span>     <span style="color:#66d9ef">uint8</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">B</span>         <span style="color:#66d9ef">uint8</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">noverflow</span> <span style="color:#66d9ef">uint16</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">hash0</span>     <span style="color:#66d9ef">uint32</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">buckets</span>    <span style="color:#a6e22e">unsafe</span>.<span style="color:#a6e22e">Pointer</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">oldbuckets</span> <span style="color:#a6e22e">unsafe</span>.<span style="color:#a6e22e">Pointer</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">nevacuate</span>  <span style="color:#66d9ef">uintptr</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">extra</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">mapextra</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">mapextra</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">overflow</span>    <span style="color:#f92672">*</span>[]<span style="color:#f92672">*</span><span style="color:#a6e22e">bmap</span> <span style="color:#75715e">// 当前持有的初始化溢出桶
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">oldoverflow</span> <span style="color:#f92672">*</span>[]<span style="color:#f92672">*</span><span style="color:#a6e22e">bmap</span> <span style="color:#75715e">// 扩容前的初始化溢出桶
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">nextOverflow</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">bmap</span>   <span style="color:#75715e">// 下一个待分配的溢出桶
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ol>
+<li><code>count</code> 表示当前哈希表中的元素数量；</li>
+<li><code>B</code> 表示当前哈希表持有的 <code>buckets</code> 数量，但是因为哈希表中桶扩容为翻倍扩容，所以该字段会存储对数，也就是 <code>len(buckets) == 2^B</code>；</li>
+<li><code>noverflow</code> 用于记录当前哈希表的溢出桶数量。</li>
+<li><code>hash0</code> 是哈希的种子，它能为哈希函数的结果引入随机性，这个值在创建哈希表时确定，并在调用哈希函数时作为参数传入；</li>
+<li><code>buckets</code> 是当前桶。</li>
+<li><code>oldbuckets</code> 是哈希在扩容时用于保存之前 <code>buckets</code> 的字段。</li>
+<li><code>nevacuate</code> 表示当前已分流桶的数量。</li>
+<li><code>mapextra</code> 用于存储溢出桶的相关数据，溢出桶是用于解决频繁扩容的有效方法。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">bmap</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">topbits</span>  [<span style="color:#ae81ff">8</span>]<span style="color:#66d9ef">uint8</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">keys</span>     [<span style="color:#ae81ff">8</span>]<span style="color:#a6e22e">keytype</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">values</span>   [<span style="color:#ae81ff">8</span>]<span style="color:#a6e22e">valuetype</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pad</span>      <span style="color:#66d9ef">uintptr</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">overflow</span> <span style="color:#66d9ef">uintptr</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>原始的 <code>bmap</code> 只有 <code>topbits</code> 字段，该字段为哈希值的高八位，用于加速键值对的访问。</p>
+<p>其他字段在编译时进行推导，该结构为虚拟结构，实际访问则通过计算内存地址的方式访问。</p>
+<h2 id="溢出桶">溢出桶</h2>
+<p>由上面可知，哈希表的底层使用的是桶存储数据，每个桶最多可以存储 8 个键值对，其中根据需要可能会多创建不定数量的溢出桶用来承载桶溢出后的数据，溢出桶会添加到桶的 <code>overflow</code> 字段。</p>
+<p>桶数量确定原则：</p>
+<ul>
+<li>哈希表未指定元素数量是默认为 0，然后根据最大负载因子为 6.5、每个存储桶中 8 个元素来确定最小的 B 大小。</li>
+</ul>
+<p>溢出桶创建规则：</p>
+<ul>
+<li>当桶的数量小于 <code>2**4</code> 时，由于数据较少、使用溢出桶的可能性较低，会省略创建的过程以减少额外开销；</li>
+<li>当桶的数量多于 <code>2**4</code> 时，会额外创建 <code>2**(B-4)</code> 个溢出桶；</li>
+</ul>
+<p>在创建时正常桶和溢出桶处于相邻的地址空间，只有在初始化的溢出桶使用完后才会通过 <code>runtime.newobject</code> 创建新的溢出桶。</p>
+<h2 id="数据操作">数据操作</h2>
+<h3 id="访问">访问</h3>
+<p>哈希表的访问步骤如下：</p>
+<ol>
+<li>计算哈希值。</li>
+<li>获取存储数据的桶。</li>
+<li>依次对比 <code>tophash</code> 与哈希值的高八位，如果相同则对比对应的键值，相同即可返回，否则继续向下寻找，如果当前桶内数据查找完后继续查找溢出桶，直到找到键值对或者数据不存在。</li>
+</ol>
+<p>因为哈希表的扩容不具备原子性，所以在扩容过程中进行访问的过程在扩容部分介绍。</p>
+<h3 id="写入修改">写入/修改</h3>
+<p>写入与修改在相同过程中实现，步骤如下：</p>
+<ol>
+<li>计算哈希值</li>
+<li>获取存储数据的桶</li>
+<li>依次对比 <code>tophash</code> 与哈希值的高八位，如果相同则对比对应的键值，相同即可将新数据写入，否则继续向下寻找，如果当前桶内数据查找完后继续查找溢出桶，直到找到键值对或者数据不存在，当数据不存在时会将哈希高八位写入到 <code>tophash</code> 键值对写入对应位置，如果最后的桶已满，则获取新的溢出桶插入到当前桶之后并写入数据。</li>
+</ol>
+<p>在扩容期间进行的写入与修改过程将在扩容部分介绍。</p>
+<h3 id="删除">删除</h3>
+<p>删除操作即删除对应的 <code>tophash</code> 和键值对，但并不会整理内存和释放多余的溢出桶，此部分在扩容部分完成。</p>
+<h2 id="扩容机制">扩容机制</h2>
+<h3 id="发生条件">发生条件</h3>
+<ol>
+<li>装载因子超过 6.5。</li>
+<li>哈希表使用了过多的溢出桶。</li>
+</ol>
+<h3 id="扩容分类">扩容分类</h3>
+<ol>
+<li>
+<p>等量扩容</p>
+<p>等量扩容的原因是使用了过多的溢出桶，扩容方式是创建一组相同数量的桶，随后将原有的桶数组设置到 <code>oldbuckets</code> 上并将新的空桶设置到 <code>buckets</code> 上，溢出桶也使用了相同的逻辑更新。</p>
+</li>
+<li>
+<p>翻倍扩容</p>
+<p>翻倍扩容的原因是装载因子已经超过了 6.5，扩容方式是创建一组 2 倍数量的桶和相应的溢出桶，随后将原有的桶数组设置到 <code>oldbuckets</code> 上并将新的空桶设置到 <code>buckets</code> 上，溢出桶也使用了相同的逻辑更新。</p>
+</li>
+</ol>
+<h3 id="增量扩容">增量扩容</h3>
+<p>在创建新桶后并没有对原有数据进行分流，数据的分流以桶为单位，分流时机为每次写入操作前和删除操作前。</p>
+<p>分流方式为从旧桶中依次读取数据，计算哈希值和新桶索引，并将数据写入到新桶中，写入方式和上文相同。之后只保留旧桶的 <code>tophash</code> 用于标记该桶已分流，其他内存则进行回收。如果所有的桶都进行了分流则置 <code>oldbuckets</code> 和<code>nevacuate</code> 为空，以回收 <code>tophash</code> 占用的空间。</p>
+<p>在增删改前如果旧桶数据已分流则直接对新桶进行操作，如果旧桶未分流则分流后对新桶进行操作。读操作前如果旧桶未分流则读取旧桶，否则读取新桶。</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/">理解 Golang 哈希表 Map 的原理 | Go 语言设计与实现 (draveness.me)</a></p>
+<p><a href="https://draveness.me/golang/docs/part1-prerequisite/ch02-compile/golang-typecheck/">Go 语言如何进行类型检查 | Go 语言设计与实现 (draveness.me)</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/265370733">Golang 数据结构详解之哈希表 - 知乎 (zhihu.com)</a></p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/go"
+      >Go</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/build-a-gateway-by-kong/"
+      ><span class="mr-1.5">←</span><span>使用 Kong 搭建网关</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/vim-command-manual/"
+      ><span>Vim 命令速查表</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

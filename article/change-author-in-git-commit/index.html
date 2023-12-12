@@ -1,0 +1,427 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>修改 Git 记录中的作者信息 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Git 设置用户名和邮箱 既然要做多人开发，那么必然要设置不同的用户名和邮箱，下面是设置的命令。 # 全局设置 git config --global user.name &lt;username&gt; git config --global user.email &lt;email&gt; # 分支设置 git config user.name &lt;username&gt; git config" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="修改 Git 记录中的作者信息">
+<meta itemprop="description" content="在一人即为一个团队的小组项目中，需要使用多个账号进行提交，但在项目结束后想改回自己的账号如何做呢？当然是使用 git-filter-repo 啊。"><meta itemprop="datePublished" content="2021-12-09T21:01:46+00:00" />
+<meta itemprop="dateModified" content="2021-12-09T21:01:46+00:00" />
+<meta itemprop="wordCount" content="762">
+<meta itemprop="keywords" content="Git," />
+  
+  <meta property="og:title" content="修改 Git 记录中的作者信息" />
+<meta property="og:description" content="在一人即为一个团队的小组项目中，需要使用多个账号进行提交，但在项目结束后想改回自己的账号如何做呢？当然是使用 git-filter-repo 啊。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/change-author-in-git-commit/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-09T21:01:46+00:00" />
+<meta property="article:modified_time" content="2021-12-09T21:01:46+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="修改 Git 记录中的作者信息"/>
+<meta name="twitter:description" content="在一人即为一个团队的小组项目中，需要使用多个账号进行提交，但在项目结束后想改回自己的账号如何做呢？当然是使用 git-filter-repo 啊。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/change-author-in-git-commit/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">修改 Git 记录中的作者信息</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Dec 9, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="git-设置用户名和邮箱">Git 设置用户名和邮箱</h2>
+<p>既然要做多人开发，那么必然要设置不同的用户名和邮箱，下面是设置的命令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 全局设置</span>
+</span></span><span style="display:flex;"><span>git config --global user.name &lt;username&gt;
+</span></span><span style="display:flex;"><span>git config --global user.email &lt;email&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 分支设置</span>
+</span></span><span style="display:flex;"><span>git config user.name &lt;username&gt;
+</span></span><span style="display:flex;"><span>git config user.email &lt;email&gt;
+</span></span></code></pre></div><p>如上，我们可以对每个人设置一个分支，在不同分支中使用不同的用户名和邮箱。</p>
+<h2 id="安装-git-filter-repo">安装 git-filter-repo</h2>
+<p><code>git-filter-repo</code> 的项目地址在 <a href="https://github.com/newren/git-filter-repo">git-filter-repo</a> ，安装要求是 <code>Git</code> 版本不低于 2.22.0，<code>python3</code> 版本不低于3.5。python3 一般是 Linux 平台中使用并于<code>python2</code> 区分的，但在 Windows 中是不可用的。在 <code>INSTALL.md</code> 中有 Windows 用户须知，但令人难受的是这一小节并没有说如何安装这个 <code>python</code> 脚本，另外见到代码目录中 <code>git_filter_repo.py</code> 文件最近修改时间是三年前，也i就没尝试这个脚本，话说，他就不能写清楚吗？</p>
+<p>虽然不能直接在 Windows 直接使用，但我们有 WSL2 啊，在 <code>INSTALL.md</code> 中有以下 bash指令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PACKAGE_TOOL install git-filter-repo
+</span></span></code></pre></div><p>我们 <code>WSL2</code> 中有 <code>apt-get</code> 啊，当把命令输进去后，竟然显示没有 <code>git-filter-repo</code> 这个东西，What Fuck! 只能使用 <code>pip</code> 安装了，但它提示这个并不会把这个脚本自动添加到 PATH 中，不过没关系，到这一步了也不在乎这么一点小缺点了,安装后添加按照如下命令添加 PATH。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 当前终端有效</span>
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:/xxx/xxx
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 永久有效</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 最后一行添加上面的指令</span>
+</span></span><span style="display:flex;"><span>vi .bashrc
+</span></span></code></pre></div><p>现在我们终于把这玩意装好了。</p>
+<h2 id="修改用户信息">修改用户信息</h2>
+<p>第一步，我们需要克隆一份干净的仓库，切换的新目录并克隆。</p>
+<p>在仓库目录下执行如下命令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#将所有用户名中包含的old 替换成 new（注意，不支持中文)</span>
+</span></span><span style="display:flex;"><span>git filter-repo --name-callback <span style="color:#e6db74">&#39;return name.replace(b&#34;old&#34;, b&#34;new&#34;)&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#将所有 commit 信息的 email中包含的 old@example.com 替换成 new@example.com</span>
+</span></span><span style="display:flex;"><span>git filter-repo --email-callback <span style="color:#e6db74">&#39;return email.replace(b&#34;old@example.com&#34;, b&#34;new@example.com&#34;)&#39;</span>
+</span></span></code></pre></div><p>当中指令执行完之后所有作者信息就都被修改了，就可以把这个本地仓库提交到我们希望的远程仓库了。</p>
+<p>因为信息修改了，所以远程仓库同步地消失了，这时需要手动添加远程仓库 <code>git remote add origin &lt;repo.git&gt;</code>，然后强制提交更新。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push --force --tags origin <span style="color:#e6db74">&#39;refs/heads/*&#39;</span>
+</span></span></code></pre></div><p>需要注意的是，不要修改已提交到远程仓库的 commit 的作者信息，这会产生大量冲突，对项目管理十分不友好。</p>
+<p>所以在使用多个账号提交 GIt 记录时，一定要事先设置用户名和邮箱。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/git"
+      >Git</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/use-oh-my-zsh-in-windows/"
+      ><span class="mr-1.5">←</span><span>Windows 中使用 Oh My Zsh 的各种方式</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/implementation-publish-and-subscription-by-javascript/"
+      ><span>JavaScript 实现发布订阅</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

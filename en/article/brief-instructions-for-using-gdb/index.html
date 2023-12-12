@@ -1,0 +1,570 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Brief Instructions for Using GDB - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="What is GDB？ GDB is the GNU Project debugger that allows you to see what&rsquo;s going on &ldquo;inside&rdquo; another program while it&rsquo;s executing &ndash; or what another program was doing when it crashed.
+There are four main things GDB can do (plus other things to support them) to help you catch errors on the fly:
+Start the program, specifying anything that might affect its behavior. Causes your program to stop on specified conditions." />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Brief Instructions for Using GDB">
+<meta itemprop="description" content="I have been learning programming for five or six years, but I still don’t know how to use a powerful debugging tool such as GDB. After I learned it, I wrote this simple article. It is more about providing a reference on how to use it, and more detailed The content still needs to check the official documentation of GDB."><meta itemprop="datePublished" content="2022-10-31T20:27:48+00:00" />
+<meta itemprop="dateModified" content="2023-02-03T16:52:08+00:00" />
+<meta itemprop="wordCount" content="1435">
+<meta itemprop="keywords" content="GDB," />
+  
+  <meta property="og:title" content="Brief Instructions for Using GDB" />
+<meta property="og:description" content="I have been learning programming for five or six years, but I still don’t know how to use a powerful debugging tool such as GDB. After I learned it, I wrote this simple article. It is more about providing a reference on how to use it, and more detailed The content still needs to check the official documentation of GDB." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/en/article/brief-instructions-for-using-gdb/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-31T20:27:48+00:00" />
+<meta property="article:modified_time" content="2023-02-03T16:52:08+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Brief Instructions for Using GDB"/>
+<meta name="twitter:description" content="I have been learning programming for five or six years, but I still don’t know how to use a powerful debugging tool such as GDB. After I learned it, I wrote this simple article. It is more about providing a reference on how to use it, and more detailed The content still needs to check the official documentation of GDB."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/en/article/brief-instructions-for-using-gdb/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Brief Instructions for Using GDB</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Oct 31, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="what-is-gdb">What is GDB？</h2>
+<p><a href="https://www.sourceware.org/gdb/">GDB</a> is the GNU Project debugger that allows you to see what&rsquo;s going on &ldquo;inside&rdquo; another program while it&rsquo;s executing &ndash; or what another program was doing when it crashed.</p>
+<p>There are four main things GDB can do (plus other things to support them) to help you catch errors on the fly:</p>
+<ul>
+<li>Start the program, specifying anything that might affect its behavior.</li>
+<li>Causes your program to stop on specified conditions.</li>
+<li>Check what happens when the program stops.</li>
+<li>Change things in a program so you can try to correct the effects of one bug and move on to another bug.</li>
+</ul>
+<p>These programs may be executed on the same machine as GDB (native), on another machine (remote), or on an emulator. GDB runs on most popular UNIX and Microsoft Windows variants, as well as Mac OS X.</p>
+<p>GDB support many programming languages, including:</p>
+<ul>
+<li>Ada</li>
+<li>Assembly</li>
+<li>C</li>
+<li>C++</li>
+<li>D</li>
+<li>Fortran</li>
+<li>Go</li>
+<li>Objective-C</li>
+<li>OpenCL</li>
+<li>Modula-2</li>
+<li>Pascal</li>
+<li>Rust</li>
+</ul>
+<h2 id="how-to-run-a-gdb">How to run a GDB？</h2>
+<p>If we use [tldr](<a href="https://tldr.sh/">tldr pages</a>) to see how to use gdb, we can get the following prompt:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ tldr gdb
+</span></span><span style="display:flex;"><span>gdb
+</span></span><span style="display:flex;"><span>The GNU Debugger.More information: https://www.gnu.org/software/gdb.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Debug an executable:
+</span></span><span style="display:flex;"><span>   gdb <span style="color:#f92672">{{</span>executable<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Attach a process to gdb:
+</span></span><span style="display:flex;"><span>   gdb -p <span style="color:#f92672">{{</span>procID<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Debug with a core file:
+</span></span><span style="display:flex;"><span>   gdb -c <span style="color:#f92672">{{</span>core<span style="color:#f92672">}}</span> <span style="color:#f92672">{{</span>executable<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Execute given GDB commands upon start:
+</span></span><span style="display:flex;"><span>   gdb -ex <span style="color:#e6db74">&#34;{{commands}}&#34;</span> <span style="color:#f92672">{{</span>executable<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> - Start gdb and pass arguments to the executable:
+</span></span><span style="display:flex;"><span>   gdb --args <span style="color:#f92672">{{</span>executable<span style="color:#f92672">}}</span> <span style="color:#f92672">{{</span>argument1<span style="color:#f92672">}}</span> <span style="color:#f92672">{{</span>argument2<span style="color:#f92672">}}</span>
+</span></span></code></pre></div><p>Here are several common uses of <code>GDB</code>, namely:</p>
+<ul>
+<li>Execute a program and debug;</li>
+<li>Enter a running program and debug it by specifying the program&rsquo;s <code>proceID</code>;</li>
+<li>By specifying the [core file](<a href="https://portal.perforce.com/s/article/2979">Core Files in Linux (perforce.com)</a>) generated when the program fails, restore the scene when the program fails to debug;</li>
+<li>Execute a program and pass in parameters and debug.</li>
+</ul>
+<p>We write a simple C language program as our debugger.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  c <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> b;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;c = %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, c);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Compile and link to an executable file with debugging information:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gcc -g a.c -o a
+</span></span></code></pre></div><p>Start GDB debugging with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gdb a
+</span></span></code></pre></div><p>After entering GDB, information similar to the following will be displayed:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>GNU gdb (Debian 10.1-1.7) 10.1.90.20210103-git
+</span></span><span style="display:flex;"><span>Copyright (C) 2021 Free Software Foundation, Inc.
+</span></span><span style="display:flex;"><span>License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+</span></span><span style="display:flex;"><span>This is free software: you are free to change and redistribute it.
+</span></span><span style="display:flex;"><span>There is NO WARRANTY, to the extent permitted by law.
+</span></span><span style="display:flex;"><span>Type &#34;show copying&#34; and &#34;show warranty&#34; for details.
+</span></span><span style="display:flex;"><span>This GDB was configured as &#34;x86_64-linux-gnu&#34;.
+</span></span><span style="display:flex;"><span>Type &#34;show configuration&#34; for configuration details.
+</span></span><span style="display:flex;"><span>For bug reporting instructions, please see:
+</span></span><span style="display:flex;"><span>&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
+</span></span><span style="display:flex;"><span>Find the GDB manual and other documentation resources online at:
+</span></span><span style="display:flex;"><span>    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>For help, type &#34;help&#34;.
+</span></span><span style="display:flex;"><span>Type &#34;apropos word&#34; to search for commands related to &#34;word&#34;...
+</span></span><span style="display:flex;"><span>Reading symbols from a...
+</span></span><span style="display:flex;"><span>(No debugging symbols found in a)
+</span></span><span style="display:flex;"><span>(gdb)
+</span></span></code></pre></div><p>It gives us a hint that <code>apropos word</code> can be used to find related commands, so we can quickly find out how to use a certain command without querying the document.</p>
+<p>For more startup related commands, see the official documentation <a href="https://sourceware.org/gdb/current/onlinedocs/gdb#Running">Running (Debugging with GDB) (sourceware.org)</a>。</p>
+<h2 id="how-to-debug-a-program-in-gdb">How to debug a program in GDB?</h2>
+<p>Debugging is nothing more than understanding the running logic of the program and the state of the program in a certain execution step, so as an introduction, you only need to know how to interrupt, start, query, and how to use <code>display</code> to provide code display.</p>
+<h3 id="interrupt">Interrupt</h3>
+<p><a href="https://sourceware.org/gdb/current/onlinedocs/gdb#Breakpoints">Break</a> can use Breakpoints, Watchpoints, Catchpoints. A breakpoint is where the program runs and breaks; an Watchpoint is used to observe a variable or even many variables combined by operators, and break if the value of the variable changes; a Catchpoint is to break when the program triggers an event, Such as catch, throw, assert, exec, syscall, fork, vfork, signal.</p>
+<p>You can use the <code>list</code> command to query the code. Each execution will output ten lines of code. If you need to get more, you can use the <code>list</code> command multiple times. Similarly, <code>list</code> also supports printing the code of the specified line. The usage is as follows:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) list
+(gdb) list 3,5
+</code></pre><p>Set a breakpoint with the following command:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) break locspec
+</code></pre><p>locspecc can specify the function name, line number, instruction address, etc., and break can be abbreviated as b.</p>
+<p>Use the following command to query breakpoints:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) info breakpoints
+(gdb) info b
+</code></pre><p>Use the following command to set the watchpoint:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) watch expr
+</code></pre><p>Use the following method to query watchpoints:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) info watchpoints
+</code></pre><p>Use the following method to set the catchpoints:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) catch event
+</code></pre><p>The catchpoints is also viewed using <code>info b</code>. It is worth mentioning that this command will also list the watchpoints we set.</p>
+<h3 id="start">Start</h3>
+<p>Startup is divided into starting the program from the beginning and continuing the program after interruption.</p>
+<p>There are two commands to start the program from the very beginning: <code>starti</code> and <code>run</code>. Among them, starti is to start the program and stop at the first instruction. This instruction is <code>_start</code> instead of the <code>main</code> function in Linux, because the initial state of a series of programs such as the stack and global functions has not been set. The <code>run</code> command starts the program and interrupts when it reaches the set breakpoint.</p>
+<p>Continuing to execute the program after interruption is actually <a href="https://sourceware.org/gdb/current/onlinedocs/gdb#Continuing-and-Stepping">Continuing and Stepping</a>. Only the most commonly used ones are introduced here A few commands:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) continue / c
+# Resume program execution, at the address where your program last stopped; any breakpoints set at that address are bypassed until the next breakpoint is reached.
+
+(gdb) step / s
+# Continue running the program until control reaches another source line, then stop it and return control to GDB, stepping into a function if it encounters it.
+
+(gdb) step count
+# Continue to run step by step, but count times. If a breakpoint or a signal unrelated to single stepping occurs before the count step, single stepping stops immediately.
+
+(gdb) next [count] / n [count]
+# Continue to the next source line in the current (innermost) stack frame. This is similar to `step`, but the occurrence of a function call within a line of code does not stop execution, ie the function is treated as an atomic instruction.
+
+(gdb) finish
+# Continue running until after the function in the selected stack frame returns.
+
+(gdb) until locspec
+# Continue running the program until the program reaches a location in the code that resolves the `locspec`, or the current stack frame returns.
+
+(gdb) stepi / si
+# Executes an instruction, then stops and returns to the debugger.
+
+(gdb) nexti / ni
+# Executes an instruction, but if it is a function call, continues execution until the function returns.
+</code></pre><h3 id="queries">Queries</h3>
+<p>During program execution, we may need to obtain certain information, such as the query breakpoint instruction <code>info breakpoints</code> mentioned above, the following are commonly used queries:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) print expr       # print the value of the expression
+(gdb) info breakpoints # query breakpoint
+(gdb) info frame       # Query stack information
+(gdb) info registers   # Query the value of the register
+</code></pre><h3 id="friendlier-page">Friendlier page</h3>
+<p>To see exactly where the program is going, we can show the source code, or even the assembly code.</p>
+<p>Display the currently running source code:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) layout src
+</code></pre><p>We can get the following page:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌─a.c────────────────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│   1           #include &lt;stdio.h&gt;                                               │
+</span></span><span style="display:flex;"><span>│   2                                                                            │
+</span></span><span style="display:flex;"><span>│   3           int main()                                                       │
+</span></span><span style="display:flex;"><span>│   4           {                                                                │
+</span></span><span style="display:flex;"><span>│B+&gt;5             int a = 1, b = 2, c = 0;                                       │
+</span></span><span style="display:flex;"><span>│   6             c = a + b;                                                     │
+</span></span><span style="display:flex;"><span>│   7             printf(&#34;c = %d\n&#34;, c);                                         │
+</span></span><span style="display:flex;"><span>│   8                                                                            │
+</span></span><span style="display:flex;"><span>│   9             return 0;                                                      │
+</span></span><span style="display:flex;"><span>│   10          }                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>│                                                                                │
+</span></span><span style="display:flex;"><span>└────────────────────────────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>native process 134526 In: main                           L5    PC: 0x55555555513d
+</span></span><span style="display:flex;"><span>(gdb) layout asm
+</span></span><span style="display:flex;"><span>(gdb)
+</span></span></code></pre></div><p>Show assembly code:</p>
+<pre tabindex="0"><code class="language-gdb" data-lang="gdb">(gdb) layout src
+</code></pre><p>Get the following page:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌────────────────────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│   0x555555555135 &lt;main&gt;           push   %rbp                                  │
+</span></span><span style="display:flex;"><span>│   0x555555555136 &lt;main+1&gt;         mov    %rsp,%rbp                             │
+</span></span><span style="display:flex;"><span>│   0x555555555139 &lt;main+4&gt;         sub    $0x10,%rsp                            │
+</span></span><span style="display:flex;"><span>│B+&gt;0x55555555513d &lt;main+8&gt;         movl   $0x1,-0x4(%rbp)                       │
+</span></span><span style="display:flex;"><span>│   0x555555555144 &lt;main+15&gt;        movl   $0x2,-0x8(%rbp)                       │
+</span></span><span style="display:flex;"><span>│   0x55555555514b &lt;main+22&gt;        movl   $0x0,-0xc(%rbp)                       │
+</span></span><span style="display:flex;"><span>│   0x555555555152 &lt;main+29&gt;        mov    -0x4(%rbp),%edx                       │
+</span></span><span style="display:flex;"><span>│   0x555555555155 &lt;main+32&gt;        mov    -0x8(%rbp),%eax                       │
+</span></span><span style="display:flex;"><span>│   0x555555555158 &lt;main+35&gt;        add    %edx,%eax                             │
+</span></span><span style="display:flex;"><span>│   0x55555555515a &lt;main+37&gt;        mov    %eax,-0xc(%rbp)                       │
+</span></span><span style="display:flex;"><span>│   0x55555555515d &lt;main+40&gt;        mov    -0xc(%rbp),%eax                       │
+</span></span><span style="display:flex;"><span>│   0x555555555160 &lt;main+43&gt;        mov    %eax,%esi                             │
+</span></span><span style="display:flex;"><span>│   0x555555555162 &lt;main+45&gt;        lea    0xe9b(%rip),%rdi        # 0x555555556 │
+</span></span><span style="display:flex;"><span>│   0x555555555169 &lt;main+52&gt;        mov    $0x0,%eax                             │
+</span></span><span style="display:flex;"><span>│   0x55555555516e &lt;main+57&gt;        call   0x555555555030 &lt;printf@plt&gt;           │
+</span></span><span style="display:flex;"><span>│   0x555555555173 &lt;main+62&gt;        mov    $0x0,%eax                             │
+</span></span><span style="display:flex;"><span>│   0x555555555178 &lt;main+67&gt;        leave                                        │
+</span></span><span style="display:flex;"><span>│   0x555555555179 &lt;main+68&gt;        ret                                          │
+</span></span><span style="display:flex;"><span>│   0x55555555517a                      nopw   0x0(%rax,%rax,1)                  │
+</span></span><span style="display:flex;"><span>└────────────────────────────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>native process 134526 In: main                           L5    PC: 0x55555555513d
+</span></span><span style="display:flex;"><span>(gdb) layout asm
+</span></span><span style="display:flex;"><span>(gdb)
+</span></span></code></pre></div></section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/gdb"
+      >GDB</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
+      ><span>Podman build container residual problem when the build process is forced to terminate</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

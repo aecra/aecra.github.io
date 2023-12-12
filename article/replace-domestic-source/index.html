@@ -1,0 +1,489 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>更换国内源 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="pip 国内源 豆瓣 http://pypi.douban.com/simple/ 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ 阿里云 https://mirrors.aliyun.com/pypi/simple/ 中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/ 临时更换 pip install pythonModuleName -i https://mirrors.aliyun.com/pypi/simple 永久更换 windows 直接在 user 目录中创建一个 pip 目录，如：C:\Users\xx\pip，" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="更换国内源">
+<meta itemprop="description" content="国内互联网的封闭性使得软件开发无法获取到国外的仓库信息，本文整理了自用技术的源更换方法。"><meta itemprop="datePublished" content="2021-03-24T16:44:54+00:00" />
+<meta itemprop="dateModified" content="2022-05-26T19:36:48+00:00" />
+<meta itemprop="wordCount" content="648">
+<meta itemprop="keywords" content="软件," />
+  
+  <meta property="og:title" content="更换国内源" />
+<meta property="og:description" content="国内互联网的封闭性使得软件开发无法获取到国外的仓库信息，本文整理了自用技术的源更换方法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/replace-domestic-source/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-24T16:44:54+00:00" />
+<meta property="article:modified_time" content="2022-05-26T19:36:48+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="更换国内源"/>
+<meta name="twitter:description" content="国内互联网的封闭性使得软件开发无法获取到国外的仓库信息，本文整理了自用技术的源更换方法。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/replace-domestic-source/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">更换国内源</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 24, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="pip">pip</h2>
+<h3 id="国内源">国内源</h3>
+<p>豆瓣 <code>http://pypi.douban.com/simple/</code></p>
+<p>清华大学 <code>https://pypi.tuna.tsinghua.edu.cn/simple/</code></p>
+<p>阿里云 <code>https://mirrors.aliyun.com/pypi/simple/</code></p>
+<p>中国科技大学 <code>https://pypi.mirrors.ustc.edu.cn/simple/</code></p>
+<h3 id="临时更换">临时更换</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install pythonModuleName -i https://mirrors.aliyun.com/pypi/simple
+</span></span></code></pre></div><h3 id="永久更换">永久更换</h3>
+<h4 id="windows">windows</h4>
+<p>直接在 user 目录中创建一个 pip 目录，如：C:\Users\xx\pip，新建文件 pip.ini，内容如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[global]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">index-url</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">https://mirrors.aliyun.com/pypi/simple/</span>
+</span></span></code></pre></div><h4 id="linux">Linux</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#创建目录</span>
+</span></span><span style="display:flex;"><span>mkdir -p ~/.pip
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#修改配置文件</span>
+</span></span><span style="display:flex;"><span>vim  ~/.pip/pip.conf
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#写入以下内容并保存</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>global<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>index-url <span style="color:#f92672">=</span> https://mirrors.aliyun.com/pypi/simple/
+</span></span></code></pre></div><h2 id="npm">npm</h2>
+<h3 id="cnpmhttpsgithubcomcnpmcnpm间接换源"><a href="https://github.com/cnpm/cnpm">cnpm</a>（间接换源）</h3>
+<p>Private npm registry and web for Company.</p>
+<p>安装并使用国内淘宝镜像源</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>npm install cnpm -g --registry<span style="color:#f92672">=</span>https://r.npm.taobao.org
+</span></span></code></pre></div><h3 id="直接换源">直接换源</h3>
+<p>单次使用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>npm install --registry<span style="color:#f92672">=</span>https://registry.npm.taobao.org
+</span></span></code></pre></div><p>永久使用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>npm config set registry https://registry.npm.taobao.org
+</span></span></code></pre></div><h2 id="ubuntu">Ubuntu</h2>
+<p>修改软件源配置文件 sources.list</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vim /etc/apt/sources.list
+</span></span></code></pre></div><p>注释掉全部内容(i)，在末尾加入如下数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+</span></span><span style="display:flex;"><span>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+</span></span><span style="display:flex;"><span># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+</span></span><span style="display:flex;"><span>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+</span></span><span style="display:flex;"><span># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+</span></span><span style="display:flex;"><span>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+</span></span><span style="display:flex;"><span># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+</span></span><span style="display:flex;"><span>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+</span></span><span style="display:flex;"><span># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># 预发布软件源，不建议启用
+</span></span><span style="display:flex;"><span># deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
+</span></span><span style="display:flex;"><span># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
+</span></span></code></pre></div><p>保存退出(Esc,!wq)，更新软件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>sudo apt-get upgrade
+</span></span></code></pre></div><h2 id="golang">Golang</h2>
+<h3 id="直接命令行配置">直接命令行配置</h3>
+<ol>
+<li>
+<p>启用 Go Modules 功能</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go env -w GO111MODULE<span style="color:#f92672">=</span>on
+</span></span></code></pre></div></li>
+<li>
+<p>配置 GOPROXY 环境变量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 官方镜像源</span>
+</span></span><span style="display:flex;"><span>go env -w GOPROXY<span style="color:#f92672">=</span>https://goproxy.io,direct
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 阿里镜像源</span>
+</span></span><span style="display:flex;"><span>go env -w GOPROXY<span style="color:#f92672">=</span>https://mirrors.aliyun.com/goproxy/,direct
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 七牛云 CDN</span>
+</span></span><span style="display:flex;"><span>go env -w GOPROXY<span style="color:#f92672">=</span>https://goproxy.cn,direct
+</span></span></code></pre></div></li>
+<li>
+<p>验证</p>
+<p><code>source ~/.bashrc</code> 后使用命令 <code>go env | grep GOPROXY</code> 查看配置是否成功。</p>
+</li>
+<li>
+<p>私有模块</p>
+<p>采用自有仓库，不经过镜像，可使用 <code>GOPRIVATE</code> 环境变量设置，多个使用逗号隔开。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go env -w GOPRIVATE<span style="color:#f92672">=</span>*.corp.example.com
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="使用系统环境变量配置">使用系统环境变量配置</h3>
+<ol>
+<li>
+<p>Linux / Mac 配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;export GO111MODULE=on&#34;</span> &gt;&gt; ~/.bashrc
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;export GOPROXY=https://goproxy.cn&#34;</span> &gt;&gt; ~/.bashrc
+</span></span><span style="display:flex;"><span>source ~/.bashrc
+</span></span></code></pre></div></li>
+<li>
+<p>Windows 配置</p>
+<p>单次使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$env:GO111MODULE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;on&#34;</span>
+</span></span><span style="display:flex;"><span>$env:GOPROXY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://goproxy.cn&#34;</span>
+</span></span></code></pre></div><p>永久使用：</p>
+<p>在系统个环境变量编辑器中设置变量 <code>GO111MODULE</code>，值为 <code>on</code>；变量 <code>GOPROXY</code>，值为 <code>goproxy.cn</code>。</p>
+</li>
+</ol>
+<h2 id="银弹">银弹</h2>
+<p>以上更换国内源的方法实在是过于繁杂，更好的方法是使用系统代理直接将本机流量转发到处于正常的网络环境的机器中。参见新文章 <a href="/article/configure-a-smooth-network-environment-for-the-server/">为服务器配置畅通的网络环境</a>。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/%E8%BD%AF%E4%BB%B6"
+      >软件</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/"
+      ><span class="mr-1.5">←</span><span>最小生成树（kruskal 算法）</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/last-common-ancestor-lca/"
+      ><span>最近公共祖先lca</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

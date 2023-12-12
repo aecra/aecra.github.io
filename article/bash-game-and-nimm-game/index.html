@@ -1,0 +1,427 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>巴什（Bash）博弈和尼姆（Nimm）博弈 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="巴什（Bash）博弈 题目： 只有一堆 n 个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取 m 个。最后取光者得胜。问是否存在先手必胜的" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="巴什（Bash）博弈和尼姆（Nimm）博弈">
+<meta itemprop="description" content="只有一堆n个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取m个。最后取光者得胜。问是否存在先手必胜的策略。"><meta itemprop="datePublished" content="2021-02-25T14:35:42+00:00" />
+<meta itemprop="dateModified" content="2021-02-25T14:35:42+00:00" />
+<meta itemprop="wordCount" content="1203">
+<meta itemprop="keywords" content="博弈论," />
+  
+  <meta property="og:title" content="巴什（Bash）博弈和尼姆（Nimm）博弈" />
+<meta property="og:description" content="只有一堆n个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取m个。最后取光者得胜。问是否存在先手必胜的策略。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/bash-game-and-nimm-game/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-25T14:35:42+00:00" />
+<meta property="article:modified_time" content="2021-02-25T14:35:42+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="巴什（Bash）博弈和尼姆（Nimm）博弈"/>
+<meta name="twitter:description" content="只有一堆n个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取m个。最后取光者得胜。问是否存在先手必胜的策略。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/bash-game-and-nimm-game/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">巴什（Bash）博弈和尼姆（Nimm）博弈</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 25, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="巴什bash博弈">巴什（Bash）博弈</h2>
+<p>题目： 只有一堆 n 个物品，两个人轮流从这堆物品中取物， 规定每次至少取一个，最多取 m 个。最后取光者得胜。问是否存在先手必胜的策略。</p>
+<p>首先引入 N（先手必胜）状态和 P（先手必败）状态的概念。</p>
+<p>什么是 N（先手必胜）状态？如果我能使对方的状态为 P（先手必败）状态，那么我当前的状态不就是 N（先手必胜）状态了吗？</p>
+<p>对于本题，可以从简单的状态入手，当石子数为 0 时为一个 P 状态，则石子数为 [1,m] 时是 N 状态，因为总可以一次拿完。而石子数为 m+1 时，先手无论如何操作，后手总可以拿完剩下的石子，故是一个 P 状态。继续向前推发现，当石子数为 m+1 的倍数时，与上述情况是相同的，先手必败；否则，先手总可以让后手处于上述状态，后手必败。</p>
+<h2 id="尼姆nimm博弈">尼姆（Nimm）博弈</h2>
+<p>题目：两个人玩游戏，有 n 堆物品，每次操作可以选一堆物品去拿，最少拿一个，无物品可取者为负。问是否存在先手必胜的策略。</p>
+<p>那我们就来总结一下简单的 P（先手必败）状态：</p>
+<ul>
+<li>
+<p>1.每个堆的物品数都为 0 //根本就没有物品取</p>
+</li>
+<li>
+<p>2.有两个堆且两个堆的物品数相同 //如果我取其中的一个堆，对方就对另一个堆进行相同的操作，怎样都是我去面对状态 1 //貌似干掉了威佐夫（Wythoff）博弈</p>
+</li>
+</ul>
+<p>对上面状态 1 进行分析可知，只有一个堆的时候，我就能使对方必败，对状态 2 进行分析，如果有两个堆且物品数目不等，我就能让他们相等，我就必胜。</p>
+<p>再对状态 2 分析，将两个堆推广到 2*n 个堆，且每个堆都有与其相同的堆，那么这种状态依旧是 P（先手必败）状态。</p>
+<p>再进一步推广，一个结论就是<strong>亦或和值为零则后手胜，否则先手胜</strong></p>
+<p>对于上面分析的状态，毫无疑问满足这个结论，但一般性地来讲是否符合呢？而又怎样理解呢？</p>
+<p>先说思考方向：<strong>枪打出头鸟</strong></p>
+<p>如果有成对相同的堆那就无需考虑，因为对手的操作，我完全可以复制过来形成状态 2，而这种成对亦或为 0，对结果没影响，可以剔除掉进行一下讨论</p>
+<p>此时将思维从十进制转换成二进制，将所有的数目看成二进制，且思维不要停留在单独的堆上（因为是亦或运算啊）</p>
+<p>设 k=a[1]^a[2]^a[3]^&hellip;^a[n]。</p>
+<p>如果 k==0，说明没有特立独行的位数，</p>
+<p>（：哎，刚才不是堆吗？怎么开始看位数了？参考系都不一样了啊？</p>
+<p>那我们想一下，如果 k!=0，说明存在一个 1 在最高位，那我们就可以对有这个最高位的堆进行操作去让其他的位（不管是什么，最高位都比他们大啊）不再特立独行。</p>
+<p>（：不对啊？怎么又跑到特立独行的位数了啊？</p>
+<p>我不是先证明如果 k!=0 时，情况反转吗？</p>
+<p>（：那你凭什么保证 k==0 时必输这个结论正确啊？</p>
+<p>接下来思考一下，如果我随便取了，k 是不是就不等于 0 了？因为相当于亦或了我刚才的操作数，而我不可能不取物品滴</p>
+<p>而这种规则下，我如果总是可以保证 k==0 时不是我面对的状态，我就能去抵消对手的操作而使结果变为 k==0，最后，是对手面对的 0，</p>
+<p>（：？？？？？</p>
+<p>可以看作是<strong>打地鼠</strong>，只要 k 中有 1 冒出来，我就去消灭，如此，反正我不是最后遇到零的，管他还有多少堆，堆中有多少个呢</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA"
+      >博弈论</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/chain-forward-star/"
+      ><span class="mr-1.5">←</span><span>链式前向星</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/what-about-the-original-blog-after-using-hexo/"
+      ><span>使用 Hexo 之后原有博客怎么办？</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

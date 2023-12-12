@@ -1,0 +1,432 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Podman 构建过程强制终止时构建容器残留问题 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="问题描述 先简要描述一下，在构建 Podman 过程中，如果使用 Ctrl &#43; C 强制终止，会使构建中的容器残留在 Podman 中，不仅占用空间还影响无用镜像的删除。 之前多次构建时" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Podman 构建过程强制终止时构建容器残留问题">
+<meta itemprop="description" content="使用 Podman 构建镜像时如果使用 Ctrl &#43; C 强制终止，会使构建中的容器残留在 Podman 中，不仅占用空间还影响无用镜像的删除。"><meta itemprop="datePublished" content="2022-08-16T10:43:50+00:00" />
+<meta itemprop="dateModified" content="2022-08-16T10:43:50+00:00" />
+<meta itemprop="wordCount" content="609">
+<meta itemprop="keywords" content="podman," />
+  
+  <meta property="og:title" content="Podman 构建过程强制终止时构建容器残留问题" />
+<meta property="og:description" content="使用 Podman 构建镜像时如果使用 Ctrl &#43; C 强制终止，会使构建中的容器残留在 Podman 中，不仅占用空间还影响无用镜像的删除。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-16T10:43:50+00:00" />
+<meta property="article:modified_time" content="2022-08-16T10:43:50+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Podman 构建过程强制终止时构建容器残留问题"/>
+<meta name="twitter:description" content="使用 Podman 构建镜像时如果使用 Ctrl &#43; C 强制终止，会使构建中的容器残留在 Podman 中，不仅占用空间还影响无用镜像的删除。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Podman 构建过程强制终止时构建容器残留问题</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Aug 16, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="问题描述">问题描述</h2>
+<p>先简要描述一下，在构建 <code>Podman</code> 过程中，如果使用 <code>Ctrl + C</code> 强制终止，会使构建中的容器残留在 <code>Podman</code> 中，不仅占用空间还影响无用镜像的删除。</p>
+<p>之前多次构建时有强制中断的情况，所以我的问题比较严重才发现，要不然一个两个无法删除的镜像还引不起重视。</p>
+<p>我的镜像列表：</p>
+<pre tabindex="0"><code class="language-log" data-lang="log">REPOSITORY                TAG         IMAGE ID      CREATED       SIZE
+&lt;none&gt;                    &lt;none&gt;      6b97c9f7f89f  2 days ago    1.67 GB
+&lt;none&gt;                    &lt;none&gt;      37616f79cf88  2 days ago    992 MB
+&lt;none&gt;                    &lt;none&gt;      e5028987de23  2 days ago    1.67 GB
+&lt;none&gt;                    &lt;none&gt;      29ebb80d809d  7 days ago    992 MB
+&lt;none&gt;                    &lt;none&gt;      30994a0dd3f6  7 days ago    1.67 GB
+&lt;none&gt;                    &lt;none&gt;      eea90f9d3610  7 days ago    992 MB
+&lt;none&gt;                    &lt;none&gt;      e2f2eb80c593  7 days ago    1.67 GB
+&lt;none&gt;                    &lt;none&gt;      339be923556e  7 days ago    930 MB
+&lt;none&gt;                    &lt;none&gt;      bc390bc57574  8 days ago    930 MB
+docker.io/library/golang  1.18.4      e3c0472b1b62  4 weeks ago   988 MB
+&lt;none&gt;                    &lt;none&gt;      57e0342b3532  5 weeks ago   991 MB
+&lt;none&gt;                    &lt;none&gt;      8b5845455f80  5 weeks ago   1.67 GB
+&lt;none&gt;                    &lt;none&gt;      803d3146f7dd  7 weeks ago   1 GB
+docker.io/library/alpine  latest      e66264b98777  2 months ago  5.82 MB
+docker.io/library/golang  1.17.5      276895edf967  7 months ago  963 MB
+docker.io/library/node    16.13.0     5964aa70c11d  9 months ago  928 MB
+</code></pre><p>当使用 <code>podman image prune</code> 删除无用镜像时，依旧剩余如上镜像，这时就想到删除单个镜像，如下删除列表中的第一个镜像：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>podman rmi 6b97c9f7f89f
+</span></span></code></pre></div><p>此时会报错:</p>
+<pre tabindex="0"><code class="language-log" data-lang="log">Error: 1 errors occurred:
+        * Image used by b63f5d5c99dd8bbb17510f58a9dfa2fe5b3a71ba57257aec6aa53c1ec4366db8: image is in use by a container
+</code></pre><p>但这个容器使用 <code>pdoman ps -a</code> 查看并不存在。</p>
+<p>经过一番搜索发现，使用 <code>podman ps --all --storage</code> 可以查询当前存储的容器和镜像，其中就包含了构建过程中因强制终止而遗留的容器，如下：</p>
+<pre tabindex="0"><code class="language-log" data-lang="log">CONTAINER ID  IMAGE                                                                                          COMMAND     CREATED      STATUS      PORTS       NAMES
+f735cc1062a7  docker.io/library/golang:1.17.5                                                                buildah     7 weeks ago  storage                 golang-working-container
+fe95fad6d0ec  docker.io/library/98ee13c4afe4a5a88fb6e3464a90ea3838e62806e9e5e025bedaaae2db25c653-tmp:latest  buildah     7 weeks ago  storage                 8e860db1f8ded07d0d7083ee05ab5c17a7d41519b04ef3127bd3921f8b3df6ff-working-containerbf7d43b6e1de  docker.io/library/b1d4f01a06501868672f31dee8be2506c18dbe938a0a12a2edb1e99fb1cb0b1d-tmp:latest  buildah     7 weeks ago  storage                 803d3146f7ddce32b8f2e9f4f9ec7d51607f5b3ddc618758aa55634d0aa1576e-working-containere5fba2ea7216  docker.io/library/golang:1.17.5                                                                buildah     7 weeks ago  storage                 golang-working-container-1
+7b94635d2311  docker.io/library/98ee13c4afe4a5a88fb6e3464a90ea3838e62806e9e5e025bedaaae2db25c653-tmp:latest  buildah     7 weeks ago  storage                 8e860db1f8ded07d0d7083ee05ab5c17a7d41519b04ef3127bd3921f8b3df6ff-working-container-1
+3297183ec5dd  docker.io/library/b1d4f01a06501868672f31dee8be2506c18dbe938a0a12a2edb1e99fb1cb0b1d-tmp:latest  buildah     7 weeks ago  storage                 803d3146f7ddce32b8f2e9f4f9ec7d51607f5b3ddc618758aa55634d0aa1576e-working-container-1
+# 后面还有非常多的项目，我们只列举了一部分。
+</code></pre><p>现在的任务就是如何解决这些垃圾数据了。</p>
+<h2 id="解决方法">解决方法</h2>
+<p>因为 <code>Podman</code> 只是一个容器管理工具，它的是使用 <code>buildah</code> 来构建镜像的，所以我们可以直接使用 <code>buildah</code> 来清理构建过程中残留的容器，使用方法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>buildah rm --all
+</span></span></code></pre></div><p>该方法不会删除 <code>podman iamges</code> 中可以查询到的镜像，因为这些构建好的镜像是交给 <code>podman</code> 了的，所以可以放心地删除。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/podman"
+      >podman</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/use-priority-queue-in-golang/"
+      ><span class="mr-1.5">←</span><span>在 Golang 中使用优先队列</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/"
+      ><span>wsl 中构建 Golang 项目时网络代理引起构建卡壳的问题</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

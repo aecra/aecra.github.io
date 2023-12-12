@@ -1,0 +1,558 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Tarjan 强连通算法 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="定义 1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg&#43;（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。 2、" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Tarjan 强连通算法">
+<meta itemprop="description" content="本文详细介绍了 tarjan 强连通分量算法，重点在算法思路的分解和描述。"><meta itemprop="datePublished" content="2021-02-19T14:42:09+00:00" />
+<meta itemprop="dateModified" content="2021-02-19T14:42:09+00:00" />
+<meta itemprop="wordCount" content="2851">
+<meta itemprop="keywords" content="算法,图论," />
+  
+  <meta property="og:title" content="Tarjan 强连通算法" />
+<meta property="og:description" content="本文详细介绍了 tarjan 强连通分量算法，重点在算法思路的分解和描述。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-19T14:42:09+00:00" />
+<meta property="article:modified_time" content="2021-02-19T14:42:09+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Tarjan 强连通算法"/>
+<meta name="twitter:description" content="本文详细介绍了 tarjan 强连通分量算法，重点在算法思路的分解和描述。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Tarjan 强连通算法</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 19, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="定义">定义</h2>
+<ul>
+<li>
+<p>1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg+（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。</p>
+</li>
+<li>
+<p>2、如果在有向图 G 中，有一条&lt;u，v&gt;有向道路，则 v 称为 u 可达的，或者说，从 u 可达 v。</p>
+</li>
+<li>
+<p>3、如果有向图 G 的任意两个顶点都互相可达，则称图 G 是强连通图，如果有向图 G 存在两顶点 u 和 v 使得 u 不能到 v，或者 v 不能到 u，则称图 G 是强非连通图。</p>
+</li>
+<li>
+<p>4、如果有向图 G 不是强连通图，他的子图 G2 是强连通图，点 v 属于 G2，任意包含 v 的强连通子图也是 G2 的子图，则乘 G2 是有向图 G 的极大强连通子图，也称强连通分量。</p>
+</li>
+<li>
+<p>5、什么是强连通？强连通其实就是指图中有两点 u，v。使得能够找到有向路径从 u 到 v 并且也能够找到有向路径从 v 到 u，则称 u，v 是强连通的。</p>
+</li>
+</ul>
+<h2 id="定义的理解">定义的理解</h2>
+<p>既然我们现在已经了解了什么是强连通，和什么是强连通分量，可能大家对于定义还是理解的不透彻，我们不妨引入一个图加强大家对强连通分量和强连通的理解：</p>
+<p><img src="https://static.aecra.cn/markdown/202102/42025a2e134f6c4f820fcd853af111f5.jpg" alt="42025a2e134f6c4f820fcd853af111f5"></p>
+<p>标注棕色线条框框的三个部分就分别是一个强连通分量，也就是说，这个图中的强连通分量有 3 个。</p>
+<p>其中我们分析最左边三个点的这部分：</p>
+<p>其中 1 能够到达 0,0 也能够通过经过 2 的路径到达 1，1 和 0 就是强连通的。</p>
+<p>其中 1 能够通过 0 到达 2,2 也能够到达 1，那么 1 和 2 就是强连通的。</p>
+<p>&hellip;………………</p>
+<p>同理，我们能够看得出来这一部分确实是强连通分量，也就是说，强连通分量里边的任意两个点，都是互相可达的。</p>
+<p>那么如何求强连通分量的个数呢？另外强连通算法能够实现什么一些基本操作呢？我们继续详解。</p>
+<h2 id="tarjan-算法详解">Tarjan 算法详解</h2>
+<p>接着我们开始接触算法，讨论如何用 Tarjan 算法求强连通分量个数：</p>
+<p>Tarjan 算法，是一个基于 Dfs 的算法（如果大家还不知道什么是 Dfs，自行百度学习），假设我们要先从 0 号节点开始 Dfs，我们发现一次 Dfs 我萌就能遍历整个图（树），而且我们发现，在 Dfs 的过程中，我们深搜到了其他强连通分量中，那么俺们 Dfs 之后如何判断他喵的哪个和那些节点属于一个强连通分量呢？我们首先引入两个数组：</p>
+<p>①dfn[]</p>
+<p>②low[]</p>
+<p>第一个数组 dfn 我们用来标记当前节点在深搜过程中是第几个遍历到的点。第二个数组是整个算法核心数组，我们稍后再说，这个时候我们不妨在纸上画一画写一写，搞出随意一个 Dfs 出来的 dfn 数组来观察一下（假设我们从节点 0 开始的 Dfs，其中一种可能的结果是这样滴）：</p>
+<p><img src="https://static.aecra.cn/markdown/202102/6e7c77b1ef2b761c773141c4bfc2d55e.jpg" alt="6e7c77b1ef2b761c773141c4bfc2d55e"></p>
+<p>这个时候我们回头来看第二个数组要怎样操作，我们定义 low[u]=min(low[u]，low[v]（即使 v 搜过了也要进行这步操作，但是 v 一定要在栈内才行）)，u 代表当前节点，v 代表其能到达的节点。这个数组在刚刚到达节点 u 的时候初始化：low[u]=dfn[u]。然后在进行下一层深搜之后回溯回来的时候，维护 low[u]。如果我们发现了某个节点回溯之后的 low[u]值还是==dfn[u]的值，那么这个节点无疑就是一个关键节点：从这个节点能够到达其强连通分量中的其他节点，但是没有其他属于这个强连通分量以外的点能够到达这个点，所以这个点的 low[u]值维护完了之后还是和 dfn[u]的值一样，口述可能理解还是相对费劲一些，我们走一遍流程图：</p>
+<ul>
+<li>
+<p>① 首先进入 0 号节点，初始化其 low[0]=dfn[0]=1，然后深搜到节点 2，初始化其：low[2]=dfn[2]=2，然后深搜到节点 1，初始化其：low[1]=dfn[1]=3；</p>
+</li>
+<li>
+<p>② 然后从节点 1 开始继续深搜，发现 0 号节点已经搜过了，没有继续能够搜的点了，开始回溯维护其值。low[1]=min（low[1]，low[0]）=1；low[2]=min（low[2]，low[1]）=1；low[0]=min（low[0]，low[2]）=1；</p>
+</li>
+<li>
+<p>③ 这个时候猛然发现，low[0]==dfn[0]，这个时候不要太开心，就断定一定 0 号节点是一个关键点，别忘了，这个时候还有 3 号节点没有遍历，我们只有在其能够到达的节点全部判断完之后，才能够下结论，所以我们继续 Dfs。</p>
+</li>
+<li>
+<p>④ 继续深搜到 3 号节点，初始化其 low[3]=dfn[3]=4，然后深搜到 4 号节点，初始化其：low[4]=dfn[4]=5，这个时候发现深搜到底，回溯，因为节点 4 没有能够到达的点，所以 low[4]也就没有幸进行维护即：low[4]=dfn[4]（这个点一定是强连通分量的关键点，但是我们先忽略这个点，这个点没有代表性，一会分析关键点的问题），然后回溯到 3 号节点，low[3]=min（low[3]，low[4]）=4；发现 low[3]==dfn[3]那么这个点也是个关键点，我们同样忽略掉。</p>
+</li>
+<li>
+<p>⑤ 最终回溯到节点 0，进行最后一次值的维护：low[0]=min（low[0]，low[3]）=0，这个时候我们猛然发现其 dfn[0]==low[0]，根据刚才所述，那么这个点就是一个关键点：能够遍历其属强连通分量的点的起始点，而且没有其他点属于其他强连通分量能够有一条有向路径连到这个节点来的节点。</p>
+</li>
+</ul>
+<p>※※大家仔细理解一下这句话，因为这个点属于一个强连通分量，而且强连通分量中的任意两个节点都是互达的，也就是说强连通分量中一定存在环，这个最后能够回到 0 号节点的 1 号节点一定有机会维护 low[1]，因为 0 号节点是先进来的，所以其 low[1]的值也一定会跟着变小，然后在回溯的过程中，其属一个强连通分量的所有点都会将 low[u]值维护成 low[0]，所以这个 0 号节点就是这个关键点：能够遍历其属强连通分量的起始点而且这样的起始点一定只有一个，所以只要发现了一个这样的关键起始点，那么就一定发现了一个强连通分量。而且这个节点没有其他点属于其他强连通分量能够有一条有向路径连到这个节点来的节点：如果这样的点存在，那么这些个点应该属于同一个强连通分量。</p>
+<p>那么综上所述，相信大家也就能够理解为什么 dfn[u]==low[u]的时候，我们就可以判断我们发现了一个强连通分量了。</p>
+<h2 id="代码示例">代码示例</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdio&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stack&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstring&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m, idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, number <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> head[<span style="color:#ae81ff">100</span>]; <span style="color:#75715e">//用于链式前向星
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> ins[<span style="color:#ae81ff">100</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dfn[<span style="color:#ae81ff">100</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>}, low[<span style="color:#ae81ff">100</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> Belong[<span style="color:#ae81ff">100</span>]; <span style="color:#75715e">//染色，每个强连通分量一个颜色
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> s;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">edge</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> v, next;
+</span></span><span style="display:flex;"><span>} e[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> u, <span style="color:#66d9ef">int</span> v)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  e[k].v <span style="color:#f92672">=</span> v;
+</span></span><span style="display:flex;"><span>  e[k].next <span style="color:#f92672">=</span> head[u];
+</span></span><span style="display:flex;"><span>  head[u] <span style="color:#f92672">=</span> k<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readdata</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> a, b;
+</span></span><span style="display:flex;"><span>  memset(head, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(head));
+</span></span><span style="display:flex;"><span>  scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>n, <span style="color:#f92672">&amp;</span>m);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>a, <span style="color:#f92672">&amp;</span>b);
+</span></span><span style="display:flex;"><span>    add(a, b);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">tarjan</span>(<span style="color:#66d9ef">int</span> u)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> v;
+</span></span><span style="display:flex;"><span>  dfn[u] <span style="color:#f92672">=</span> low[u] <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>idx; <span style="color:#75715e">//每次dfs，u的次序号增加1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  s.push(u);          <span style="color:#75715e">//将u入栈，栈就是为了回溯染色
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  ins[u] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;          <span style="color:#75715e">//标记u在栈内
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> head[u]; i <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i <span style="color:#f92672">=</span> e[i].next)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//访问从u出发的边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    v <span style="color:#f92672">=</span> e[i].v;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>dfn[v])
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//如果v没被处理过
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      tarjan(v); <span style="color:#75715e">//dfs(v)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      low[u] <span style="color:#f92672">=</span> min(low[u], low[v]); <span style="color:#75715e">//u点能到达的最小次序号是它自己能到达点的最小次序号和连接点v能到达点的最小次序号中较小的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (ins[v])
+</span></span><span style="display:flex;"><span>      low[u] <span style="color:#f92672">=</span> min(low[u], dfn[v]); <span style="color:#75715e">//如果v在栈内，u点能到达的最小次序号是它自己能到达点的最小次序号和v的次序号中较小的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (dfn[u] <span style="color:#f92672">==</span> low[u])
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//回溯，对该强连通分量内的点染色
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    number<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      v <span style="color:#f92672">=</span> s.top();
+</span></span><span style="display:flex;"><span>      s.pop();
+</span></span><span style="display:flex;"><span>      ins[v] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>      Belong[v] <span style="color:#f92672">=</span> number;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">while</span> (u <span style="color:#f92672">!=</span> v);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">work</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>dfn[i])
+</span></span><span style="display:flex;"><span>      tarjan(i);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;共有%d强连通分量，它们是:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, number);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> number; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;第%d个:&#34;</span>, i);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (Belong[j] <span style="color:#f92672">==</span> i)
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;%d &#34;</span>, j);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  readdata();
+</span></span><span style="display:flex;"><span>  work();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/%E7%AE%97%E6%B3%95"
+      >算法</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/%E5%9B%BE%E8%AE%BA"
+      >图论</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/floyd-minimum-ring/"
+      ><span class="mr-1.5">←</span><span>Floyd 最小环算法</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/shortest-path-problem/"
+      ><span>最短路问题</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

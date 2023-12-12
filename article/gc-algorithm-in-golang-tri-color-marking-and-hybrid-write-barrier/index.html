@@ -1,0 +1,456 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Golang 中的 GC 算法：三色标记与混合写屏障 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="标记清除法 在 v1.0~v1.3 版本中都是用的是标记清除算法。首先我们需要了解 STW（Stop The World）是什么，顾名思义，STW 是将当前程序完全暂停，不执" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Golang 中的 GC 算法：三色标记与混合写屏障">
+<meta itemprop="description" content="Golang 中 GC 算法的实现思路，为什么使用三色标记法，写屏障又是什么，混合写屏障解决了哪些问题。"><meta itemprop="datePublished" content="2022-10-20T20:07:32+00:00" />
+<meta itemprop="dateModified" content="2022-10-20T20:07:32+00:00" />
+<meta itemprop="wordCount" content="1478">
+<meta itemprop="keywords" content="Go," />
+  
+  <meta property="og:title" content="Golang 中的 GC 算法：三色标记与混合写屏障" />
+<meta property="og:description" content="Golang 中 GC 算法的实现思路，为什么使用三色标记法，写屏障又是什么，混合写屏障解决了哪些问题。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-20T20:07:32+00:00" />
+<meta property="article:modified_time" content="2022-10-20T20:07:32+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Golang 中的 GC 算法：三色标记与混合写屏障"/>
+<meta name="twitter:description" content="Golang 中 GC 算法的实现思路，为什么使用三色标记法，写屏障又是什么，混合写屏障解决了哪些问题。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Golang 中的 GC 算法：三色标记与混合写屏障</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Oct 20, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="标记清除法">标记清除法</h2>
+<p>在 v1.0~v1.3 版本中都是用的是标记清除算法。首先我们需要了解 STW（Stop The World）是什么，顾名思义，STW 是将当前程序完全暂停，不执行用户程序并开始垃圾回收。标记清除算法的流程如下：</p>
+<ol>
+<li>Stop the world；</li>
+<li>标记：从根对象开始标记，将可达对象和不可达对象区分开；</li>
+<li>清除：将不可达对象回收；</li>
+<li>恢复用户程序的执行。</li>
+</ol>
+<p>标记清除算法如此简单粗暴很明显有非常突出的性能问题，体现在</p>
+<ol>
+<li>STW 会导致程序卡顿，对程序相应带来不可接受的延时；</li>
+<li>标记过程需要扫描整个堆空间；</li>
+<li>清除数据会产生堆碎片，这里需要参照内存分配算法。</li>
+</ol>
+<p>v1.0 是完全串行的标记清除算法，v1.1 实现了多核系统的并行垃圾收集和标记，v1.3 运行时基于只有指针类型的值包含指针的假设增加了对栈内存的精确扫描支持，实现了真正精确的垃圾收集。</p>
+<h2 id="三色标记法">三色标记法</h2>
+<p>在 v1.5 中 Golang 实现了三色标记法，三色标记法的流程如下：</p>
+<ol>
+<li>所有对象都标记为白色；</li>
+<li>从根节点开始将对象标记为灰色；</li>
+<li>从灰色及各种选择一个灰色对象并将其标记为黑色；</li>
+<li>将该黑色对象指向的对象都标记为灰色；</li>
+<li>重复步骤2、步骤3 直到不存在灰色对象。</li>
+<li>回收白色对象。</li>
+</ol>
+<h2 id="写屏障">写屏障</h2>
+<h3 id="三色不变式">三色不变式</h3>
+<p>如果我们在使用三色标记法时采用和标记清除法相同的 STW 措施时肯定可以正常运行，但正是为了解决 STW 时间过长而采用的三色标记法，所以程序和GC是要并行的，如果有如下情况将会回收不应回收的对象：</p>
+<ol>
+<li>黑色对象指向白色对象；</li>
+<li>直接或间接指向该白色对象的灰色对象切断了依赖链条；</li>
+</ol>
+<p>这种情况在标记完之后会将该白色对象清除掉，而黑色对象将产生悬浮指针问题。</p>
+<p><strong>强三色不变式</strong>：不允许黑色对象引用白色对象</p>
+<p><strong>弱三色不变式</strong>：黑色对象可以引用白色对象，但是这个白色对象必须存在其他灰色对象对它的引用，或者可达它的链路上游存在灰色对象。</p>
+<p>而为了实现三色不变式，引入了屏障机制。</p>
+<h3 id="插入写屏障">插入写屏障</h3>
+<p>写屏障这个名字如果没有接触过会感到很迷惑，其实它就是在进行写操作之前添加额外的处理，可以看作对函数的进一步封装。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>writePointer(slot, ptr):
+</span></span><span style="display:flex;"><span>    shade(ptr)
+</span></span><span style="display:flex;"><span>    *slot = ptr
+</span></span></code></pre></div><p>上述插入写屏障的伪代码非常好理解，每当执行类似 <code>*slot = ptr</code> 的表达式时，我们会执行上述写屏障通过 <code>shade</code> 函数尝试改变指针的颜色。如果 <code>ptr</code> 指针是白色的，那么该函数会将该对象设置成灰色，其他情况则保持不变。</p>
+<p>通过这种方法就可以保证强三色不变式。</p>
+<p>因为栈上的对象在垃圾收集中也会被认为是根对象，所以为了保证内存的安全，插入写屏障必须为栈上的对象增加写屏障，而用户代码执行过程中对会对栈上的数据频繁读写，所以会大幅增加写入的额外开销；另一种方法是不对栈上的空间开启插入写屏障，而是在标记阶段完成后 Stop the World，并对栈上的对象进行扫描，这两种方法各有利弊。</p>
+<h3 id="删除写屏障">删除写屏障</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>writePointer(slot, ptr)
+</span></span><span style="display:flex;"><span>    shade(*slot)
+</span></span><span style="display:flex;"><span>    *slot = ptr
+</span></span></code></pre></div><p>被删除对象，如果自身为灰色或者白色，那么被标记为灰色。</p>
+<p>通过这种方法就可以保证弱三色不变式。</p>
+<p>这种方式的缺点是，对于本次要删除的对象，只有在下一轮之后才会被清除。</p>
+<h3 id="混合写屏障">混合写屏障</h3>
+<p>v1.8 使用了<strong>混合写屏障</strong>将垃圾收集时最坏的 STW 时间缩短至 0.05ms 以内。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>writePointer(slot, ptr):
+</span></span><span style="display:flex;"><span>    shade(*slot)
+</span></span><span style="display:flex;"><span>    if current stack is grey:
+</span></span><span style="display:flex;"><span>        shade(ptr)
+</span></span><span style="display:flex;"><span>    *slot = ptr
+</span></span></code></pre></div><p>该写屏障会<strong>将被覆盖的对象标记成灰色并在当前 goroutine 的栈没有扫描时将新对象也标记成灰色</strong>。</p>
+<p>标记阶段开始时<strong>将栈上的可达对象全部扫描并标记为黑色</strong>。</p>
+<p>在垃圾收集的标记阶段，我们需要<strong>将创建的所有新对象都标记成黑色</strong>，防止新分配的栈内存和堆内存中的对象被错误地回收，同时因为栈中的对象在标记阶段最终都会变为黑色，所以不再需要重新扫描栈空间。</p>
+<p>通过这种方法就可以保证变形的弱三色不变式。</p>
+<p>关于 <code>if current stack is grey</code> 的问题，这个判断如果单纯看写屏障不容易搞明白适用条件，这里的标记阶段是并发执行的，当涉及到不同 goroutine 的操作时，例如 channel 带来的变量复制情况，会在不同的栈上进行操作，这里是为了防止另一个栈将我们需要的对象进行回收。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/go"
+      >Go</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/brief-instructions-for-using-gdb/"
+      ><span class="mr-1.5">←</span><span>GDB 简要使用说明</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/use-priority-queue-in-golang/"
+      ><span>在 Golang 中使用优先队列</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

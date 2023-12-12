@@ -1,0 +1,788 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>最短路问题 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="弗洛伊德算法 通过中间节点 k 来实现 i 和 j 的距离缩短，空间和时间复杂度都为 n3，一般数据在 400 以内可以使用。 for (int i = 0; i &lt; n; i&#43;&#43;) for (int j = 0; j &lt; n; j&#43;&#43;) for" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="最短路问题">
+<meta itemprop="description" content="这篇文章展示了常见的弗洛伊德算法、迪杰斯特拉算法、bellman-ford 算法、SPFA 算法的具体实现，但缺乏具体的文字阐释，同样的，以后补充。"><meta itemprop="datePublished" content="2021-02-18T20:52:34+00:00" />
+<meta itemprop="dateModified" content="2021-08-12T16:18:35+00:00" />
+<meta itemprop="wordCount" content="2032">
+<meta itemprop="keywords" content="算法,图论," />
+  
+  <meta property="og:title" content="最短路问题" />
+<meta property="og:description" content="这篇文章展示了常见的弗洛伊德算法、迪杰斯特拉算法、bellman-ford 算法、SPFA 算法的具体实现，但缺乏具体的文字阐释，同样的，以后补充。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/shortest-path-problem/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-18T20:52:34+00:00" />
+<meta property="article:modified_time" content="2021-08-12T16:18:35+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="最短路问题"/>
+<meta name="twitter:description" content="这篇文章展示了常见的弗洛伊德算法、迪杰斯特拉算法、bellman-ford 算法、SPFA 算法的具体实现，但缺乏具体的文字阐释，同样的，以后补充。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/shortest-path-problem/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">最短路问题</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 18, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="弗洛伊德算法">弗洛伊德算法</h2>
+<p>通过中间节点 k 来实现 i 和 j 的距离缩短，空间和时间复杂度都为 n3，一般数据在 400 以内可以使用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> n; k<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (ai <span style="color:#f92672">&lt;</span> inf <span style="color:#f92672">&amp;&amp;</span> ak <span style="color:#f92672">&lt;</span> inf)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (ai <span style="color:#f92672">+</span> ak <span style="color:#f92672">&lt;</span> ai)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          ai <span style="color:#f92672">=</span> ai <span style="color:#f92672">+</span> ak;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span></code></pre></div><h2 id="迪杰斯特拉算法">迪杰斯特拉算法</h2>
+<p>指定一个点到其余各个顶点的最短路径，也叫“单源最短路径”。</p>
+<p>矩阵存储边代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> e10, dis[<span style="color:#ae81ff">10</span>], book[<span style="color:#ae81ff">10</span>], n, m, t1, t2, t3, u, v, min;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> inf <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">30</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//读入n和m，n表示顶点个数，m表示边的条数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>n, <span style="color:#f92672">&amp;</span>m);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> m; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> j)
+</span></span><span style="display:flex;"><span>      ei <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>      ei <span style="color:#f92672">=</span> inf;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//读入边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  scanf(<span style="color:#e6db74">&#34;%d%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>t1, <span style="color:#f92672">&amp;</span>t2, <span style="color:#f92672">&amp;</span>t3);
+</span></span><span style="display:flex;"><span>  et1 <span style="color:#f92672">=</span> t3;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//初始化dis数组，这是1号顶点到其余各个顶点的初始化路程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  dis[i] <span style="color:#f92672">=</span> e1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//book数组初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  book[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>book[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//核心算法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//找到离1号点最近的顶点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  min <span style="color:#f92672">=</span> inf;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (book[j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> dis[j] <span style="color:#f92672">&lt;</span> min)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      min <span style="color:#f92672">=</span> dis[j];
+</span></span><span style="display:flex;"><span>      u <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  book[u] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> v <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; v <span style="color:#f92672">&lt;=</span> n; v<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (eu <span style="color:#f92672">&lt;</span> min)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (dis[v] <span style="color:#f92672">&gt;</span> dis[u] <span style="color:#f92672">+</span> eu)
+</span></span><span style="display:flex;"><span>        dis[v] <span style="color:#f92672">=</span> dis[u] <span style="color:#f92672">+</span> eu;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//输出结果
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;%d &#34;</span>, dis[i]);
+</span></span></code></pre></div><p>链式前向星存储边：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdio&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstring&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;queue&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">EDGE</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> next; <span style="color:#75715e">//下一条边的存储下标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> to;   <span style="color:#75715e">//这条边的终点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> w;    <span style="color:#75715e">//权值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>EDGE edge[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m, cnt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> head[<span style="color:#ae81ff">10</span>]; <span style="color:#75715e">//head[i]表示以i为起点的第一条边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Add</span>(<span style="color:#66d9ef">int</span> u, <span style="color:#66d9ef">int</span> v, <span style="color:#66d9ef">int</span> w)
+</span></span><span style="display:flex;"><span>{ <span style="color:#75715e">//起点u, 终点v, 权值w
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  edge[<span style="color:#f92672">++</span>cnt].next <span style="color:#f92672">=</span> head[u];
+</span></span><span style="display:flex;"><span>  edge[cnt].w <span style="color:#f92672">=</span> w;
+</span></span><span style="display:flex;"><span>  edge[cnt].to <span style="color:#f92672">=</span> v;
+</span></span><span style="display:flex;"><span>  head[u] <span style="color:#f92672">=</span> cnt; <span style="color:#75715e">//第一条边为当前边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> dis[<span style="color:#ae81ff">10</span>], book[<span style="color:#ae81ff">10</span>], t1, t2, t3, u, v, min;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> inf <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">30</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//读入n和m，n表示顶点个数，m表示边的条数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>n, <span style="color:#f92672">&amp;</span>m);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//读入边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    scanf(<span style="color:#e6db74">&#34;%d%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>t1, <span style="color:#f92672">&amp;</span>t2, <span style="color:#f92672">&amp;</span>t3);
+</span></span><span style="display:flex;"><span>    Add(t1, t2, t3);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//初始化dis数组，这是1号顶点到其余各个顶点的初始化路程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    dis[i] <span style="color:#f92672">=</span> inf;
+</span></span><span style="display:flex;"><span>  dis[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> head[<span style="color:#ae81ff">1</span>]; i <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">=</span> edge[i].next)
+</span></span><span style="display:flex;"><span>    dis[edge[i].to] <span style="color:#f92672">=</span> edge[i].w;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//book数组初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    book[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  book[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//核心算法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//找到离1号点最近的顶点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    min <span style="color:#f92672">=</span> inf;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (book[j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> dis[j] <span style="color:#f92672">&lt;</span> min)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        min <span style="color:#f92672">=</span> dis[j];
+</span></span><span style="display:flex;"><span>        u <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">​</span> book[u] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">​</span> <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> v <span style="color:#f92672">=</span> head[u]; v <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>; v <span style="color:#f92672">=</span> edge[v].next)
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">​</span> <span style="color:#66d9ef">if</span> (dis[edge[v].to] <span style="color:#f92672">&gt;</span> dis[u] <span style="color:#f92672">+</span> edge[v].w)
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">​</span> dis[edge[v].to] <span style="color:#f92672">=</span> dis[u] <span style="color:#f92672">+</span> edge[v].w;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//输出结果
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%d &#34;</span>, dis[i]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">输入
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">6 9
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">1 2 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">1 3 12
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">2 3 9
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">2 4 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">3 5 5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">4 3 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">4 5 13
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">4 6 15
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">5 6 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">输出
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">0 1 8 4 13 17
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><p>使用优先队列对算法进行优化：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdio&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstring&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;queue&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ctime&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> MAX_N <span style="color:#f92672">=</span> <span style="color:#ae81ff">30000</span>, MAX_L <span style="color:#f92672">=</span> <span style="color:#ae81ff">30000</span>; <span style="color:#75715e">//边的最大数量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> isPrint <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dis[MAX_N], book[MAX_N], nodeExist[MAX_N];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 使用优先队列存结点，降低松弛操作复杂度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NODE</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> aimNode, distance;
+</span></span><span style="display:flex;"><span>    NODE(<span style="color:#66d9ef">int</span> aimNode, <span style="color:#66d9ef">int</span> distance) <span style="color:#f92672">:</span> aimNode(aimNode), distance(distance) {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;</span>(<span style="color:#66d9ef">const</span> NODE <span style="color:#f92672">&amp;</span>rhs) <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> distance <span style="color:#f92672">&gt;</span> rhs.distance;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>NODE<span style="color:#f92672">&gt;</span> Q;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 链式前向星存边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">EDGE</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> next; <span style="color:#75715e">//下一条边的存储下标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> to;        <span style="color:#75715e">//这条边的终点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> w;        <span style="color:#75715e">//权值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>EDGE edge[MAX_L];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> head[MAX_N]; <span style="color:#75715e">//head[i]表示以i为起点的第一条边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Add</span>(<span style="color:#66d9ef">int</span> u, <span style="color:#66d9ef">int</span> v, <span style="color:#66d9ef">int</span> w)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//起点u, 终点v, 权值w
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    edge[<span style="color:#f92672">++</span>cnt].next <span style="color:#f92672">=</span> head[u];
+</span></span><span style="display:flex;"><span>    edge[cnt].w <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    edge[cnt].to <span style="color:#f92672">=</span> v;
+</span></span><span style="display:flex;"><span>    head[u] <span style="color:#f92672">=</span> cnt; <span style="color:#75715e">//第一条边为当前边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Dijikstra</span>(<span style="color:#66d9ef">int</span> startNode)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    memset(dis, <span style="color:#ae81ff">0x7F</span>, <span style="color:#66d9ef">sizeof</span>(dis));
+</span></span><span style="display:flex;"><span>    memset(book, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(book));
+</span></span><span style="display:flex;"><span>    dis[startNode] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    book[startNode] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//核心算法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Q.push(NODE(startNode, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>Q.empty())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        NODE q <span style="color:#f92672">=</span> Q.top();
+</span></span><span style="display:flex;"><span>        Q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// book[q.aimNode] = 1;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> v <span style="color:#f92672">=</span> head[q.aimNode]; v <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>; v <span style="color:#f92672">=</span> edge[v].next)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (dis[edge[v].to] <span style="color:#f92672">&gt;</span> dis[q.aimNode] <span style="color:#f92672">+</span> edge[v].w)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                dis[edge[v].to] <span style="color:#f92672">=</span> dis[q.aimNode] <span style="color:#f92672">+</span> edge[v].w;
+</span></span><span style="display:flex;"><span>                Q.push(NODE(edge[v].to, dis[edge[v].to]));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//输出结果
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (isPrint)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;---- Now Start Node IS %d ----</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, startNode);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> MAX_N; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nodeExist[i])
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (dis[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2139062143</span>)
+</span></span><span style="display:flex;"><span>                    printf(<span style="color:#e6db74">&#34;%d-&gt;%d: inf</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, startNode, i);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                    printf(<span style="color:#e6db74">&#34;%d-&gt;%d: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, startNode, i, dis[i]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    clock_t start, end;
+</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> clock();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FILE <span style="color:#f92672">*</span>fr, <span style="color:#f92672">*</span>fw;
+</span></span><span style="display:flex;"><span>    fr <span style="color:#f92672">=</span> freopen(<span style="color:#e6db74">&#34;small.txt&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>, stdin);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isPrint)
+</span></span><span style="display:flex;"><span>        fw <span style="color:#f92672">=</span> freopen(<span style="color:#e6db74">&#34;out_small.txt&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>, stdout);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//读入n和m，n表示顶点个数，m表示边的条数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>n, <span style="color:#f92672">&amp;</span>m);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//读入边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> t1, t2;
+</span></span><span style="display:flex;"><span>        scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>t1, <span style="color:#f92672">&amp;</span>t2);
+</span></span><span style="display:flex;"><span>        nodeExist[t1] <span style="color:#f92672">=</span> nodeExist[t2] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        Add(t1, t2, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 求所有点为起点的单源最短路
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> MAX_N; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>nodeExist[i])
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>isPrint)
+</span></span><span style="display:flex;"><span>            printf(<span style="color:#e6db74">&#34;%d/%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, p, n);
+</span></span><span style="display:flex;"><span>        Dijikstra(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fclose(fr);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isPrint)
+</span></span><span style="display:flex;"><span>        fclose(fw);
+</span></span><span style="display:flex;"><span>    end <span style="color:#f92672">=</span> clock();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>isPrint)
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;%fs&#34;</span>, <span style="color:#66d9ef">double</span>(end <span style="color:#f92672">-</span> start) <span style="color:#f92672">/</span> CLOCKS_PER_SEC);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="bellman-ford-算法">bellman-ford 算法</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdio&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstring&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ctime&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> MAX_L <span style="color:#f92672">=</span> <span style="color:#ae81ff">30000</span>, MAX_N <span style="color:#f92672">=</span> <span style="color:#ae81ff">30000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dis[MAX_N], nodeExist[MAX_N], u[MAX_L], v[MAX_L], w[MAX_L];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> isPrint <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bellmanFord</span>(<span style="color:#66d9ef">int</span> origin)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    memset(dis, <span style="color:#ae81ff">0x7F</span>, <span style="color:#66d9ef">sizeof</span>(dis));
+</span></span><span style="display:flex;"><span>    dis[origin] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> MAX_L; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (u[i] <span style="color:#f92672">==</span> origin)
+</span></span><span style="display:flex;"><span>            dis[v[i]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; k <span style="color:#f92672">&lt;=</span> n; k<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (dis[v[i]] <span style="color:#f92672">&gt;</span> dis[u[i]] <span style="color:#f92672">+</span> w[i])
+</span></span><span style="display:flex;"><span>                dis[v[i]] <span style="color:#f92672">=</span> dis[u[i]] <span style="color:#f92672">+</span> w[i];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isPrint)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;---- Now Start Node IS %d ----</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, origin);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> MAX_N; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nodeExist[i])
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (dis[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2139062143</span>)
+</span></span><span style="display:flex;"><span>                    printf(<span style="color:#e6db74">&#34;%d-&gt;%d: inf</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, origin, i);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                    printf(<span style="color:#e6db74">&#34;%d-&gt;%d: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, origin, i, dis[i]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    clock_t start, end;
+</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> clock();
+</span></span><span style="display:flex;"><span>    FILE <span style="color:#f92672">*</span>fr, <span style="color:#f92672">*</span>fw;
+</span></span><span style="display:flex;"><span>    fr <span style="color:#f92672">=</span> freopen(<span style="color:#e6db74">&#34;small.txt&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>, stdin);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isPrint)
+</span></span><span style="display:flex;"><span>        fw <span style="color:#f92672">=</span> freopen(<span style="color:#e6db74">&#34;out_small.txt&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>, stdout);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>, <span style="color:#f92672">&amp;</span>n, <span style="color:#f92672">&amp;</span>m);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>,<span style="color:#f92672">&amp;</span>u[i],<span style="color:#f92672">&amp;</span>v[i]);
+</span></span><span style="display:flex;"><span>        nodeExist[v[i]] <span style="color:#f92672">=</span> nodeExist[u[i]] <span style="color:#f92672">=</span> w[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 求所有点为起点的单源最短路
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> MAX_N; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nodeExist[i])
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            p<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            bellmanFord(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>isPrint)
+</span></span><span style="display:flex;"><span>                printf(<span style="color:#e6db74">&#34;%d/%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, p, n);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fclose(fr);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isPrint)
+</span></span><span style="display:flex;"><span>        fclose(fw);
+</span></span><span style="display:flex;"><span>    end <span style="color:#f92672">=</span> clock();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>isPrint)
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;%fs&#34;</span>, <span style="color:#66d9ef">double</span>(end <span style="color:#f92672">-</span> start) <span style="color:#f92672">/</span> CLOCKS_PER_SEC);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>dis 数组作用与迪杰斯特拉算法相同。u、v、w 三个数组用来记录边的信息。</p>
+<p>第 i 条边存储在 u[i] v[i] w[i]中，表示从顶点 u[i]到到顶点 v[i]的边权值为 w[i].</p>
+<h2 id="spfa-算法">SPFA 算法</h2>
+<p>设立一个先进先出的队列 q 用来保存待优化的结点，优化时每次取出队首结点 u，并且用 u 点当前的最短路径估计值对离开 u 点所指向的结点 v 进行松弛操作，如果 v 点的最短路径估计值有所调整，且 v 点不在当前的队列中，就将 v 点放入队尾。这样不断从队列中取出结点来进行松弛操作，直至队列空为止。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>dis[i] <span style="color:#f92672">&gt;</span> dis[v] <span style="color:#f92672">+</span> a[v][i]
+</span></span></code></pre></div><p>&ldquo;&gt;&ldquo;改为&rdquo;&lt;&ldquo;后可求最长路</p>
+<p>代码示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">spfa</span>(<span style="color:#66d9ef">int</span> s)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    dis[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">99999999</span>; <span style="color:#75715e">//初始化每点i到s的距离
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  dis[s] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  vis[s] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  q.push(s); <span style="color:#75715e">//队列初始化,s为起点,dis数组作用与bellman-ford算法相同
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> i, v;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>q.empty())
+</span></span><span style="display:flex;"><span>  { <span style="color:#75715e">//队列非空
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    v <span style="color:#f92672">=</span> q.front();<span style="color:#75715e">//取队首元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vis[v] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;<span style="color:#75715e">//释放队首结点，因为这节点可能下次用来松弛其它节点，重新入队
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) <span style="color:#75715e">//对所有顶点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (a[v][i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> dis[i] <span style="color:#f92672">&gt;</span> dis[v] <span style="color:#f92672">+</span> a[v][i])
+</span></span><span style="display:flex;"><span>      { <span style="color:#75715e">//节点s到节点i通过节点v松弛
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        dis[i] <span style="color:#f92672">=</span> dis[v] <span style="color:#f92672">+</span> a[v][i]; <span style="color:#75715e">//修改最短路
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (vis[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        { <span style="color:#75715e">//如果扩展结点i不在队列中，入队
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          q.push(i);
+</span></span><span style="display:flex;"><span>          vis[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/%E7%AE%97%E6%B3%95"
+      >算法</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/%E5%9B%BE%E8%AE%BA"
+      >图论</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/"
+      ><span class="mr-1.5">←</span><span>Tarjan 强连通算法</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/mysql-database/"
+      ><span>MySQL 数据库</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

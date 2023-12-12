@@ -1,0 +1,491 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>记 SSL 证书使用一大坑 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="SSL 是什么？ SSL(Secure Sockets Layer 安全套接字协议),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="记 SSL 证书使用一大坑">
+<meta itemprop="description" content="在使用 SSL 证书过程中遇到了一个大坑，两个单词的差异让我白白浪费了三个多小时，这里总结一下 SSL 证书的相关知识。"><meta itemprop="datePublished" content="2021-09-17T15:37:09+00:00" />
+<meta itemprop="dateModified" content="2021-09-17T15:37:09+00:00" />
+<meta itemprop="wordCount" content="1432">
+<meta itemprop="keywords" content="SSL," />
+  
+  <meta property="og:title" content="记 SSL 证书使用一大坑" />
+<meta property="og:description" content="在使用 SSL 证书过程中遇到了一个大坑，两个单词的差异让我白白浪费了三个多小时，这里总结一下 SSL 证书的相关知识。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/remember-a-bug-in-use-ssl-certificates/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-17T15:37:09+00:00" />
+<meta property="article:modified_time" content="2021-09-17T15:37:09+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="记 SSL 证书使用一大坑"/>
+<meta name="twitter:description" content="在使用 SSL 证书过程中遇到了一个大坑，两个单词的差异让我白白浪费了三个多小时，这里总结一下 SSL 证书的相关知识。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/remember-a-bug-in-use-ssl-certificates/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">记 SSL 证书使用一大坑</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Sep 17, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="ssl-是什么">SSL 是什么？</h2>
+<p>SSL(Secure Sockets Layer <a href="https://baike.baidu.com/item/%E5%AE%89%E5%85%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E5%8D%8F%E8%AE%AE">安全套接字协议</a>),及其继任者<a href="https://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8">传输层安全</a>（Transport Layer Security，TLS）是为<a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/9636548">网络通信</a>提供安全及<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7/110071">数据完整性</a>的一种安全协议。TLS 与 SSL 在<a href="https://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82/4329536">传输层</a>与<a href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E5%B1%82/16412033">应用层</a>之间对网络连接进行加密。</p>
+<h2 id="ssl-证书">SSL 证书</h2>
+<p>SSL 证书是一种遵守 SSL 协议的服务器数字证书，由受信任的根证书颁发机构颁发。</p>
+<h3 id="证书格式">证书格式</h3>
+<ul>
+<li>
+<p>.DER .CER，文件是二进制格式，只保存证书，不保存私钥。</p>
+</li>
+<li>
+<p>.PEM，一般是文本格式，可保存证书，可保存私钥。</p>
+</li>
+<li>
+<p>.CRT，可以是二进制格式，可以是文本格式，与 .DER 格式相同，不保存私钥。</p>
+</li>
+<li>
+<p>.PFX .P12，二进制格式，同时包含证书和私钥，一般有密码保护。</p>
+</li>
+<li>
+<p>.JKS，二进制格式，同时包含证书和私钥，一般有密码保护。</p>
+</li>
+</ul>
+<h3 id="证书转换">证书转换</h3>
+<ol>
+<li>
+<p>CER/CRT</p>
+<p>将“cert.crt”证书文件直接重命名为“cert.pem”。</p>
+</li>
+<li>
+<p>PFX</p>
+<ul>
+<li>
+<p>提取私钥命令，以“cert.pfx”转换为“key.pem”为例。</p>
+<p>openssl pkcs12 -in cert.pfx -nocerts -out key.pem</p>
+</li>
+<li>
+<p>提取证书命令，以“cert.pfx”转换位“cert.pem”为例。</p>
+<p>openssl pkcs12 -in cert.pfx -nokeys -out cert.pem</p>
+</li>
+</ul>
+</li>
+<li>
+<p>P7B</p>
+<ul>
+<li>
+<p>证书转换，以“cert.p7b”转换为“cert.cer”为例。</p>
+<p>openssl pkcs7 -print_certs -in cert.p7b -out cert.cer</p>
+</li>
+<li>
+<p>将“cert.cer”证书文件直接重命名为“cert.pem”。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>DER</p>
+<ul>
+<li>提取私钥命令，以“privatekey.der”转换为“privatekey.pem”为例。
+openssl rsa -inform DER -outform PEM -in privatekey.der -out privatekey.</li>
+</ul>
+</li>
+<li>
+<p>pem</p>
+<ul>
+<li>提取证书命令，以“cert.cer”转换为“cert.pem”为例。
+openssl x509 -inform der -in cert.cer -out cert.pem</li>
+</ul>
+</li>
+</ol>
+<h2 id="遇到的坑">遇到的坑</h2>
+<p>在上面我们可以很清楚地区分各个 SSL 证书的格式和区别，我遇到的问题开头就说了是两个字母的问题。</p>
+<h3 id="场景复现">场景复现</h3>
+<p>我的证书是从<a href="https://ohttps.com/">OHTTPS</a>上申请的，该网站提供的证书是 PEM 格式，同时提供了文件 <code>cert.key</code> - 私钥文件、<code>cert.cer</code> - 证书文件、<code>fullchain.cer</code> - 证书文件(包含证书和中间证书)。</p>
+<p>我的使用场景是 EwoMail 开源版邮件服务器。官网的要求是：</p>
+<blockquote>
+<p>默认使用本地证书,IMAP,SMTP,POP,WEB 访问都是通用一个文件</p>
+<p>使用互联网经过认证的证书，将你申请生成的 nginx 证书替换以下 2 个文件</p>
+<p>公匙 /etc/ssl/certs/dovecot.pem</p>
+<p>私匙 /etc/ssl/private/dovecot.pem</p>
+</blockquote>
+<p>所以我理所应当地就把 <code>cert.cer</code> 文件中内容复制到了 <code>/etc/ssl/certs/dovecot.pem</code> 中，把 <code>cert.key</code> 文件中的内容复制到了 <code>/etc/ssl/private/dovecot.pem</code> 中，但执行时总是报下面的这个错误：</p>
+<blockquote>
+<p>Sep 17 21:54:30 VM-4-3-centos nginx[15958]: nginx: [emerg] cannot load certificate &ldquo;/etc/ssl/certs/&gt; dovecot.pem&rdquo;: PEM_read_bio_X509_AUX() failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start &gt; line:Expecting: TRUSTED CERTIFICATE)</p>
+<p>Sep 17 21:54:30 VM-4-3-centos nginx[15958]: nginx: configuration file /ewomail/nginx/conf/nginx.conf test failed</p>
+<p>Sep 17 21:54:30 VM-4-3-centos systemd[1]: nginx.service: control process exited, code=exited status=1</p>
+<p>Sep 17 21:54:30 VM-4-3-centos systemd[1]: Failed to start The NGINX HTTP and reverse proxy server.</p>
+<p>Sep 17 21:54:30 VM-4-3-centos systemd[1]: Unit nginx.service entered failed state.</p>
+<p>Sep 17 21:54:30 VM-4-3-centos systemd[1]: nginx.service failed.</p>
+</blockquote>
+<p>我能咋办，当然是去 <del>愉快</del> 地 Google 去喽，从 SSL 证书格式到 SSL 证书标准，从 SSL 官网的 Configure 到 NGINX 和 dovecot 的配置，在找了几个小时并逐渐崩溃后，在 StackOverflow 看到了这个问题 <a href="https://stackoverflow.com/questions/51899844/nginx-ssl-no-start-line-expecting-trusted-certificate/52085885">nginx SSL no start line: expecting: TRUSTED CERTIFICATE</a>，提问的回复里有下面这句话：</p>
+<blockquote>
+<p>It is expecting BEGIN TRUSTED CERTIFICATE instead of BEGIN CERTIFICATE and same for the end. The filename and extension are irelevant (you can name it foobar.42 and it will work the same way) only the content of the file is important.</p>
+</blockquote>
+<p>死马当活马医，我把 <code>BEGIN CERTIFICATE</code> 换成了 <code>BEGIN TRUSTED CERTIFICATE</code>，<code>END CERTIFICATE</code> 换成了<code>END TRUSTED CERTIFICATE</code>，一运行，成了！！！</p>
+<h3 id="问题发现">问题发现</h3>
+<p>证书由一个“证书颁发机构”通过一个或多个中间人签署。这将建立一个直到根证书的信任链，其中颁发者等于主体，该证书对自身进行签名。</p>
+<p>上文中的证书某种情况下是一个“自签名”证书，在技术上与 CA 证书没有区别，除了默认情况下没有系统（包括您自己的系统）会在没有特定配置的情况下信任此类证书。</p>
+<p>这基本上说明：应用程序说它正在根据您的配置加载一个无法验证的证书（因为它是自签名的），同时没有明确地将其配置为信任它。</p>
+<p>所以加上这个 <code>TRUSTED</code> 就等同于通知使用这个证书的程序这个证书是可信的。在 openssl 程序中有这样一个参数 <code>-clrtrust</code> , 它就是证书中有无 <code>TRUSTED</code> 的说明。可以通过 <code>openssl x509 -in trusted.pem -clrtrust -out normal.pem</code> 来将未取信的证书转换成取信的证书。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/ssl"
+      >SSL</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/go-exception-handling/"
+      ><span class="mr-1.5">←</span><span>Go 的异常处理</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/create-docker-image/"
+      ><span>docker 镜像的创建</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

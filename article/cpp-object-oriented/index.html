@@ -1,0 +1,1087 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>C&#43;&#43; 面向对象 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="引用 引用： int n = 4; int &amp; r = n; // r引用了n,r的类型是int &amp; 某个变量的引用，等价与这个变量，相当于这个变量的别名 常引用： int n=4; const int &amp; r = n; // r" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="C&#43;&#43; 面向对象">
+<meta itemprop="description" content="本文是学习 C&#43;&#43; 面向对象时的学习笔记。"><meta itemprop="datePublished" content="2021-02-16T20:01:41+00:00" />
+<meta itemprop="dateModified" content="2021-02-16T20:01:41+00:00" />
+<meta itemprop="wordCount" content="7201">
+<meta itemprop="keywords" content="c&#43;&#43;," />
+  
+  <meta property="og:title" content="C&#43;&#43; 面向对象" />
+<meta property="og:description" content="本文是学习 C&#43;&#43; 面向对象时的学习笔记。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/cpp-object-oriented/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-16T20:01:41+00:00" />
+<meta property="article:modified_time" content="2021-02-16T20:01:41+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="C&#43;&#43; 面向对象"/>
+<meta name="twitter:description" content="本文是学习 C&#43;&#43; 面向对象时的学习笔记。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/cpp-object-oriented/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">C&#43;&#43; 面向对象</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 16, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="引用">引用</h2>
+<p><strong>引用：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span> r <span style="color:#f92672">=</span> n; <span style="color:#75715e">// r引用了n,r的类型是int &amp;
+</span></span></span></code></pre></div><p>某个变量的引用，等价与这个变量，相当于这个变量的别名</p>
+<p><strong>常引用：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span> r <span style="color:#f92672">=</span> n; <span style="color:#75715e">// r的类型是const int &amp;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>r <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>; <span style="color:#75715e">// 编译错误
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">300</span>; <span style="color:#75715e">// 编译正确
+</span></span></span></code></pre></div><p>不能通过常引用去修改引用的内容</p>
+<p><strong>常引用和非常引用的转换：</strong></p>
+<p>const T &amp;和 T &amp;是不同的类型！！！</p>
+<p>T &amp;类型的引用或 T &amp;类型的变量可以用来初始化 const T &amp;类型的引用。</p>
+<p>const T &amp;类型的常变量和 const T &amp;类型的引用则不能用来初始化 T &amp;类型的引用，除非进行强制类型转换。</p>
+<h2 id="const-关键字">const 关键字</h2>
+<p><strong>定义常量：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> ML <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> string NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tom&#34;</span>;
+</span></span></code></pre></div><p><strong>定义常量指针：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">// 不可通过常量指针修改其指向的内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> n, m;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>n;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// 编译错误
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>m; <span style="color:#75715e">// ok,常量指针的指向可以变化
+</span></span></span></code></pre></div><p>常量指针不能赋值给非常量指针，反过来可以</p>
+<p>通过强制类型转换(int *)可以将常量指针赋值给非常量指针</p>
+<p>应用：</p>
+<p>函数参数为常量指针，可避免内部不小心改变参数指针所指地方的内容</p>
+<p><strong>定义常引用：</strong></p>
+<p>不能通过常引用去修改引用的变量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span> r <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;<span style="color:#75715e">// 错误
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;<span style="color:#75715e">// 正确
+</span></span></span></code></pre></div><h2 id="动态内存分配">动态内存分配</h2>
+<h3 id="使用-new-运算符分配存储空间">使用 new 运算符分配存储空间</h3>
+<p>1.分配一个变量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>P <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> T;
+</span></span></code></pre></div><p>T 是任意类型名，P 是类型为 T*的指针</p>
+<p>动态分配出一片大小为 sizeof(T)字节的内存空间，并且将该内存空间的起始地址赋值给 P。例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>pn;
+</span></span><span style="display:flex;"><span>pn <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>pn <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+</span></span></code></pre></div><p>2.分配一个数组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>P <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> T[N];
+</span></span></code></pre></div><p>T：任意类型名</p>
+<p>P：类型为 T*的指针</p>
+<p>N：要分配的数组元素的个数，可以是整形表达式</p>
+<p>动态分配出一片大小为 sizeof(T)*N 字节的内存空间，并且将该内存空间的起始地址赋值给 P。</p>
+<h3 id="使用-delete-释放分配出的空间">使用 delete 释放分配出的空间</h3>
+<p>1.释放一个变量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p; <span style="color:#75715e">// 异常，一片空间不能被delete多次
+</span></span></span></code></pre></div><p>2.释放一个数组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> now <span style="color:#66d9ef">int</span>[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span>p[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> []p; <span style="color:#75715e">// 该指针必须指向分配出来的数组，[]必须加，否则只释放一个变量的空间，而其余的将无法释放进而形成内存碎片
+</span></span></span></code></pre></div><h2 id="内联函数">内联函数</h2>
+<p>1.函数调用是有时间开销的。如果函数本身只有几条语句，执行非常块，而且函数被反复执行很多次，相比 之下调用函教所产生的这个开销就会显得比较大。</p>
+<p>2.为了减少函数调用的开销，引入了<strong>内联函数机制</strong>。编 译器处理对内朕函数的调用语句时，是将整个函数的 代玛插入到调用语句处，而不会产生调用函数的语句。</p>
+<p>例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#a6e22e">MAX</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span>(a <span style="color:#f92672">&gt;</span> b) <span style="color:#66d9ef">return</span> a;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> b;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="函数重载">函数重载</h2>
+<p>一个或多个函数，名字相同，然而参数个数或参数类型不同，这叫作函数的重载。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">MAX</span>(<span style="color:#66d9ef">int</span> n1, <span style="color:#66d9ef">int</span> n2){  }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">MAX</span>(<span style="color:#66d9ef">double</span> f1, <span style="color:#66d9ef">double</span> f2){  }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">MAX</span>(<span style="color:#66d9ef">int</span> n1, <span style="color:#66d9ef">int</span> n2, <span style="color:#66d9ef">int</span> n3){  }
+</span></span></code></pre></div><p>函数重载使函数命名简单</p>
+<p>编译器通过调用语句中的函数实参的类型和个数判断应该调用哪个函数</p>
+<p>使用时应避免函数的二义性</p>
+<h2 id="函数的缺省参数">函数的缺省参数</h2>
+<p>C++中，定义函数的时候可以让最右边的连续若干个参数有缺省值，那么调用函数的时候．若相应位置不写参 数，参数就是缺省值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>){  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>func(<span style="color:#ae81ff">10</span>); <span style="color:#75715e">// 等效于func(10,1,1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>func(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">4</span>); <span style="color:#75715e">// 等效于func(10,4,1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>func(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">7</span>);
+</span></span><span style="display:flex;"><span>func(<span style="color:#ae81ff">10</span>, ,<span style="color:#ae81ff">7</span>); <span style="color:#75715e">// 不行，只能最右边的连续若干个参数缺省
+</span></span></span></code></pre></div><p>函数参数可缺省的目的在于提高程序的可扩充性</p>
+<p>在函数拓展时，只需增设缺省函数，原程序就不必修改</p>
+<h2 id="类概述">类概述</h2>
+<ol>
+<li>
+<p>概念</p>
+<p>类是定义同一类所有对象的变量和方法的蓝图或原型</p>
+<p>对象是由类定义的</p>
+<p>一个对象有属性和方法，属性是变量，方法是函数</p>
+</li>
+<li>
+<p>实例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">student</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> age;
+</span></span><span style="display:flex;"><span>    string name;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sex;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>(<span style="color:#66d9ef">int</span> age, string name, <span style="color:#66d9ef">int</span> sex_){
+</span></span><span style="display:flex;"><span>      age <span style="color:#f92672">=</span> age, name <span style="color:#f92672">=</span> name, sex <span style="color:#f92672">=</span> sex_;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    string <span style="color:#a6e22e">namechange</span>(string name_){
+</span></span><span style="display:flex;"><span>      name <span style="color:#f92672">=</span> name_;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}; <span style="color:#75715e">// 必须有分号
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>  student A;<span style="color:#75715e">// A是一个对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>对象的内存分配</p>
+<p>对象所占的内存空间大小，等于所有成员变量的大小之和</p>
+<p>每个对象都有自己的内存空间，一个对象的成员变量改变不会影响其他对象</p>
+</li>
+<li>
+<p>对象间的运算</p>
+<p>可以使用“=”进行赋值运算，但不能使用“==”“！=”等运算符进行比较，除非进行运算符重载</p>
+</li>
+<li>
+<p>使用类的成员变量和成员函数</p>
+<p>用法一:对象.成员名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>student A;
+</span></span><span style="display:flex;"><span>A.init(<span style="color:#ae81ff">10</span>, <span style="color:#e6db74">&#34;Tom,1&#34;</span>);
+</span></span><span style="display:flex;"><span>A.name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Jack&#34;</span>;
+</span></span></code></pre></div><p>用法二:指针-&gt;成员名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>student A;
+</span></span><span style="display:flex;"><span>shudent <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>A;
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">-&gt;</span>init(<span style="color:#ae81ff">10</span>, <span style="color:#e6db74">&#34;Tom,1&#34;</span>); <span style="color:#75715e">// init()作用在p指向的对象上
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>p<span style="color:#f92672">-&gt;</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tom&#34;</span>;
+</span></span></code></pre></div><p>用法三:引用.成员名</p>
+</li>
+</ol>
+<h2 id="类成员可访问范围">类成员可访问范围</h2>
+<p>在类的定义中，用下列访问范围关键词来说明类成员可被访问的范围：</p>
+<p>private：私有成员，只能在成员函数内访问</p>
+<p>public：公有成员，可以在任意地方访问</p>
+<p>protected：保护成员</p>
+<p>以上三种关键字出现的次数和先后次序都没有限制。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">className</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#960050;background-color:#1e0010">私有成员和属性</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#960050;background-color:#1e0010">公有属性和函数</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">protected</span><span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#960050;background-color:#1e0010">保护属性和函数</span>
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>如果某个成员前面没有上述关键词，则缺省的被认为是私有成员</p>
+<p>在类的成员函数内部，能够访问：</p>
+<p>当前对象的全部属性、函数，同类其他对象的全部属性、函数。</p>
+<p>在类的成员函数以外的地方，只能够访问该类对象的共有成员</p>
+<p>设置私有成员的机制，叫“隐藏”</p>
+<p>“隐藏”的目的是强制对成员变量的访问一定要通过成员函数进行，那么以后成员变量的类型等属性修改后，只需要更改成员函数即可。否则，所有直接访问成员变量的语句都需要修改。</p>
+<p>与 struct 的区别是 struct 的未声明变量是公有成员</p>
+<h2 id="类成员函数的重载和函数缺省">类成员函数的重载和函数缺省</h2>
+<p>成员函数也可以重载</p>
+<p>成员函数也可以带缺省函数（注意避免二义性）</p>
+<h2 id="构造函数">构造函数</h2>
+<ol>
+<li>
+<p>基本概念</p>
+<p>成员函数的一种</p>
+<p>名字与类名相同，可以有参数，不能有返回值（void 也不行）</p>
+<p>作用是对对象进行初始化，如给成员变量赋初值</p>
+<p>如果定义类是没写构造函数，则编译器生成一个默认的无参数的构造函数（默认构造函数无参数，不做任何操作）</p>
+<p>如果定义了构造函数，则编译器不生成默认的无参数的构造函数</p>
+<p><strong>对象生成时构造函数自动被调用</strong>。对象一旦生成，就再也不能在其上执行构造函数</p>
+<p>一个类可以有多个构造函数</p>
+</li>
+<li>
+<p>例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">student</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> age;
+</span></span><span style="display:flex;"><span>    string name;
+</span></span><span style="display:flex;"><span>    student(<span style="color:#66d9ef">int</span> age <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, string name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tom&#34;</span>){
+</span></span><span style="display:flex;"><span>      age <span style="color:#f92672">=</span> age, name <span style="color:#f92672">=</span> name;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p><strong>构造函数最好是 public 的</strong>，private 构造函数不能直接用来初始化对象</p>
+</li>
+<li>
+<p>构造函数在数组中应用</p>
+<p>初始化过程也会调用构造函数</p>
+</li>
+</ol>
+<h2 id="复制构造函数">复制构造函数</h2>
+<ol>
+<li>
+<p>基本概念</p>
+<p>只有一个参数，及对同类对象的<strong>引用</strong></p>
+<p>形如 X::X(X&amp;)或 X::X(const X &amp;)，二者选一</p>
+<p>后者以常量对象作为参数</p>
+<p>不允许有形如 X::X(X)的构造函数</p>
+<p>如果没有定义复制构造函数，那么编译器生成默认复制构造函数。默认的复制构造函数完成复制功能</p>
+<p>例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Complex</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> real,imag;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Complex(<span style="color:#66d9ef">const</span> Complex <span style="color:#f92672">&amp;</span> c){
+</span></span><span style="display:flex;"><span>        real<span style="color:#f92672">=</span>c.real,imag<span style="color:#f92672">=</span>c.imag;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p>起作用的三种情况</p>
+<ol>
+<li>
+<p>当用一个对象去初始化同类的一个对象时</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>Complex <span style="color:#a6e22e">c2</span>(c1);
+</span></span><span style="display:flex;"><span>Complex c2 <span style="color:#f92672">=</span> c1; <span style="color:#75715e">// 初始化语句，非赋值语句
+</span></span></span></code></pre></div></li>
+<li>
+<p>如果某函数有一个参数是类 A 的对象。那么该函数调用时，类 A 的复制构造函数将被调用</p>
+</li>
+<li>
+<p>如果某函数的返回值是类 A 的对象，则函数返回时，A 的复制构造函数被调用时起作用。</p>
+<p>对象间赋值并不导致复制构造函数被调用</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="类型转换构造函数">类型转换构造函数</h2>
+<p>定义转换构造函数的目的是实现类的自动转换</p>
+<p>只有一个参数，而且不是复制构造函数的构造函数，一般就可以看作是转换构造函数</p>
+<p>当需要的时候，编译系统会自动调用转换构造函数，建立一个无名的临时对象（或临时变量）</p>
+<p>例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Complex</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">double</span> real, imag;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>     Complex(<span style="color:#66d9ef">int</span> c){
+</span></span><span style="display:flex;"><span>        real <span style="color:#f92672">=</span> c, imag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 显式类型转换构造函数：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Complex</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">double</span> real, imag;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">explicit</span> Complex(<span style="color:#66d9ef">int</span> c){
+</span></span><span style="display:flex;"><span>        real <span style="color:#f92672">=</span> c, imag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>Complex c1;
+</span></span><span style="display:flex;"><span>c1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span><span style="color:#f92672">:</span><span style="color:#75715e">// error 9不能被自动转换成一个临时Complex对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>c1 <span style="color:#f92672">=</span> Complex(p);<span style="color:#75715e">// OK
+</span></span></span></code></pre></div><h2 id="析构函数">析构函数</h2>
+<p>名字与类名相同，在前面加“~”，没有参数和返回值，一个类<strong>最多只能有一个析构函数</strong></p>
+<p>析构函数<strong>对象消亡时即自动被调用</strong>。可以定义析构函数来在对象消亡前做善后工作，比如释放分配的空间等。</p>
+<p>如果定义类时没写析构函数，则编译器生成缺省析构函数。缺省析构函数什么也不做</p>
+<p>如果定义了析构函数，则编译器不生成缺省的析构函数</p>
+<p>例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">String</span>{
+</span></span><span style="display:flex;"><span>  priviate:
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>p;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>     String(){
+</span></span><span style="display:flex;"><span>       p<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>String(){
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">delete</span> []p;
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>析构函数和数组:</p>
+<p>对象数组生命期结束时，对象数组的每个元素的析构函数都会被调用</p>
+<h2 id="this-指针">this 指针</h2>
+<p>作用:</p>
+<p>其作用就是指向成员函数所作用的对象</p>
+<p><strong>非静态</strong>成员函数中可以直接使用 this 来代表指向该函数作用的对象的指针</p>
+<p>例：</p>
+<p>this-&gt;real++;// 等价于 real++</p>
+<p>在函数中可使用*this 返回当前对象</p>
+<p>对象的空指针可以调用不使用成员变量的函数</p>
+<p>静态成员函数中<strong>不能</strong>使用 this 指针！</p>
+<p>因为静态成员函数并不具体作用与某个对象！</p>
+<p>因此，静态成员函数的真实的参数的个数，就是程序中写出的参数个数。</p>
+<h2 id="静态成员">静态成员</h2>
+<ol>
+<li>
+<p>基本概念</p>
+<p>在定义前面加了 static 关键字的成员</p>
+<p>注意：</p>
+<p>1.普通成员变量每个对象有各自的一份，而静态成员变量一共就有一份，为所有对象共享。</p>
+<p>2.普通成员函数必须作用于某个对象，而静态成员函数并不具体作用于某个对象</p>
+<p>3.静态成员不需要通过对象就能访问</p>
+<p>4.静态成员变量本质上是集成到类中的全局变量，即使此类不存在一个对象，该静态成员变量也存在</p>
+<p>5.必须在定义类的文件中对静态成员变量进行一次说明或初始化。否则编译能通过，链接不能通过</p>
+<p>6.在静态成员函数中，不能访问非静态成员变量，也不能调用非静态成员函数</p>
+<p>7.sizeof 运算符不会计算静态成员变量</p>
+<p>例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CRectangle</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> w, h;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> nTotalArea; <span style="color:#75715e">// 静态成员变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> NtotalNumber; <span style="color:#75715e">// 静态成员变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    CRectangle(<span style="color:#66d9ef">int</span> w, <span style="color:#66d9ef">int</span> h);
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>CRectangle();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PrintTotal</span>(); <span style="color:#75715e">// 静态成员函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span></code></pre></div></li>
+<li>
+<p>访问方法</p>
+<p>1.类名::成员名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>CRectangle<span style="color:#f92672">::</span>PrintTotal();
+</span></span></code></pre></div><p>2.对象名.成员名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>CRectangle r;
+</span></span><span style="display:flex;"><span>r.PrintTotal();
+</span></span></code></pre></div><p>3.指针-&gt;成员名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>CRectangle <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>r;
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">-&gt;</span>PrintTotal();
+</span></span></code></pre></div><p>4.引用.成员名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>CRectangle <span style="color:#f92672">&amp;</span>ref<span style="color:#f92672">=</span>r;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span>ref.nTotalNumber;
+</span></span></code></pre></div></li>
+<li>
+<p>应用案例</p>
+<p>构造函数中对矩形数量单增，矩形面积增加</p>
+<p><strong>特别注意</strong>在复制构造函数中要有构造函数相同的对静态成员变量的修改</p>
+<p>析构函数中对矩形数量单减，矩形面积减小</p>
+</li>
+</ol>
+<h2 id="初始化链表">初始化链表</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CTyre</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">int</span> radius;
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">int</span> width;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>     CTyre(<span style="color:#66d9ef">int</span> r, <span style="color:#66d9ef">int</span> w)<span style="color:#f92672">:</span>radius(r),width(w){ }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>radius(r)相当于 int radius(r);是初始化。</p>
+<p>成员对象初始化列表中的参数可以是任意对象的表达式，可以包括函数、变量，只要表达式中的函数或变量有定义就行。</p>
+<h2 id="成员对象和封闭类">成员对象和封闭类</h2>
+<ol>
+<li>
+<p>基本概念</p>
+<p>成员对象是指一个类的成员是一个类的对象的此对象</p>
+<p>封闭类是指含有成员对象的类</p>
+</li>
+<li>
+<p>实例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CTyre</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> radius;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> width;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    CTyre(<span style="color:#66d9ef">int</span> r,<span style="color:#66d9ef">int</span> w)<span style="color:#f92672">:</span>radius(r),width(w){ }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CEngine</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CCar</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> price;
+</span></span><span style="display:flex;"><span>    CTyre tyre;
+</span></span><span style="display:flex;"><span>    CEngine engine;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    CCar(<span style="color:#66d9ef">int</span> p,<span style="color:#66d9ef">int</span> tr,<span style="color:#66d9ef">int</span> tw)<span style="color:#f92672">:</span>price(p),tyre(tr,w){ }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// tyre使用构造函数初始化，engine使用自动生成的无参构造函数初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span></code></pre></div><p>上例中，如果 CCar 类不定义构造函数，则下面的语句会编译出错：</p>
+<p>CCar car;</p>
+<p>因为编译器不明白 car.tyre 该如何初始化。 car.engine 的初始化没问题，用自动生成的无参构造函数即可。</p>
+<p><strong>任何生成封闭类对象的语句，都要让编译器明白，对象中的成员对象，是如何初始化的。</strong></p>
+</li>
+<li>
+<p>封闭类构造函数和析构函数的执行顺序</p>
+<p>（1）封闭类对象生成时，先执行所有成员对象的构造函数，然后才执行封闭类的构造函数。</p>
+<p>（2）对象成员的构造函数调用次序和对象成员在类中的说明次序一致，与他们在成员初始化列表中出现的次序无关。</p>
+<p>（3）当对象类的对象消亡时，限制性封闭类的析构函数，然后再执行成员对象的析构函数。次序和构造函数的调用次序相反。</p>
+</li>
+</ol>
+<h2 id="常量对象常量成员函数">常量对象、常量成员函数</h2>
+<ol>
+<li>
+<p>基本概念</p>
+<p>常量对象：如果不希望某个对象的值被改变，则定义该对象的时候可以在前面加 const 关键字。</p>
+<p>常量成员函数：在类的成员函数说明后面加上 const 关键字，则该成员函数称为常量成员函数。</p>
+<p>常量成员函数执行期间不应修改其所作用的对象。因此，在常量成员函数中不能修改成员变量的值（静态成员变量除外），也不能调用同类的非常量成员函数（静态成员函数除外）。</p>
+</li>
+<li>
+<p>实例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> value;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">GetValue</span>() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// wrong
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    func(); <span style="color:#75715e">// wrong
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>();
+</span></span><span style="display:flex;"><span>  Sample(){}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p>常量成员函数的重载</p>
+<p>两个成员函数，名字和参数表都一样，但一个是 const，一个不是，算重载。</p>
+<p>调用时 常量成员对象调用常量成员函数，非常量成员对象先找非常量成员函数，如果没有调用常量成员函数。</p>
+</li>
+</ol>
+<h2 id="友元">友元</h2>
+<p>友元分为友元函数和友元类</p>
+<p>（1）友元函数：一个类的友元函数，可以访问该类的私有成员</p>
+<p>​ 可以将一个类的成员函数（包括构造、析构函数）说明为另一个类的友元。</p>
+<p>（2）友元类：如果 A 是 B 的友元类，那么 A 的成员函数可以访问 B 的私有成员</p>
+<p>友元使一个类可以修改其成员对象的私有成员，如果未声明友元则不可访问或修改其成员对象的私有成员。</p>
+<p>友元类之间的关系不能传递，不能继承</p>
+<h2 id="运算符重载">运算符重载</h2>
+<h3 id="基本概念">基本概念</h3>
+<ol>
+<li>
+<p>运算符重载的需求</p>
+<p>C++预定义的运算符，只能用于基本数据类型的运算：整型、实型、字符型、逻辑型……</p>
+<p>+、-、*、/、%、^、&amp;、&raquo;、!=、=、&laquo;、|、!……</p>
+<p>目的：实现预期功能、使代码更简洁</p>
+</li>
+<li>
+<p>基本概念</p>
+<p>运算符重载，就是对已有的运算符（C++中预定义的运算符）赋予多重的含义，使同一运算符作用于不同的数据时导致不同类型的行为。</p>
+<p>目的：拓展 C++中提供的运算符的适用范围，使之能作用于对象。</p>
+</li>
+<li>
+<p>运算符重载的形式</p>
+<p>（1）运算符重载的实质是函数重载</p>
+<p>（2）可以重载为普通函数，也可以重载为成员函数</p>
+<p>（3）把含运算符的表达式转换成对运算符函数的调用</p>
+<p>（4）把运算符的操作数转换成运算符函数的参数</p>
+<p>（5）运算符被多次重载时，根据实参的类型决定调用哪个运算符函数</p>
+</li>
+<li>
+<p>运算符重载的形式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">返回值类型</span> <span style="color:#66d9ef">operator</span> <span style="color:#960050;background-color:#1e0010">运算符</span>(<span style="color:#960050;background-color:#1e0010">形参表</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>重载为成员函数时，参数个数为运算符目数减一</p>
+<p>重载为普通函数时，参数个数为运算符目数</p>
+</li>
+</ol>
+<h3 id="赋值运算符的重载">赋值运算符的重载</h3>
+<ol>
+<li>
+<p>赋值运算符‘=’重载</p>
+<p>“=”只能重载为成员函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">String</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>str;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        String()<span style="color:#f92672">:</span>str(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>]) { str[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">c_str</span>() { <span style="color:#66d9ef">return</span> str; };
+</span></span><span style="display:flex;"><span>        String <span style="color:#f92672">&amp;</span> oprator <span style="color:#f92672">=</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>s);
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">::~</span>String() { <span style="color:#66d9ef">delete</span>[] str; }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>String <span style="color:#f92672">&amp;</span> String<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>s)
+</span></span><span style="display:flex;"><span>{   <span style="color:#75715e">// 重载“=”以使得obj=“hello”能够成立
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">delete</span>[] str;
+</span></span><span style="display:flex;"><span>    str <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[strlen(s)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    strcpy(str, s);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>深拷贝和浅拷贝(复制构造函数应同深拷贝)</p>
+<p>浅拷贝：</p>
+<p>原生的“=”只能使两个对象的内存完全相同</p>
+<p>而如果成员有指针，只改变了指针指向的地址，而产生一系列问题</p>
+<p>深拷贝：</p>
+<p>重载“=”重新分配内存空间，深度拷贝</p>
+<p>深拷贝的问题：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>s <span style="color:#f92672">=</span> s;
+</span></span></code></pre></div><p>此时直接 delete[] str; 会导致逻辑错误，因此重载时先判断指针指向的地址是否相同，再行处理</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>String <span style="color:#f92672">&amp;</span> String<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>s)
+</span></span><span style="display:flex;"><span>{   <span style="color:#75715e">// 重载“=”以使得obj=“hello”能够成立
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(<span style="color:#66d9ef">this</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span> s)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span>[] str;
+</span></span><span style="display:flex;"><span>    str <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[strlen(s)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    strcpy(str, s);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>对 operator=返回值类型的讨论</p>
+<p>对运算符重载时，应尽量保留原运算符的特性</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> b <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>(a <span style="color:#f92672">=</span> b) <span style="color:#f92672">=</span> c; <span style="color:#75715e">// 会修改a的值
+</span></span></span></code></pre></div></li>
+</ol>
+<h3 id="运算符重载为友元">运算符重载为友元</h3>
+<p>重载为成员函数不够用了</p>
+<p>(1,1)+1;</p>
+<p>1+(1,1);</p>
+<p>复数与实数相加</p>
+<h3 id="流插入运算符和流提取运算符的重载">流插入运算符和流提取运算符的重载</h3>
+<ol>
+<li>
+<p>流输入运算符的重载</p>
+<p>cout 是在 iostream 中定义的，ostream 类的对象</p>
+<p>“&laquo;”能用在 cout 上是因为，在 iostream 中对“&laquo;”进行了重载。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>ostream <span style="color:#f92672">&amp;</span> ostream<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(<span style="color:#66d9ef">int</span> n)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">……</span><span style="color:#75715e">// 输出n的代码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>实际应用时使用的是普通函数的重载</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> age;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>Student a;
+</span></span><span style="display:flex;"><span>ostream <span style="color:#f92672">&amp;</span> ostream<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span> o,<span style="color:#66d9ef">const</span> Student <span style="color:#f92672">&amp;</span> as)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  o<span style="color:#f92672">&lt;&lt;</span>as.age;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>cout<span style="color:#f92672">&lt;&lt;</span>a;
+</span></span></code></pre></div></li>
+<li>
+<p>流输出运算符的重载</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>istream <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&gt;&gt;</span>(istream <span style="color:#f92672">&amp;</span> is,Complex <span style="color:#f92672">&amp;</span> c)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    string s;
+</span></span><span style="display:flex;"><span>    is<span style="color:#f92672">&gt;&gt;</span>s;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> pos <span style="color:#f92672">=</span> s.find(<span style="color:#e6db74">&#34;+&#34;</span>,<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    string sTmp <span style="color:#f92672">=</span> s.substr(<span style="color:#ae81ff">0</span>,pos);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 分离出代表实部的字符串
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    c.real <span style="color:#f92672">=</span> atof(sTmo.c_str());
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// atof库函数能将const char*指针指向的内容转换成float
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sTmp <span style="color:#f92672">=</span> s.substr(pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,s.length()<span style="color:#f92672">-</span>pos<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 分离出代表虚部的字符串
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    c.imag <span style="color:#f92672">=</span> stof(sTmp.c_str());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> is;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="类型转换运算符的重载">类型转换运算符的重载</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Complex</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> real,imag;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Complex(<span style="color:#66d9ef">double</span> r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,<span style="color:#66d9ef">double</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">:</span>real(r),imag(i){ };
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">double</span> () { <span style="color:#66d9ef">return</span> real; }
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 重载强制类型转换运算符 double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Complex c(<span style="color:#ae81ff">1.2</span>,<span style="color:#ae81ff">3.4</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#66d9ef">double</span>)c <span style="color:#f92672">&lt;&lt;</span> endl;<span style="color:#75715e">// 输出1.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">double</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> c;<span style="color:#75715e">// 等价于 double n=2+c.operator double()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout<span style="color:#f92672">&lt;&lt;</span>n;<span style="color:#75715e">// 输出 3.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="自增自减运算符的重载">自增自减运算符的重载</h3>
+<p>++、&ndash;有前置/后置之分，为了区分所重载的是前置运算符还是后置运算符，<strong>c++规定</strong></p>
+<ul>
+<li>
+<p>前置运算符作为一元运算符重载</p>
+<p>重载为成员函数：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>T <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">++</span>();
+</span></span><span style="display:flex;"><span>T <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">--</span>();
+</span></span></code></pre></div><p>重载为全局函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>T1 <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">++</span>(T2);
+</span></span><span style="display:flex;"><span>T1 <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">--</span>(T2);
+</span></span></code></pre></div><ul>
+<li>
+<p>后置运算符作为二元运算符重载，多写一个没用的参数</p>
+<p>重载为成员函数：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>T <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">++</span>(<span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span>T <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">--</span>(<span style="color:#66d9ef">int</span>);
+</span></span></code></pre></div><p>重载为全局函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>T1 <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">++</span>(T2,<span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span>T1 <span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">--</span>(T2,<span style="color:#66d9ef">int</span>);
+</span></span></code></pre></div><p>但是在没有后置运算符重载而有前置重载的情况下，</p>
+<p>在 vs 中，obj++ 也调用前置重载，而 dev 则令 obj++ 编译出错</p>
+<p>前置形式的++、&ndash;返回变量的引用</p>
+<p>后置形式的++、&ndash;返回临时变量</p>
+<p>&ndash;i 更快</p>
+<h3 id="运算符重载的注意事项">运算符重载的注意事项</h3>
+<p>1.C++不允许定义新的运算符</p>
+<p>2.重载后运算符的含义应该符合日常习惯</p>
+<p>3.运算符重载不改变运算符的优先级</p>
+<p>4.一下运算符不能被重载：“.”、“.*”、“::”、“?:”、sizeof；</p>
+<p>5.重载运算符()、[]、-&gt;或赋值运算符=时，运算符重载函数必须声明为类的成员函数。</p>
+<h2 id="继承和派生的基本概念">继承和派生的基本概念</h2>
+<p><strong>继承</strong>：在定义一个新的类 B 时，如果该类与某个已有的类 A 相似（指的是 B 拥有 A 的全部特点），那么可以把 A 作为一个基类，而把 B 作为基类的一个派生类（也称子类）。</p>
+<p>派生类是通过对基类进行<strong>修改和扩充</strong>得到的。在派生类中，可以扩充新的成员变量和成员函数。</p>
+<p>派生类一经定义后，可以独立使用，不依赖于基类。</p>
+<p>派生类拥有基类的全部成员函数和成员变量，不论是 private、protected、public。</p>
+<p>在派生类的各个成员函数中，<strong>不能访问基类中的 private 成员。</strong></p>
+<p>派生类的写法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">派生类名:</span><span style="color:#a6e22e">public</span> <span style="color:#960050;background-color:#1e0010">基类名</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>派生类中的函数可以对基类函数进行<strong>覆盖，<strong>但依旧可以</strong>调用</strong>基类的相同函数。</p>
+<p>派生类对象的内存空间</p>
+<p>派生类对象的体积，等于基类对象的体积，再加上派生类对象自己的成员变量的体积。**在派生类对象中，包含着基类对象，**而且基类对象的存储位置位于派生类对象新增的成员变量之前。</p>
+<h2 id="继承关系和复合关系">继承关系和复合关系</h2>
+<p>类之间的两种关系</p>
+<p>1，继承：“是”关系</p>
+<p>继承 A，B 是基类 A 的派生类。</p>
+<p>逻辑上要求：“一个 B 对象也<strong>是</strong>一个 A 对象”。</p>
+<p>2.复合：“有”关系</p>
+<p>类 C 中“有”成员变量 k，k 是类 D 的对象，则 C 和 D 是复合关系</p>
+<p>一般逻辑上要求：“D 对象是 C 对象的固有属性或组成部分”。</p>
+<p>对于人养狗的情况，使用指针分别指向狗和人</p>
+<h2 id="派生类覆盖基类成员">派生类覆盖基类成员</h2>
+<p>派生类可以定义一个和基类成员同名的成员，这叫<strong>覆盖</strong>。在派生类中访问这类成员时，缺省的情况是访问派生类中定义的成员。要在派生类中访问由基类定义的<strong>同名</strong>成员时，要用<strong>作用域符号::</strong>。</p>
+<p>成员类型访问权限：</p>
+<p>类的 private 成员：</p>
+<p>​ - 基类的成员函数</p>
+<p>​ - 基类的友元函数</p>
+<p>基类的 public 成员：</p>
+<p>​ - 基类的成员函数</p>
+<p>​ - 基类的友元函数</p>
+<p>​ - 派生类的成员函数</p>
+<p>​ - 派生类的友元函数</p>
+<p>​ - 其他函数</p>
+<p>基类的 protected 成员：</p>
+<p>​ - 基类的成员函数</p>
+<p>​ - 基类的友元函数</p>
+<p>​ - 派生类的成员函数可以访问当前对象的基类的保护成员</p>
+<h2 id="派生类的构造函数">派生类的构造函数</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bug</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> nLegs;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> nColor;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> nType;
+</span></span><span style="display:flex;"><span>        Bug(<span style="color:#66d9ef">int</span> legs, <span style="color:#66d9ef">int</span> color);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PrintBug</span>(){ };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FlyBug</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Bug
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> nWings;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        FlyBug(<span style="color:#66d9ef">int</span> legs, <span style="color:#66d9ef">int</span> color, <span style="color:#66d9ef">int</span> wings);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Bug<span style="color:#f92672">::</span>Bug(<span style="color:#66d9ef">int</span> legs, <span style="color:#66d9ef">int</span> color)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    nLegs <span style="color:#f92672">=</span> legs;
+</span></span><span style="display:flex;"><span>    nColor <span style="color:#f92672">=</span> color;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 错误的FlyBug构造函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>FlyBug<span style="color:#f92672">::</span>FlyBug(<span style="color:#66d9ef">int</span> legs, <span style="color:#66d9ef">int</span> color, <span style="color:#66d9ef">int</span> wings)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    nlegs <span style="color:#f92672">=</span> legs;<span style="color:#75715e">// 不能访问
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    nColor <span style="color:#f92672">=</span> color;<span style="color:#75715e">// 不能访问
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    nType <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#75715e">// OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    nWings <span style="color:#f92672">=</span> wings;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 正确的FlyBug构造函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>FlyBug<span style="color:#f92672">::</span>FlyBug(<span style="color:#66d9ef">int</span> legs, <span style="color:#66d9ef">int</span> color, <span style="color:#66d9ef">int</span> wings)<span style="color:#f92672">:</span>Bug(legs,color)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    nWing <span style="color:#f92672">=</span> wings;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在创建派生类的对象时，需要调用基类的构造函数初始化派生类对象中从基类继承的成员。在执行一个派生类的构造函数之前，总是先执行基类的构造函数。</p>
+<p>调用基类的构造函数的两种方法</p>
+<p>- <strong>显式方式</strong>：在派生类的构造函数中，为基类的构造函数提供参数。</p>
+<p>​ derived::derived(arg_derived-list):base(arg_base-list)</p>
+<p>- <strong>隐式方式</strong>：在派生类的构造函数中，省略基类构造函数时，派生类的构造函数则自动调用基类的默认构造函数。</p>
+<p>派生类的析构函数被执行时，执行完派生类的析构函数后，自动调用基类的析构函数。</p>
+<p>封闭派生类对象的<strong>构造函数的执行顺序</strong>：</p>
+<p>基类的构造函数-&gt;成员对象类的构造函数-&gt;派生类自己的构造函数</p>
+<h2 id="公有继承的赋值兼容规则">公有继承的赋值兼容规则</h2>
+<p>public 继承的赋值兼容规则：</p>
+<p>1.派生类的对象可以赋值给基类对象</p>
+<p>2.派生类对象可以初始化基类引用</p>
+<p>3.派生类对象的地址可以赋值给基类指针</p>
+<p>直接基类和间接基类</p>
+<p>A 派生出 B，B 派生出 C，C 派生出 D，D 派生出 E……</p>
+<p>可以连续继承</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/c&#43;&#43;"
+      >c&#43;&#43;</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/using-javascript-to-achieve-typewriter-effect/"
+      ><span class="mr-1.5">←</span><span>使用 JavaScript 实现打字机效果</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/manipulating-tables-with-python/"
+      ><span>用 python 操作表格</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

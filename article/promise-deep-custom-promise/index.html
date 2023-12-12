@@ -1,0 +1,945 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Promise 深入 &#43; 自定义 Promise - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="前置知识准备 函数对象与实例对象 函数对象：将函数作为对象使用时, 简称为函数对象。 实例对象：new 函数产生的对象, 简称为实例对象。 function Fn() { // Fn函" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Promise 深入 &#43; 自定义 Promise">
+<meta itemprop="description" content="promise 的学习记录，剖析了 promise 的实现，对其原理和应用加深理解。"><meta itemprop="datePublished" content="2021-03-15T16:06:58+00:00" />
+<meta itemprop="dateModified" content="2021-03-15T16:06:58+00:00" />
+<meta itemprop="wordCount" content="4287">
+<meta itemprop="keywords" content="JavaScript," />
+  
+  <meta property="og:title" content="Promise 深入 &#43; 自定义 Promise" />
+<meta property="og:description" content="promise 的学习记录，剖析了 promise 的实现，对其原理和应用加深理解。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/promise-deep-custom-promise/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-15T16:06:58+00:00" />
+<meta property="article:modified_time" content="2021-03-15T16:06:58+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Promise 深入 &#43; 自定义 Promise"/>
+<meta name="twitter:description" content="promise 的学习记录，剖析了 promise 的实现，对其原理和应用加深理解。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/promise-deep-custom-promise/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Promise 深入 &#43; 自定义 Promise</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 15, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="前置知识准备">前置知识准备</h2>
+<h3 id="函数对象与实例对象">函数对象与实例对象</h3>
+<p>函数对象：将函数作为对象使用时, 简称为函数对象。</p>
+<p>实例对象：new 函数产生的对象, 简称为实例对象。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Fn</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Fn函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fn</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Fn</span>(); <span style="color:#75715e">// Fn是构造函数  fn是实例对象(简称为对象)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">Fn</span>.<span style="color:#a6e22e">prototype</span>); <span style="color:#75715e">// Fn是函数对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">Fn</span>.<span style="color:#a6e22e">call</span>({}); <span style="color:#75715e">// Fn是函数对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#test&#39;</span>); <span style="color:#75715e">// jQuery函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/test&#39;</span>); <span style="color:#75715e">// jQuery函数对象
+</span></span></span></code></pre></div><h3 id="两种类型的回调函数">两种类型的回调函数</h3>
+<h4 id="同步回调">同步回调</h4>
+<p>理解：立即执行, 完全执行完了才结束, 不会放入回调队列中</p>
+<p>例子：数组遍历相关的回调函数 / Promise 的 excutor 函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>];
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">item</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 遍历回调, 同步回调函数, 不会放入列队, 一上来就要执行完
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">item</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;forEach()之后&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// forEach()之后
+</span></span></span></code></pre></div><h4 id="异步回调">异步回调</h4>
+<p>理解：不会立即执行, 会放入回调队列中将来执行</p>
+<p>例子：定时器回调 / ajax 回调 / Promise 的成功|失败的回调</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 异步回调函数, 会放入队列中将来执行
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timout callback()&#39;</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;setTimeout()之后&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// setTimeout()之后
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// timout callback()
+</span></span></span></code></pre></div><h3 id="程序错误">程序错误</h3>
+<h4 id="错误类型">错误类型</h4>
+<ul>
+<li>
+<p>Error: 所有错误的父类型</p>
+</li>
+<li>
+<p>ReferenceError: 引用的变量不存在</p>
+</li>
+<li>
+<p>TypeError: 数据类型不正确的错误</p>
+</li>
+<li>
+<p>RangeError: 数据值不在其所允许的范围内</p>
+</li>
+<li>
+<p>SyntaxError: 语法错误</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">/* ReferenceError: 引用的变量不存在 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ReferenceError: a is not defined
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;-----&#39;</span>) <span style="color:#75715e">// 没有捕获error, 下面的代码不会执行
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* TypeError: 数据类型不正确的错误 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">xxx</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// TypeError: Cannot read property &#39;xxx&#39; of undefined
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">xxx</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// TypeError: b.xxx is not a function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* RangeError: 数据值不在其所允许的范围内 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fn</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fn</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fn</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// RangeError: Maximum call stack size exceeded
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* SyntaxError: 语法错误 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">c</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// SyntaxError: Unexpected string
+</span></span></span></code></pre></div><h4 id="错误处理">错误处理</h4>
+<p>捕获错误：try &hellip; catch</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">d</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">xxx</span>);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">stack</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;出错之后&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Cannot read property &#39;xxx&#39; of undefined
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// TypeError: Cannot read property &#39;xxx&#39; of undefined
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//    at &lt;anonymous&gt;:3:19
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 出错之后
+</span></span></span></code></pre></div><p>抛出错误：throw error</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">something</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (Date.<span style="color:#a6e22e">now</span>() <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;当前时间为奇数, 可以执行任务&#39;</span>);
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 如果时间是偶数抛出异常, 由调用来处理
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;当前时间为偶数无法执行任务&#39;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 捕获处理异常
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">something</span>();
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Error">错误对象</a></strong></p>
+<p>message 属性: 错误相关信息</p>
+<p>stack 属性: 函数调用栈记录信息</p>
+<h2 id="promise-深入">Promise 深入</h2>
+<h3 id="含义">含义</h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> 是<a href="/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程</a>的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6 将其写进了语言标准，统一了用法，原生提供了<code>Promise</code>对象。</p>
+<p>所谓<code>Promise</code>，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。</p>
+<h3 id="特点">特点</h3>
+<p>（1）对象的状态不受外界影响。<code>Promise</code>对象代表一个异步操作，有三种状态：<code>pending</code>（进行中）、<code>fulfilled</code>（已成功）和<code>rejected</code>（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是<code>Promise</code>这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。</p>
+<p>（2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。<code>Promise</code>对象的状态改变，只有两种可能：从<code>pending</code>变为<code>fulfilled</code>和从<code>pending</code>变为<code>rejected</code>。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就称为 resolved（已定型）。如果改变已经发生了，你再对<code>Promise</code>对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。</p>
+<h3 id="基本使用">基本使用</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 1. 创建一个新的promise对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 执行器函数  同步回调
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;执行 excutor&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 2. 执行异步操作任务
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">time</span> <span style="color:#f92672">=</span> Date.<span style="color:#a6e22e">now</span>(); <span style="color:#75715e">// 如果当前时间是偶数就代表成功, 否则代表失败
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3.1. 如果成功了, 调用resolve(value)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">time</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;成功的数据, time=&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">time</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 3.2. 如果失败了, 调用reject(reason)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#a6e22e">reject</span>(<span style="color:#e6db74">&#39;失败的数据, time=&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">time</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }, <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;new Promise()之后&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">then</span>(
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">value</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 接收得到成功的value数据    onResolved
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;成功的回调&#39;</span>, <span style="color:#a6e22e">value</span>);
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">reason</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 接收得到失败的reason数据   onRejected
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;失败的回调&#39;</span>, <span style="color:#a6e22e">reason</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 执行 excutor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// new Promise()之后
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 失败的回调 失败的数据, time=1615801107751
+</span></span></span></code></pre></div><h3 id="为什么要用-promise">为什么要用 Promise</h3>
+<ol>
+<li>
+<p>指定回调函数的方式更加灵活:</p>
+<p>​ 旧的：必须在启动异步任务前指定</p>
+<p>​ promise：启动异步任务 =&gt; 返回 promie 对象 =&gt; 给 promise 对象绑定回调函数(甚至可以在异步任务结束后指定)</p>
+</li>
+<li>
+<p>支持链式调用, 可以解决回调地狱问题</p>
+<p>什么是回调地狱? 回调函数嵌套调用, 外部回调函数异步执行的结果是嵌套的回调函数执行的条件</p>
+<p>回调地狱的缺点? 不便于阅读 / 不便于异常处理</p>
+<p>解决方案? promise 链式调用</p>
+<p>终极解决方案? async/await</p>
+<p>详见 <a href="/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">JavaScript 中的异步编程</a></p>
+</li>
+</ol>
+<h3 id="promise-的-api">Promise 的 API</h3>
+<ol>
+<li>
+<p><strong>Promise 构造函数: Promise (excutor) {}</strong></p>
+<p>excutor 函数: 同步执行 (resolve, reject) =&gt; {}</p>
+<p>resolve 函数: 内部定义成功时我们调用的函数 value =&gt; {}</p>
+<p>reject 函数: 内部定义失败时我们调用的函数 error =&gt; {}</p>
+<p>说明: excutor 会在 Promise 内部立即同步回调,异步操作在执行器中执行</p>
+</li>
+<li>
+<p><strong>Promise.prototype.then 方法: (onResolved, onRejected) =&gt; {}</strong></p>
+<p>onResolved 函数: 成功的回调函数 (value) =&gt; {}</p>
+<p>onRejected 函数: 失败的回调函数 (error) =&gt; {}</p>
+<p>说明: 指定用于得到成功 value 的成功回调和用于得到失败 error 的失败回调</p>
+<p>返回一个新的 promise 对象</p>
+</li>
+<li>
+<p><strong>Promise.prototype.catch 方法: (onRejected) =&gt; {}</strong></p>
+<p>onRejected 函数: 失败的回调函数 (error) =&gt; {}</p>
+<p>说明: then()的语法糖, 相当于: then(undefined, onRejected)</p>
+</li>
+<li>
+<p><strong>Promise.resolve 方法: (value) =&gt; {}</strong></p>
+<p>value: 成功的数据或 promise 对象</p>
+<p>说明: 返回一个成功/失败的 promise 对象</p>
+</li>
+<li>
+<p><strong>Promise.reject 方法: (error) =&gt; {}</strong></p>
+<p>error: 错误内容</p>
+<p>说明: 返回一个失败的 promise 对象</p>
+</li>
+<li>
+<p><strong>Promise.all 方法: (promises) =&gt; {}</strong></p>
+<p>promises: 包含 n 个 promise 的数组</p>
+<p>说明: 返回一个新的 promise, 只有所有的 promise 都成功才成功, 只要有一个失败了就直接失败</p>
+</li>
+<li>
+<p><strong>Promise.race 方法: (promises) =&gt; {}</strong></p>
+<p>promises: 包含 n 个 promise 的数组</p>
+<p>说明: 返回一个新的 promise, 第一个完成的 promise 的结果状态就是最终的结果状态</p>
+</li>
+</ol>
+<h3 id="promise-的几个关键问题">Promise 的几个关键问题</h3>
+<ol>
+<li>
+<p><strong>如何改变 promise 的状态?</strong></p>
+<p>(1)resolve(value): 如果当前是 pendding 就会变为 resolved</p>
+<p>(2)reject(error): 如果当前是 pendding 就会变为 rejected</p>
+<p>(3)抛出异常: 如果当前是 pendding 就会变为 rejected</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolve</span>(<span style="color:#ae81ff">1</span>); <span style="color:#75715e">// promise变为resolved成功状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">reject</span>(<span style="color:#ae81ff">2</span>); <span style="color:#75715e">// promise变为rejected失败状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;出错了&#39;</span>); <span style="color:#75715e">// 抛出异常, promse变为rejected失败状态, error为抛出的error
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">throw</span> <span style="color:#ae81ff">3</span>; <span style="color:#75715e">// 抛出异常, promse变为rejected失败状态, error为 抛出的3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>});
+</span></span></code></pre></div></li>
+<li>
+<p><strong>一个 promise 指定多个成功/失败回调函数, 都会调用吗?</strong></p>
+<p>当 promise 改变为对应状态时都会调用</p>
+</li>
+<li>
+<p><strong>改变 promise 状态和指定回调函数谁先谁后?</strong></p>
+<p>(1)都有可能, 正常情况下是先指定回调再改变状态, 但也可以先改状态再指定回调</p>
+<p>(2)如何先改状态再指定回调?</p>
+<p>① 在执行器中直接调用 resolve()/reject()</p>
+<p>② 延迟更长时间才调用 then()</p>
+<p>(3)什么时候才能得到数据?</p>
+<p>① 如果先指定的回调, 那当状态发生改变时, 回调函数就会调用, 得到数据</p>
+<p>② 如果先改变的状态, 那当指定回调时, 回调函数就会调用, 得到数据</p>
+</li>
+<li>
+<p><strong>promise.then()返回的新 promise 的结果状态由什么决定?</strong></p>
+<p>(1)简单表达: 由 then()指定的回调函数执行的结果决定</p>
+<p>(2)详细表达:</p>
+<p>① 如果抛出异常, 新 promise 变为 rejected, reason 为抛出的异常</p>
+<p>② 如果返回的是非 promise 的任意值, 新 promise 变为 resolved, value 为返回的值</p>
+<p>③ 如果返回的是另一个新 promise, 此 promise 的结果就会成为新 promise 的结果</p>
+</li>
+<li>
+<p><strong>promise 如何串连多个操作任务?</strong></p>
+<p>(1)promise 的 then()返回一个新的 promise, 可以写成 then()的链式调用</p>
+<p>(2)通过 then 的链式调用串连多个同步/异步任务</p>
+</li>
+<li>
+<p><strong>promise 异常传/穿透?</strong></p>
+<p>(1)当使用 promise 的 then 链式调用时, 可以在最后指定失败的回调</p>
+<p>(2)前面任何操作出了异常, 都会传到最后失败的回调中处理</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Promise.prototype.then()的默认调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Promise.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">then</span>(
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">value</span>) =&gt; Promise.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">calue</span>),
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">error</span>) =&gt; Promise.<span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>中断 promise 链?</strong></p>
+<p>(1)当使用 promise 的 then 链式调用时, 在中间中断, 不再调用后面的回调函数</p>
+<p>(2)办法: 在回调函数中返回一个 pendding 状态的 promise 对象</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise(() =&gt; {});
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="自定义手写promise">自定义（手写）Promise</h2>
+<h3 id="代码">代码</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 自定义Promise类
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> Promise {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Promise 构造函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * executor：执行器函数（同步执行）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">executor</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">PENDING</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">undefined</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">callbacks</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resolve</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">value</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">PENDING</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">RESOLVED</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">callbacks</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 异步调用已在队列中的回调函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">callbacks</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">callback</span>) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">callback</span>.<span style="color:#a6e22e">onResolved</span>(<span style="color:#a6e22e">value</span>);
+</span></span><span style="display:flex;"><span>          });
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reject</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">error</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">PENDING</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">REJECTED</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">error</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">callbacks</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 异步调用已在队列中的回调函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">callbacks</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">callback</span>) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">callback</span>.<span style="color:#a6e22e">onRejected</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>          });
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">executor</span>(<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Promise 原型对象的 then()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * 指定成功和失败的回调函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * 返回一个新的 Promise 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">onResolved</span>, <span style="color:#a6e22e">onRejected</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">onResolved</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">onResolved</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;function&#39;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">onResolved</span> <span style="color:#f92672">:</span> (<span style="color:#a6e22e">value</span>) =&gt; <span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">onRejected</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">onRejected</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;function&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">?</span> <span style="color:#a6e22e">onRejected</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">:</span> (<span style="color:#a6e22e">error</span>) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
+</span></span><span style="display:flex;"><span>          };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handle</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">callback</span>) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">result</span> <span style="color:#66d9ef">instanceof</span> Promise) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>);
+</span></span><span style="display:flex;"><span>          } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">result</span>);
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      };
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">RESOLVED</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">handle</span>(<span style="color:#a6e22e">onResolved</span>);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">REJECTED</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">handle</span>(<span style="color:#a6e22e">onRejected</span>);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">callbacks</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">onResolved</span><span style="color:#f92672">:</span> () =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">handle</span>(<span style="color:#a6e22e">onResolved</span>);
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">onRejected</span><span style="color:#f92672">:</span> () =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">handle</span>(<span style="color:#a6e22e">onRejected</span>);
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Promise 原型对象的 catch()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * 指定失败的回调函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * 返回一个新的 Promise 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">onRejected</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">undefined</span>, <span style="color:#a6e22e">onRejected</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Promise 函数的对象的 resolve 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * 返回一个指定 error 的失败的 promise
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">value</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">value</span> <span style="color:#66d9ef">instanceof</span> Promise) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">value</span>);
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Promise 函数的对象的 reject 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * 返回一个指定 error 的失败的 promise
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Promise 函数对象的 all 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * 返回一个 promise，只有当所有的 promise 都成功时才成功，否则只要有一个失败就失败
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">all</span>(<span style="color:#a6e22e">promises</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">values</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">promises</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">promise</span>, <span style="color:#a6e22e">index</span>) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">promise</span> <span style="color:#f92672">=</span> Promise.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">promise</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">promise</span>.<span style="color:#a6e22e">then</span>(
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">value</span>) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">values</span>[<span style="color:#a6e22e">index</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">values</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">promises</span>.<span style="color:#a6e22e">length</span>) {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">values</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">error</span>) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Promise 函数对象的 race 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * 返回一个 promise，其结果由第一个完成的 promise 决定
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">race</span>(<span style="color:#a6e22e">promises</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">promises</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">promise</span>) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">promise</span> <span style="color:#f92672">=</span> Promise.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">promise</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">promise</span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>);
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="遇到的问题">遇到的问题</h3>
+<ol>
+<li>
+<p>this 的指向</p>
+<p>在 executor 中，因为设定了 setTimeout，因而 resolve 调用时的 this 指向为当前运行环境的 this（window），因此通过箭头函数，将 this 设置为函数创建时的 this 即 promise 实例可以解决 resolve 调用时 this 指向问题。</p>
+<p>在 then 方法中，handle 实际调用时 this 同样为 window，通过箭头函数解决 this 指向问题。</p>
+</li>
+<li>
+<p>微任务和宏任务</p>
+<p>在 es6 中 then 中的函数会放入微任务中，而因为开发者无法向微任务队列中添加任务，所以用宏任务替代，即用 setTimeout 实现异步执行，详细问题见 <a href="/2021/03/05/2021-03-05-JavaScript%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">JavaScript 中的异步编程</a></p>
+</li>
+<li>
+<p>then 方法如何书写？</p>
+<ul>
+<li>返回一个 Promise 实例，其中存储了 then 中代码运行状态的信息；</li>
+<li>运行状态信息受到 onResolved 和 onRejected 的执行结果影响；</li>
+<li>then 同步执行，then 中的函数异步执行且受调用 then 的 promise 实例状态的控制；</li>
+<li>异常穿透；</li>
+</ul>
+</li>
+</ol>
+<h2 id="面试题">面试题</h2>
+<h3 id="面试题-1">面试题 1</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 3 2 4 1
+</span></span></span></code></pre></div><h3 id="面试题-2">面试题 2</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolve</span>();
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 2 5 3 4 1
+</span></span></span></code></pre></div><h3 id="面试题-3">面试题 3</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">first</span> <span style="color:#f92672">=</span> () =&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">7</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">resolve</span>(<span style="color:#ae81ff">6</span>);
+</span></span><span style="display:flex;"><span>      }, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resolve</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">arg</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arg</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">first</span>().<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">arg</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arg</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 3 7 4 1 2 5
+</span></span></span></code></pre></div><p>注意：promise 状态一但变化就固定下来了。</p>
+<h3 id="面试题-4">面试题 4</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;1&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolve</span>();
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;2&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;3&#39;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>();
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;4&#39;</span>);
+</span></span><span style="display:flex;"><span>      })
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;5&#39;</span>);
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;6&#39;</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;7&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolve</span>();
+</span></span><span style="display:flex;"><span>}).<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;8&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 1 7 2 3 8 4 6 5 0
+</span></span></span></code></pre></div><p>注意：then 中函数是否放入微任务队列取决于它前面的 Promise 的状态改变。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/javascript"
+      >JavaScript</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/last-common-ancestor-lca/"
+      ><span class="mr-1.5">←</span><span>最近公共祖先lca</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/"
+      ><span>JavaScript 中 call()、apply()、bind() 的用法差异</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

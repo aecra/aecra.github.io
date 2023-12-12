@@ -1,0 +1,465 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Vercel 使用之部署博客 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Vercel 是什么 如果你曾听说过 ZEIT Now，是的，它是 Vercel 的前身。在去年早些时候，ZEIT Now 进行了「品牌升级」，成为了现在的 Vercel。 注册与安装 首先，" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="Vercel 使用之部署博客">
+<meta itemprop="description" content="如果你曾听说过 ZEIT Now，是的，它是 Vercel 的前身。在去年早些时候，ZEIT Now 进行了「品牌升级」，成为了现在的 Vercel。"><meta itemprop="datePublished" content="2021-02-22T00:08:23+00:00" />
+<meta itemprop="dateModified" content="2021-02-22T00:08:23+00:00" />
+<meta itemprop="wordCount" content="1595">
+<meta itemprop="keywords" content="vercel,建站," />
+  
+  <meta property="og:title" content="Vercel 使用之部署博客" />
+<meta property="og:description" content="如果你曾听说过 ZEIT Now，是的，它是 Vercel 的前身。在去年早些时候，ZEIT Now 进行了「品牌升级」，成为了现在的 Vercel。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/deployment-blog-used-by-vercel/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-22T00:08:23+00:00" />
+<meta property="article:modified_time" content="2021-02-22T00:08:23+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Vercel 使用之部署博客"/>
+<meta name="twitter:description" content="如果你曾听说过 ZEIT Now，是的，它是 Vercel 的前身。在去年早些时候，ZEIT Now 进行了「品牌升级」，成为了现在的 Vercel。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/deployment-blog-used-by-vercel/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Vercel 使用之部署博客</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 22, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="vercel-是什么">Vercel 是什么</h2>
+<p>如果你曾听说过 ZEIT Now，是的，它是 Vercel 的前身。在去年早些时候，ZEIT Now 进行了「品牌升级」，成为了现在的 Vercel。</p>
+<h2 id="注册与安装">注册与安装</h2>
+<p>首先，在 <a href="https://vercel.com">Vercel 官网</a>注册一个新账户。现在，注册新用户必须使用 Github、Gitlab 或者 Bitbucket 的账户进行授权，并绑定手机号。注册完成后，可以在配置页面修改自己的邮箱地址。</p>
+<p>Vercel 的大部分功能都通过命令行来操作。Vercel 的客户端工具<a href="https://vercel.com/download">下载地址</a>。</p>
+<p>这个命令行工具是使用 Node.js 编写的，因此使用 npm 安装，也因此同时支持 Windows、macOS 和 Linux 操作系统。如果你没有安装过 Node.js 环境，需要先<a href="https://nodejs.org/zh-cn/download/">安装 Node.js</a>。之后，可以在 Windows 的 Powershell 或者 macOS 的终端中运行下述命令安装 Vercel：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>npm i -g vercel
+</span></span></code></pre></div><p>成功安装后，运行下述命令登录账户：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vc login
+</span></span></code></pre></div><p>这里，<code>vc</code> 是 Vercel 的缩写，你也可以使用完整版的 <code>vercel</code> 来执行。</p>
+<p>Vercel 的登录很有意思，因为我们自始至终没有设置过账户密码，它是通过向你邮箱发送一封邮件确认。在邮件中，甚至还有一个和你约定的「暗号」，作为彼此的凭证。</p>
+<h2 id="绑定域名">绑定域名</h2>
+<p>如果你拥有你自己的域名，或者你拥有多个域名，我十分推荐把它们全部绑定到 Vercel 进行管理。</p>
+<p>把域名绑定到 Vercel 时，只需要执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vc domains add 域名
+</span></span></code></pre></div><p>然后在你的域名解析服务商处添加解析即可。</p>
+<h2 id="hexo--vercel-搭建博客">hexo + vercel 搭建博客</h2>
+<p>如果你喜爱写作、喜爱分享，那你一定想过要有一个自己的博客。除了使用类似新浪博客、CSDN 等博客服务之外，许多人也会尝试自己搭建一个「独立博客」。</p>
+<p>我以知名的静态博客系统 Hexo 为例。使用 Hexo 写作后，执行 hexo 的命令生成网站的静态文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hexo g
+</span></span></code></pre></div><p>这时，会产生一个 public 的文件夹。</p>
+<p>继续执行 Vercel 的命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vc
+</span></span></code></pre></div><p>是的，这次不需要跟其他命令，只需要简单的 vc 即可。</p>
+<p>接下来会出现交互式的配置菜单，需要你依次选择：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Vercel CLI 19.2.0
+</span></span><span style="display:flex;"><span>? Set up and deploy “~/Documents/workspace/blog”? [Y/n] y
+</span></span><span style="display:flex;"><span>? Which scope do you want to deploy to? sanko.sspai
+</span></span><span style="display:flex;"><span>? Link to existing project? [y/N] n
+</span></span><span style="display:flex;"><span>? What’s your project’s name? blog
+</span></span><span style="display:flex;"><span>? In which directory is your code located? ./public
+</span></span><span style="display:flex;"><span>? Want to override the settings? [y/N] n
+</span></span></code></pre></div><p>在第一次部署时，只有倒数第二个问题「In which directory is your code located?」要手动输入 <code>public</code> ，其他问题全部可以直接敲击回车键选择默认配置。</p>
+<p>现在，网站已经成功运行起来了。你可以直接去浏览器按下「Ctrl+V」粘贴，即可访问你的新博客。</p>
+<p>值得注意的是，这个网站支持 HTTPS 访问。Vercel 会自动为我们申请一个 Let&rsquo;s Encrypt 的证书，并为我们自动续期。而如果这一切由我们自己来完成，则需要：</p>
+<ol>
+<li>购买域名</li>
+<li>购买服务器</li>
+<li>安装与配置 Nginx</li>
+<li>上传网站文件</li>
+<li>添加 DNS 解析项</li>
+<li>配置 Let&rsquo;s Encrypt 的证书</li>
+<li>每三个月续期证书</li>
+</ol>
+<p>相比之下，使用 Vercel 确实省心不少，还省下了购买域名和服务器的费用。</p>
+<p>要更新文章的时候，只需要执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vc --prod
+</span></span></code></pre></div><p>文章就会更新到之前的网址中。</p>
+<h2 id="hexo--github--vercel-搭建博客">hexo + github + vercel 搭建博客</h2>
+<p>和上面的方式不同的是该方案需要用到 GitHub 来管理我们的网站源码，同时不再需要使用 vercel 工具。</p>
+<p>hexo 和 GitHub 的使用请见上一篇文章。注：并不需要部署 GitHub 的静态网站。</p>
+<p>OK，我们已经过完了上一篇文章，接下来我们就要用 vercel 来部署我们的网站了。</p>
+<p>第一步：进入 vercel 的控制台，点击 New Project。</p>
+<p>第二步：授权 GitHub 并 Import 上文所设置的 GitHub 仓库。</p>
+<p>第三步：选择自己的账户。</p>
+<p>第四步： Continue。</p>
+<p>第五步：设置相关信息并 Deploy，看不明白默认即可。</p>
+<p>第六步：进入项目页点击 Settings -&gt; Domains，然后添加域名，设置域名解析。</p>
+<p>然后等一会儿之后，我们访问添加的域名就可以访问到我们的博客了。而且这个项目只需要更改 GitHub 仓库，Vercel 会在仓库变更之后重新加载网站。</p>
+<h2 id="更上一层楼">更上一层楼</h2>
+<p>通过上面那一步是不是发现 Vercel 本身就可以为我们编译项目？而且支持的项目种类非常多，所以我们可以直接把各种项目提交到 GitHub 仓库，然后设置 Vercel，这样就不需要本地跑程序去编译工程了。</p>
+<p>而且 Vercel 支持可执行程序，除了没有数据库之外这妥妥的完美解决方案啊，又不需要备案，真香！</p>
+<h2 id="限制">限制</h2>
+<p>这么好的事情有没有限制嘞？</p>
+<p>当然有，只不过对于个人博客这种小项目，完全不需要担心被限制，据说是每月 100G 流量，当然，短时间大流量肯定是要出问题的。</p>
+<p>项目数目有没有限制不清楚，可以去试一下。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/vercel"
+      >vercel</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/%E5%BB%BA%E7%AB%99"
+      >建站</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/what-about-the-original-blog-after-using-hexo/"
+      ><span class="mr-1.5">←</span><span>使用 Hexo 之后原有博客怎么办？</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/quickly-build-hexo-personal-blog-and-deploy-it-to-github/"
+      ><span>快速搭建 Hexo 个人博客并部署至 GitHub</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,481 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>快速搭建 Hexo 个人博客并部署至 GitHub - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="准备环境 安装 Git sudo apt install git-core -y 安装 Node.js 使用以下命令安装 Node.js wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh 更新一下 source ~/.profile 安装 Node.js nvm install stable 安装 Hexo 安装 cnpm 使用以下命令安装 cnpm npm install -g cnpm --registry=https://registry.npm.taobao.org 安装 hexo-cli 用命令创建 hexo" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="快速搭建 Hexo 个人博客并部署至 GitHub">
+<meta itemprop="description" content="本文通过简略的步骤展示了 hexo 静态博客生成器的使用方法，并介绍了 GitHub 推送个人博客的方法，最后还有一个不知道有没有用的绑定域名的说明。"><meta itemprop="datePublished" content="2021-02-21T23:51:38+00:00" />
+<meta itemprop="dateModified" content="2021-02-21T23:51:38+00:00" />
+<meta itemprop="wordCount" content="699">
+<meta itemprop="keywords" content="hexo," />
+  
+  <meta property="og:title" content="快速搭建 Hexo 个人博客并部署至 GitHub" />
+<meta property="og:description" content="本文通过简略的步骤展示了 hexo 静态博客生成器的使用方法，并介绍了 GitHub 推送个人博客的方法，最后还有一个不知道有没有用的绑定域名的说明。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/quickly-build-hexo-personal-blog-and-deploy-it-to-github/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-21T23:51:38+00:00" />
+<meta property="article:modified_time" content="2021-02-21T23:51:38+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="快速搭建 Hexo 个人博客并部署至 GitHub"/>
+<meta name="twitter:description" content="本文通过简略的步骤展示了 hexo 静态博客生成器的使用方法，并介绍了 GitHub 推送个人博客的方法，最后还有一个不知道有没有用的绑定域名的说明。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/quickly-build-hexo-personal-blog-and-deploy-it-to-github/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">快速搭建 Hexo 个人博客并部署至 GitHub</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 21, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="准备环境">准备环境</h2>
+<h3 id="安装-git">安装 Git</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install git-core -y
+</span></span></code></pre></div><h3 id="安装-nodejs">安装 Node.js</h3>
+<p>使用以下命令安装 Node.js</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
+</span></span></code></pre></div><p>更新一下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>source ~/.profile
+</span></span></code></pre></div><p>安装 Node.js</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nvm install stable
+</span></span></code></pre></div><h2 id="安装-hexo">安装 Hexo</h2>
+<h3 id="安装-cnpm">安装 cnpm</h3>
+<p>使用以下命令安装 cnpm</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>npm install -g cnpm --registry<span style="color:#f92672">=</span>https://registry.npm.taobao.org
+</span></span></code></pre></div><h3 id="安装-hexo-cli">安装 hexo-cli</h3>
+<h4 id="用命令创建-hexo-文件夹">用命令创建 hexo 文件夹</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir hexo
+</span></span></code></pre></div><h4 id="用命令安装-hexo">用命令安装 hexo</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cnpm install -g hexo-cli
+</span></span></code></pre></div><h4 id="初始化-hexo">初始化 hexo</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd hexo/
+</span></span><span style="display:flex;"><span>hexo init
+</span></span></code></pre></div><h4 id="测试安装成功">测试安装成功</h4>
+<p>打开 hexo 服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hexo server
+</span></span></code></pre></div><p>打开浏览器访问 <a href="http://localhost:4000/">http://localhost:4000/</a> 即可看到搭建成功的博客页面</p>
+<h2 id="将博客部署到-github">将博客部署到 GitHub</h2>
+<h3 id="如果没有-github-账户的先去注册有-github-账户的直接下一步">如果没有 GitHub 账户的先去注册，有 GitHub 账户的直接下一步</h3>
+<p>去注册 <a href="https://github.com/">GitHub</a> 账户</p>
+<h3 id="设置-username-和-useremail">设置 user.name 和 user.email</h3>
+<p>把以下命令中的 &ldquo;Your user.name&rdquo; 和 &ldquo;You user.email&rdquo; 换成自己的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git config --global user.name <span style="color:#e6db74">&#34;Your user.name&#34;</span>
+</span></span><span style="display:flex;"><span>git config --global user.email <span style="color:#e6db74">&#34;You user.email&#34;</span>
+</span></span></code></pre></div><h3 id="生成-ssh-密匙">生成 ssh 密匙</h3>
+<p>user.email 就是自己注册 GitHub 的邮箱</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh-keygen -t rsa -C user.email
+</span></span></code></pre></div><p>下面要输入要保存到的路径（Windows 为用户目录）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/home/ubuntu/.ssh/id_rsa
+</span></span></code></pre></div><p>然后直接回车回车</p>
+<h3 id="查看-ssh-密匙">查看 ssh 密匙</h3>
+<p>打开</p>
+<ul>
+<li><em>id_rsa.pub</em></li>
+</ul>
+<h3 id="在-github-账户下添加-ssh-key">在 GitHub 账户下添加 SSH key</h3>
+<p><a href="https://github.com/settings/keys">去 GitHub 添加 SSH key</a></p>
+<h3 id="创建-github-仓库">创建 GitHub 仓库</h3>
+<p>命名格式为&quot;账户的 userName&quot;.github.io 例如 ： zhangsan.github.io 去<a href="https://github.com/new">创建 GitHub 仓库</a></p>
+<h3 id="修改-hexo-配置">修改 hexo 配置</h3>
+<p>打开 hexo 配置文件</p>
+<ul>
+<li><em>_config.yml</em></li>
+</ul>
+<p>修改对应部分</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">git</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">git@github.com:(BoView)/(BoView).github.io.git</span> <span style="color:#75715e">#括号里面换成自己的用户名和仓库名,去掉括号</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">branch</span>: <span style="color:#ae81ff">master</span>
+</span></span></code></pre></div><p>保存一下</p>
+<h3 id="测试并部署">测试并部署</h3>
+<p>清空静态页面</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hexo clean
+</span></span></code></pre></div><p>生成静态页面</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hexo g
+</span></span></code></pre></div><p>将 public 文件内容部署到 github 仓库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hexo d
+</span></span></code></pre></div><p>如果部署遇到错误的时候，先运行下面这条命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>npm install hexo-deployer-git --save
+</span></span></code></pre></div><p>然后重新部署一下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hexo d
+</span></span></code></pre></div><p>此时可以打开浏览器访问 userName.github.io (GitHub 仓库名) 即可以访问到搭建的博客页面</p>
+<h2 id="绑定域名">绑定域名</h2>
+<h3 id="添加解析记录">添加解析记录</h3>
+<ul>
+<li>如果想通过域名访问的就继续，前提是要有自己的域名，要是通过上面的仓库名可以访问就满足的可以跳过这一步</li>
+<li>去自己的域名下<a href="https://console.cloud.tencent.com/domain/mydomain">添加解析</a>记录类型为 CNAME 主机记录为@ 线路选择默认，TTL 选择 600，记录值为 github 的仓库名 userName.github.io</li>
+</ul>
+<h3 id="配置-hexo">配置 hexo</h3>
+<p>创建 CNAME 配置文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>touch ~/hexo/source/CNAME
+</span></span></code></pre></div><p>去 <em>CNAME 文件</em> 下添加刚才解析的域名 例如： zhangsan.com</p>
+<p>然后重新部署一下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hexo g
+</span></span><span style="display:flex;"><span>hexo d
+</span></span></code></pre></div><h2 id="hexo-博客已搭建完成">Hexo 博客已搭建完成</h2>
+<p>可将 markdown 文件放置到 ./source/_posts/ 中即可部署自己的文章页面</p>
+<p>另外，可以在文件夹 themes 中添加博客主题，然后修改 _config.yml 文件中的 theme 为主题文件夹名，即可使用新的主题部署自己的博客</p>
+<p>更多的博客主题见 <a href="https://hexo.io/themes/">点击</a></p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/hexo"
+      >hexo</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/deployment-blog-used-by-vercel/"
+      ><span class="mr-1.5">←</span><span>Vercel 使用之部署博客</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/javascript-notes/"
+      ><span>JavaScript 笔记</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

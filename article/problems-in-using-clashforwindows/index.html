@@ -1,0 +1,454 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>使用 ClashForWindows 时的一些问题 - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="什么是 ClashForWindows ClashForWindows 是一个开源的 Clash 的图形化界面，可以在 Windows 上使用。既然看了这篇文章，那就意味着你已经知道 Clash 是什么了，所以这里就不再赘述了。 安装 我选择的是" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://aecra.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://aecra.github.io/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://aecra.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () =>
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+          ],
+          
+          throwOnError : false
+        })
+    );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://aecra.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://aecra.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.121.1">
+
+  
+  
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta itemprop="name" content="使用 ClashForWindows 时的一些问题">
+<meta itemprop="description" content="这里记录了我在使用 ClashForWindows 时遇到的一些问题，以及解决方法。"><meta itemprop="datePublished" content="2023-01-26T21:34:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-26T21:34:00+00:00" />
+<meta itemprop="wordCount" content="671">
+<meta itemprop="keywords" content="ClashForWindows,GFW," />
+  
+  <meta property="og:title" content="使用 ClashForWindows 时的一些问题" />
+<meta property="og:description" content="这里记录了我在使用 ClashForWindows 时遇到的一些问题，以及解决方法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aecra.github.io/article/problems-in-using-clashforwindows/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-26T21:34:00+00:00" />
+<meta property="article:modified_time" content="2023-01-26T21:34:00+00:00" />
+
+
+  
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="使用 ClashForWindows 时的一些问题"/>
+<meta name="twitter:description" content="这里记录了我在使用 ClashForWindows 时遇到的一些问题，以及解决方法。"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://aecra.github.io/article/problems-in-using-clashforwindows/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://aecra.github.io"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">使用 ClashForWindows 时的一些问题</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jan 26, 2023</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="什么是-clashforwindows">什么是 ClashForWindows</h2>
+<p>ClashForWindows 是一个开源的 Clash 的图形化界面，可以在 Windows 上使用。既然看了这篇文章，那就意味着你已经知道 Clash 是什么了，所以这里就不再赘述了。</p>
+<h2 id="安装">安装</h2>
+<p>我选择的是使用 scoop 安装，因为我觉得这样比较方便。scoop 是 Windows 平台的软件管理工具，可以看看查看官网 <a href="https://scoop.sh/">scoop.sh</a>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># 添加 scoop bucket</span>
+</span></span><span style="display:flex;"><span>scoop bucket add yixuju https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/yi-Xu-<span style="color:#ae81ff">0100</span>/scoop-bucket
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装</span>
+</span></span><span style="display:flex;"><span>scoop install yuxuju/ClashForWindows
+</span></span></code></pre></div><h2 id="问题">问题</h2>
+<h3 id="什么样的使用方式问题最少">什么样的使用方式问题最少</h3>
+<p>因为做开发的缘故，知名的项目地址在国内都难以访问，经常需要设置镜像源，同时因为毒瘤的 Python 在使用代理时无法使用 HTTPS 协议，所以我选择使用 ClashForWindows 的的 TUN 模式。这样可以直接虚拟出一个网卡，从而使得所有的程序对网络代理无感，这样同时省去了不同开发工具的代理设置。</p>
+<p>启动 TUN 模式需要进行如下操作：</p>
+<ol>
+<li>
+<p>点击 <code>General</code> 中 <code>Service Mode</code> 右边 <code>Manage</code>，在打开窗口中安装服务模式，安装完成应用会自动重启，<code>Service Mode</code> 右边地球图标变为绿色即安装成功。</p>
+</li>
+<li>
+<p>点击 <code>General</code> 中 <code>TUN Mode</code> 右边开关启动 TUN 模式</p>
+</li>
+</ol>
+<h3 id="更新后-tun-模式无法使用">更新后 TUN 模式无法使用</h3>
+<p>因为 ClashForWindows 目前无法识别不同版本安装的 TUN 服务，所以在更新后需要重新安装 TUN 服务。</p>
+<p>这里需要注意，<code>yixuju</code> 提供的 bucket <a href="https://github.com/yi-Xu-0100/scoop-bucket">scoop-bucket</a> 在更新时会申请权限卸载 TUN 服务，所以软件更新后只需要重新安装 TUN 服务即可。</p>
+<h3 id="无法安装-tun-服务">无法安装 TUN 服务</h3>
+<p>如果无法安装 TUN 服务，可能有如下几种情况：</p>
+<ol>
+<li>
+<p><code>C:\Program Files</code> 目录下有名为 <code>Clash for Windows Service</code> 的文件夹或文件。</p>
+</li>
+<li>
+<p>没有提供管理员权限。</p>
+</li>
+<li>
+<p>旧版的 TUN 服务没有卸载。</p>
+</li>
+<li>
+<p>旧版的 TUN 服务卸载时有部分内容残留。</p>
+</li>
+</ol>
+<p>此时可以尝试在面板中卸载 TUN 服务，删除 <code>C:\Program Files\Clash for Windows Service</code> 文件夹或文件，然后重新安装 TUN 服务。</p>
+<p>如果你的各种尝试都没有成功，你可以采用如下方法手动安装 TUN 服务：</p>
+<ol>
+<li>
+<p>点击 <code>General</code> 中的 <code>Home Directory</code> 打开文件夹，进入此软件的 <code>resources\static\files\win\common</code> 子目录中。</p>
+</li>
+<li>
+<p>将 <code>service.yml</code> 文件复制到 <code>resources\static\files\win\x64\service</code> 子目录。</p>
+</li>
+<li>
+<p>执行如下命令：</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>service.exe uninstall
+</span></span><span style="display:flex;"><span>service.exe install
+</span></span><span style="display:flex;"><span>service.exe start
+</span></span></code></pre></div></section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/clashforwindows"
+      >ClashForWindows</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="https://aecra.github.io/tags/gfw"
+      >GFW</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/network-encoding-and-decoding-algorithm-in-p2p-file-sharing-system/"
+      ><span class="mr-1.5">←</span><span>P2P文件共享系统中网络编码译码算法</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://aecra.github.io/article/brief-instructions-for-using-gdb/"
+      ><span>GDB 简要使用说明</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://aecra.github.io">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
