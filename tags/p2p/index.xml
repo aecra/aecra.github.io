@@ -13,7 +13,7 @@
       <link>https://aecra.github.io/article/network-encoding-and-decoding-algorithm-in-p2p-file-sharing-system/</link>
       <pubDate>Tue, 15 Aug 2023 20:46:43 +0000</pubDate>
       <guid>https://aecra.github.io/article/network-encoding-and-decoding-algorithm-in-p2p-file-sharing-system/</guid>
-      <description>摘要 P2P文件共享在互联网上越来越受欢迎，其中基于P2P技术的内容分发系统BitTorrent是最广泛应用的一种。然而，该系统存在一些限制，</description>
+      <description>摘要 P2P 文件共享在互联网上越来越受欢迎，其中基于 P2P 技术的内容分发系统 BitTorrent 是最广泛应用的一种。然而，该系统存在一些限制，包括对种子节点的依赖性过强</description>
     </item>
   </channel>
 </rss>
