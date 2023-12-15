@@ -57,7 +57,7 @@
   
   
   
-  <meta name="description" content="NGINX 安装 NGINX 入门指导 网站强制使用 HTTPS 监听 80 端口上的所有请求，将其重定向到 443 端口，之后每个服务只需要监听 443 点扣上对应的域名即可。 server { listen 80 default_server; server_name _; return 301 https://$host$request_uri;" />
+  <meta name="description" content="NGINX 安装 NGINX 入门指导 网站强制使用 HTTPS 监听 80 端口上的所有请求，将其重定向到 443 端口，之后每个服务只需要监听 443 端口上对应的域名即可。 server { listen 80 default_server; server_name _; return 301 https://$host$request_uri;" />
   <meta name="author" content="Tian Jiale" />
   
 
@@ -322,7 +322,7 @@ if (!doNotTrack) {
   <section><h2 id="nginx-安装">NGINX 安装</h2>
 <p><a href="/article/nginx-getting-started-guide/">NGINX 入门指导</a></p>
 <h2 id="网站强制使用-https">网站强制使用 HTTPS</h2>
-<p>监听 80 端口上的所有请求，将其重定向到 443 端口，之后每个服务只需要监听 443 点扣上对应的域名即可。</p>
+<p>监听 80 端口上的所有请求，将其重定向到 443 端口，之后每个服务只需要监听 443 端口上对应的域名即可。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">server</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span> <span style="color:#e6db74">default_server</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">_</span>;
