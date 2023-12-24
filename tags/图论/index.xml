@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>图论 on Tian Jiale&#39;s Blog</title>
-    <link>https://aecra.github.io/tags/%E5%9B%BE%E8%AE%BA/</link>
+    <link>/tags/%E5%9B%BE%E8%AE%BA/</link>
     <description>Recent content in 图论 on Tian Jiale&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 27 Mar 2021 22:47:46 +0000</lastBuildDate>
-    <atom:link href="https://aecra.github.io/tags/%E5%9B%BE%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/%E5%9B%BE%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>最小生成树（kruskal 算法）</title>
-      <link>https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/</link>
+      <link>/article/minimum-spanning-tree-kruskal-algorithm/</link>
       <pubDate>Sat, 27 Mar 2021 22:47:46 +0000</pubDate>
-      <guid>https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/</guid>
+      <guid>/article/minimum-spanning-tree-kruskal-algorithm/</guid>
       <description>说明 此算法可以称为“加边法”，初始最小生成树边数为 0，每迭代一次就选择一条满足条件的最小代价边，加入到最小生成树的边集合里。 实现思路 把图中的</description>
     </item>
     <item>
       <title>拓扑排序</title>
-      <link>https://aecra.github.io/article/topological-sorting/</link>
+      <link>/article/topological-sorting/</link>
       <pubDate>Sun, 28 Feb 2021 13:14:08 +0000</pubDate>
-      <guid>https://aecra.github.io/article/topological-sorting/</guid>
+      <guid>/article/topological-sorting/</guid>
       <description>百度百科 对一个有向无环图(Directed Acyclic Graph 简称 DAG)G 进行拓扑排序，是将 G 中所有顶点排成一个线性序列，使得图中任意一对顶点 u 和 v，若边(u,v</description>
     </item>
     <item>
       <title>链式前向星</title>
-      <link>https://aecra.github.io/article/chain-forward-star/</link>
+      <link>/article/chain-forward-star/</link>
       <pubDate>Fri, 26 Feb 2021 18:59:07 +0000</pubDate>
-      <guid>https://aecra.github.io/article/chain-forward-star/</guid>
+      <guid>/article/chain-forward-star/</guid>
       <description>介绍 有权边的图的存储一般有两种：邻接矩阵、前向星。 若图是稀疏图，边很少，开二维数组 a[][]很浪费;若点很多(如 10000 个点)a[10000][1</description>
     </item>
     <item>
       <title>Floyd 最小环算法</title>
-      <link>https://aecra.github.io/article/floyd-minimum-ring/</link>
+      <link>/article/floyd-minimum-ring/</link>
       <pubDate>Sat, 20 Feb 2021 16:38:46 +0000</pubDate>
-      <guid>https://aecra.github.io/article/floyd-minimum-ring/</guid>
+      <guid>/article/floyd-minimum-ring/</guid>
       <description>思路一 首先，理解 Floyd 算法是按照点的编号增加的顺序更新最短路径的。 因为 Floyd 算法基于动态规划思想，动态规划过程必定存在一个顺序，这里的顺序就是节点编</description>
     </item>
     <item>
       <title>Tarjan 强连通算法</title>
-      <link>https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/</link>
+      <link>/article/tarjan-strong-connectivity-algorithm/</link>
       <pubDate>Fri, 19 Feb 2021 14:42:09 +0000</pubDate>
-      <guid>https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/</guid>
+      <guid>/article/tarjan-strong-connectivity-algorithm/</guid>
       <description>定义 1、有向图 G 中，以顶点 v 为起点的弧的数目称为 v 的出度，记做 deg+（v）；以顶点 v 为终点的弧的数目称为 v 的入度，记做 deg-（v）。 2、</description>
     </item>
     <item>
       <title>最短路问题</title>
-      <link>https://aecra.github.io/article/shortest-path-problem/</link>
+      <link>/article/shortest-path-problem/</link>
       <pubDate>Thu, 18 Feb 2021 20:52:34 +0000</pubDate>
-      <guid>https://aecra.github.io/article/shortest-path-problem/</guid>
+      <guid>/article/shortest-path-problem/</guid>
       <description>弗洛伊德算法 通过中间节点 k 来实现 i 和 j 的距离缩短，空间和时间复杂度都为 n3，一般数据在 400 以内可以使用。 for (int i = 0; i &amp;lt; n; i++) for (int j = 0; j &amp;lt; n; j++) for</description>
     </item>
   </channel>

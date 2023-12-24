@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Tian Jiale&#39;s Blog</title>
-    <link>https://aecra.github.io/page/</link>
+    <link>/page/</link>
     <description>Recent content in Pages on Tian Jiale&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 13 Sep 2021 18:24:34 +0000</lastBuildDate>
-    <atom:link href="https://aecra.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关 于</title>
-      <link>https://aecra.github.io/about/</link>
+      <link>/about/</link>
       <pubDate>Mon, 13 Sep 2021 18:24:34 +0000</pubDate>
-      <guid>https://aecra.github.io/about/</guid>
+      <guid>/about/</guid>
       <description>你好，我是一位喜欢瞎搞的工程师。尽管在大学时期渴望投身软件开发领域，但遇上了中国的互联网行业寒冬，我目前身份是一名电动汽车高压系统工程师。尽</description>
     </item>
     <item>
       <title>友 链</title>
-      <link>https://aecra.github.io/link/</link>
+      <link>/link/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://aecra.github.io/link/</guid>
+      <guid>/link/</guid>
       <description>Hasdsd&amp;rsquo;s blog：https://hasdsd.cn/ 通过发邮件 (Tian-Jiale@outlook.com) 可以申请添加友链哦！</description>
     </item>
   </channel>

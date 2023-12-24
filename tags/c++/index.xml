@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>c&#43;&#43; on Tian Jiale&#39;s Blog</title>
-    <link>https://aecra.github.io/tags/c&#43;&#43;/</link>
+    <link>/tags/c&#43;&#43;/</link>
     <description>Recent content in c&#43;&#43; on Tian Jiale&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 16 Feb 2021 20:01:41 +0000</lastBuildDate>
-    <atom:link href="https://aecra.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>C&#43;&#43; 面向对象</title>
-      <link>https://aecra.github.io/article/cpp-object-oriented/</link>
+      <link>/article/cpp-object-oriented/</link>
       <pubDate>Tue, 16 Feb 2021 20:01:41 +0000</pubDate>
-      <guid>https://aecra.github.io/article/cpp-object-oriented/</guid>
+      <guid>/article/cpp-object-oriented/</guid>
       <description>引用 引用： int n = 4; int &amp;amp; r = n; // r引用了n,r的类型是int &amp;amp; 某个变量的引用，等价与这个变量，相当于这个变量的别名 常引用： int n=4; const int &amp;amp; r = n; // r</description>
     </item>
   </channel>

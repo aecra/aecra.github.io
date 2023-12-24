@@ -2,478 +2,478 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://aecra.github.io/tags/bittorrent/</loc>
+    <loc>/tags/bittorrent/</loc>
     <lastmod>2023-08-15T20:46:43+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/p2p/</loc>
+    <loc>/tags/p2p/</loc>
     <lastmod>2023-08-15T20:46:43+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/network-encoding-and-decoding-algorithm-in-p2p-file-sharing-system/</loc>
+    <loc>/article/network-encoding-and-decoding-algorithm-in-p2p-file-sharing-system/</loc>
     <lastmod>2023-08-15T20:46:43+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/post/</loc>
-    <lastmod>2023-08-15T20:46:43+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://aecra.github.io/en/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://aecra.github.io/post/"
-                />
-  </url><url>
-    <loc>https://aecra.github.io/tags/</loc>
+    <loc>/post/</loc>
     <lastmod>2023-08-15T20:46:43+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/"
+                href="/en/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/"
+                href="/post/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/</loc>
+    <loc>/tags/</loc>
+    <lastmod>2023-08-15T20:46:43+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="/tags/"
+                />
+  </url><url>
+    <loc>/</loc>
     <lastmod>2023-12-12T18:24:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/"
+                href="/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/"
+                href="/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A0%81/</loc>
+    <loc>/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A0%81/</loc>
     <lastmod>2023-08-15T20:46:43+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91/</loc>
+    <loc>/tags/%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91/</loc>
     <lastmod>2023-08-15T20:46:43+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/clashforwindows/</loc>
+    <loc>/tags/clashforwindows/</loc>
     <lastmod>2023-01-26T21:34:00+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/gfw/</loc>
+    <loc>/tags/gfw/</loc>
     <lastmod>2023-01-26T21:34:00+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/problems-in-using-clashforwindows/</loc>
+    <loc>/article/problems-in-using-clashforwindows/</loc>
     <lastmod>2023-01-26T21:34:00+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/gdb/</loc>
+    <loc>/tags/gdb/</loc>
     <lastmod>2023-02-03T16:52:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/gdb/"
+                href="/en/tags/gdb/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/gdb/"
+                href="/tags/gdb/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/article/brief-instructions-for-using-gdb/</loc>
+    <loc>/article/brief-instructions-for-using-gdb/</loc>
     <lastmod>2023-02-03T16:52:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/brief-instructions-for-using-gdb/"
+                href="/en/article/brief-instructions-for-using-gdb/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/brief-instructions-for-using-gdb/"
+                href="/article/brief-instructions-for-using-gdb/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/tags/go/</loc>
+    <loc>/tags/go/</loc>
     <lastmod>2022-10-20T20:07:32+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</loc>
+    <loc>/article/gc-algorithm-in-golang-tri-color-marking-and-hybrid-write-barrier/</loc>
     <lastmod>2022-10-20T20:07:32+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/golang/</loc>
+    <loc>/tags/golang/</loc>
     <lastmod>2022-09-13T23:41:00+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+    <loc>/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-09-13T23:41:00+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/use-priority-queue-in-golang/</loc>
+    <loc>/article/use-priority-queue-in-golang/</loc>
     <lastmod>2022-09-13T23:41:00+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/podman/</loc>
+    <loc>/tags/podman/</loc>
     <lastmod>2022-08-16T10:43:50+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/podman/"
+                href="/en/tags/podman/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/podman/"
+                href="/tags/podman/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</loc>
+    <loc>/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</loc>
     <lastmod>2022-08-16T10:43:50+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
+                href="/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
+                href="/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/tags/docker/</loc>
+    <loc>/tags/docker/</loc>
     <lastmod>2022-08-13T21:09:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/docker/"
+                href="/en/tags/docker/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/docker/"
+                href="/tags/docker/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/</loc>
+    <loc>/article/web-proxy-causes-build-jam-when-building-golang-projects-in-wsl/</loc>
     <lastmod>2022-08-13T21:09:21+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/nginx/</loc>
+    <loc>/tags/nginx/</loc>
     <lastmod>2022-07-14T11:25:54+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/collection-of-nginx-issues/</loc>
+    <loc>/article/collection-of-nginx-issues/</loc>
     <lastmod>2022-07-14T11:25:54+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/configure-a-smooth-network-environment-for-the-server/</loc>
+    <loc>/article/configure-a-smooth-network-environment-for-the-server/</loc>
     <lastmod>2022-05-26T19:00:25+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E8%BF%90%E7%BB%B4/</loc>
+    <loc>/tags/%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2022-05-26T19:00:25+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/build-a-gateway-by-kong/</loc>
+    <loc>/article/build-a-gateway-by-kong/</loc>
     <lastmod>2022-05-26T17:30:35+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/build-a-gateway-by-kong/"
+                href="/en/article/build-a-gateway-by-kong/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/build-a-gateway-by-kong/"
+                href="/article/build-a-gateway-by-kong/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/tags/%E7%BD%91%E5%85%B3/</loc>
+    <loc>/tags/%E7%BD%91%E5%85%B3/</loc>
     <lastmod>2022-05-26T17:30:35+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/hash-table-implementation-in-go/</loc>
+    <loc>/article/hash-table-implementation-in-go/</loc>
     <lastmod>2022-04-20T19:51:21+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/vim/</loc>
+    <loc>/tags/vim/</loc>
     <lastmod>2022-04-04T15:51:45+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/vim-command-manual/</loc>
+    <loc>/article/vim-command-manual/</loc>
     <lastmod>2022-04-04T15:51:45+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/rfc/</loc>
+    <loc>/tags/rfc/</loc>
     <lastmod>2022-02-21T22:44:13+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/the-oauth-2.0-authorization-framework-in-chinese/</loc>
+    <loc>/article/the-oauth-2.0-authorization-framework-in-chinese/</loc>
     <lastmod>2022-02-21T22:44:13+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E7%BF%BB%E8%AF%91/</loc>
+    <loc>/tags/%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2022-02-21T22:44:13+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/vmware/</loc>
+    <loc>/tags/vmware/</loc>
     <lastmod>2022-02-13T20:19:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/vmware/"
+                href="/en/tags/vmware/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/vmware/"
+                href="/tags/vmware/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</loc>
+    <loc>/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</loc>
     <lastmod>2022-02-13T20:19:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
+                href="/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
+                href="/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/article/sorting-algorithm/</loc>
+    <loc>/article/sorting-algorithm/</loc>
     <lastmod>2022-02-14T14:14:59+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/forwarding-tcp-connections-by-domain-name-in-nginx/</loc>
+    <loc>/article/forwarding-tcp-connections-by-domain-name-in-nginx/</loc>
     <lastmod>2022-02-11T17:08:45+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E8%BD%AF%E4%BB%B6/</loc>
+    <loc>/tags/%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2022-05-26T19:36:48+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/powershell/</loc>
+    <loc>/tags/powershell/</loc>
     <lastmod>2021-12-12T17:06:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/powershell-beautification-for-ys-themes/</loc>
+    <loc>/article/powershell-beautification-for-ys-themes/</loc>
     <lastmod>2021-12-12T17:06:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/use-oh-my-zsh-in-windows/</loc>
+    <loc>/article/use-oh-my-zsh-in-windows/</loc>
     <lastmod>2021-12-12T17:06:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/zsh/</loc>
+    <loc>/tags/zsh/</loc>
     <lastmod>2021-12-12T17:06:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/git/</loc>
+    <loc>/tags/git/</loc>
     <lastmod>2021-12-09T21:01:46+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/change-author-in-git-commit/</loc>
+    <loc>/article/change-author-in-git-commit/</loc>
     <lastmod>2021-12-09T21:01:46+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/javascript/</loc>
+    <loc>/tags/javascript/</loc>
     <lastmod>2021-12-05T21:38:25+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/implementation-publish-and-subscription-by-javascript/</loc>
+    <loc>/article/implementation-publish-and-subscription-by-javascript/</loc>
     <lastmod>2021-12-05T21:38:25+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/object-oriented-in-go/</loc>
+    <loc>/article/object-oriented-in-go/</loc>
     <lastmod>2021-11-23T23:55:49+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/windows-linux-dual-system-boot-problem/</loc>
+    <loc>/article/windows-linux-dual-system-boot-problem/</loc>
     <lastmod>2021-10-28T18:52:34+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E7%B3%BB%E7%BB%9F/</loc>
+    <loc>/tags/%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2021-10-28T18:52:34+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/how-to-gracefully-implement-async-await-error-handing/</loc>
+    <loc>/article/how-to-gracefully-implement-async-await-error-handing/</loc>
     <lastmod>2021-10-18T16:53:59+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/go-exception-handling/</loc>
+    <loc>/article/go-exception-handling/</loc>
     <lastmod>2021-10-12T20:44:50+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/ssl/</loc>
+    <loc>/tags/ssl/</loc>
     <lastmod>2021-09-17T15:37:09+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/remember-a-bug-in-use-ssl-certificates/</loc>
+    <loc>/article/remember-a-bug-in-use-ssl-certificates/</loc>
     <lastmod>2021-09-17T15:37:09+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/page/</loc>
+    <loc>/page/</loc>
     <lastmod>2023-12-12T18:24:34+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2023-12-12T18:24:34+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/create-docker-image/</loc>
+    <loc>/article/create-docker-image/</loc>
     <lastmod>2021-07-04T10:23:09+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/nginx-getting-started-guide/</loc>
+    <loc>/article/nginx-getting-started-guide/</loc>
     <lastmod>2021-10-01T19:55:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/nginx-getting-started-guide/"
+                href="/en/article/nginx-getting-started-guide/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/nginx-getting-started-guide/"
+                href="/article/nginx-getting-started-guide/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/article/kmp-string-matching-algorithm/</loc>
+    <loc>/article/kmp-string-matching-algorithm/</loc>
     <lastmod>2021-05-24T19:41:22+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/introduction-to-axios-and-source-code-analysis/</loc>
+    <loc>/article/introduction-to-axios-and-source-code-analysis/</loc>
     <lastmod>2021-04-17T00:26:25+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/node/</loc>
+    <loc>/tags/node/</loc>
     <lastmod>2021-03-27T22:55:10+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/webpack-learning-notes/</loc>
+    <loc>/article/webpack-learning-notes/</loc>
     <lastmod>2021-03-27T22:55:10+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E5%9B%BE%E8%AE%BA/</loc>
+    <loc>/tags/%E5%9B%BE%E8%AE%BA/</loc>
     <lastmod>2021-08-12T16:18:35+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/minimum-spanning-tree-kruskal-algorithm/</loc>
+    <loc>/article/minimum-spanning-tree-kruskal-algorithm/</loc>
     <lastmod>2021-03-27T22:47:46+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/replace-domestic-source/</loc>
+    <loc>/article/replace-domestic-source/</loc>
     <lastmod>2022-05-26T19:36:48+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/last-common-ancestor-lca/</loc>
+    <loc>/article/last-common-ancestor-lca/</loc>
     <lastmod>2021-03-17T23:50:14+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/promise-deep-custom-promise/</loc>
+    <loc>/article/promise-deep-custom-promise/</loc>
     <lastmod>2021-03-15T16:06:58+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/</loc>
+    <loc>/article/differences-in-the-usage-of-call-apply-and-bind-in-javascript/</loc>
     <lastmod>2021-03-14T23:47:57+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/linux/</loc>
+    <loc>/tags/linux/</loc>
     <lastmod>2021-03-12T19:47:32+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/ubuntu-deepin-installation-software/</loc>
+    <loc>/article/ubuntu-deepin-installation-software/</loc>
     <lastmod>2021-03-12T19:47:32+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/extended-euclidean-theorem/</loc>
+    <loc>/article/extended-euclidean-theorem/</loc>
     <lastmod>2021-03-08T19:02:08+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/asynchronous-programming-in-javascript/</loc>
+    <loc>/article/asynchronous-programming-in-javascript/</loc>
     <lastmod>2021-03-05T20:54:11+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/fast-power-and-fast-power-modulus/</loc>
+    <loc>/article/fast-power-and-fast-power-modulus/</loc>
     <lastmod>2021-03-04T10:43:14+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/computer-vision-target-detection/</loc>
+    <loc>/article/computer-vision-target-detection/</loc>
     <lastmod>2021-03-03T20:06:10+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
+    <loc>/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
     <lastmod>2021-03-03T20:06:10+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-03-03T20:06:10+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/topological-sorting/</loc>
+    <loc>/article/topological-sorting/</loc>
     <lastmod>2021-02-28T13:14:08+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/chain-forward-star/</loc>
+    <loc>/article/chain-forward-star/</loc>
     <lastmod>2021-02-26T18:59:07+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/bash-game-and-nimm-game/</loc>
+    <loc>/article/bash-game-and-nimm-game/</loc>
     <lastmod>2021-02-25T14:35:42+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</loc>
+    <loc>/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</loc>
     <lastmod>2021-02-25T14:35:42+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/python/</loc>
+    <loc>/tags/python/</loc>
     <lastmod>2021-02-22T18:57:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E5%BB%BA%E7%AB%99/</loc>
+    <loc>/tags/%E5%BB%BA%E7%AB%99/</loc>
     <lastmod>2021-02-22T18:57:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/what-about-the-original-blog-after-using-hexo/</loc>
+    <loc>/article/what-about-the-original-blog-after-using-hexo/</loc>
     <lastmod>2021-02-22T18:57:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/vercel/</loc>
+    <loc>/tags/vercel/</loc>
     <lastmod>2021-02-22T00:08:23+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/deployment-blog-used-by-vercel/</loc>
+    <loc>/article/deployment-blog-used-by-vercel/</loc>
     <lastmod>2021-02-22T00:08:23+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/hexo/</loc>
+    <loc>/tags/hexo/</loc>
     <lastmod>2021-02-21T23:51:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/quickly-build-hexo-personal-blog-and-deploy-it-to-github/</loc>
+    <loc>/article/quickly-build-hexo-personal-blog-and-deploy-it-to-github/</loc>
     <lastmod>2021-02-21T23:51:38+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/javascript-notes/</loc>
+    <loc>/article/javascript-notes/</loc>
     <lastmod>2021-02-21T15:27:32+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/floyd-minimum-ring/</loc>
+    <loc>/article/floyd-minimum-ring/</loc>
     <lastmod>2021-02-20T16:38:46+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/tarjan-strong-connectivity-algorithm/</loc>
+    <loc>/article/tarjan-strong-connectivity-algorithm/</loc>
     <lastmod>2021-02-19T14:42:09+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/shortest-path-problem/</loc>
+    <loc>/article/shortest-path-problem/</loc>
     <lastmod>2021-08-12T16:18:35+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/mysql/</loc>
+    <loc>/tags/mysql/</loc>
     <lastmod>2021-02-17T13:22:57+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/mysql/"
+                href="/en/tags/mysql/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/mysql/"
+                href="/tags/mysql/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/article/mysql-database/</loc>
+    <loc>/article/mysql-database/</loc>
     <lastmod>2021-02-17T13:22:57+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/using-javascript-to-achieve-typewriter-effect/</loc>
+    <loc>/article/using-javascript-to-achieve-typewriter-effect/</loc>
     <lastmod>2021-02-17T13:22:57+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2021-02-17T13:22:57+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/c&#43;&#43;/</loc>
+    <loc>/tags/c&#43;&#43;/</loc>
     <lastmod>2021-02-16T20:01:41+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/cpp-object-oriented/</loc>
+    <loc>/article/cpp-object-oriented/</loc>
     <lastmod>2021-02-16T20:01:41+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/excel/</loc>
+    <loc>/tags/excel/</loc>
     <lastmod>2021-02-12T13:23:47+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/manipulating-tables-with-python/</loc>
+    <loc>/article/manipulating-tables-with-python/</loc>
     <lastmod>2021-02-12T13:23:47+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/jquery/</loc>
+    <loc>/tags/jquery/</loc>
     <lastmod>2021-02-10T10:44:52+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/jquery-notes/</loc>
+    <loc>/article/jquery-notes/</loc>
     <lastmod>2021-02-10T10:44:52+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/css/</loc>
+    <loc>/tags/css/</loc>
     <lastmod>2021-02-07T11:13:35+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/less/</loc>
+    <loc>/tags/less/</loc>
     <lastmod>2021-02-07T11:13:35+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/less-notes/</loc>
+    <loc>/article/less-notes/</loc>
     <lastmod>2021-02-07T11:13:35+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/vue/</loc>
+    <loc>/tags/vue/</loc>
     <lastmod>2021-02-06T12:09:14+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/introduction-to-vue-basics/</loc>
+    <loc>/article/introduction-to-vue-basics/</loc>
     <lastmod>2021-02-06T12:09:14+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/ajax/</loc>
+    <loc>/tags/ajax/</loc>
     <lastmod>2021-02-05T10:17:04+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/use-of-ajax-in-javascript/</loc>
+    <loc>/article/use-of-ajax-in-javascript/</loc>
     <lastmod>2021-02-05T10:17:04+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/tags/html/</loc>
+    <loc>/tags/html/</loc>
     <lastmod>2021-01-31T13:18:45+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/article/html-css/</loc>
+    <loc>/article/html-css/</loc>
     <lastmod>2021-01-31T13:18:45+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/categories/</loc>
+    <loc>/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/categories/"
+                href="/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/categories/"
+                href="/categories/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/link/</loc>
+    <loc>/link/</loc>
   </url>
 </urlset>

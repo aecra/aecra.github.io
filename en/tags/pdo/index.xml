@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PDO on Tian Jiale&#39;s Blog</title>
-    <link>https://aecra.github.io/en/tags/pdo/</link>
+    <link>/en/tags/pdo/</link>
     <description>Recent content in PDO on Tian Jiale&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 14 Feb 2021 14:26:56 +0000</lastBuildDate>
-    <atom:link href="https://aecra.github.io/en/tags/pdo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/en/tags/pdo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why shouldn&#39;t I use mysql_* functions in PHP?</title>
-      <link>https://aecra.github.io/en/article/why-should-not-i-use-mysql-functions-in-php/</link>
+      <link>/en/article/why-should-not-i-use-mysql-functions-in-php/</link>
       <pubDate>Sun, 14 Feb 2021 14:26:56 +0000</pubDate>
-      <guid>https://aecra.github.io/en/article/why-should-not-i-use-mysql-functions-in-php/</guid>
+      <guid>/en/article/why-should-not-i-use-mysql-functions-in-php/</guid>
       <description>PHP offers three different APIs to connect to MySQL. These are the mysql(removed as of PHP 7), mysqli, and PDO extensions.&#xA;The mysql_ functions used to be very popular, but their use is not encouraged anymore. The documentation team is discussing the database security situation, and educating users to move away from the commonly used ext/mysql extension is part of this (check php.internals: deprecating ext/mysql).&#xA;And the later PHP developer team has taken the decision to generate E_DEPRECATED errors when users connect to MySQL, whether through mysql_connect(), mysql_pconnect() or the implicit connection functionality built into ext/mysql.</description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PowerShell on Tian Jiale&#39;s Blog</title>
-    <link>https://aecra.github.io/tags/powershell/</link>
+    <link>/tags/powershell/</link>
     <description>Recent content in PowerShell on Tian Jiale&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 12 Dec 2021 17:06:38 +0000</lastBuildDate>
-    <atom:link href="https://aecra.github.io/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PowerShell 美化之 ys 主题</title>
-      <link>https://aecra.github.io/article/powershell-beautification-for-ys-themes/</link>
+      <link>/article/powershell-beautification-for-ys-themes/</link>
       <pubDate>Sun, 12 Dec 2021 17:06:38 +0000</pubDate>
-      <guid>https://aecra.github.io/article/powershell-beautification-for-ys-themes/</guid>
+      <guid>/article/powershell-beautification-for-ys-themes/</guid>
       <description>简要说明 这篇文章本来是没有的，但之前突发奇想在 Windows上整了一个 Oh My Zsh，见文章Windows 中使用 Oh My Zsh 的各种方式，可 TMD 第二天就卡</description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GDB on Tian Jiale&#39;s Blog</title>
-    <link>https://aecra.github.io/en/tags/gdb/</link>
+    <link>/en/tags/gdb/</link>
     <description>Recent content in GDB on Tian Jiale&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 31 Oct 2022 20:27:48 +0000</lastBuildDate>
-    <atom:link href="https://aecra.github.io/en/tags/gdb/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/en/tags/gdb/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Brief Instructions for Using GDB</title>
-      <link>https://aecra.github.io/en/article/brief-instructions-for-using-gdb/</link>
+      <link>/en/article/brief-instructions-for-using-gdb/</link>
       <pubDate>Mon, 31 Oct 2022 20:27:48 +0000</pubDate>
-      <guid>https://aecra.github.io/en/article/brief-instructions-for-using-gdb/</guid>
+      <guid>/en/article/brief-instructions-for-using-gdb/</guid>
       <description>What is GDB？ GDB is the GNU Project debugger that allows you to see what&amp;rsquo;s going on &amp;ldquo;inside&amp;rdquo; another program while it&amp;rsquo;s executing &amp;ndash; or what another program was doing when it crashed.&#xA;There are four main things GDB can do (plus other things to support them) to help you catch errors on the fly:&#xA;Start the program, specifying anything that might affect its behavior. Causes your program to stop on specified conditions.</description>
     </item>
   </channel>

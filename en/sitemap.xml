@@ -2,209 +2,209 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://aecra.github.io/en/article/brief-instructions-for-using-gdb/</loc>
+    <loc>/en/article/brief-instructions-for-using-gdb/</loc>
     <lastmod>2023-02-03T16:52:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/brief-instructions-for-using-gdb/"
+                href="/article/brief-instructions-for-using-gdb/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/brief-instructions-for-using-gdb/"
+                href="/en/article/brief-instructions-for-using-gdb/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/tags/gdb/</loc>
+    <loc>/en/tags/gdb/</loc>
     <lastmod>2023-02-03T16:52:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/gdb/"
+                href="/tags/gdb/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/gdb/"
+                href="/en/tags/gdb/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/post/</loc>
+    <loc>/en/post/</loc>
     <lastmod>2023-02-03T16:52:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/post/"
+                href="/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/post/"
+                href="/en/post/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/tags/</loc>
+    <loc>/en/tags/</loc>
     <lastmod>2023-02-03T16:52:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/"
+                href="/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/"
+                href="/en/tags/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/</loc>
+    <loc>/en/</loc>
     <lastmod>2023-02-03T16:52:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/"
+                href="/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/"
+                href="/en/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/tags/podman/</loc>
+    <loc>/en/tags/podman/</loc>
     <lastmod>2022-08-16T10:43:50+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/podman/"
+                href="/tags/podman/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/podman/"
+                href="/en/tags/podman/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</loc>
+    <loc>/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/</loc>
     <lastmod>2022-08-16T10:43:50+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
+                href="/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
+                href="/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/article/build-a-gateway-by-kong/</loc>
+    <loc>/en/article/build-a-gateway-by-kong/</loc>
     <lastmod>2022-05-26T17:30:35+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/build-a-gateway-by-kong/"
+                href="/article/build-a-gateway-by-kong/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/build-a-gateway-by-kong/"
+                href="/en/article/build-a-gateway-by-kong/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/tags/gateway/</loc>
+    <loc>/en/tags/gateway/</loc>
     <lastmod>2022-05-26T17:30:35+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/tags/vmware/</loc>
+    <loc>/en/tags/vmware/</loc>
     <lastmod>2022-02-13T20:19:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/vmware/"
+                href="/tags/vmware/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/vmware/"
+                href="/en/tags/vmware/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</loc>
+    <loc>/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</loc>
     <lastmod>2022-02-13T20:19:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
+                href="/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
+                href="/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/tags/dev/</loc>
+    <loc>/en/tags/dev/</loc>
     <lastmod>2022-01-22T15:25:34+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</loc>
+    <loc>/en/article/how-to-mount-host-folder-in-vmware-20.04-on-windows/</loc>
     <lastmod>2022-01-22T15:25:34+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/article/nginx-getting-started-guide/</loc>
+    <loc>/en/article/nginx-getting-started-guide/</loc>
     <lastmod>2021-10-01T19:55:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/article/nginx-getting-started-guide/"
+                href="/article/nginx-getting-started-guide/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/article/nginx-getting-started-guide/"
+                href="/en/article/nginx-getting-started-guide/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/tags/software/</loc>
+    <loc>/en/tags/software/</loc>
     <lastmod>2021-10-01T19:55:34+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/tags/docker/</loc>
+    <loc>/en/tags/docker/</loc>
     <lastmod>2021-04-20T10:35:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/docker/"
+                href="/tags/docker/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/docker/"
+                href="/en/tags/docker/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/article/docker-tutorial/</loc>
+    <loc>/en/article/docker-tutorial/</loc>
     <lastmod>2021-04-20T10:35:12+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/tags/mysql/</loc>
+    <loc>/en/tags/mysql/</loc>
     <lastmod>2021-02-14T14:26:56+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/tags/mysql/"
+                href="/tags/mysql/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/tags/mysql/"
+                href="/en/tags/mysql/"
                 />
   </url><url>
-    <loc>https://aecra.github.io/en/tags/pdo/</loc>
+    <loc>/en/tags/pdo/</loc>
     <lastmod>2021-02-14T14:26:56+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/tags/php/</loc>
+    <loc>/en/tags/php/</loc>
     <lastmod>2021-02-14T14:26:56+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/article/why-should-not-i-use-mysql-functions-in-php/</loc>
+    <loc>/en/article/why-should-not-i-use-mysql-functions-in-php/</loc>
     <lastmod>2021-02-14T14:26:56+00:00</lastmod>
   </url><url>
-    <loc>https://aecra.github.io/en/categories/</loc>
+    <loc>/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://aecra.github.io/categories/"
+                href="/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://aecra.github.io/en/categories/"
+                href="/en/categories/"
                 />
   </url>
 </urlset>

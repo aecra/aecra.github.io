@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vmware on Tian Jiale&#39;s Blog</title>
-    <link>https://aecra.github.io/en/tags/vmware/</link>
+    <link>/en/tags/vmware/</link>
     <description>Recent content in Vmware on Tian Jiale&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 13 Feb 2022 20:19:13 +0000</lastBuildDate>
-    <atom:link href="https://aecra.github.io/en/tags/vmware/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/en/tags/vmware/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VMware development virtual machine starts and shuts down with the system.</title>
-      <link>https://aecra.github.io/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</link>
+      <link>/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</link>
       <pubDate>Sun, 13 Feb 2022 20:19:13 +0000</pubDate>
-      <guid>https://aecra.github.io/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</guid>
+      <guid>/en/article/vmware-development-virtual-machine-starts-and-shuts-down-with-the-system/</guid>
       <description>Reasons for Vmware Virtual Machine Development Windows development is sometimes so unsatisfactory, especially when the services developed need to run in Linux, and there are always some inexplicable problems if you develop in Windows, so it is necessary to develop in Linux. There are several options for using Linux development environment in Windows, such as WSL2, Hyper-V, VitualBox and Vmware. WSL2 is so tied to Windows that many configurations cannot</description>
     </item>
   </channel>

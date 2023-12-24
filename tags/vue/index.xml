@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vue on Tian Jiale&#39;s Blog</title>
-    <link>https://aecra.github.io/tags/vue/</link>
+    <link>/tags/vue/</link>
     <description>Recent content in vue on Tian Jiale&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 06 Feb 2021 12:09:14 +0000</lastBuildDate>
-    <atom:link href="https://aecra.github.io/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/vue/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>vue 基础入门</title>
-      <link>https://aecra.github.io/article/introduction-to-vue-basics/</link>
+      <link>/article/introduction-to-vue-basics/</link>
       <pubDate>Sat, 06 Feb 2021 12:09:14 +0000</pubDate>
-      <guid>https://aecra.github.io/article/introduction-to-vue-basics/</guid>
+      <guid>/article/introduction-to-vue-basics/</guid>
       <description>官网 前置知识 完整的学习 vue：html + css、JavaScript、css3、HTML5、第三方库、网络通信、ES6+、webpack、模</description>
     </item>
   </channel>
