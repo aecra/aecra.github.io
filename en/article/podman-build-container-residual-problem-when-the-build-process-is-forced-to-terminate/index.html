@@ -34,6 +34,8 @@
 
 
 
+
+
 <html
   class="not-ready lg:text-base"
   style="--bg: #faf8f1"
@@ -103,7 +105,8 @@ There were forced interruptions on many previous builds, so my problem was more 
   
   
   
-  <link
+  
+<link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
   integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
@@ -122,19 +125,20 @@ There were forced interruptions on many previous builds, so my problem was more 
   crossorigin="anonymous"
 ></script>
 
+
 <script>
-    document.addEventListener("DOMContentLoaded", () =>
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-          ],
-          
-          throwOnError : false
-        })
-    );
+  document.addEventListener('DOMContentLoaded', () =>
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      
+      throwOnError: false,
+    }),
+  );
 </script>
 
   
@@ -146,41 +150,57 @@ There were forced interruptions on many previous builds, so my problem was more 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.121.1">
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-V4ML7JFB21');
+        }
+      </script>
+    
+  
 
+
+  
   
   <meta itemprop="name" content="Podman build container residual problem when the build process is forced to terminate">
-<meta itemprop="description" content="If you use Ctrl &#43; C to force termination when building images with Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images."><meta itemprop="datePublished" content="2022-08-16T10:43:50+00:00" />
-<meta itemprop="dateModified" content="2022-08-16T10:43:50+00:00" />
-<meta itemprop="wordCount" content="468">
-<meta itemprop="keywords" content="podman," />
+  <meta itemprop="description" content="If you use Ctrl &#43; C to force termination when building images with Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images.">
+  <meta itemprop="datePublished" content="2022-08-16T10:43:50+00:00">
+  <meta itemprop="dateModified" content="2022-08-16T10:43:50+00:00">
+  <meta itemprop="wordCount" content="468">
+  <meta itemprop="keywords" content="Podman">
   
-  <meta property="og:title" content="Podman build container residual problem when the build process is forced to terminate" />
-<meta property="og:description" content="If you use Ctrl &#43; C to force termination when building images with Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-08-16T10:43:50+00:00" />
-<meta property="article:modified_time" content="2022-08-16T10:43:50+00:00" />
-
+  <meta property="og:url" content="/en/article/podman-build-container-residual-problem-when-the-build-process-is-forced-to-terminate/">
+  <meta property="og:site_name" content="Tian Jiale&#39;s Blog">
+  <meta property="og:title" content="Podman build container residual problem when the build process is forced to terminate">
+  <meta property="og:description" content="If you use Ctrl &#43; C to force termination when building images with Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-08-16T10:43:50+00:00">
+    <meta property="article:modified_time" content="2022-08-16T10:43:50+00:00">
+    <meta property="article:tag" content="Podman">
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Podman build container residual problem when the build process is forced to terminate"/>
-<meta name="twitter:description" content="If you use Ctrl &#43; C to force termination when building images with Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images."/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Podman build container residual problem when the build process is forced to terminate">
+  <meta name="twitter:description" content="If you use Ctrl &#43; C to force termination when building images with Podman, the containers in the build will be left in Podman, which will not only take up space but also affect the deletion of useless images.">
 
   
   
@@ -389,6 +409,7 @@ fe95fad6d0ec  docker.io/library/98ee13c4afe4a5a88fb6e3464a90ea3838e62806e9e5e025
 
   
 
+
   
 </article>
 
@@ -399,7 +420,7 @@ fe95fad6d0ec  docker.io/library/98ee13c4afe4a5a88fb6e3464a90ea3838e62806e9e5e025
   class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
 >
   <div class="mr-auto">
-    &copy; 2023
+    &copy; 2024
     <a class="link" href="/">Tian Jiale&#39;s Blog</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"

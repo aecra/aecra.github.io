@@ -34,6 +34,8 @@
 
 
 
+
+
 <html
   class="not-ready lg:text-base"
   style="--bg: #faf8f1"
@@ -102,7 +104,8 @@
   
   
   
-  <link
+  
+<link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
   integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
@@ -121,19 +124,20 @@
   crossorigin="anonymous"
 ></script>
 
+
 <script>
-    document.addEventListener("DOMContentLoaded", () =>
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-          ],
-          
-          throwOnError : false
-        })
-    );
+  document.addEventListener('DOMContentLoaded', () =>
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      
+      throwOnError: false,
+    }),
+  );
 </script>
 
   
@@ -145,41 +149,58 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.121.1">
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-V4ML7JFB21');
+        }
+      </script>
+    
+  
 
+
+  
   
   <meta itemprop="name" content="Less 笔记">
-<meta itemprop="description" content="less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。"><meta itemprop="datePublished" content="2021-02-07T11:13:35+00:00" />
-<meta itemprop="dateModified" content="2021-02-07T11:13:35+00:00" />
-<meta itemprop="wordCount" content="2866">
-<meta itemprop="keywords" content="css,less," />
+  <meta itemprop="description" content="less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。">
+  <meta itemprop="datePublished" content="2021-02-07T11:13:35+00:00">
+  <meta itemprop="dateModified" content="2021-02-07T11:13:35+00:00">
+  <meta itemprop="wordCount" content="2866">
+  <meta itemprop="keywords" content="Css,Less">
   
-  <meta property="og:title" content="Less 笔记" />
-<meta property="og:description" content="less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/article/less-notes/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-02-07T11:13:35+00:00" />
-<meta property="article:modified_time" content="2021-02-07T11:13:35+00:00" />
-
+  <meta property="og:url" content="/article/less-notes/">
+  <meta property="og:site_name" content="Tian Jiale&#39;s Blog">
+  <meta property="og:title" content="Less 笔记">
+  <meta property="og:description" content="less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-02-07T11:13:35+00:00">
+    <meta property="article:modified_time" content="2021-02-07T11:13:35+00:00">
+    <meta property="article:tag" content="Css">
+    <meta property="article:tag" content="Less">
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Less 笔记"/>
-<meta name="twitter:description" content="less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。"/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Less 笔记">
+  <meta name="twitter:description" content="less 是一种动态样式语言，属于 css 预处理器的范畴，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运行，本文是 Less 的较为详尽的记录。">
 
   
   
@@ -593,7 +614,7 @@ LESS 既可以在 客户端 上运行 ，也可以借助 Node.js 在服务端运
   z-index: 1;
 }
 </code></pre><h3 id="带多个参数的混合">带多个参数的混合</h3>
-<p>见 <a href="###%E5%B8%A6%E5%8F%82%E6%95%B0%E5%B9%B6%E4%B8%94%E6%9C%89%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84%E6%B7%B7%E5%90%88">带参数并且有默认值的混合</a></p>
+<p>见 <a href="/article/less-notes/###带参数并且有默认值的混合">带参数并且有默认值的混合</a></p>
 <h3 id="形参和实参">形参和实参</h3>
 <blockquote>
 <p>命名参数就是引用 mixin 时可以通过参数名称而不是参数的位置来为 mixin 提供参数值。</p>
@@ -938,6 +959,7 @@ percentage(0.5); // returns `50%`
 
   
 
+
   
 </article>
 
@@ -948,7 +970,7 @@ percentage(0.5); // returns `50%`
   class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
 >
   <div class="mr-auto">
-    &copy; 2023
+    &copy; 2024
     <a class="link" href="/">Tian Jiale&#39;s Blog</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>vue on Tian Jiale&#39;s Blog</title>
+    <title>Vue on Tian Jiale&#39;s Blog</title>
     <link>/tags/vue/</link>
-    <description>Recent content in vue on Tian Jiale&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Vue on Tian Jiale&#39;s Blog</description>
+    <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 06 Feb 2021 12:09:14 +0000</lastBuildDate>
     <atom:link href="/tags/vue/index.xml" rel="self" type="application/rss+xml" />

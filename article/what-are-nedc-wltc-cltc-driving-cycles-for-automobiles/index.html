@@ -1,0 +1,467 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>汽车续航的NEDC、WLTC、CLTC工况是什么？ - Tian Jiale&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="为什么需要测试工况？ 汽车续航是电动汽车的重要指标之一，它直接影响了电动汽车的使用体验。在实际使用中，电动汽车的续航里程受到很多因素的影响，例" />
+  <meta name="author" content="Tian Jiale" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://static.aecra.cn/avatar.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+  
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () =>
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      
+      throwOnError: false,
+    }),
+  );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.127.0">
+
+  
+  
+  
+  
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-V4ML7JFB21');
+        }
+      </script>
+    
+  
+
+
+  
+  
+  <meta itemprop="name" content="汽车续航的NEDC、WLTC、CLTC工况是什么？">
+  <meta itemprop="description" content="本文介绍了汽车续航的NEDC、WLTC、CLTC工况是什么，以及为什么需要测试工况，最后介绍了缩短测试法。">
+  <meta itemprop="datePublished" content="2024-06-22T10:15:45+00:00">
+  <meta itemprop="dateModified" content="2024-06-22T10:15:45+00:00">
+  <meta itemprop="wordCount" content="1963">
+  <meta itemprop="keywords" content="电动汽车,工况续航,WLTC,NEDC,CLTC">
+  
+  <meta property="og:url" content="/article/what-are-nedc-wltc-cltc-driving-cycles-for-automobiles/">
+  <meta property="og:site_name" content="Tian Jiale&#39;s Blog">
+  <meta property="og:title" content="汽车续航的NEDC、WLTC、CLTC工况是什么？">
+  <meta property="og:description" content="本文介绍了汽车续航的NEDC、WLTC、CLTC工况是什么，以及为什么需要测试工况，最后介绍了缩短测试法。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-06-22T10:15:45+00:00">
+    <meta property="article:modified_time" content="2024-06-22T10:15:45+00:00">
+    <meta property="article:tag" content="电动汽车">
+    <meta property="article:tag" content="工况续航">
+    <meta property="article:tag" content="WLTC">
+    <meta property="article:tag" content="NEDC">
+    <meta property="article:tag" content="CLTC">
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="汽车续航的NEDC、WLTC、CLTC工况是什么？">
+  <meta name="twitter:description" content="本文介绍了汽车续航的NEDC、WLTC、CLTC工况是什么，以及为什么需要测试工况，最后介绍了缩短测试法。">
+
+  
+  
+  
+  <link rel="canonical" href="/article/what-are-nedc-wltc-cltc-driving-cycles-for-automobiles/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="/"
+      >Tian Jiale&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >关 于</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/link/"
+        >友 链</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/aecra"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">汽车续航的NEDC、WLTC、CLTC工况是什么？</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jun 22, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="为什么需要测试工况">为什么需要测试工况？</h2>
+<p>汽车续航是电动汽车的重要指标之一，它直接影响了电动汽车的使用体验。在实际使用中，电动汽车的续航里程受到很多因素的影响，例如驾驶习惯、环境温度、载重等。为了能够更好地评估电动汽车的续航性能，汽车制造商通常会对电动汽车的续航性能进行测试。在测试中，汽车制造商通常会使用一些标准化的工况来模拟实际使用中的驾驶情况，以便更好地评估电动汽车的续航性能。</p>
+<p>当前电动汽车或者混动汽车的能耗与续航是用户和汽车自媒体最关注的指标，不同团队对车辆测试工况有自己的理解。作为新能源领域的引领者，比亚迪在2024年5月28日于西安新发布了秦L和海豹06，因其百公里2.9L（NEDC）综合续航里程达2100km的表现，大多汽车自媒体都进行了自己的测试，其中既有阿喵这种极度佛系开出2409.5km续航的，也有向北不断电这种两人高速行驶达成1977km续航，更有大鹏快开车这种满员满载空调最低高速跑1182km。可见不同工况对续航里程的影响是极大的。</p>
+<h2 id="nedc工况">NEDC工况</h2>
+<p>NEDC（New European Driving Cycle）是欧洲的一种标准化的工况，用于评估汽车的燃油经济性和排放性能。NEDC工况包括两个部分：城市工况和郊区工况。在城市工况中，汽车以低速行驶，频繁启停，模拟城市道路的行驶情况；在郊区工况中，汽车以高速行驶，模拟郊区道路的行驶情况。通过对这两个工况的综合评估，可以更好地评估汽车的燃油经济性和排放性能。</p>
+<p>NEDC一个工况循环如下：</p>
+<p><img alt="NEDC循环工况" src="https://static.aecra.cn/markdown/202406/NEDCcycle.jpg"></p>
+<p>NEDC 测试每一个循环耗时为 1180 秒，最高速度 120 公里，平均速度 33.6 公里。</p>
+<p>续航测试时需要严格按照速度要求误差在±1% 以内，一个循环跑完后继续下一个循环，结束标准为车辆车速无法满足要求的下限，结束时挡位保持不变，使车辆滑行至最低稳定车速或 5 km/h，再踩下制动踏板进行停车。</p>
+<h2 id="wltc工况">WLTC工况</h2>
+<p>WLTC（Worldwide Harmonized Light Vehicles Test Cycle）是全球统一的轻型车辆测试工况，用于评估汽车的燃油经济性和排放性能。WLTC工况包括四个部分：低速工况、中速工况、高速工况和额外工况。在低速工况中，汽车以低速行驶，模拟城市道路的行驶情况；在中速工况中，汽车以中速行驶，模拟郊区道路的行驶情况；在高速工况中，汽车以高速行驶，模拟高速公路的行驶情况；在额外工况中，汽车以高速行驶，模拟高速公路的行驶情况。通过对这四个工况的综合评估，可以更好地评估汽车的燃油经济性和排放性能。</p>
+<p>WLTC一个工况循环如下：</p>
+<p><img alt="WLTC循环工况" src="https://static.aecra.cn/markdown/202406/WLTCcycle.jpg"></p>
+<p>循环总行驶里程为 23.27km（其中市区工况 3.09km，市郊 4.76km，高速 7.16km，超高速 8.25km），时长 1800s，循环平均速度 46.53km/h、怠速比例为 13%。</p>
+<p>WLTC工况对电动汽车更严格是因为高速高且占比更高。</p>
+<h2 id="cltc工况">CLTC工况</h2>
+<p>CLTC（China Light-duty Test Cycle）是中国的一种轻型车辆测试工况，用于评估汽车的燃油经济性和排放性能。CLTC工况包括两个部分：城市工况和郊区工况。在城市工况中，汽车以低速行驶，频繁启停，模拟城市道路的行驶情况；在郊区工况中，汽车以高速行驶，模拟郊区道路的行驶情况。通过对这两个工况的综合评估，可以更好地评估汽车的燃油经济性和排放性能。</p>
+<p>CLTC一个工况循环如下：</p>
+<p><img alt="CLTC循环工况" src="https://static.aecra.cn/markdown/202406/CLTCcycle.jpg"></p>
+<p>CLTC 测试工况循环耗时与 WLTC 相同均为 1800 秒，分为低速区、中速区、高速区三个速度区间，测试中最高时速 114 公里，平均时速 28.96 公里。CLTC 测试工况怠速时间占整个循环时间的 22.1%，与 NEDC 测试工况的怠速占比接近。</p>
+<p>因为中国的道路交通更为拥堵，所有CLTC的平均车速并不高，且高速占比更低，又因为低俗段更多，纯电车辆更能发挥出其电动机的优势，所以纯电汽车CLTC测试工况显得更水。</p>
+<h2 id="为什么工信部要求使用wltc工况">为什么工信部要求使用WLTC工况？</h2>
+<p>最初我国没有自己的标准，因此沿用的NEDC工况法，但因该工况的周期性更为明显，与实际道路交通的行驶轻情况差别较大，所以后续更换为了WLTC工况，在该工况下，车辆加减速更为频繁，且高速段更高，因此对于能耗随车速增长更为明显的纯电车辆WLTC工况下的能耗更高，而燃油车因为车速更匹配其热效率区间，能耗反而可能会有所下降。</p>
+<h2 id="缩短测试法">缩短测试法</h2>
+<p>因现有纯电车辆续航普遍为400km以上，为了更快地完成测试，降低测试成本，制定了一个缩短测试法。</p>
+<p>缩短法速度片段由 2 个试验循环段和 2 个恒速段组成，其中 $DS_1$ 和 $DS_2$ 为试验循环段；$CSS_M$ 和 $CSS_E$ 为恒速段，由较高的恒定车速构成，用以尽快放电，减少测试时间。</p>
+<p>CLTC一个工况循环如下：</p>
+<p><img alt="CLTC缩短法" src="https://static.aecra.cn/markdown/202406/CLTCcycle-short.png"></p>
+<p>能耗计算方法加权两次循环使用 0.05 / 0.95 加权计算，续驶里程=放电量/实车能耗。</p>
+<p>最后说个有意思的事情，对纯电车辆使用缩短法更容易达成更长的续航里程，因为电池在容量不足时的输出功率受限制，较大功率输出会导致电压拉低到截止电压从而断开接触器中断电力输出，缩短法末端只跑100km/h，对功率需求不高更容易满足，常规法如果在末端处于循环的高速段则会因跟不上曲线而实验暂停。</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="/tags/%E7%94%B5%E5%8A%A8%E6%B1%BD%E8%BD%A6"
+      >电动汽车</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="/tags/%E5%B7%A5%E5%86%B5%E7%BB%AD%E8%88%AA"
+      >工况续航</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="/tags/wltc"
+      >WLTC</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="/tags/nedc"
+      >NEDC</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="/tags/cltc"
+      >CLTC</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="/article/network-encoding-and-decoding-algorithm-in-p2p-file-sharing-system/"
+      ><span>P2P文件共享系统中网络编码译码算法</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="/">Tian Jiale&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

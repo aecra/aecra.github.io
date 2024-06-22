@@ -34,6 +34,8 @@
 
 
 
+
+
 <html
   class="not-ready lg:text-base"
   style="--bg: #faf8f1"
@@ -104,7 +106,8 @@ docker run -d -p 80:80 docker/getting-started You&rsquo;ll notice a few flags be
   
   
   
-  <link
+  
+<link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
   integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
@@ -123,19 +126,20 @@ docker run -d -p 80:80 docker/getting-started You&rsquo;ll notice a few flags be
   crossorigin="anonymous"
 ></script>
 
+
 <script>
-    document.addEventListener("DOMContentLoaded", () =>
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-          ],
-          
-          throwOnError : false
-        })
-    );
+  document.addEventListener('DOMContentLoaded', () =>
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      
+      throwOnError: false,
+    }),
+  );
 </script>
 
   
@@ -147,41 +151,57 @@ docker run -d -p 80:80 docker/getting-started You&rsquo;ll notice a few flags be
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.121.1">
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-V4ML7JFB21');
+        }
+      </script>
+    
+  
 
+
+  
   
   <meta itemprop="name" content="Docker tutorial">
-<meta itemprop="description" content="The official docker tutorial is reproduced for reference."><meta itemprop="datePublished" content="2021-04-20T10:35:12+00:00" />
-<meta itemprop="dateModified" content="2021-04-20T10:35:12+00:00" />
-<meta itemprop="wordCount" content="9014">
-<meta itemprop="keywords" content="docker," />
+  <meta itemprop="description" content="The official docker tutorial is reproduced for reference.">
+  <meta itemprop="datePublished" content="2021-04-20T10:35:12+00:00">
+  <meta itemprop="dateModified" content="2021-04-20T10:35:12+00:00">
+  <meta itemprop="wordCount" content="9014">
+  <meta itemprop="keywords" content="Docker">
   
-  <meta property="og:title" content="Docker tutorial" />
-<meta property="og:description" content="The official docker tutorial is reproduced for reference." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/en/article/docker-tutorial/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-04-20T10:35:12+00:00" />
-<meta property="article:modified_time" content="2021-04-20T10:35:12+00:00" />
-
+  <meta property="og:url" content="/en/article/docker-tutorial/">
+  <meta property="og:site_name" content="Tian Jiale&#39;s Blog">
+  <meta property="og:title" content="Docker tutorial">
+  <meta property="og:description" content="The official docker tutorial is reproduced for reference.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-04-20T10:35:12+00:00">
+    <meta property="article:modified_time" content="2021-04-20T10:35:12+00:00">
+    <meta property="article:tag" content="Docker">
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Docker tutorial"/>
-<meta name="twitter:description" content="The official docker tutorial is reproduced for reference."/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker tutorial">
+  <meta name="twitter:description" content="The official docker tutorial is reproduced for reference.">
 
   
   
@@ -322,7 +342,7 @@ if (!doNotTrack) {
 <h3 id="the-docker-dashboard">The Docker Dashboard</h3>
 <p>Before going too far, we want to highlight the Docker Dashboard, which gives you a quick view of the containers running on your machine. It gives you quick access to container logs, lets you get a shell inside the container, and lets you easily manage container lifecycle (stop, remove, etc.).</p>
 <p>To access the dashboard, follow the instructions for either <a href="https://docs.docker.com/docker-for-mac/dashboard/">Mac</a> or <a href="https://docs.docker.com/docker-for-windows/dashboard/">Windows</a>. If you open the dashboard now, you will see this tutorial running! The container name (<code>jolly_bouman</code> below) is a randomly created name. So, you&rsquo;ll most likely have a different name.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/629e7fe7f1247328ad7c39a05e5403e0.png" alt="tutorial-in-dashboard"></p>
+<p><img alt="tutorial-in-dashboard" src="https://static.aecra.cn/markdown/202104/629e7fe7f1247328ad7c39a05e5403e0.png"></p>
 <h3 id="what-is-a-container">What is a container?</h3>
 <p>Now that you&rsquo;ve run a container, what <em>is</em> a container? Simply put, a container is simply another process on your machine that has been isolated from all other processes on the host machine. That isolation leverages <a href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">kernel namespaces and cgroups</a>, features that have been in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use.</p>
 <blockquote>
@@ -337,7 +357,7 @@ if (!doNotTrack) {
 <h2 id="our-application">Our Application</h2>
 <p>For the rest of this tutorial, we will be working with a simple todo list manager that is running in Node.js. If you&rsquo;re not familiar with Node.js, don&rsquo;t worry! No real JavaScript experience is needed!</p>
 <p>At this point, your development team is quite small and you&rsquo;re simply building an app to prove out your MVP (minimum viable product). You want to show how it works and what it&rsquo;s capable of doing without needing to think about how it will work for a large team, multiple developers, etc.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/eb7dc36e07d82642d69f8ef7283d8ef1.png" alt="todo-list-sample"></p>
+<p><img alt="todo-list-sample" src="https://static.aecra.cn/markdown/202104/eb7dc36e07d82642d69f8ef7283d8ef1.png"></p>
 <h3 id="getting-our-app">Getting our App</h3>
 <p>Before we can run the application, we need to get the application source code onto our machine. For real projects, you will typically clone the repo. But, for this tutorial, we have created a ZIP file containing the application.</p>
 <ol>
@@ -346,7 +366,7 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>Once extracted, use your favorite code editor to open the project. If you&rsquo;re in need of an editor, you can use <a href="https://code.visualstudio.com/">Visual Studio Code</a>. You should see the <code>package.json</code> and two subdirectories (<code>src</code> and <code>spec</code>).</p>
-<p><img src="https://static.aecra.cn/markdown/202104/fc7d00bef419c38a15bf940286635357.png" alt="ide-screenshot"></p>
+<p><img alt="ide-screenshot" src="https://static.aecra.cn/markdown/202104/fc7d00bef419c38a15bf940286635357.png"></p>
 </li>
 </ol>
 <h3 id="building-the-apps-container-image">Building the App&rsquo;s Container Image</h3>
@@ -381,13 +401,13 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>After a few seconds, open your web browser to <a href="http://localhost:3000">http://localhost:3000</a>. You should see our app!</p>
-<p><img src="https://static.aecra.cn/markdown/202104/885eba5692f6bb08855298217a7a03f3.png" alt="todo-list-empty"></p>
+<p><img alt="todo-list-empty" src="https://static.aecra.cn/markdown/202104/885eba5692f6bb08855298217a7a03f3.png"></p>
 </li>
 <li>
 <p>Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove items. Your frontend is successfully storing items in the backend! Pretty quick and easy, huh?</p>
 <p>At this point, you should have a running todo list manager with a few items, all built by you! Now, let&rsquo;s make a few changes and learn about managing our containers.</p>
 <p>If you take a quick look at the Docker Dashboard, you should see your two containers running now (this tutorial and your freshly launched app container)!</p>
-<p><img src="https://static.aecra.cn/markdown/202104/853c89818607ac4341fe2399bc62a70c.png" alt="dashboard-two-containers"></p>
+<p><img alt="dashboard-two-containers" src="https://static.aecra.cn/markdown/202104/853c89818607ac4341fe2399bc62a70c.png"></p>
 </li>
 </ol>
 <h3 id="recap">Recap</h3>
@@ -453,7 +473,7 @@ if (!doNotTrack) {
 <p>Confirm the removal and you&rsquo;re done!</p>
 </li>
 </ol>
-<p><img src="https://static.aecra.cn/markdown/202104/50cc19890b8d05d477dbbf9c82c55fb5.png" alt="dashboard-removing-container"></p>
+<p><img alt="dashboard-removing-container" src="https://static.aecra.cn/markdown/202104/50cc19890b8d05d477dbbf9c82c55fb5.png"></p>
 <h4 id="starting-our-updated-app-container">Starting our updated app container</h4>
 <ol>
 <li>
@@ -462,7 +482,7 @@ if (!doNotTrack) {
 </span></span></code></pre></div></li>
 <li>
 <p>Refresh your browser on <a href="http://localhost:3000">http://localhost:3000</a> and you should see your updated help text!</p>
-<p><img src="https://static.aecra.cn/markdown/202104/10ead5c26776b3198faa596720614126.png" alt="todo-list-updated-empty-text"></p>
+<p><img alt="todo-list-updated-empty-text" src="https://static.aecra.cn/markdown/202104/10ead5c26776b3198faa596720614126.png"></p>
 </li>
 </ol>
 <h3 id="recap-">Recap-</h3>
@@ -491,7 +511,7 @@ if (!doNotTrack) {
 </li>
 </ol>
 <p>If you look on the right-side of the page, you&rsquo;ll see a section named <strong>Docker commands</strong>. This gives an example command that you will need to run to push to this repo.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/00d18f0766c70548eb092f1f3fcf9e5b.png" alt="push-command"></p>
+<p><img alt="push-command" src="https://static.aecra.cn/markdown/202104/00d18f0766c70548eb092f1f3fcf9e5b.png"></p>
 <h3 id="pushing-our-image">Pushing our Image</h3>
 <ol>
 <li>
@@ -525,7 +545,7 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>Once you&rsquo;re logged in, click on the &ldquo;+ ADD NEW INSTANCE&rdquo; link in the left side bar. (If you don&rsquo;t see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/9f22be1ba5d91b0318ebda83e7c0b5d0.png" alt="pwd-add-new-instance"></p>
+<p><img alt="pwd-add-new-instance" src="https://static.aecra.cn/markdown/202104/9f22be1ba5d91b0318ebda83e7c0b5d0.png"></p>
 </li>
 <li>
 <p>In the terminal, start your freshly pushed app.</p>
@@ -553,7 +573,7 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>Validate we can see the output by <code>exec</code>&lsquo;ing into the container. To do so, open the Dashboard and click the first action of the container that is running the <code>ubuntu</code> image.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/249c0a74b522f02b314fd223fccc2245.png" alt="dashboard-open-cli-ubuntu"></p>
+<p><img alt="dashboard-open-cli-ubuntu" src="https://static.aecra.cn/markdown/202104/249c0a74b522f02b314fd223fccc2245.png"></p>
 <p>You will see a terminal that is running a shell in the ubuntu container. Run the following command to see the content of the <code>/data.txt</code> file. Close this terminal afterwards again.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /data.txt
 </span></span></code></pre></div><p>If you prefer the command line you can use the <code>docker exec</code> command to do the same. You need to get the container&rsquo;s ID (use <code>docker ps</code> to get it) and get the content with the following command.</p>
@@ -591,7 +611,7 @@ if (!doNotTrack) {
 </span></span></code></pre></div></li>
 <li>
 <p>Once the container starts up, open the app and add a few items to your todo list.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/60b10f9e01299f57f32113682ffbd786.png" alt="items-added"></p>
+<p><img alt="items-added" src="https://static.aecra.cn/markdown/202104/60b10f9e01299f57f32113682ffbd786.png"></p>
 </li>
 <li>
 <p>Remove the container for the todo app. Use the Dashboard or <code>docker ps</code> to get the ID and then <code>docker rm -f &lt;id&gt;</code> to remove it.</p>
@@ -719,7 +739,7 @@ if (!doNotTrack) {
 </span></span></span></code></pre></div></li>
 <li>
 <p>Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might take a few seconds for the Node server to restart, so if you get an error, just try refreshing after a few seconds.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/b15fc1009476e897a61bdcbeeba30949.png" alt="updated-add-button"></p>
+<p><img alt="updated-add-button" src="https://static.aecra.cn/markdown/202104/b15fc1009476e897a61bdcbeeba30949.png"></p>
 </li>
 <li>
 <p>Feel free to make any other changes you&rsquo;d like to make. When you&rsquo;re done, stop the container and build your new image using <code>docker build -t getting-started .</code>.</p>
@@ -739,7 +759,7 @@ if (!doNotTrack) {
 <li>Running multiple processes will require a process manager (the container only starts one process), which adds complexity to container startup/shutdown</li>
 </ul>
 <p>And there are more reasons. So, we will update our application to work like this:</p>
-<p><img src="https://static.aecra.cn/markdown/202104/c56dd71fc2c07e8ade158f39572990c9.png" alt="multi-app-architecture"></p>
+<p><img alt="multi-app-architecture" src="https://static.aecra.cn/markdown/202104/c56dd71fc2c07e8ade158f39572990c9.png"></p>
 <h3 id="container-networking">Container Networking</h3>
 <p>Remember that containers, by default, run in isolation and don&rsquo;t know anything about other processes or containers on the same machine. So, how do we allow one container to talk to another? The answer is <strong>networking</strong>. Now, you don&rsquo;t have to be a network engineer (hooray!). Simply remember this rule&hellip;</p>
 <blockquote>
@@ -891,7 +911,7 @@ is <strong>secret</strong>.</p>
 </li>
 </ol>
 <p>If you take a quick look at the Docker Dashboard, you&rsquo;ll see that we have two app containers running. But, there&rsquo;s no real indication that they are grouped together in a single app. We&rsquo;ll see how to make that better shortly!</p>
-<p><img src="https://static.aecra.cn/markdown/202104/71235cab7f723bb685e88360a5a2ab41.png" alt="dashboard-multi-container-app"></p>
+<p><img alt="dashboard-multi-container-app" src="https://static.aecra.cn/markdown/202104/71235cab7f723bb685e88360a5a2ab41.png"></p>
 <h3 id="recap_">Recap_</h3>
 <p>At this point, we have an application that now stores its data in an external database running in a separate container. We learned a little bit about container networking and saw how service discovery can be performed using DNS.</p>
 <p>But, there&rsquo;s a good chance you are starting to feel a little overwhelmed with everything you need to do to start up this application. We have to create a network, start containers, specify all of the environment variables, expose ports, and more! That&rsquo;s a lot to remember and it&rsquo;s certainly making things harder to pass along to someone else.</p>
@@ -1129,9 +1149,9 @@ background.</p>
 </ol>
 <h3 id="seeing-our-app-stack-in-docker-dashboard">Seeing our App Stack in Docker Dashboard</h3>
 <p>If we look at the Docker Dashboard, we&rsquo;ll see that there is a group named <strong>app</strong>. This is the &ldquo;project name&rdquo; from Docker Compose and used to group the containers together. By default, the project name is simply the name of the directory that the <code>docker-compose.yml</code> was located in.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/218bb2d647b110c9fbf272ac12ab377f.png" alt="dashboard-app-project-collapsed"></p>
+<p><img alt="dashboard-app-project-collapsed" src="https://static.aecra.cn/markdown/202104/218bb2d647b110c9fbf272ac12ab377f.png"></p>
 <p>If you twirl down the app, you will see the two containers we defined in the compose file. The names are also a little more descriptive, as they follow the pattern of <code>&lt;project-name&gt;_&lt;service-name&gt;_&lt;replica-number&gt;</code>. So, it&rsquo;s very easy to quickly see what container is our app and which container is the mysql database.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/61043e0fe60692b1b876e29434451184.png" alt="dashboard-app-project-expanded"></p>
+<p><img alt="dashboard-app-project-expanded" src="https://static.aecra.cn/markdown/202104/61043e0fe60692b1b876e29434451184.png"></p>
 <h3 id="tearing-it-all-down">Tearing it All Down</h3>
 <p>When you&rsquo;re ready to tear it all down, simply run <code>docker-compose down</code> or hit the trash can on the Docker Dashboard for the entire app. The containers will stop and the network will be removed.</p>
 <blockquote>
@@ -1168,7 +1188,7 @@ doesn&rsquo;t get much simpler than that!</p>
 </span></span></code></pre></div><p>The output lists the type of vulnerability, a URL to learn more, and importantly which version of the relevant library fixes the vulnerability.</p>
 <p>There are several other options, which you can read about in the <a href="https://docs.docker.com/engine/scan/">docker scan documentation</a>.</p>
 <p>As well as scanning your newly built image on the command line, you can also <a href="https://docs.docker.com/docker-hub/vulnerability-scanning/">configure Docker Hub</a> to scan all newly pushed images automatically, and you can then see the results in both Docker Hub and Docker Desktop.</p>
-<p><img src="https://static.aecra.cn/markdown/202104/e38429ba3f980a5deb09fa6435aa7e59.png" alt="hvs"></p>
+<p><img alt="hvs" src="https://static.aecra.cn/markdown/202104/e38429ba3f980a5deb09fa6435aa7e59.png"></p>
 <h3 id="image-layering">Image Layering</h3>
 <p>Did you know that you can look at what makes up an image? Using the <code>docker image history</code> command, you can see the command that was used to create each layer within an image.</p>
 <ol>
@@ -1372,6 +1392,7 @@ doesn&rsquo;t get much simpler than that!</p>
 
   
 
+
   
 </article>
 
@@ -1382,7 +1403,7 @@ doesn&rsquo;t get much simpler than that!</p>
   class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
 >
   <div class="mr-auto">
-    &copy; 2023
+    &copy; 2024
     <a class="link" href="/">Tian Jiale&#39;s Blog</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"

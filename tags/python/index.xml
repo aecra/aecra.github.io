@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>python on Tian Jiale&#39;s Blog</title>
+    <title>Python on Tian Jiale&#39;s Blog</title>
     <link>/tags/python/</link>
-    <description>Recent content in python on Tian Jiale&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Python on Tian Jiale&#39;s Blog</description>
+    <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 22 Feb 2021 18:57:38 +0000</lastBuildDate>
     <atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />

@@ -34,6 +34,8 @@
 
 
 
+
+
 <html
   class="not-ready lg:text-base"
   style="--bg: #faf8f1"
@@ -104,7 +106,8 @@ And the later PHP developer team has taken the decision to generate E_DEPRECATED
   
   
   
-  <link
+  
+<link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
   integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
@@ -123,19 +126,20 @@ And the later PHP developer team has taken the decision to generate E_DEPRECATED
   crossorigin="anonymous"
 ></script>
 
+
 <script>
-    document.addEventListener("DOMContentLoaded", () =>
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-          ],
-          
-          throwOnError : false
-        })
-    );
+  document.addEventListener('DOMContentLoaded', () =>
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      
+      throwOnError: false,
+    }),
+  );
 </script>
 
   
@@ -147,41 +151,59 @@ And the later PHP developer team has taken the decision to generate E_DEPRECATED
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.121.1">
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-V4ML7JFB21');
+        }
+      </script>
+    
+  
 
+
+  
   
   <meta itemprop="name" content="Why shouldn&#39;t I use mysql_* functions in PHP?">
-<meta itemprop="description" content="This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record."><meta itemprop="datePublished" content="2021-02-14T14:26:56+00:00" />
-<meta itemprop="dateModified" content="2021-02-14T14:26:56+00:00" />
-<meta itemprop="wordCount" content="2267">
-<meta itemprop="keywords" content="PHP,PDO,MySQL," />
+  <meta itemprop="description" content="This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record.">
+  <meta itemprop="datePublished" content="2021-02-14T14:26:56+00:00">
+  <meta itemprop="dateModified" content="2021-02-14T14:26:56+00:00">
+  <meta itemprop="wordCount" content="2267">
+  <meta itemprop="keywords" content="PHP,PDO,MySQL">
   
-  <meta property="og:title" content="Why shouldn&#39;t I use mysql_* functions in PHP?" />
-<meta property="og:description" content="This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/en/article/why-should-not-i-use-mysql-functions-in-php/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-02-14T14:26:56+00:00" />
-<meta property="article:modified_time" content="2021-02-14T14:26:56+00:00" />
-
+  <meta property="og:url" content="/en/article/why-should-not-i-use-mysql-functions-in-php/">
+  <meta property="og:site_name" content="Tian Jiale&#39;s Blog">
+  <meta property="og:title" content="Why shouldn&#39;t I use mysql_* functions in PHP?">
+  <meta property="og:description" content="This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-02-14T14:26:56+00:00">
+    <meta property="article:modified_time" content="2021-02-14T14:26:56+00:00">
+    <meta property="article:tag" content="PHP">
+    <meta property="article:tag" content="PDO">
+    <meta property="article:tag" content="MySQL">
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Why shouldn&#39;t I use mysql_* functions in PHP?"/>
-<meta name="twitter:description" content="This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record."/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Why shouldn&#39;t I use mysql_* functions in PHP?">
+  <meta name="twitter:description" content="This article is an answer from stackoverflow. A blog written a few years ago uses mysql_* technology in the background. However, during code refactoring this year, it was found that PDO can solve the mysql problem of anti-human and unsafe, so this article is excerpted for record.">
 
   
   
@@ -622,6 +644,7 @@ if (!doNotTrack) {
 
   
 
+
   
 </article>
 
@@ -632,7 +655,7 @@ if (!doNotTrack) {
   class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
 >
   <div class="mr-auto">
-    &copy; 2023
+    &copy; 2024
     <a class="link" href="/">Tian Jiale&#39;s Blog</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"

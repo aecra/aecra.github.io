@@ -34,6 +34,8 @@
 
 
 
+
+
 <html
   class="not-ready lg:text-base"
   style="--bg: #faf8f1"
@@ -102,7 +104,8 @@
   
   
   
-  <link
+  
+<link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
   integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
@@ -121,19 +124,20 @@
   crossorigin="anonymous"
 ></script>
 
+
 <script>
-    document.addEventListener("DOMContentLoaded", () =>
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-          ],
-          
-          throwOnError : false
-        })
-    );
+  document.addEventListener('DOMContentLoaded', () =>
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      
+      throwOnError: false,
+    }),
+  );
 </script>
 
   
@@ -145,41 +149,58 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.121.1">
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-V4ML7JFB21', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4ML7JFB21"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-V4ML7JFB21');
+        }
+      </script>
+    
+  
 
+
+  
   
   <meta itemprop="name" content="使用 Hexo 之后原有博客怎么办？">
-<meta itemprop="description" content="在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废那不是得每更一篇文就要去博客后台提交文章？而且有的文章小毛病一大堆可能要三天两头地修改，就这繁杂的工作能把我折腾地放弃写博客。从一贯的删繁就简的思路来看，用 python 这种简单的语言来干这种事情那是最好的了。"><meta itemprop="datePublished" content="2021-02-22T18:57:38+00:00" />
-<meta itemprop="dateModified" content="2021-02-22T18:57:38+00:00" />
-<meta itemprop="wordCount" content="1264">
-<meta itemprop="keywords" content="python,建站," />
+  <meta itemprop="description" content="在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废那不是得每更一篇文就要去博客后台提交文章？而且有的文章小毛病一大堆可能要三天两头地修改，就这繁杂的工作能把我折腾地放弃写博客。从一贯的删繁就简的思路来看，用 python 这种简单的语言来干这种事情那是最好的了。">
+  <meta itemprop="datePublished" content="2021-02-22T18:57:38+00:00">
+  <meta itemprop="dateModified" content="2021-02-22T18:57:38+00:00">
+  <meta itemprop="wordCount" content="1264">
+  <meta itemprop="keywords" content="Python,建站">
   
-  <meta property="og:title" content="使用 Hexo 之后原有博客怎么办？" />
-<meta property="og:description" content="在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废那不是得每更一篇文就要去博客后台提交文章？而且有的文章小毛病一大堆可能要三天两头地修改，就这繁杂的工作能把我折腾地放弃写博客。从一贯的删繁就简的思路来看，用 python 这种简单的语言来干这种事情那是最好的了。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/article/what-about-the-original-blog-after-using-hexo/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-02-22T18:57:38+00:00" />
-<meta property="article:modified_time" content="2021-02-22T18:57:38+00:00" />
-
+  <meta property="og:url" content="/article/what-about-the-original-blog-after-using-hexo/">
+  <meta property="og:site_name" content="Tian Jiale&#39;s Blog">
+  <meta property="og:title" content="使用 Hexo 之后原有博客怎么办？">
+  <meta property="og:description" content="在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废那不是得每更一篇文就要去博客后台提交文章？而且有的文章小毛病一大堆可能要三天两头地修改，就这繁杂的工作能把我折腾地放弃写博客。从一贯的删繁就简的思路来看，用 python 这种简单的语言来干这种事情那是最好的了。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-02-22T18:57:38+00:00">
+    <meta property="article:modified_time" content="2021-02-22T18:57:38+00:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="建站">
 
   
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="使用 Hexo 之后原有博客怎么办？"/>
-<meta name="twitter:description" content="在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废那不是得每更一篇文就要去博客后台提交文章？而且有的文章小毛病一大堆可能要三天两头地修改，就这繁杂的工作能把我折腾地放弃写博客。从一贯的删繁就简的思路来看，用 python 这种简单的语言来干这种事情那是最好的了。"/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="使用 Hexo 之后原有博客怎么办？">
+  <meta name="twitter:description" content="在一月底二月初写了一份博客代码，然后在两天前接触了 Hexo 这个静态博客生成器，悲剧地发现还是这个简单快捷。转为 Hexo 之后原博客代码要想不荒废那不是得每更一篇文就要去博客后台提交文章？而且有的文章小毛病一大堆可能要三天两头地修改，就这繁杂的工作能把我折腾地放弃写博客。从一贯的删繁就简的思路来看，用 python 这种简单的语言来干这种事情那是最好的了。">
 
   
   
@@ -510,6 +531,7 @@ if (!doNotTrack) {
 
   
 
+
   
 </article>
 
@@ -520,7 +542,7 @@ if (!doNotTrack) {
   class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
 >
   <div class="mr-auto">
-    &copy; 2023
+    &copy; 2024
     <a class="link" href="/">Tian Jiale&#39;s Blog</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
